@@ -147,7 +147,7 @@ export default function Hero() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.3 }}
-                            className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
+                            className="flex flex-col sm:flex-row gap-4 w-fit sm:w-auto mx-auto lg:mx-0"
                         >
                             {/* Botón primario */}
                             <motion.a
