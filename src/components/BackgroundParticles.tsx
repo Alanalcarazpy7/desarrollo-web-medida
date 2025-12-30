@@ -14,10 +14,10 @@ export default function BackgroundParticles() {
 
         let animationFrameId: number;
         let particles: Particle[] = [];
-        const particleCount = 60;
+        const particleCount = 120; // Balance entre densidad y TBT
         const theme = {
-            accent: "#00d9ff",
-            glow: "rgba(0, 217, 255, 0.3)",
+            accent: "#00d9ff", // Color original del sistema
+            glow: "rgba(0, 217, 255, 0.5)",
         };
 
         class Particle {
@@ -27,17 +27,17 @@ export default function BackgroundParticles() {
             speedY: number;
             speedX: number;
             opacity: number;
-            pulseSpeed: number;
             pulse: number;
+            pulseSpeed: number;
 
             constructor() {
                 this.x = Math.random() * canvas!.width;
                 this.y = Math.random() * canvas!.height;
-                this.size = Math.random() * 2 + 1;
-                this.speedY = -(Math.random() * 0.5 + 0.2);
+                this.size = Math.random() * 3 + 1.5; // Copos más grandes para visibilidad
+                this.speedY = Math.random() * 0.8 + 0.2; // Caída hacia ABAJO
                 this.speedX = (Math.random() - 0.5) * 0.3;
-                this.opacity = Math.random() * 0.5 + 0.1;
-                this.pulse = 0;
+                this.opacity = Math.random() * 0.6 + 0.4;
+                this.pulse = Math.random() * Math.PI;
                 this.pulseSpeed = Math.random() * 0.02 + 0.01;
             }
 
@@ -46,8 +46,8 @@ export default function BackgroundParticles() {
                 this.x += this.speedX;
                 this.pulse += this.pulseSpeed;
 
-                if (this.y < -20) {
-                    this.y = canvas!.height + 20;
+                if (this.y > canvas!.height + 20) {
+                    this.y = -20;
                     this.x = Math.random() * canvas!.width;
                 }
                 if (this.x < -20) this.x = canvas!.width + 20;
@@ -56,25 +56,25 @@ export default function BackgroundParticles() {
 
             draw() {
                 if (!ctx) return;
-                const currentOpacity = this.opacity * (0.7 + Math.sin(this.pulse) * 0.3);
+                const currentOpacity = this.opacity * (0.8 + Math.sin(this.pulse) * 0.2);
 
+                ctx.save();
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fillStyle = theme.accent;
                 ctx.globalAlpha = currentOpacity;
-                ctx.fill();
 
-                // Glow sutil (solo si el tamaño es suficiente para optimizar)
-                if (this.size > 1.5) {
-                    ctx.shadowBlur = 10;
-                    ctx.shadowColor = theme.accent;
-                } else {
-                    ctx.shadowBlur = 0;
-                }
+                // Brillo del sistema
+                ctx.shadowBlur = 8;
+                ctx.shadowColor = "rgba(0, 217, 255, 0.8)";
+
+                ctx.fill();
+                ctx.restore();
             }
         }
 
         const resize = () => {
+            if (!canvas) return;
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
             init();
@@ -88,6 +88,7 @@ export default function BackgroundParticles() {
         };
 
         const animate = () => {
+            if (!ctx || !canvas) return;
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             particles.forEach((p) => {
                 p.update();
@@ -111,9 +112,10 @@ export default function BackgroundParticles() {
             ref={canvasRef}
             className="fixed inset-0 pointer-events-none z-0"
             style={{
+                width: "100vw",
+                height: "100vh",
                 background: "transparent",
-                opacity: 0.6,
-                contain: "strict"
+                opacity: 0.8
             }}
         />
     );
