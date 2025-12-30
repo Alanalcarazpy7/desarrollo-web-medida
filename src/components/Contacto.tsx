@@ -184,6 +184,7 @@ ${formData.mensaje}
                             <motion.a
                                 key={method.titulo}
                                 href={method.link}
+                                aria-label={`Contactar por ${method.titulo}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 initial={{ opacity: 0, x: -30 }}
@@ -285,8 +286,9 @@ ${formData.mensaje}
 
                             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '12px' }}>
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                                    <label style={{ fontSize: '12px', fontWeight: 600, color: theme.textMuted, marginLeft: '4px' }}>NOMBRE</label>
+                                    <label htmlFor="nombre" style={{ fontSize: '12px', fontWeight: 600, color: theme.textMuted, marginLeft: '4px' }}>NOMBRE</label>
                                     <motion.input
+                                        id="nombre"
                                         whileFocus={{ scale: 1.01, backgroundColor: 'rgba(255, 255, 255, 0.05)' }}
                                         type="text"
                                         required
@@ -309,8 +311,9 @@ ${formData.mensaje}
                                     />
                                 </div>
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                                    <label style={{ fontSize: '12px', fontWeight: 600, color: theme.textMuted, marginLeft: '4px' }}>EMAIL</label>
+                                    <label htmlFor="email" style={{ fontSize: '12px', fontWeight: 600, color: theme.textMuted, marginLeft: '4px' }}>EMAIL</label>
                                     <motion.input
+                                        id="email"
                                         whileFocus={{ scale: 1.01, backgroundColor: 'rgba(255, 255, 255, 0.05)' }}
                                         type="email"
                                         required
@@ -336,8 +339,9 @@ ${formData.mensaje}
 
                             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '12px' }}>
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                                    <label style={{ fontSize: '12px', fontWeight: 600, color: theme.textMuted, marginLeft: '4px' }}>WHATSAPP</label>
+                                    <label htmlFor="whatsapp-form" style={{ fontSize: '12px', fontWeight: 600, color: theme.textMuted, marginLeft: '4px' }}>WHATSAPP</label>
                                     <motion.input
+                                        id="whatsapp-form"
                                         whileFocus={{ scale: 1.01, backgroundColor: 'rgba(255, 255, 255, 0.05)' }}
                                         type="tel"
                                         value={formData.telefono}
@@ -359,9 +363,10 @@ ${formData.mensaje}
                                     />
                                 </div>
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                                    <label style={{ fontSize: '12px', fontWeight: 600, color: theme.textMuted, marginLeft: '4px' }}>PRESUPUESTO</label>
+                                    <label htmlFor="presupuesto" style={{ fontSize: '12px', fontWeight: 600, color: theme.textMuted, marginLeft: '4px' }}>PRESUPUESTO</label>
                                     <div className="relative">
                                         <motion.select
+                                            id="presupuesto"
                                             whileFocus={{ scale: 1.01, backgroundColor: 'rgba(255, 255, 255, 0.05)' }}
                                             value={formData.presupuesto}
                                             onChange={(e) => setFormData({ ...formData, presupuesto: e.target.value })}
@@ -397,8 +402,9 @@ ${formData.mensaje}
                             </div>
 
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                                <label style={{ fontSize: '12px', fontWeight: 600, color: theme.textMuted, marginLeft: '4px' }}>DETALLES</label>
+                                <label htmlFor="detalles" style={{ fontSize: '12px', fontWeight: 600, color: theme.textMuted, marginLeft: '4px' }}>DETALLES</label>
                                 <motion.textarea
+                                    id="detalles"
                                     whileFocus={{ scale: 1.01, backgroundColor: 'rgba(255, 255, 255, 0.05)' }}
                                     required
                                     rows={6}

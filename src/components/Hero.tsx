@@ -76,13 +76,14 @@ export default function Hero() {
                 scrollMarginTop: '100px'
             }}
         >
-            {/* Glow ambiental sutil */}
-            <div className="absolute inset-0 pointer-events-none">
+            {/* Glow ambiental optimizado (contain: paint para evitar CLS) */}
+            <div className="absolute inset-0 pointer-events-none" style={{ contain: 'paint' }}>
                 <div
                     className="absolute top-0 left-1/4 w-96 h-96 rounded-full opacity-20"
                     style={{
                         background: `radial-gradient(circle, ${theme.accent}, transparent 70%)`,
                         filter: "blur(80px)",
+                        willChange: "transform, opacity",
                     }}
                 />
             </div>
@@ -93,11 +94,9 @@ export default function Hero() {
 
                     {/* IZQUIERDA: Texto */}
                     <div className="flex flex-col gap-6 md:gap-8 items-center lg:items-start text-center lg:text-left">
-                        {/* Badge */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            className="inline-flex items-center gap-2 px-4 py-2 rounded-full w-fit cursor-default"
+                        {/* Badge con animación CSS para evitar retraso de hidratación */}
+                        <div
+                            className="inline-flex items-center gap-2 px-4 py-2 rounded-full w-fit cursor-default animate-fade-in-up"
                             style={{
                                 background: `${theme.bgCard}80`,
                                 border: `1px solid ${theme.accent}40`,
@@ -113,14 +112,12 @@ export default function Hero() {
                             >
                                 Disponible para proyectos
                             </span>
-                        </motion.div>
+                        </div>
 
-                        {/* Título grande y limpio */}
-                        <motion.h1
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.1 }}
-                            className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight"
+                        {/* Título optimizado para LCP con CSS Puro */}
+                        <h1
+                            className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight animate-hero-fade"
+                            style={{ transform: 'translate3d(0,0,0)' }}
                         >
                             <span style={{ color: theme.text }}>
                                 Desarrollo de
@@ -135,18 +132,15 @@ export default function Hero() {
                             >
                                 Software a Medida
                             </span>
-                        </motion.h1>
+                        </h1>
 
                         {/* Descripción corta */}
-                        <motion.p
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 0.2 }}
-                            className="text-base md:text-lg max-w-lg leading-relaxed opacity-80"
-                            style={{ color: theme.textMuted }}
+                        <p
+                            className="text-base md:text-lg max-w-lg leading-relaxed opacity-80 animate-fade-in"
+                            style={{ color: theme.textMuted, animationDelay: '0.4s' }}
                         >
                             Transformo ideas en sistemas modernos y funcionales. Soluciones digitales para negocios que quieren evolucionar.
-                        </motion.p>
+                        </p>
 
                         {/* Botones de acción */}
                         <motion.div
@@ -278,10 +272,13 @@ function StatsCard({ stat, index, theme }: { stat: any; index: number; theme: an
     const mouseX = useSpring(x, { stiffness: 500, damping: 100 });
     const mouseY = useSpring(y, { stiffness: 500, damping: 100 });
 
-    function handleMouseMove({ currentTarget, clientX, clientY }: any) {
-        const { left, top, width, height } = currentTarget.getBoundingClientRect();
-        x.set((clientX - left) / width - 0.5);
-        y.set((clientY - top) / height - 0.5);
+    const cardRef = useRef<HTMLDivElement>(null);
+
+    function handleMouseMove({ clientX, clientY }: any) {
+        if (!cardRef.current) return;
+        const rect = cardRef.current.getBoundingClientRect();
+        x.set((clientX - rect.left) / rect.width - 0.5);
+        y.set((clientY - rect.top) / rect.height - 0.5);
     }
 
     function handleMouseLeave() {
@@ -294,9 +291,10 @@ function StatsCard({ stat, index, theme }: { stat: any; index: number; theme: an
 
     return (
         <motion.div
+            ref={cardRef}
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.4 + index * 0.1, type: "spring" }}
+            transition={{ delay: 0.3 + index * 0.05, type: "spring" }} // Delay optimizado
             style={{
                 rotateX,
                 rotateY,

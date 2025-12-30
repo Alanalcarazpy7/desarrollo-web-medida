@@ -93,8 +93,8 @@ export default function Servicios() {
                 scrollMarginTop: '100px'
             }}
         >
-            {/* Efectos de fondo */}
-            <div className="absolute inset-0 opacity-[0.02]">
+            {/* Efectos de fondo optimizados (contain: paint) */}
+            <div className="absolute inset-0 opacity-[0.02]" style={{ contain: 'paint' }}>
                 <motion.div
                     className="absolute inset-0"
                     style={{
@@ -103,6 +103,7 @@ export default function Servicios() {
                             linear-gradient(90deg, ${theme.accent} 2px, transparent 2px)
                         `,
                         backgroundSize: "80px 80px",
+                        willChange: "transform",
                     }}
                     animate={{
                         backgroundPosition: ["0px 0px", "80px 80px"],
@@ -115,34 +116,38 @@ export default function Servicios() {
                 />
             </div>
 
-            {/* Orbes flotantes */}
-            <motion.div
-                className="absolute top-1/4 -left-40 w-96 h-96 rounded-full pointer-events-none"
-                style={{
-                    background: `radial-gradient(circle, ${theme.accentGlow}, transparent 70%)`,
-                    filter: "blur(120px)",
-                }}
-                animate={{
-                    x: [0, 100, 0],
-                    y: [0, -50, 0],
-                    scale: [1, 1.2, 1],
-                }}
-                transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-            />
+            {/* Orbes flotantes optimizados (contain: strict para 0 CLS) */}
+            <div className="absolute inset-0 pointer-events-none" style={{ contain: 'strict' }}>
+                <motion.div
+                    className="absolute top-1/4 -left-40 w-96 h-96 rounded-full"
+                    style={{
+                        background: `radial-gradient(circle, ${theme.accentGlow}, transparent 70%)`,
+                        filter: "blur(120px)",
+                        willChange: "transform, opacity",
+                    }}
+                    animate={{
+                        x: [0, 100, 0],
+                        y: [0, -50, 0],
+                        scale: [1, 1.2, 1],
+                    }}
+                    transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+                />
 
-            <motion.div
-                className="absolute bottom-1/4 -right-40 w-96 h-96 rounded-full pointer-events-none"
-                style={{
-                    background: `radial-gradient(circle, ${theme.accentGlow}, transparent 70%)`,
-                    filter: "blur(120px)",
-                }}
-                animate={{
-                    x: [0, -100, 0],
-                    y: [0, 50, 0],
-                    scale: [1, 1.3, 1],
-                }}
-                transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-            />
+                <motion.div
+                    className="absolute bottom-1/4 -right-40 w-96 h-96 rounded-full"
+                    style={{
+                        background: `radial-gradient(circle, ${theme.accentGlow}, transparent 70%)`,
+                        filter: "blur(120px)",
+                        willChange: "transform, opacity",
+                    }}
+                    animate={{
+                        x: [0, -100, 0],
+                        y: [0, 50, 0],
+                        scale: [1, 1.3, 1],
+                    }}
+                    transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+                />
+            </div>
 
             <div className="w-full max-w-7xl mx-auto px-6 md:px-8 relative z-10">
                 {/* Encabezado */}
@@ -207,7 +212,7 @@ export default function Servicios() {
                 </motion.div>
 
                 {/* Cuadrícula de servicios */}
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 mb-24">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 justify-items-center md:justify-items-stretch mb-24">
                     {servicios.map((servicio, index) => {
                         const isHovered = hoveredIndex === index;
                         return (
@@ -224,7 +229,7 @@ export default function Servicios() {
                                 whileHover={{ y: -8 }}
                                 onHoverStart={() => setHoveredIndex(index)}
                                 onHoverEnd={() => setHoveredIndex(null)}
-                                className="relative group"
+                                className="relative group w-full max-w-[380px] mx-auto md:max-w-none"
                             >
                                 {/* Contenedor de la tarjeta */}
                                 <div
@@ -302,54 +307,6 @@ export default function Servicios() {
                         );
                     })}
                 </div>
-
-                {/* Sección de llamada a la acción (CTA) */}
-                <motion.div
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.8, delay: 1 }}
-                    className="text-center"
-                >
-                    <motion.a
-                        href="#contacto"
-                        whileHover={{ scale: 1.08, y: -4 }}
-                        whileTap={{ scale: 0.95 }}
-                        className="relative inline-flex items-center gap-4 px-16 py-6 rounded-full font-black text-xl uppercase tracking-wider overflow-hidden group cursor-pointer"
-                    >
-                        {/* Fondo con gradiente animado */}
-                        <motion.div
-                            className="absolute inset-0"
-                            style={{
-                                background: `linear-gradient(135deg, ${theme.accent}, ${theme.accentDark}, ${theme.accent})`,
-                                boxShadow: `0 0 50px ${theme.accentGlow}, 0 12px 40px ${theme.accentGlow}`,
-                            }}
-                            whileHover={{
-                                boxShadow: `0 0 80px ${theme.accentGlow}, 0 16px 60px ${theme.accentGlow}`,
-                            }}
-                        />
-
-                        {/* Efecto de luz deslizante */}
-                        <motion.div
-                            className="absolute inset-0"
-                            style={{
-                                background: `linear-gradient(90deg, transparent 20%, rgba(255, 255, 255, 0.5), transparent 80%)`,
-                            }}
-                            animate={{ x: ["-200%", "200%"] }}
-                            transition={{ duration: 3, repeat: Infinity, ease: "linear", repeatDelay: 1 }}
-                        />
-
-                        {/* Borde pulsante */}
-                        <motion.div
-                            className="absolute inset-0 rounded-full"
-                            style={{ border: `3px solid ${theme.accent}` }}
-                            animate={{
-                                scale: [1, 1.12, 1],
-                                opacity: [0.6, 0, 0.6],
-                            }}
-                            transition={{ duration: 2.5, repeat: Infinity }}
-                        />
-                    </motion.a>
-                </motion.div>
             </div>
         </section>
     );

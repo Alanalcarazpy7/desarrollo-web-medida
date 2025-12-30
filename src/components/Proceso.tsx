@@ -156,7 +156,7 @@ export default function Proceso() {
                 </motion.div>
 
                 {/* Cuadrícula del proceso */}
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16 relative">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16 justify-items-center md:justify-items-stretch relative">
                     {pasos.map((paso, index) => (
                         <motion.div
                             key={paso.numero}
@@ -169,9 +169,8 @@ export default function Proceso() {
                                 stiffness: 100,
                             }}
                             whileHover={{ y: -10 }}
-                            onHoverStart={() => setHoveredIndex(index)}
                             onHoverEnd={() => setHoveredIndex(null)}
-                            className="relative group h-full"
+                            className="relative group w-full max-w-[400px] mx-auto md:max-w-none h-full"
                         >
                             <div className="relative p-7 md:p-8 rounded-[40px] h-full flex flex-col transition-all duration-700 overflow-hidden"
                                 style={{

@@ -7,7 +7,6 @@ export default function SpectacularNavbar() {
     const [scrolled, setScrolled] = useState(false);
     const [activeSection, setActiveSection] = useState("inicio");
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const [mounted, setMounted] = useState(false);
     const { scrollYProgress } = useScroll();
 
     const theme = {
@@ -25,32 +24,35 @@ export default function SpectacularNavbar() {
     useEffect(() => {
         const handleScroll = () => {
             setScrolled(window.scrollY > 50);
-
-            // Orden correcto basado en page.tsx: Servicios -> Proceso -> Proyectos -> Contacto
-            const sections = ["inicio", "servicios", "proceso", "proyectos", "contacto"];
-
-            // Verificar de abajo hacia arriba (invertido)
-            // Esto asegura que siempre elijamos la sección activa más específica/reciente
-            for (let i = sections.length - 1; i >= 0; i--) {
-                const section = sections[i];
-                const element = document.getElementById(section);
-                if (element) {
-                    const rect = element.getBoundingClientRect();
-                    // Si la parte superior de la sección está por encima de la mitad de la pantalla (o es razonablemente visible)
-                    // entonces es la sección activa.
-                    if (rect.top <= window.innerHeight / 2) {
-                        setActiveSection(section);
-                        break;
-                    }
-                }
-            }
         };
 
-        window.addEventListener("scroll", handleScroll);
-        setMounted(true);
-        // Verificación inicial
+        const sections = ["inicio", "servicios", "proceso", "proyectos", "contacto"];
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -20% 0px',
+            threshold: 0.3
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    setActiveSection(entry.target.id);
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach((id) => {
+            const element = document.getElementById(id);
+            if (element) observer.observe(element);
+        });
+
+        window.addEventListener("scroll", handleScroll, { passive: true });
         handleScroll();
-        return () => window.removeEventListener("scroll", handleScroll);
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+            observer.disconnect();
+        };
     }, []);
 
     const navItems = [
@@ -73,36 +75,7 @@ export default function SpectacularNavbar() {
                 }}
             />
 
-            {/* Partículas de fondo más densas */}
-            {mounted && (
-                <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
-                    {[...Array(40)].map((_, i) => (
-                        <motion.div
-                            key={i}
-                            className="absolute rounded-full"
-                            style={{
-                                width: Math.random() * 5 + 2,
-                                height: Math.random() * 5 + 2,
-                                left: `${Math.random() * 100}%`,
-                                top: `${Math.random() * 100}%`,
-                                background: theme.accent,
-                                boxShadow: `0 0 ${Math.random() * 25 + 10}px ${theme.accentGlow}`,
-                            }}
-                            animate={{
-                                y: [0, -60, 0],
-                                opacity: [0.2, 0.7, 0.2],
-                                scale: [1, 1.8, 1],
-                            }}
-                            transition={{
-                                duration: Math.random() * 7 + 5,
-                                repeat: Infinity,
-                                delay: Math.random() * 3,
-                                ease: "easeInOut",
-                            }}
-                        />
-                    ))}
-                </div>
-            )}
+            {/* Partículas del navbar removidas (redundantes con BackgroundParticles) */}
 
             <motion.nav
                 initial={{ y: -100, opacity: 0 }}
@@ -110,30 +83,15 @@ export default function SpectacularNavbar() {
                 transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                 className={`fixed top-0 left-0 right-0 z-50 flex justify-center transition-all duration-700 ${scrolled ? "py-4" : "py-6"}`}
             >
-                {/* Fondo del navbar con borde inferior destacado */}
+                {/* Fondo del navbar optimizado (contain: paint) */}
                 <div
                     className="absolute inset-0"
                     style={{
-                        background: scrolled
-                            ? `linear-gradient(180deg, ${theme.bgNav}f5 0%, ${theme.bgNav}e8 100%)`
-                            : `linear-gradient(180deg, ${theme.bgNav}cc 0%, ${theme.bgNav}99 100%)`,
-                        backdropFilter: "blur(30px) saturate(180%)",
-                        borderBottom: `2px solid ${scrolled ? theme.accent + '40' : theme.accent + '20'}`,
-                        boxShadow: scrolled
-                            ? `0 8px 32px rgba(0, 0, 0, 0.8), 0 0 100px ${theme.accentGlow}`
-                            : `0 4px 20px rgba(0, 0, 0, 0.6)`,
-                    }}
-                />
-
-                {/* Grid de fondo sutil */}
-                <div
-                    className="absolute inset-0 opacity-[0.03]"
-                    style={{
-                        backgroundImage: `
-                            linear-gradient(${theme.accent} 1px, transparent 1px),
-                            linear-gradient(90deg, ${theme.accent} 1px, transparent 1px)
-                        `,
-                        backgroundSize: "50px 50px",
+                        background: scrolled ? theme.bgNav : 'transparent',
+                        backdropFilter: scrolled ? "blur(20px)" : "none",
+                        borderBottom: `1px solid ${scrolled ? theme.accent + '30' : 'transparent'}`,
+                        boxShadow: scrolled ? `0 4px 20px rgba(0, 0, 0, 0.8)` : 'none',
+                        contain: 'paint'
                     }}
                 />
 
@@ -426,6 +384,7 @@ export default function SpectacularNavbar() {
                         <div className="xl:hidden">
                             <motion.button
                                 onClick={() => setMobileMenuOpen(true)}
+                                aria-label="Abrir menú de navegación"
                                 className="relative p-3 group cursor-pointer flex items-center justify-center"
                                 whileTap={{ scale: 0.9 }}
                             >
@@ -521,6 +480,7 @@ export default function SpectacularNavbar() {
 
                                 <motion.button
                                     onClick={() => setMobileMenuOpen(false)}
+                                    aria-label="Cerrar menú de navegación"
                                     style={{
                                         padding: '12px',
                                         borderRadius: '16px',

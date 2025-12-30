@@ -1,16 +1,16 @@
+import dynamic from "next/dynamic";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Servicios from "@/components/Servicios";
-import Proceso from "@/components/Proceso";
-import Proyectos from "@/components/Proyectos";
-import Testimonios from "@/components/Testimonios";
-import Estadisticas from "@/components/Estadisticas";
-import Contacto from "@/components/Contacto";
-import Footer from "@/components/Footer";
-import WhatsAppButton from "@/components/WhatsAppButton";
+import BackgroundParticles from "@/components/BackgroundParticles";
 import ScrollProgress from "@/components/ScrollProgress";
 
-import BackgroundParticles from "@/components/BackgroundParticles";
+// Carga dinámica para componentes debajo del fold (reduce TBT y bundle inicial)
+const Proceso = dynamic(() => import("@/components/Proceso"), { ssr: true });
+const Proyectos = dynamic(() => import("@/components/Proyectos"), { ssr: true });
+const Contacto = dynamic(() => import("@/components/Contacto"), { ssr: true });
+const Footer = dynamic(() => import("@/components/Footer"), { ssr: true });
+const WhatsAppButton = dynamic(() => import("@/components/WhatsAppButton"), { ssr: true });
 
 export default function Home() {
   return (

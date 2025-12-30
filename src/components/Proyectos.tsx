@@ -2,6 +2,7 @@
 
 import { motion, useMotionValue, useSpring, useTransform, AnimatePresence, useInView } from "framer-motion";
 import { useRef, useState, MouseEvent } from "react";
+import Image from "next/image";
 
 // Componente de tarjeta 3D
 function ProjectCard({ project, index, theme }: { project: any, index: number, theme: any }) {
@@ -37,12 +38,13 @@ function ProjectCard({ project, index, theme }: { project: any, index: number, t
             style={{
                 perspective: 1200,
             }}
-            className="w-full h-full"
+            className="w-full h-full max-w-[380px] mx-auto md:max-w-none"
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
         >
             <motion.a
                 href={project.link}
+                aria-label={`Ver detalles del proyecto ${project.titulo}`}
                 style={{
                     rotateX,
                     rotateY,
@@ -60,16 +62,23 @@ function ProjectCard({ project, index, theme }: { project: any, index: number, t
 
                     {/* Sección de imagen */}
                     <div className="relative aspect-[16/10] w-full overflow-hidden shrink-0">
-                        <motion.img
-                            src={project.imagen}
-                            alt={project.titulo}
-                            className={`w-full h-full object-cover ${project.objectPosition === 'left' ? 'object-left' : 'object-center'}`}
+                        <motion.div
+                            className="w-full h-full"
                             variants={{
                                 rest: { scale: 1 },
                                 hover: { scale: 1.1 }
                             }}
                             transition={{ duration: 0.8, ease: "easeOut" }}
-                        />
+                        >
+                            <Image
+                                src={project.imagen}
+                                alt={project.titulo}
+                                fill
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                className={`object-cover ${project.objectPosition === 'left' ? 'object-left' : 'object-center'}`}
+                                priority={index < 2}
+                            />
+                        </motion.div>
 
                         {/* Etiqueta de categoría */}
                         <div className="absolute top-5 right-5 z-20">
@@ -200,7 +209,7 @@ function ProjectCard({ project, index, theme }: { project: any, index: number, t
                     <div className="absolute inset-0 border-2 border-cyan-500/0 group-hover:border-cyan-500/50 rounded-[24px] transition-colors duration-300 pointer-events-none" />
                 </div>
             </motion.a>
-        </motion.div>
+        </motion.div >
     );
 }
 
@@ -289,8 +298,8 @@ export default function Proyectos() {
                 scrollMarginTop: '100px'
             }}
         >
-            {/* Patrón de fondo */}
-            <div className="absolute inset-0 opacity-[0.02]">
+            {/* Patrón de fondo optimizado (contain: paint) */}
+            <div className="absolute inset-0 opacity-[0.02]" style={{ contain: 'paint' }}>
                 <motion.div
                     className="absolute inset-0"
                     style={{
@@ -299,6 +308,7 @@ export default function Proyectos() {
                             linear-gradient(90deg, ${theme.accent} 2px, transparent 2px)
                         `,
                         backgroundSize: "80px 80px",
+                        willChange: "transform",
                     }}
                     animate={{
                         backgroundPosition: ["0px 0px", "80px 80px"],
@@ -312,7 +322,7 @@ export default function Proyectos() {
             </div>
 
             {/* Elementos de fondo */}
-            <div className="w-full max-w-7xl px-4 md:px-8 relative z-10">
+            <div className="w-full max-w-7xl px-6 md:px-8 relative z-10">
 
                 {/* Encabezado */}
                 <motion.div
@@ -415,7 +425,7 @@ export default function Proyectos() {
                 </motion.div>
 
                 {/* Cuadrícula 3D de proyectos */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 perspective-2000 pb-24 items-stretch">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center md:justify-items-stretch perspective-2000 pb-24 items-stretch">
                     <AnimatePresence mode="popLayout">
                         {proyectosFiltrados.map((proyecto, index) => (
                             <ProjectCard
