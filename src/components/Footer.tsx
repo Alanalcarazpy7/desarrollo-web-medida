@@ -97,20 +97,33 @@ export default function Footer() {
                         flexDirection: 'column',
                         alignItems: isMobile ? 'center' : 'flex-start'
                     }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '24px' }}>
+                        <motion.a
+                            href="#inicio"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                window.scrollTo({ top: 0, behavior: 'smooth' });
+                            }}
+                            style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '24px', cursor: 'pointer', textDecoration: 'none' }}
+                            whileHover={{ scale: 1.05 }}
+                            transition={{ duration: 0.4 }}
+                        >
                             <div className="relative" style={{ width: '48px', height: '48px' }}>
                                 {/* Anillos orbitales estáticos para el footer */}
-                                <div
+                                <motion.div
                                     className="absolute inset-0 rounded-full border"
                                     style={{ borderColor: `${theme.accent}30`, borderRadius: '50%' }}
+                                    animate={{ rotate: 360 }}
+                                    transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
                                 />
-                                <div
+                                <motion.div
                                     className="absolute inset-0 rounded-full border"
                                     style={{ borderColor: `${theme.accent}20`, transform: "rotate(60deg)", borderRadius: '50%' }}
+                                    animate={{ rotate: -360 }}
+                                    transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
                                 />
 
                                 {/* Core del logo */}
-                                <div
+                                <motion.div
                                     className="relative w-full h-full rounded-xl flex items-center justify-center overflow-hidden"
                                     style={{
                                         background: `linear-gradient(135deg, #0a0a0a, #111111)`,
@@ -118,45 +131,49 @@ export default function Footer() {
                                         boxShadow: `0 0 20px rgba(0, 217, 255, 0.3), inset 0 0 10px ${theme.accent}10`,
                                         borderRadius: '12px'
                                     }}
+                                    whileHover={{
+                                        boxShadow: `0 0 50px rgba(0, 217, 255, 0.5), inset 0 0 25px ${theme.accent}20`,
+                                    }}
                                 >
-                                    <span
-                                        className="relative z-10 text-xl font-black tracking-wider"
-                                        style={{
-                                            color: theme.accent,
-                                            textShadow: `0 0 10px rgba(0, 217, 255, 0.5)`,
-                                        }}
-                                    >
-                                        A
-                                    </span>
-                                </div>
+                                    <img
+                                        src="/favicon.png"
+                                        alt="SolveTech"
+                                        width="44"
+                                        height="44"
+                                        style={{ objectFit: 'cover' }}
+                                    />
+                                </motion.div>
                             </div>
 
                             <div className="flex flex-col items-start">
                                 <div className="flex items-baseline gap-1">
                                     <span
-                                        className="text-2xl font-black tracking-[0.15em] uppercase"
+                                        className="text-2xl font-black tracking-[0.05em]"
                                         style={{ color: theme.text }}
                                     >
-                                        ALAN
+                                        Solve
                                     </span>
                                     <span
-                                        className="text-2xl font-light tracking-[0.15em] uppercase"
-                                        style={{ color: theme.textMuted }}
+                                        className="text-2xl font-light tracking-[0.05em]"
+                                        style={{ color: theme.accent }}
                                     >
-                                        DEV
+                                        Tech
                                     </span>
                                 </div>
-                                <div
+                                <motion.div
                                     className="h-px mt-1"
                                     style={{
                                         background: `linear-gradient(90deg, ${theme.accent}, transparent)`,
                                         width: "100%"
                                     }}
+                                    initial={{ width: 0 }}
+                                    animate={{ width: "100%" }}
+                                    transition={{ duration: 1, delay: 0.5 }}
                                 />
                             </div>
-                        </div>
+                        </motion.a>
                         <p style={{ color: theme.textMuted, lineHeight: 1.6, maxWidth: '400px', fontSize: '15px' }}>
-                            Creando el futuro digital con soluciones web premium, diseño de vanguardia y tecnología de alto rendimiento.
+                            Impulsamos negocios con soluciones de ingeniería de software premium, diseño de vanguardia y tecnología de alto rendimiento.
                         </p>
                     </div>
 
@@ -195,9 +212,7 @@ export default function Footer() {
                     alignItems: 'center',
                     justifyContent: isMobile ? 'center' : 'space-between',
                 }}>
-                    <p style={{ color: theme.textMuted, fontSize: '14px', margin: 0 }}>
-                        © {currentYear} AlanDev. Todos los derechos reservados.
-                    </p>
+                    © {currentYear} SolveTech. Todos los derechos reservados.
 
                     <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
                         {sections.legal.map((item) => (

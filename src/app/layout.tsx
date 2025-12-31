@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 
 const inter = Inter({
@@ -11,23 +12,31 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL("https://alandev.com.py"),
   title: {
-    default: "Alan Dev | Desarrollo Web a Medida & Software de Alto Rendimiento",
-    template: "%s | Alan Dev"
+    default: "SolveTech | Ingeniería de Software & Consultoría Digital",
+    template: "%s | SolveTech"
   },
-  description: "Desarrollador full-stack especializado en soluciones digitales premium. Creación de software a medida, e-commerce escalables y sistemas de gestión de alto impacto.",
+  description: "Consultoría de software y desarrollo web de élite. Especialistas en sistemas a medida, e-commerce escalables y arquitectura digital de alto impacto bajo la marca SolveTech.",
   keywords: [
-    "desarrollo web paraguay",
-    "programador freelance",
+    "solvetech",
     "software a medida",
-    "aplicaciones web modernas",
-    "next.js developer",
-    "diseño web premium",
-    "alan dev",
-    "sistemas de gestion"
+    "consultoría tecnológica",
+    "desarrollo web premium",
+    "next.js paraguay",
+    "ingeniería de software",
+    "sistemas de gestión paraguay"
   ],
   authors: [{ name: "Alan Alcaraz", url: "https://alandev.com.py" }],
   creator: "Alan Alcaraz",
   publisher: "Alan Alcaraz",
+  icons: {
+    icon: [
+      { url: '/favicon.png', type: 'image/png' },
+      { url: '/icon.png', type: 'image/png', sizes: '512x512' }
+    ],
+    apple: [
+      { url: '/apple-icon.png', type: 'image/png' }
+    ],
+  },
   robots: {
     index: true,
     follow: true,
@@ -40,17 +49,17 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Alan Dev | Desarrollo Web a Medida",
-    description: "Transformo tus ideas en experiencias digitales excepcionales con tecnología de vanguardia.",
+    title: "SolveTech | Soluciones Tecnológicas de Élite",
+    description: "Transformamos negocios con infraestructura digital de vanguardia y desarrollo de software a medida.",
     url: "https://alandev.com.py",
-    siteName: "Alan Dev Portfolio",
+    siteName: "SolveTech",
     locale: "es_PY",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Alan Dev | Desarrollador de Software Premium",
-    description: "Especialista en desarrollo de software a medida y alto rendimiento.",
+    title: "SolveTech | Ingeniería de Software Premium",
+    description: "Expertos en consultoría tecnológica y desarrollo de sistemas escalables.",
     creator: "@alanalcarazpy", // Ajustar si el usuario tiene otro handle
   },
   alternates: {
@@ -61,8 +70,8 @@ export const metadata: Metadata = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
-  "name": "Alan Dev",
-  "image": "https://alandev.com.py/icon.png", // Ajustar si hay un logo real
+  "name": "SolveTech",
+  "image": "https://alandev.com.py/icon.svg",
   "@id": "https://alandev.com.py",
   "url": "https://alandev.com.py",
   "telephone": "+595981000000", // Ejemplo, el usuario debe ajustar
@@ -111,6 +120,7 @@ export default function RootLayout({
         />
         {children}
         <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );

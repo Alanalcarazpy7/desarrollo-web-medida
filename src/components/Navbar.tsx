@@ -132,55 +132,33 @@ export default function SpectacularNavbar() {
                                         boxShadow: `0 0 50px ${theme.accentGlow}, inset 0 0 25px ${theme.accent}20`,
                                     }}
                                 >
-                                    {/* Efecto de luz en movimiento */}
-                                    <motion.div
-                                        className="absolute inset-0"
+                                    {/* Logo SolveTech S */}
+                                    <img
+                                        src="/favicon.png"
+                                        alt="SolveTech"
+                                        width="44"
+                                        height="44"
                                         style={{
-                                            background: `linear-gradient(45deg, transparent, ${theme.accent}40, transparent)`,
-                                        }}
-                                        animate={{
-                                            x: ["-100%", "200%"],
-                                        }}
-                                        transition={{
-                                            duration: 3,
-                                            repeat: Infinity,
-                                            ease: "linear",
+                                            filter: `drop-shadow(0 0 10px ${theme.accentDark})`,
+                                            objectFit: 'cover'
                                         }}
                                     />
-
-                                    <motion.span
-                                        className="relative z-10 text-2xl font-black tracking-wider"
-                                        style={{
-                                            color: theme.accent,
-                                            textShadow: `0 0 15px ${theme.accentGlow}`,
-                                        }}
-                                        animate={{
-                                            textShadow: [
-                                                `0 0 20px ${theme.accentGlow}`,
-                                                `0 0 40px ${theme.accentGlow}`,
-                                                `0 0 20px ${theme.accentGlow}`,
-                                            ],
-                                        }}
-                                        transition={{ duration: 2, repeat: Infinity }}
-                                    >
-                                        A
-                                    </motion.span>
                                 </motion.div>
                             </div>
 
                             <div className="flex flex-col">
                                 <motion.div className="flex items-baseline gap-1">
                                     <span
-                                        className="text-3xl font-black tracking-[0.15em] uppercase"
+                                        className="text-3xl font-black tracking-[0.05em]"
                                         style={{ color: theme.text }}
                                     >
-                                        ALAN
+                                        Solve
                                     </span>
                                     <span
-                                        className="text-3xl font-light tracking-[0.15em] uppercase"
-                                        style={{ color: theme.textMuted }}
+                                        className="text-3xl font-light tracking-[0.05em]"
+                                        style={{ color: theme.accent }}
                                     >
-                                        DEV
+                                        Tech
                                     </span>
                                 </motion.div>
                                 <motion.div
@@ -196,7 +174,7 @@ export default function SpectacularNavbar() {
                                     className="text-[9px] tracking-[0.3em] uppercase font-medium mt-1"
                                     style={{ color: theme.textMuted }}
                                 >
-                                    DIGITAL EXCELLENCE
+                                    TECNOLOGÍA & DESARROLLO WEB
                                 </span>
                             </div>
                         </motion.a>
@@ -469,12 +447,18 @@ export default function SpectacularNavbar() {
                                                 boxShadow: `0 0 20px ${theme.accentGlow}`,
                                             }}
                                         >
-                                            <span style={{ color: theme.accent, fontSize: '20px', fontWeight: 900, textShadow: `0 0 10px ${theme.accentGlow}` }}>A</span>
+                                            <img
+                                                src="/favicon.png"
+                                                alt="SolveTech"
+                                                width="44"
+                                                height="44"
+                                                style={{ objectFit: 'cover' }}
+                                            />
                                         </div>
                                     </div>
                                     <div style={{ display: 'flex', flexDirection: 'column' }}>
-                                        <span style={{ fontSize: '22px', fontWeight: 900, letterSpacing: '0.1em', color: '#fff', lineHeight: 1 }}>ALAN</span>
-                                        <span style={{ fontSize: '22px', fontWeight: 300, letterSpacing: '0.1em', color: theme.textMuted, lineHeight: 1 }}>DEV</span>
+                                        <span style={{ fontSize: '22px', fontWeight: 900, letterSpacing: '0.05em', color: '#fff', lineHeight: 1 }}>Solve</span>
+                                        <span style={{ fontSize: '22px', fontWeight: 300, letterSpacing: '0.05em', color: theme.accent, lineHeight: 1 }}>Tech</span>
                                     </div>
                                 </div>
 
@@ -584,7 +568,7 @@ export default function SpectacularNavbar() {
                             {/* Decoración sutil inferior con diseño mejorado */}
                             <div className="absolute bottom-10 left-10 flex flex-col gap-2 opacity-30">
                                 <span className="text-[10px] tracking-[0.5em] text-white uppercase font-black">
-                                    Alan Dev © 2026
+                                    SolveTech © 2026
                                 </span>
                                 <div className="h-px w-12 bg-white" />
                             </div>
