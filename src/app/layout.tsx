@@ -15,11 +15,12 @@ export const metadata: Metadata = {
     default: "SolveTech | Ingeniería de Software & Consultoría Digital",
     template: "%s | SolveTech"
   },
-  description: "Consultoría de software y desarrollo web de élite. Especialistas en sistemas a medida, e-commerce escalables y arquitectura digital de alto impacto bajo la marca SolveTech.",
+  description: "Consultoría de software y desarrollo web de élite. Especialistas en desarrollar tu página web, sistemas a medida, e-commerce escalables y arquitectura digital bajo la marca SolveTech.",
   keywords: [
     "solvetech",
     "software a medida",
-    "consultoría tecnológica",
+    "desarrollar mi página web",
+    "crear sitio web profesional",
     "desarrollo web premium",
     "next.js paraguay",
     "ingeniería de software",
