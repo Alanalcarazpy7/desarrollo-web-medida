@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
             allow: '/',
             disallow: '/private/',
         },
-        sitemap: 'https://alandev.com.py/sitemap.xml',
+        sitemap: 'https://solvatech.vercel.app/sitemap.xml',
     }
 }

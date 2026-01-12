@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const baseUrl = 'https://alandev.com.py' // Reemplazar con la URL final del usuario
+    const baseUrl = 'https://solvatech.vercel.app' // Reemplazar con la URL final del usuario
 
     return [
         {

@@ -10,7 +10,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://alandev.com.py"),
+  metadataBase: new URL("https://solvatech.vercel.app"),
   title: {
     default: "SolveTech | Ingeniería de Software & Consultoría Digital",
     template: "%s | SolveTech"
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     "ingeniería de software",
     "sistemas de gestión paraguay"
   ],
-  authors: [{ name: "Alan Alcaraz", url: "https://alandev.com.py" }],
+  authors: [{ name: "Alan Alcaraz", url: "https://solvatech.vercel.app" }],
   creator: "Alan Alcaraz",
   publisher: "Alan Alcaraz",
   icons: {
@@ -56,6 +56,9 @@ export const metadata: Metadata = {
     locale: "es_PY",
     type: "website",
   },
+  verification: {
+    google: "VlBerPqiUySA7idLeMLX8ijEjX8BHYLYKZ5sOHDD6xg",
+  },
   twitter: {
     card: "summary_large_image",
     title: "SolveTech | Ingeniería de Software Premium",
@@ -63,7 +66,7 @@ export const metadata: Metadata = {
     creator: "@alanalcarazpy", // Ajustar si el usuario tiene otro handle
   },
   alternates: {
-    canonical: "https://alandev.com.py",
+    canonical: "https://solvatech.vercel.app",
   },
 };
 
@@ -71,9 +74,9 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   "name": "SolveTech",
-  "image": "https://alandev.com.py/icon.svg",
-  "@id": "https://alandev.com.py",
-  "url": "https://alandev.com.py",
+  "image": "https://solvatech.vercel.app/icon.svg",
+  "@id": "https://solvatech.vercel.app",
+  "url": "https://solvatech.vercel.app",
   "telephone": "+595981000000", // Ejemplo, el usuario debe ajustar
   "address": {
     "@type": "PostalAddress",
