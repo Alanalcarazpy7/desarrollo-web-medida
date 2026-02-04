@@ -337,7 +337,7 @@ function StatsCard({ stat, index, theme }: { stat: any; index: number; theme: an
             />
 
             {/* Contenido */}
-            <div className="relative z-10 flex flex-col items-center gap-4 text-center">
+            <div className="relative z-10 flex flex-col items-center gap-4 text-center" style={{ padding: '1.5rem 0' }}>
                 {/* Icono profesional */}
                 <motion.div
                     className="w-16 h-16 rounded-2xl flex items-center justify-center transition-all duration-500 group-hover:scale-110"
