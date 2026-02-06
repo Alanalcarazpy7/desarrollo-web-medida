@@ -1,11 +1,9 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useRef, useState } from "react";
+import { motion } from "framer-motion";
+import { useState } from "react";
 
 export default function Proceso() {
-    const ref = useRef(null);
-    const isInView = useInView(ref, { once: true, margin: "-100px" });
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
     const pasos = [
@@ -91,7 +89,6 @@ export default function Proceso() {
     return (
         <section
             id="proceso"
-            ref={ref}
             className="relative overflow-hidden flex justify-center"
             style={{
                 marginTop: '140px',
@@ -108,14 +105,16 @@ export default function Proceso() {
                 {/* Encabezado */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.8 }}
                     className="text-center mb-20 md:mb-40"
                 >
                     {/* Distintivo similar a Servicios */}
                     <motion.div
                         initial={{ opacity: 0, scale: 0.5 }}
-                        animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
                         transition={{ duration: 0.6, type: "spring" }}
                         className="inline-flex items-center gap-3 px-6 py-3 mb-8 rounded-full cursor-default"
                         style={{
@@ -161,7 +160,8 @@ export default function Proceso() {
                         <motion.div
                             key={paso.numero}
                             initial={{ opacity: 0, y: 30 }}
-                            animate={isInView ? { opacity: 1, y: 0 } : {}}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-50px" }}
                             transition={{
                                 duration: 0.8,
                                 delay: index * 0.1,

@@ -1,7 +1,7 @@
 "use client";
 
-import { motion, useMotionValue, useSpring, useTransform, AnimatePresence, useInView } from "framer-motion";
-import { useRef, useState, MouseEvent } from "react";
+import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from "framer-motion";
+import { useState, MouseEvent } from "react";
 import Image from "next/image";
 
 // Componente de tarjeta 3D
@@ -60,28 +60,62 @@ function ProjectCard({ project, index, theme }: { project: any, index: number, t
                 {/* Contenedor de contenido de la tarjeta */}
                 <div className="relative w-full h-full rounded-[24px] overflow-hidden border border-white/10 flex flex-col grow shadow-2xl" style={{ backgroundColor: '#13141C' }}>
 
-                    {/* Sección de imagen */}
-                    <div className="relative aspect-[16/10] w-full overflow-hidden shrink-0">
-                        <motion.div
-                            className="w-full h-full"
-                            variants={{
-                                rest: { scale: 1 },
-                                hover: { scale: 1.1 }
-                            }}
-                            transition={{ duration: 0.8, ease: "easeOut" }}
-                        >
-                            <Image
-                                src={project.imagen}
-                                alt={project.titulo}
-                                fill
-                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                                className={`object-cover ${project.objectPosition === 'left' ? 'object-left' : 'object-center'}`}
-                                priority={index < 2}
-                            />
-                        </motion.div>
+                    {/* Sección de imagen - CON LÓGICA DE FLIP SI EXISTE IMAGEN BACK */}
+                    <div className="relative aspect-[16/10] w-full shrink-0 group-image-container" style={{ perspective: '1000px' }}>
+                        {project.imagenBack ? (
+                            <motion.div
+                                className="w-full h-full relative"
+                                style={{ transformStyle: "preserve-3d" }}
+                                variants={{
+                                    rest: { rotateY: 0 },
+                                    hover: { rotateY: 180 }
+                                }}
+                                transition={{ duration: 1.2, ease: [0.4, 0, 0.2, 1] }}
+                            >
+                                {/* FRENTE */}
+                                <div className="absolute inset-0 w-full h-full" style={{ backfaceVisibility: "hidden" }}>
+                                    <Image
+                                        src={project.imagen}
+                                        alt={project.titulo}
+                                        fill
+                                        className={`object-cover ${project.objectPosition === 'left' ? 'object-left' : 'object-center'}`}
+                                        priority={index < 2}
+                                    />
+                                </div>
 
-                        {/* Etiqueta de categoría */}
-                        <div className="absolute top-5 right-5 z-20">
+                                {/* DORSO (ADMIN) */}
+                                <div className="absolute inset-0 w-full h-full bg-[#13141C]" style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}>
+                                    <Image
+                                        src={project.imagenBack}
+                                        alt={`${project.titulo} Admin`}
+                                        fill
+                                        className="object-cover object-left-top"
+                                    />
+                                </div>
+                            </motion.div>
+                        ) : (
+                            // DIBUJADO NORMAL SIN FLIP
+                            <motion.div
+                                className="w-full h-full"
+                                variants={{
+                                    rest: { scale: 1 },
+                                    hover: { scale: 1.1 }
+                                }}
+                                transition={{ duration: 0.8, ease: "easeOut" }}
+                            >
+                                <Image
+                                    src={project.imagen}
+                                    alt={project.titulo}
+                                    fill
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                    className={`object-cover ${project.objectPosition === 'left' ? 'object-left' : 'object-center'}`}
+                                    priority={index < 2}
+                                />
+                            </motion.div>
+                        )}
+
+                        {/* Etiqueta de categoría (Global - siempre visible y estática) */}
+                        <div className="absolute top-5 right-5 z-20 pointer-events-none" style={{ transform: 'translateZ(20px)' }}>
                             <motion.div
                                 initial={{ opacity: 0, x: 20 }}
                                 animate={{ opacity: 1, x: 0 }}
@@ -107,9 +141,10 @@ function ProjectCard({ project, index, theme }: { project: any, index: number, t
                             </motion.div>
                         </div>
 
+
                         {/* Superposición al pasar el cursor */}
                         <motion.div
-                            className="absolute inset-0"
+                            className="absolute inset-0 z-10"
                             variants={{
                                 rest: { opacity: 0 },
                                 hover: { opacity: 1 }
@@ -119,7 +154,7 @@ function ProjectCard({ project, index, theme }: { project: any, index: number, t
                         />
 
                         {/* Botón Ver Proyecto */}
-                        <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
+                        <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden z-20">
                             <motion.div
                                 variants={{
                                     rest: { y: 20, opacity: 0, scale: 0.9 },
@@ -214,8 +249,6 @@ function ProjectCard({ project, index, theme }: { project: any, index: number, t
 }
 
 export default function Proyectos() {
-    const ref = useRef(null);
-    const isInView = useInView(ref, { once: true, margin: "-100px" });
     const [selectedCategory, setSelectedCategory] = useState("Todos");
 
     const theme = {
@@ -248,6 +281,15 @@ export default function Proyectos() {
             imagen: "/projects/stockpro.jpg",
             objectPosition: "left",
             link: "#",
+        },
+        {
+            titulo: "Global Exchange",
+            categoria: "Sistemas",
+            tecnologias: ["Django", "Python", "PostgreSQL", "Docker", "JS"],
+            descripcion: "Sistema integral para casa de cambios. Gestión de divisas, cálculo de ganancias, reportes y control de usuarios.",
+            imagen: "/projects/global-exchange-1.png",
+            imagenBack: "/projects/global-exchange-2-admin.png",
+            link: "https://github.com/MertinGIT/Casa-De-Cambios-De-Divisas",
         },
         {
             titulo: "Inmobiliaria Premium",
@@ -291,7 +333,6 @@ export default function Proyectos() {
     return (
         <section
             id="proyectos"
-            ref={ref}
             className="relative overflow-hidden flex justify-center w-full min-h-screen"
             style={{
                 marginTop: '140px',
@@ -327,14 +368,16 @@ export default function Proyectos() {
                 {/* Encabezado */}
                 <motion.div
                     initial={{ opacity: 0, y: 40 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.8 }}
                     className="text-center mb-24"
                 >
                     {/* Distintivo */}
                     <motion.div
                         initial={{ opacity: 0, scale: 0.5 }}
-                        animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
                         transition={{ duration: 0.6, type: "spring" }}
                         className="inline-flex items-center gap-3 px-6 py-3 mb-8 rounded-full cursor-default"
                         style={{
@@ -375,7 +418,8 @@ export default function Proyectos() {
                     {/* Subtítulo */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
-                        animate={isInView ? { opacity: 1, y: 0 } : {}}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
                         transition={{ duration: 0.8, delay: 0.2 }}
                         className="flex justify-center w-full px-6"
                     >

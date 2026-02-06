@@ -1,11 +1,9 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useRef, useState } from "react";
+import { motion } from "framer-motion";
+import { useState } from "react";
 
 export default function Servicios() {
-    const ref = useRef(null);
-    const isInView = useInView(ref, { once: true, margin: "-100px" });
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
     const theme = {
@@ -86,7 +84,6 @@ export default function Servicios() {
     return (
         <section
             id="servicios"
-            ref={ref}
             className="min-h-screen relative overflow-hidden flex flex-col items-start lg:items-center justify-start lg:justify-center"
             style={{
                 marginTop: '140px',
@@ -153,14 +150,16 @@ export default function Servicios() {
                 {/* Encabezado */}
                 <motion.div
                     initial={{ opacity: 0, y: 40 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.8 }}
                     className="text-center mb-24"
                 >
                     {/* Distintivo */}
                     <motion.div
                         initial={{ opacity: 0, scale: 0.5 }}
-                        animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
                         transition={{ duration: 0.6, type: "spring" }}
                         className="inline-flex items-center gap-3 px-6 py-3 mb-8 rounded-full cursor-default"
                         style={{
@@ -201,7 +200,8 @@ export default function Servicios() {
                     {/* Subtítulo */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
-                        animate={isInView ? { opacity: 1, y: 0 } : {}}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
                         transition={{ duration: 0.8, delay: 0.2 }}
                         className="flex justify-center w-full px-6"
                     >
@@ -219,7 +219,8 @@ export default function Servicios() {
                             <motion.div
                                 key={servicio.numero}
                                 initial={{ opacity: 0, y: 40 }}
-                                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true, margin: "-50px" }}
                                 transition={{
                                     duration: 0.6,
                                     delay: index * 0.1,

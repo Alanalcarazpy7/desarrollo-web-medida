@@ -1,11 +1,9 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useRef, useState } from "react";
+import { motion } from "framer-motion";
+import { useState } from "react";
 
 export default function Contacto() {
-    const ref = useRef(null);
-    const isInView = useInView(ref, { once: true, margin: "-100px" });
     const [formData, setFormData] = useState({
         nombre: "",
         email: "",
@@ -101,7 +99,6 @@ ${formData.mensaje}
     return (
         <section
             id="contacto"
-            ref={ref}
             className="relative overflow-hidden flex justify-center"
             style={{
                 marginTop: '140px',
@@ -113,14 +110,16 @@ ${formData.mensaje}
                 {/* Encabezado */}
                 <motion.div
                     initial={{ opacity: 0, y: 40 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.8 }}
                     className="text-center mb-16 md:mb-20"
                 >
                     {/* Badge */}
                     <motion.div
                         initial={{ opacity: 0, scale: 0.5 }}
-                        animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
                         transition={{ duration: 0.6, type: "spring" }}
                         className="inline-flex items-center gap-3 px-6 py-3 mb-8 rounded-full cursor-default"
                         style={{
@@ -170,7 +169,8 @@ ${formData.mensaje}
                     {/* Left Side - Contact Methods (1 col) - Balanced Height */}
                     <motion.div
                         initial={{ opacity: 0, x: -50 }}
-                        animate={isInView ? { opacity: 1, x: 0 } : {}}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
                         transition={{ duration: 0.8, delay: 0.2 }}
                         className="lg:col-span-1"
                         style={{
@@ -188,7 +188,8 @@ ${formData.mensaje}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 initial={{ opacity: 0, x: -30 }}
-                                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
                                 transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
                                 whileHover={{ x: 5, scale: 1.02 }}
                                 whileTap={{ scale: 0.98 }}
@@ -243,7 +244,8 @@ ${formData.mensaje}
                     {/* Right Side - Contact Form (2 cols) - Compacted */}
                     <motion.div
                         initial={{ opacity: 0, x: 50 }}
-                        animate={isInView ? { opacity: 1, x: 0 } : {}}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
                         transition={{ duration: 0.8, delay: 0.4 }}
                         className="lg:col-span-2"
                     >

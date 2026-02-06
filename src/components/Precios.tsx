@@ -329,7 +329,7 @@ export default function Precios() {
     };
 
     return (
-        <section id="precios" style={{ position: "relative", padding: "70px 20px", overflow: "hidden", background: "#000" }}>
+        <section id="precios" style={{ position: "relative", padding: "70px 20px", overflow: "hidden", background: "#000", scrollMarginTop: "100px" }}>
             {/* Background glows */}
             <motion.div
                 animate={{ scale: [1, 1.1, 1], opacity: [0.4, 0.6, 0.4] }}
@@ -351,6 +351,30 @@ export default function Precios() {
                     transition={{ duration: 0.6 }}
                     style={{ textAlign: "center", marginBottom: "50px" }}
                 >
+                    {/* Distintivo */}
+                    <div
+                        className="inline-flex items-center gap-3 px-6 py-3 mb-8 rounded-full cursor-default"
+                        style={{
+                            background: "rgba(255, 255, 255, 0.03)",
+                            border: `2px solid ${theme.accent}30`,
+                            backdropFilter: "blur(20px)",
+                            display: "inline-flex"
+                        }}
+                    >
+                        <motion.span
+                            className="w-3 h-3 rounded-full"
+                            style={{ background: theme.accent, boxShadow: `0 0 20px ${theme.accent}80` }}
+                            animate={{
+                                scale: [1, 1.3, 1],
+                                opacity: [1, 0.7, 1],
+                            }}
+                            transition={{ duration: 2, repeat: Infinity }}
+                        />
+                        <span className="text-sm font-bold uppercase tracking-[0.2em]" style={{ color: theme.accent }}>
+                            Inversión Inteligente
+                        </span>
+                    </div>
+
                     <h2 style={{ fontSize: "clamp(2.2rem, 4vw, 3rem)", fontWeight: 800, marginBottom: "10px", color: "#fff" }}>
                         Precios{" "}
                         <motion.span

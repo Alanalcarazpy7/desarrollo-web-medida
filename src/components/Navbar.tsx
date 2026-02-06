@@ -26,7 +26,7 @@ export default function SpectacularNavbar() {
             setScrolled(window.scrollY > 50);
         };
 
-        const sections = ["inicio", "servicios", "proceso", "proyectos", "contacto"];
+        const sections = ["inicio", "servicios", "proceso", "proyectos", "precios", "contacto"];
         const observerOptions = {
             root: null,
             rootMargin: '-20% 0px -20% 0px',
@@ -60,6 +60,7 @@ export default function SpectacularNavbar() {
         { label: "Servicios", href: "#servicios" },
         { label: "Proceso", href: "#proceso" },
         { label: "Proyectos", href: "#proyectos" },
+        { label: "Precios", href: "#precios" },
         { label: "Contacto", href: "#contacto" },
     ];
 
@@ -179,19 +180,19 @@ export default function SpectacularNavbar() {
                             </div>
                         </motion.a>
 
-                        {/* NAVEGACIÓN DESKTOP - ESPECTACULAR Y ESPACIADA */}
-                        <div className="hidden xl:flex items-center gap-12">
+                        {/* NAVEGACIÓN DESKTOP - MODERNA Y COMPACTA (Fix Overlap) */}
+                        <div className="hidden xl:flex items-center gap-2">
                             {navItems.map((item, i) => {
                                 const isActive = activeSection === item.href.substring(1);
                                 return (
                                     <motion.a
                                         key={item.label}
                                         href={item.href}
-                                        className="relative group px-12 py-6 rounded-3xl cursor-pointer"
+                                        className="relative group px-6 py-3 rounded-2xl cursor-pointer"
                                         initial={{ opacity: 0, y: -30 }}
                                         animate={{ opacity: 1, y: 0 }}
                                         transition={{ delay: i * 0.1, duration: 0.6, type: "spring" }}
-                                        whileHover={{ scale: 1.1, y: -5 }}
+                                        whileHover={{ scale: 1.05, y: -2 }}
                                         whileTap={{ scale: 0.95 }}
                                     >
                                         {/* Fondo 3D con capas */}
@@ -309,9 +310,9 @@ export default function SpectacularNavbar() {
                                 initial={{ opacity: 0, scale: 0.7 }}
                                 animate={{ opacity: 1, scale: 1 }}
                                 transition={{ delay: 0.6, duration: 0.6, type: "spring" }}
-                                whileHover={{ scale: 1.12, y: -5 }}
+                                whileHover={{ scale: 1.05, y: -2 }}
                                 whileTap={{ scale: 0.95 }}
-                                className="relative ml-8 px-16 py-6 rounded-3xl overflow-hidden group cursor-pointer"
+                                className="relative ml-4 px-8 py-4 rounded-2xl overflow-hidden group cursor-pointer"
                             >
                                 {/* Fondo animado súper brillante */}
                                 <motion.div
