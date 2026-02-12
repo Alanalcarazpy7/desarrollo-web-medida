@@ -138,7 +138,7 @@ export default function Hero() {
                             </span>
                             {mounted && <br />}
                             <span style={{ color: theme.text, fontSize: '0.8em' }}>
-                                {mounted ? t('hero.titleEnd') : "al Siguiente Nivel"}
+                                {mounted ? t('hero.titleEnd') : ""}
                             </span>
                         </h1>
 
@@ -147,7 +147,7 @@ export default function Hero() {
                             className="text-base md:text-lg max-w-lg leading-relaxed opacity-80 animate-fade-in"
                             style={{ color: theme.textMuted, animationDelay: '0.4s' }}
                         >
-                            {mounted ? t('hero.description') : "En SolvaTech transformamos ideas en sistemas modernos y funcionales."}
+                            {mounted ? t('hero.description') : "En SolvaTech transformamos ideas en sistemas modernos y funcionales. Soluciones digitales para negocios que quieren evolucionar."}
                         </p>
 
                         {/* Botones de acción */}
