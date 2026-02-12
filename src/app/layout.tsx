@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
+import { LanguageProvider } from "@/context/LanguageContext";
 import "./globals.css";
 
 const inter = Inter({
@@ -12,19 +13,19 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL("https://solvatech.vercel.app"),
   title: {
-    default: "SolveTech | Ingeniería de Software & Consultoría Digital",
-    template: "%s | SolveTech"
+    default: "SolvaTech | Agencia de Desarrollo Web & Marketing Digital",
+    template: "%s | SolvaTech"
   },
-  description: "Consultoría de software y desarrollo web de élite. Especialistas en desarrollar tu página web, sistemas a medida, e-commerce escalables y arquitectura digital bajo la marca SolveTech.",
+  description: "SolvaTech es tu agencia de desarrollo web y marketing digital en Paraguay. Expertos en páginas web, tiendas online (e-commerce), SEO y software a medida para potenciar tu negocio.",
   keywords: [
-    "solvetech",
+    "solvatech",
+    "desarrollo web paraguay",
+    "diseño web asunción",
+    "agencia de marketing digital",
+    "crear tienda online paraguay",
     "software a medida",
-    "desarrollar mi página web",
-    "crear sitio web profesional",
-    "desarrollo web premium",
-    "next.js paraguay",
-    "ingeniería de software",
-    "sistemas de gestión paraguay"
+    "programadores en paraguay",
+    "servicios digitales"
   ],
   authors: [{ name: "Alan Alcaraz", url: "https://solvatech.vercel.app" }],
   creator: "Alan Alcaraz",
@@ -50,10 +51,10 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "SolveTech | Soluciones Tecnológicas de Élite",
-    description: "Transformamos negocios con infraestructura digital de vanguardia y desarrollo de software a medida.",
-    url: "https://alandev.com.py",
-    siteName: "SolveTech",
+    title: "SolvaTech | Soluciones Digitales & Desarrollo Web",
+    description: "Impulsamos tu negocio con sitios web de alto rendimiento y estrategias de marketing digital efectivas en Paraguay.",
+    url: "https://solvatech.vercel.app",
+    siteName: "SolvaTech",
     locale: "es_PY",
     type: "website",
   },
@@ -62,8 +63,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "SolveTech | Ingeniería de Software Premium",
-    description: "Expertos en consultoría tecnológica y desarrollo de sistemas escalables.",
+    title: "SolvaTech | Agencia Digital Premium",
+    description: "Expertos en desarrollo web, e-commerce y posicionamiento SEO.",
     creator: "@alanalcarazpy", // Ajustar si el usuario tiene otro handle
   },
   alternates: {
@@ -74,7 +75,7 @@ export const metadata: Metadata = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
-  "name": "SolveTech",
+  "name": "SolvaTech",
   "image": "https://solvatech.vercel.app/icon.svg",
   "@id": "https://solvatech.vercel.app",
   "url": "https://solvatech.vercel.app",
@@ -118,13 +119,15 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className={inter.className}>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-        {children}
-        <SpeedInsights />
-        <Analytics />
+        <LanguageProvider>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          />
+          {children}
+          <SpeedInsights />
+          <Analytics />
+        </LanguageProvider>
       </body>
     </html>
   );

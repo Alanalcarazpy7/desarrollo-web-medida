@@ -38,7 +38,7 @@ export default function WhatsAppButton() {
                 />
 
                 <motion.a
-                    href="https://wa.me/595982880043?text=Hola! Me interesa conocer más sobre los servicios de desarrollo web de SolveTech."
+                    href="https://wa.me/595982880043?text=Hola! Me interesa conocer más sobre los servicios de desarrollo web de SolvaTech."
                     aria-label="Contactar por WhatsApp"
                     target="_blank"
                     rel="noopener noreferrer"

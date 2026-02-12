@@ -1,11 +1,12 @@
 "use client";
 
 import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from "framer-motion";
-import { useState, MouseEvent } from "react";
+import { useState, MouseEvent, useEffect } from "react";
 import Image from "next/image";
+import { useLanguage } from "@/context/LanguageContext";
 
 // Componente de tarjeta 3D
-function ProjectCard({ project, index, theme }: { project: any, index: number, theme: any }) {
+function ProjectCard({ project, index, theme, ctaText }: { project: any, index: number, theme: any, ctaText: string }) {
     const x = useMotionValue(0);
     const y = useMotionValue(0);
 
@@ -177,7 +178,7 @@ function ProjectCard({ project, index, theme }: { project: any, index: number, t
                                     cursor: 'pointer'
                                 }}
                             >
-                                <span>Ver Proyecto</span>
+                                <span>{ctaText}</span>
                                 <svg style={{ width: '18px', height: '18px', color: '#000000' }} fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2.5}>
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                                 </svg>
@@ -249,86 +250,96 @@ function ProjectCard({ project, index, theme }: { project: any, index: number, t
 }
 
 export default function Proyectos() {
-    const [selectedCategory, setSelectedCategory] = useState("Todos");
+    const { t } = useLanguage();
+    const [selectedCategoryKey, setSelectedCategoryKey] = useState("all");
+    const [mounted, setMounted] = useState(false);
+    useEffect(() => setMounted(true), []);
 
     const theme = {
         bg: "#000000",
         bgCard: "#0a0a0a",
         bgCardHover: "#111111",
         accent: "#00d9ff",
-        accentDark: "#0099cc",
+         accentDark: "#0099cc",
         accentGlow: "rgba(0, 217, 255, 0.5)",
         text: "#ffffff",
         textMuted: "#888888"
     };
 
-    const categorias = ["Todos", "Sistemas", "E-commerce", "Sitio Web"];
+    const categories = ['all', 'systems', 'ecommerce', 'website'];
 
     const proyectos = [
         {
             titulo: "ModaShoppy",
-            categoria: "E-commerce",
+            categoryKey: "ecommerce",
+            categoria: mounted ? t('projects.categories.ecommerce') : "E-commerce",
             tecnologias: ["React", "Supabase", "Zustand"],
-            descripcion: "Plataforma de moda escalable con gestión de stock integrada y experiencia de compra optimizada.",
+            descripcion: mounted ? t('projects.items.modashoppy.description') : "Plataforma de moda escalable con gestión de stock integrada y experiencia de compra optimizada.",
             imagen: "/projects/modashoppy.png",
-            link: "#",
+            link: "https://modashoppy.netlify.app/",
         },
         {
             titulo: "StockPRO",
-            categoria: "Sistemas",
+            categoryKey: "systems",
+            categoria: mounted ? t('projects.categories.systems') : "Sistemas",
             tecnologias: ["React", "Supabase", "Zustand", "TanStack"],
-            descripcion: "Gestión de inventarios de alto rendimiento con sincronización en tiempo real y dashboard analítico modular.",
+            descripcion: mounted ? t('projects.items.stockpro.description') : "Gestión de inventarios de alto rendimiento con sincronización en tiempo real y dashboard analítico modular.",
             imagen: "/projects/stockpro.jpg",
             objectPosition: "left",
-            link: "#",
+            link: "https://control-inventarios.netlify.app/login",
         },
         {
             titulo: "Global Exchange",
-            categoria: "Sistemas",
+            categoryKey: "systems",
+            categoria: mounted ? t('projects.categories.systems') : "Sistemas",
             tecnologias: ["Django", "Python", "PostgreSQL", "Docker", "JS"],
-            descripcion: "Sistema integral para casa de cambios. Gestión de divisas, cálculo de ganancias, reportes y control de usuarios.",
+            descripcion: mounted ? t('projects.items.globalexchange.description') : "Sistema integral para casa de cambios. Gestión de divisas, cálculo de ganancias, reportes y control de usuarios.",
             imagen: "/projects/global-exchange-1.png",
             imagenBack: "/projects/global-exchange-2-admin.png",
             link: "https://github.com/MertinGIT/Casa-De-Cambios-De-Divisas",
         },
         {
-            titulo: "Inmobiliaria Premium",
-            categoria: "Sitio Web",
+            titulo: "Gestion Inmobiliaria",
+            categoryKey: "website",
+            categoria: mounted ? t('projects.categories.website') : "Sitio Web",
             tecnologias: ["React", "HTML5", "CSS3"],
-            descripcion: "Plataforma elegante para la gestión y visualización de propiedades con filtrado inteligente y UX fluida.",
+            descripcion: mounted ? t('projects.items.inmobiliaria.description') : "Plataforma elegante para la gestión y visualización de propiedades con filtrado inteligente y UX fluida.",
             imagen: "/projects/inmobiliaria.jpg",
-            link: "#",
+            link: "https://alanalcarazpy7.github.io/gestion-inmobiliaria/",
         },
         {
             titulo: "Amsterdam Bar",
-            categoria: "Sitio Web",
+            categoryKey: "website",
+            categoria: mounted ? t('projects.categories.website') : "Sitio Web",
             tecnologias: ["HTML5", "CSS3", "JavaScript"],
-            descripcion: "Menú digital interactivo y presencia online sofisticada diseñada para elevar la experiencia gastronómica.",
+            descripcion: mounted ? t('projects.items.amsterdam.description') : "Menú digital interactivo y presencia online sofisticada diseñada para elevar la experiencia gastronómica.",
             imagen: "/projects/amsterdam.png",
-            link: "#",
+            link: "https://amsterdam-resto-bar.netlify.app/",
         },
         {
             titulo: "Electro-Master",
-            categoria: "E-commerce",
+            categoryKey: "ecommerce",
+            categoria: mounted ? t('projects.categories.ecommerce') : "E-commerce",
             tecnologias: ["HTML5", "CSS3", "JavaScript"],
-            descripcion: "E-commerce de tecnología optimizado para conversiones con catálogo dinámico y diseño de alto impacto.",
+            descripcion: mounted ? t('projects.items.electromaster.description') : "E-commerce de tecnología optimizado para conversiones con catálogo dinámico y diseño de alto impacto.",
             imagen: "/projects/electromaster.png",
-            link: "#",
+            link: "https://github.com/Alanalcarazpy7/tienda-ecommerce",
         },
         {
             titulo: "Foodluck Resto",
-            categoria: "Sitio Web",
+            categoryKey: "website",
+            categoria: mounted ? t('projects.categories.website') : "Sitio Web",
             tecnologias: ["HTML5", "CSS3", "JavaScript"],
-            descripcion: "Landing page gastronómica premium enfocada en el impacto visual y la reserva directa de clientes.",
+            descripcion: mounted ? t('projects.items.foodluck.description') : "Landing page gastronómica premium enfocada en el impacto visual y la reserva directa de clientes.",
             imagen: "/projects/foodluck.png",
-            link: "#",
+            link: "https://alanalcarazpy7.github.io/restaurante-de-comida/",
         },
     ];
 
     const proyectosFiltrados =
-        selectedCategory === "Todos"
+        selectedCategoryKey === "all"
             ? proyectos
-            : proyectos.filter((p) => p.categoria === selectedCategory);
+            : proyectos.filter((p) => p.categoryKey === selectedCategoryKey);
 
     return (
         <section
@@ -396,13 +407,13 @@ export default function Proyectos() {
                             transition={{ duration: 2, repeat: Infinity }}
                         />
                         <span className="text-sm font-bold uppercase tracking-[0.2em]" style={{ color: theme.accent }}>
-                            Portfolio
+                            {mounted ? t('projects.badge') : "Portfolio"}
                         </span>
                     </motion.div>
 
                     {/* Título */}
                     <h2 className="text-4xl md:text-6xl lg:text-7xl font-black mb-6 px-4" style={{ margin: '1rem 0' }}>
-                        <span style={{ color: theme.text }}>Proyectos </span>
+                        <span style={{ color: theme.text }}>{mounted ? t('projects.titleStart') : "Proyectos"} </span>
                         <br className="md:hidden" />
                         <span
                             style={{
@@ -411,7 +422,7 @@ export default function Proyectos() {
                                 WebkitTextFillColor: "transparent",
                             }}
                         >
-                            Destacados
+                            {mounted ? t('projects.titleHighlight') : "Destacados"}
                         </span>
                     </h2>
 
@@ -424,16 +435,16 @@ export default function Proyectos() {
                         className="flex justify-center w-full px-6"
                     >
                         <p className="text-base md:text-xl lg:text-2xl max-w-3xl leading-relaxed text-center opacity-80" style={{ color: theme.textMuted, margin: '1rem 0' }}>
-                            Experiencias digitales de vanguardia que transforman negocios.
+                            {mounted ? t('projects.subtitle') : "Experiencias digitales de vanguardia que transforman negocios."}
                         </p>
                     </motion.div>
 
                     {/* Filtros */}
                     <div className="flex flex-wrap justify-center gap-4 mt-12" style={{ marginBottom: '80px' }}>
-                        {categorias.map((categoria) => (
+                        {categories.map((catKey) => (
                             <button
-                                key={categoria}
-                                onClick={() => setSelectedCategory(categoria)}
+                                key={catKey}
+                                onClick={() => setSelectedCategoryKey(catKey)}
                                 style={{
                                     padding: '10px 24px',
                                     borderRadius: '12px',
@@ -441,28 +452,28 @@ export default function Proyectos() {
                                     fontWeight: 700,
                                     textTransform: 'uppercase',
                                     letterSpacing: '0.05em',
-                                    backgroundColor: selectedCategory === categoria ? 'rgba(0, 217, 255, 0.15)' : 'rgba(255, 255, 255, 0.03)',
-                                    border: selectedCategory === categoria ? '1px solid #00d9ff' : '1px solid rgba(255, 255, 255, 0.1)',
-                                    color: selectedCategory === categoria ? '#00d9ff' : '#94a3b8',
-                                    boxShadow: selectedCategory === categoria ? '0 0 20px rgba(0, 217, 255, 0.3)' : 'none',
+                                    backgroundColor: selectedCategoryKey === catKey ? 'rgba(0, 217, 255, 0.15)' : 'rgba(255, 255, 255, 0.03)',
+                                    border: selectedCategoryKey === catKey ? '1px solid #00d9ff' : '1px solid rgba(255, 255, 255, 0.1)',
+                                    color: selectedCategoryKey === catKey ? '#00d9ff' : '#94a3b8',
+                                    boxShadow: selectedCategoryKey === catKey ? '0 0 20px rgba(0, 217, 255, 0.3)' : 'none',
                                     transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                                     cursor: 'pointer',
                                     backdropFilter: 'blur(10px)'
                                 }}
                                 onMouseEnter={(e) => {
-                                    if (selectedCategory !== categoria) {
+                                    if (selectedCategoryKey !== catKey) {
                                         e.currentTarget.style.borderColor = 'rgba(0, 217, 255, 0.5)';
                                         e.currentTarget.style.color = '#ffffff';
                                     }
                                 }}
                                 onMouseLeave={(e) => {
-                                    if (selectedCategory !== categoria) {
+                                    if (selectedCategoryKey !== catKey) {
                                         e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)';
                                         e.currentTarget.style.color = '#94a3b8';
                                     }
                                 }}
                             >
-                                {categoria}
+                                {mounted ? t(`projects.categories.${catKey}`) : catKey}
                             </button>
                         ))}
                     </div>
@@ -477,6 +488,7 @@ export default function Proyectos() {
                                 project={proyecto}
                                 index={index}
                                 theme={theme}
+                                ctaText={mounted ? t('projects.cta') : "Ver Proyecto"}
                             />
                         ))}
                     </AnimatePresence>

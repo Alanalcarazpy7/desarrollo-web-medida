@@ -7,7 +7,7 @@ const testimonios = [
     {
         nombre: "María González",
         cargo: "CEO, Fashion Store",
-        testimonio: "SolveTech transformó completamente nuestra presencia online. El e-commerce no solo es hermoso, sino que las ventas aumentaron un 300% en el primer mes gracias a la velocidad y UX.",
+        testimonio: "SolvaTech transformó completamente nuestra presencia online. El e-commerce no solo es hermoso, sino que las ventas aumentaron un 300% en el primer mes gracias a la velocidad y UX.",
         avatar: "MG",
         gradient: "from-pink-500 to-rose-500",
         rating: 5,

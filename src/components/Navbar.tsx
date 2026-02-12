@@ -2,6 +2,9 @@
 
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function SpectacularNavbar() {
     const [scrolled, setScrolled] = useState(false);
@@ -23,45 +26,61 @@ export default function SpectacularNavbar() {
 
     useEffect(() => {
         const handleScroll = () => {
-            setScrolled(window.scrollY > 50);
-        };
+            const scrollY = window.scrollY;
+            setScrolled(scrollY > 50);
 
-        const sections = ["inicio", "servicios", "proceso", "proyectos", "precios", "contacto"];
-        const observerOptions = {
-            root: null,
-            rootMargin: '-20% 0px -20% 0px',
-            threshold: 0.3
-        };
+            // Center-Line ScrollSpy Logic:
+            // The section active is the one whose center is closest to the screen center.
+            const sections = ["inicio", "servicios", "proceso", "proyectos", "precios", "blog", "contacto"];
+            const viewCenter = scrollY + window.innerHeight / 2;
+            let currentSection = "";
+            let minDistance = Infinity;
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    setActiveSection(entry.target.id);
+            sections.forEach((id) => {
+                const element = document.getElementById(id);
+                if (element) {
+                    const rect = element.getBoundingClientRect();
+                    const sectionTop = rect.top + scrollY;
+                    const sectionCenter = sectionTop + rect.height / 2;
+                    const distance = Math.abs(viewCenter - sectionCenter);
+
+                    // Consider active if center is closest and it's somewhat visible
+                    if (distance < minDistance) {
+                        minDistance = distance;
+                        currentSection = id;
+                    }
                 }
             });
-        }, observerOptions);
 
-        sections.forEach((id) => {
-            const element = document.getElementById(id);
-            if (element) observer.observe(element);
-        });
+            // Special case logic for very top and very bottom
+            if (scrollY < 100) currentSection = "inicio";
+            if ((window.innerHeight + scrollY) >= document.body.offsetHeight - 50) currentSection = "contacto";
+
+            if (currentSection) setActiveSection(currentSection);
+        };
 
         window.addEventListener("scroll", handleScroll, { passive: true });
         handleScroll();
 
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-            observer.disconnect();
-        };
+        return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    const pathname = usePathname();
+    const isHome = pathname === "/";
+    const { t } = useLanguage();
+    
+    // Check if we are on client to avoid hydration mismatch with localStorage
+    const [mounted, setMounted] = useState(false);
+    useEffect(() => setMounted(true), []);
+
     const navItems = [
-        { label: "Inicio", href: "#inicio" },
-        { label: "Servicios", href: "#servicios" },
-        { label: "Proceso", href: "#proceso" },
-        { label: "Proyectos", href: "#proyectos" },
-        { label: "Precios", href: "#precios" },
-        { label: "Contacto", href: "#contacto" },
+        { label: mounted ? t('navbar.home') : "Inicio", href: "#inicio" },
+        { label: mounted ? t('navbar.services') : "Servicios", href: "#servicios" },
+        { label: mounted ? t('navbar.process') : "Proceso", href: "#proceso" },
+        { label: mounted ? t('navbar.projects') : "Proyectos", href: "#proyectos" },
+        { label: mounted ? t('navbar.pricing') : "Precios", href: "#precios" },
+        { label: mounted ? t('navbar.blog') : "Blog", href: "#blog" },
+        { label: mounted ? t('navbar.contact') : "Contacto", href: "#contacto" },
     ];
 
     return (
@@ -96,7 +115,7 @@ export default function SpectacularNavbar() {
                     }}
                 />
 
-                <div className="w-full max-w-7xl px-6 md:px-8 relative" style={{ margin: '0.7rem 0' }}>
+                <div className="w-full max-w-[1440px] px-6 md:px-8 relative" style={{ margin: '0.7rem 0' }}>
                     <div className="flex items-center justify-between">
 
                         {/* LOGO ORIGINAL SIN MODIFICAR */}
@@ -136,7 +155,7 @@ export default function SpectacularNavbar() {
                                     {/* Logo SolveTech S */}
                                     <img
                                         src="/favicon.png"
-                                        alt="SolveTech"
+                                        alt="SolvaTech"
                                         width="44"
                                         height="44"
                                         style={{
@@ -153,7 +172,7 @@ export default function SpectacularNavbar() {
                                         className="text-3xl font-black tracking-[0.05em]"
                                         style={{ color: theme.text }}
                                     >
-                                        Solve
+                                        Solva
                                     </span>
                                     <span
                                         className="text-3xl font-light tracking-[0.05em]"
@@ -183,11 +202,11 @@ export default function SpectacularNavbar() {
                         {/* NAVEGACIÓN DESKTOP - MODERNA Y COMPACTA (Fix Overlap) */}
                         <div className="hidden xl:flex items-center gap-2">
                             {navItems.map((item, i) => {
-                                const isActive = activeSection === item.href.substring(1);
+                                const isActive = (activeSection === item.href.substring(1) && isHome) || (item.label === "Blog" && pathname.startsWith("/blog"));
                                 return (
                                     <motion.a
                                         key={item.label}
-                                        href={item.href}
+                                        href={isHome ? item.href : '/' + item.href}
                                         className="relative group px-6 py-3 rounded-2xl cursor-pointer"
                                         initial={{ opacity: 0, y: -30 }}
                                         animate={{ opacity: 1, y: 0 }}
@@ -305,6 +324,9 @@ export default function SpectacularNavbar() {
                                 );
                             })}
 
+                            {/* LANGUAGE SWITCHER */}
+                            <LanguageSwitcher />
+
                             {/* CTA BUTTON - ULTRA ESPECTACULAR */}
                             <motion.button
                                 initial={{ opacity: 0, scale: 0.7 }}
@@ -417,7 +439,7 @@ export default function SpectacularNavbar() {
                             animate={{ x: 0 }}
                             exit={{ x: "100%" }}
                             transition={{ type: "spring", damping: 30, stiffness: 200 }}
-                            className="fixed right-0 top-0 bottom-0 w-[85%] max-w-[400px] z-[70] overflow-hidden"
+                            className="fixed right-0 top-0 bottom-0 w-[85%] max-w-[400px] z-[70] overflow-y-auto"
                             style={{
                                 background: theme.bgNav,
                                 borderLeft: `1px solid ${theme.accent}30`,
@@ -450,7 +472,7 @@ export default function SpectacularNavbar() {
                                         >
                                             <img
                                                 src="/favicon.png"
-                                                alt="SolveTech"
+                                                alt="SolvaTech"
                                                 width="44"
                                                 height="44"
                                                 style={{ objectFit: 'cover' }}
@@ -458,7 +480,7 @@ export default function SpectacularNavbar() {
                                         </div>
                                     </div>
                                     <div style={{ display: 'flex', flexDirection: 'column' }}>
-                                        <span style={{ fontSize: '22px', fontWeight: 900, letterSpacing: '0.05em', color: '#fff', lineHeight: 1 }}>Solve</span>
+                                        <span style={{ fontSize: '22px', fontWeight: 900, letterSpacing: '0.05em', color: '#fff', lineHeight: 1 }}>Solva</span>
                                         <span style={{ fontSize: '22px', fontWeight: 300, letterSpacing: '0.05em', color: theme.accent, lineHeight: 1 }}>Tech</span>
                                     </div>
                                 </div>
@@ -491,14 +513,19 @@ export default function SpectacularNavbar() {
                                 </motion.button>
                             </div>
 
+                            {/* SELECTOR DE IDIOMA MÓVIL - Ahora en la parte superior para evitar overlap */}
+                            <div className="px-8 mt-6 mb-4 flex justify-start border-b border-white/5 pb-6">
+                                <LanguageSwitcher />
+                            </div>
+
                             {/* Enlaces del menú más compactos */}
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', padding: '0 24px' }}>
                                 {navItems.map((item, i) => {
-                                    const isActive = activeSection === item.href.substring(1);
+                                    const isActive = (activeSection === item.href.substring(1) && isHome) || (item.label === "Blog" && pathname.startsWith("/blog"));
                                     return (
                                         <motion.a
                                             key={item.label}
-                                            href={item.href}
+                                            href={isHome ? item.href : `/${item.href}`}
                                             onClick={() => setMobileMenuOpen(false)}
                                             initial={{ opacity: 0, x: 20 }}
                                             animate={{ opacity: 1, x: 0 }}
@@ -566,10 +593,12 @@ export default function SpectacularNavbar() {
                                 })}
                             </div>
 
+
+
                             {/* Decoración sutil inferior con diseño mejorado */}
                             <div className="absolute bottom-10 left-10 flex flex-col gap-2 opacity-30">
                                 <span className="text-[10px] tracking-[0.5em] text-white uppercase font-black">
-                                    SolveTech © 2026
+                                    SolvaTech © 2026
                                 </span>
                                 <div className="h-px w-12 bg-white" />
                             </div>

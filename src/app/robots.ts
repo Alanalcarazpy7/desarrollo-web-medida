@@ -7,6 +7,9 @@ export default function robots(): MetadataRoute.Robots {
             allow: '/',
             disallow: '/private/',
         },
-        sitemap: 'https://solvatech.vercel.app/sitemap.xml',
+        sitemap: [
+            'https://solvatech.vercel.app/sitemap.xml',
+            'https://solvatech.vercel.app/blog/sitemap.xml'
+        ],
     }
 }

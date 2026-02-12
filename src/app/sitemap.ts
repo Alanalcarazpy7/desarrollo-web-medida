@@ -1,32 +1,33 @@
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const baseUrl = 'https://solvatech.vercel.app' // Reemplazar con la URL final del usuario
+    const baseUrl = 'https://solvatech.vercel.app' 
 
     return [
         {
             url: baseUrl,
             lastModified: new Date(),
-            changeFrequency: 'monthly',
-            priority: 1,
-        },
-        {
-            url: `${baseUrl}/#servicios`,
-            lastModified: new Date(),
-            changeFrequency: 'monthly',
-            priority: 0.8,
-        },
-        {
-            url: `${baseUrl}/#proyectos`,
-            lastModified: new Date(),
             changeFrequency: 'weekly',
-            priority: 0.9,
+            priority: 1,
+            alternates: {
+                languages: {
+                    es: baseUrl,
+                    en: baseUrl,
+                }
+            }
         },
         {
-            url: `${baseUrl}/#contacto`,
+            url: `${baseUrl}/blog`,
             lastModified: new Date(),
-            changeFrequency: 'yearly',
-            priority: 0.5,
+            changeFrequency: 'daily',
+            priority: 0.9,
+            alternates: {
+                languages: {
+                    es: `${baseUrl}/blog`,
+                    en: `${baseUrl}/blog`,
+                }
+            }
         },
+        // Otras rutas estáticas si las hubiera
     ]
 }

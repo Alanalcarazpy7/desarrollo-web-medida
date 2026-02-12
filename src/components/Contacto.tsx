@@ -1,9 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Contacto() {
+    const { t } = useLanguage();
+    const [mounted, setMounted] = useState(false);
+    useEffect(() => setMounted(true), []);
     const [formData, setFormData] = useState({
         nombre: "",
         email: "",
@@ -67,8 +71,8 @@ ${formData.mensaje}
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
                 </svg>
             ),
-            titulo: "WhatsApp",
-            descripcion: "Respuesta inmediata",
+            titulo: mounted ? t('contact.methods.whatsapp.title') : "WhatsApp",
+            descripcion: mounted ? t('contact.methods.whatsapp.desc') : "Respuesta inmediata",
             valor: "+595 982 880 043",
             link: "https://wa.me/595982880043",
         },
@@ -78,8 +82,8 @@ ${formData.mensaje}
                     <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
             ),
-            titulo: "Email",
-            descripcion: "Escríbenos",
+            titulo: mounted ? t('contact.methods.email.title') : "Email",
+            descripcion: mounted ? t('contact.methods.email.desc') : "Escríbenos",
             valor: "alantechxpy@gmail.com",
             link: "mailto:alantechxpy@gmail.com",
         },
@@ -89,11 +93,18 @@ ${formData.mensaje}
                     <path strokeLinecap="round" strokeLinejoin="round" d="M3 9.75L12 3l9 6.75M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
                 </svg>
             ),
-            titulo: "Instagram",
-            descripcion: "Síguenos",
+            titulo: mounted ? t('contact.methods.instagram.title') : "Instagram",
+            descripcion: mounted ? t('contact.methods.instagram.desc') : "Síguenos",
             valor: "@alandev_py",
             link: "https://www.instagram.com/alandev_py/",
         },
+    ];
+
+    const budgetOptions = mounted ? t('contact.form.budgetOptions') : [
+        "Menos de 1.000.000 Gs",
+        "1.000.000 Gs - 3.000.000 Gs",
+        "3.000.000 Gs - 5.000.000 Gs",
+        "Más de 5.000.000 Gs"
     ];
 
     return (
@@ -101,7 +112,7 @@ ${formData.mensaje}
             id="contacto"
             className="relative overflow-hidden flex justify-center"
             style={{
-                marginTop: '140px',
+                marginTop: '80px',
                 scrollMarginTop: '100px'
             }}
         >
@@ -138,13 +149,13 @@ ${formData.mensaje}
                             transition={{ duration: 2, repeat: Infinity }}
                         />
                         <span className="text-sm font-bold uppercase tracking-[0.2em]" style={{ color: theme.accent }}>
-                            Hablemos de Tu Proyecto
+                            {mounted ? t('contact.badge') : "Hablemos de Tu Proyecto"}
                         </span>
                     </motion.div>
 
                     {/* Título */}
                     <h2 className="text-4xl md:text-6xl lg:text-7xl font-black mb-6 px-4" style={{ margin: '1rem 0' }}>
-                        <span style={{ color: theme.text }}>¿Listo para </span>
+                        <span style={{ color: theme.text }}>{mounted ? t('contact.titleStart') : "¿Listo para"} </span>
                         <br className="md:hidden" />
                         <span
                             style={{
@@ -153,14 +164,14 @@ ${formData.mensaje}
                                 WebkitTextFillColor: "transparent",
                             }}
                         >
-                            Empezar?
+                            {mounted ? t('contact.titleHighlight') : "Empezar?"}
                         </span>
                     </h2>
 
                     {/* Subtítulo */}
                     <div className="flex justify-center w-full px-6">
                         <p className="text-base md:text-xl text-slate-400 max-w-2xl leading-relaxed text-center opacity-80" style={{ margin: '1rem 0' }}>
-                            Conversemos sobre cómo podemos llevar tu negocio al siguiente nivel digital
+                            {mounted ? t('contact.subtitle') : "Conversemos sobre cómo podemos llevar tu negocio al siguiente nivel digital"}
                         </p>
                     </div>
                 </motion.div>
@@ -263,9 +274,9 @@ ${formData.mensaje}
                         }}>
                             <div style={{ marginBottom: '0px' }}>
                                 <h3 style={{ fontSize: '24px', fontWeight: 800, color: theme.text, marginBottom: '2px', letterSpacing: '-0.02em' }}>
-                                    Cuéntanos tu Visión
+                                    {mounted ? t('contact.form.title') : "Cuéntanos tu Visión"}
                                 </h3>
-                                <p style={{ color: theme.textMuted, fontSize: '13px' }}>Completa el formulario y te responderemos en breve.</p>
+                                <p style={{ color: theme.textMuted, fontSize: '13px' }}>{mounted ? t('contact.form.subtitle') : "Completa el formulario y te responderemos en breve."}</p>
                             </div>
 
                             {submitSuccess && (
@@ -282,13 +293,13 @@ ${formData.mensaje}
                                         fontWeight: 600,
                                         fontSize: '13px'
                                     }}>
-                                    ✅ ¡Mensaje enviado!
+                                    {mounted ? t('contact.form.success') : "✅ ¡Mensaje enviado!"}
                                 </motion.div>
                             )}
 
                             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '12px' }}>
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                                    <label htmlFor="nombre" style={{ fontSize: '12px', fontWeight: 600, color: theme.textMuted, marginLeft: '4px' }}>NOMBRE</label>
+                                    <label htmlFor="nombre" style={{ fontSize: '12px', fontWeight: 600, color: theme.textMuted, marginLeft: '4px' }}>{mounted ? t('contact.form.name') : "NOMBRE"}</label>
                                     <motion.input
                                         id="nombre"
                                         whileFocus={{ scale: 1.01, backgroundColor: 'rgba(255, 255, 255, 0.05)' }}
@@ -296,7 +307,7 @@ ${formData.mensaje}
                                         required
                                         value={formData.nombre}
                                         onChange={(e) => setFormData({ ...formData, nombre: e.target.value })}
-                                        placeholder="Tu nombre completo"
+                                        placeholder={mounted ? t('contact.form.namePlaceholder') : "Tu nombre completo"}
                                         style={{
                                             width: '100%',
                                             padding: '12px 16px', // Padding menor
@@ -313,7 +324,7 @@ ${formData.mensaje}
                                     />
                                 </div>
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                                    <label htmlFor="email" style={{ fontSize: '12px', fontWeight: 600, color: theme.textMuted, marginLeft: '4px' }}>EMAIL</label>
+                                    <label htmlFor="email" style={{ fontSize: '12px', fontWeight: 600, color: theme.textMuted, marginLeft: '4px' }}>{mounted ? t('contact.form.email') : "EMAIL"}</label>
                                     <motion.input
                                         id="email"
                                         whileFocus={{ scale: 1.01, backgroundColor: 'rgba(255, 255, 255, 0.05)' }}
@@ -321,7 +332,7 @@ ${formData.mensaje}
                                         required
                                         value={formData.email}
                                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                        placeholder="tu@email.com"
+                                        placeholder={mounted ? t('contact.form.emailPlaceholder') : "tu@email.com"}
                                         style={{
                                             width: '100%',
                                             padding: '12px 16px',
@@ -341,7 +352,7 @@ ${formData.mensaje}
 
                             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '12px' }}>
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                                    <label htmlFor="whatsapp-form" style={{ fontSize: '12px', fontWeight: 600, color: theme.textMuted, marginLeft: '4px' }}>WHATSAPP</label>
+                                    <label htmlFor="whatsapp-form" style={{ fontSize: '12px', fontWeight: 600, color: theme.textMuted, marginLeft: '4px' }}>{mounted ? t('contact.form.whatsapp') : "WHATSAPP"}</label>
                                     <motion.input
                                         id="whatsapp-form"
                                         whileFocus={{ scale: 1.01, backgroundColor: 'rgba(255, 255, 255, 0.05)' }}
@@ -365,7 +376,7 @@ ${formData.mensaje}
                                     />
                                 </div>
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                                    <label htmlFor="presupuesto" style={{ fontSize: '12px', fontWeight: 600, color: theme.textMuted, marginLeft: '4px' }}>PRESUPUESTO</label>
+                                    <label htmlFor="presupuesto" style={{ fontSize: '12px', fontWeight: 600, color: theme.textMuted, marginLeft: '4px' }}>{mounted ? t('contact.form.budget') : "PRESUPUESTO"}</label>
                                     <div className="relative">
                                         <motion.select
                                             id="presupuesto"
@@ -388,11 +399,10 @@ ${formData.mensaje}
                                             onFocus={(e) => { e.target.style.borderColor = theme.accent; e.target.style.boxShadow = `0 0 0 2px ${theme.accent}15`; }}
                                             onBlur={(e) => { e.target.style.borderColor = 'rgba(255, 255, 255, 0.1)'; e.target.style.boxShadow = 'none'; }}
                                         >
-                                            <option value="" style={{ backgroundColor: '#000', color: '#fff' }}>Seleccionar rango...</option>
-                                            <option value="Menos de 1.000.000 Gs" style={{ backgroundColor: '#000', color: '#fff' }}>Menos de 1.000.000 Gs</option>
-                                            <option value="1.000.000 Gs - 3.000.000 Gs" style={{ backgroundColor: '#000', color: '#fff' }}>1.000.000 Gs - 3.000.000 Gs</option>
-                                            <option value="3.000.000 Gs - 5.000.000 Gs" style={{ backgroundColor: '#000', color: '#fff' }}>3.000.000 Gs - 5.000.000 Gs</option>
-                                            <option value="Más de 5.000.000 Gs" style={{ backgroundColor: '#000', color: '#fff' }}>Más de 5.000.000 Gs</option>
+                                            <option value="" style={{ backgroundColor: '#000', color: '#fff' }}>{mounted ? t('contact.form.budgetPlaceholder') : "Seleccionar rango..."}</option>
+                                            {budgetOptions.map((option: string) => (
+                                                <option key={option} value={option} style={{ backgroundColor: '#000', color: '#fff' }}>{option}</option>
+                                            ))}
                                         </motion.select>
                                         <div style={{ position: 'absolute', right: '16px', top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none', color: theme.accent }}>
                                             <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -404,7 +414,7 @@ ${formData.mensaje}
                             </div>
 
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                                <label htmlFor="detalles" style={{ fontSize: '12px', fontWeight: 600, color: theme.textMuted, marginLeft: '4px' }}>DETALLES</label>
+                                <label htmlFor="detalles" style={{ fontSize: '12px', fontWeight: 600, color: theme.textMuted, marginLeft: '4px' }}>{mounted ? t('contact.form.details') : "DETALLES"}</label>
                                 <motion.textarea
                                     id="detalles"
                                     whileFocus={{ scale: 1.01, backgroundColor: 'rgba(255, 255, 255, 0.05)' }}
@@ -412,7 +422,7 @@ ${formData.mensaje}
                                     rows={6}
                                     value={formData.mensaje}
                                     onChange={(e) => setFormData({ ...formData, mensaje: e.target.value })}
-                                    placeholder="Descríbenos brevemente el sistema, aplicación o sitio web que tienes en mente..."
+                                    placeholder={mounted ? t('contact.form.detailsPlaceholder') : "Descríbenos brevemente el sistema, aplicación o sitio web que tienes en mente..."}
                                     style={{
                                         width: '100%',
                                         padding: '12px 16px',
@@ -454,7 +464,7 @@ ${formData.mensaje}
                                     overflow: 'hidden'
                                 }}
                             >
-                                <span className="relative z-10">{isSubmitting ? "..." : "Enviar"}</span>
+                                <span className="relative z-10">{isSubmitting ? (mounted ? t('contact.form.sending') : "...") : (mounted ? t('contact.form.submit') : "Enviar")}</span>
                                 <motion.div
                                     style={{
                                         position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',

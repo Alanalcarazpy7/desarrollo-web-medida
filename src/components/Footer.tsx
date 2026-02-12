@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Footer() {
     const currentYear = 2026;
@@ -13,11 +14,14 @@ export default function Footer() {
         textMuted: "#888888",
     };
 
+    const { t } = useLanguage();
+    const [mounted, setMounted] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
+        setMounted(true);
         const checkMobile = () => {
-            setIsMobile(window.innerWidth < 1024);
+             setIsMobile(window.innerWidth < 1024);
         };
         checkMobile();
         window.addEventListener('resize', checkMobile);
@@ -26,21 +30,21 @@ export default function Footer() {
 
     const sections = {
         servicios: [
-            { label: "Desarrollo Web", href: "#servicios" },
-            { label: "E-commerce", href: "#servicios" },
-            { label: "Aplicaciones Web", href: "#servicios" },
-            { label: "Diseño UI/UX", href: "#servicios" },
+            { label: mounted ? t('footer.services.web') : "Desarrollo Web", href: "#servicios" },
+            { label: mounted ? t('footer.services.ecommerce') : "E-commerce", href: "#servicios" },
+            { label: mounted ? t('footer.services.apps') : "Aplicaciones Web", href: "#servicios" },
+            { label: mounted ? t('footer.services.design') : "Diseño UI/UX", href: "#servicios" },
         ],
         empresa: [
-            { label: "Sobre Nosotros", href: "#inicio" },
-            { label: "Proyectos", href: "#proyectos" },
-            { label: "Proceso", href: "#proceso" },
-            { label: "Contacto", href: "#contacto" },
+             { label: mounted ? t('footer.company.about') : "Sobre Nosotros", href: "#inicio" },
+             { label: mounted ? t('footer.company.projects') : "Proyectos", href: "#proyectos" },
+             { label: mounted ? t('footer.company.process') : "Proceso", href: "#proceso" },
+             { label: mounted ? t('footer.company.contact') : "Contacto", href: "#contacto" },
         ],
         legal: [
-            { label: "Términos", href: "#" },
-            { label: "Privacidad", href: "#" },
-            { label: "Cookies", href: "#" },
+            { label: mounted ? t('footer.legal.terms') : "Términos", href: "#" },
+            { label: mounted ? t('footer.legal.privacy') : "Privacidad", href: "#" },
+            { label: mounted ? t('footer.legal.cookies') : "Cookies", href: "#" },
         ],
     };
 
@@ -137,7 +141,7 @@ export default function Footer() {
                                 >
                                     <img
                                         src="/favicon.png"
-                                        alt="SolveTech"
+                                        alt="SolvaTech"
                                         width="44"
                                         height="44"
                                         style={{ objectFit: 'cover' }}
@@ -151,7 +155,7 @@ export default function Footer() {
                                         className="text-2xl font-black tracking-[0.05em]"
                                         style={{ color: theme.text }}
                                     >
-                                        Solve
+                                        Solva
                                     </span>
                                     <span
                                         className="text-2xl font-light tracking-[0.05em]"
@@ -173,13 +177,13 @@ export default function Footer() {
                             </div>
                         </motion.a>
                         <p style={{ color: theme.textMuted, lineHeight: 1.6, maxWidth: '400px', fontSize: '15px' }}>
-                            Impulsamos negocios con soluciones de ingeniería de software premium, diseño de vanguardia y tecnología de alto rendimiento.
+                            {mounted ? t('footer.description') : "Impulsamos negocios con soluciones de ingeniería de software premium, diseño de vanguardia y tecnología de alto rendimiento."}
                         </p>
                     </div>
 
                     {/* Enlaces */}
                     <div className="flex flex-col items-center lg:items-start">
-                        <h4 style={{ color: theme.text, fontWeight: 700, marginBottom: '20px' }}>Servicios</h4>
+                        <h4 style={{ color: theme.text, fontWeight: 700, marginBottom: '20px' }}>{mounted ? t('footer.servicesTitle') : "Servicios"}</h4>
                         <div style={listStyle}>
                             {sections.servicios.map((item) => (
                                 <a key={item.label} href={item.href} style={linkStyle} className="footer-link">
@@ -190,7 +194,7 @@ export default function Footer() {
                     </div>
 
                     <div className="flex flex-col items-center lg:items-start">
-                        <h4 style={{ color: theme.text, fontWeight: 700, marginBottom: '20px' }}>Empresa</h4>
+                        <h4 style={{ color: theme.text, fontWeight: 700, marginBottom: '20px' }}>{mounted ? t('footer.companyTitle') : "Empresa"}</h4>
                         <div style={listStyle}>
                             {sections.empresa.map((item) => (
                                 <a key={item.label} href={item.href} style={linkStyle} className="footer-link">
@@ -212,7 +216,7 @@ export default function Footer() {
                     alignItems: 'center',
                     justifyContent: isMobile ? 'center' : 'space-between',
                 }}>
-                    © {currentYear} SolveTech. Todos los derechos reservados.
+                    © {currentYear} SolvaTech. {mounted ? t('footer.rights') : "Todos los derechos reservados."}
 
                     <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
                         {sections.legal.map((item) => (

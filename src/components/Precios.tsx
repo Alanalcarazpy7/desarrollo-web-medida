@@ -1,9 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Precios() {
+    const { t, language } = useLanguage();
+    const [mounted, setMounted] = useState(false);
+    useEffect(() => setMounted(true), []);
+
     const theme = {
         accent: "#00d9ff",
         accentDark: "#0099cc",
@@ -11,11 +16,11 @@ export default function Precios() {
 
     const plans = [
         {
-            title: "Página",
-            titleAccent: "Informativa",
+            title: mounted ? t('pricing.plan1.title') : "Página",
+            titleAccent: mounted ? t('pricing.plan1.titleAccent') : "Informativa",
             price: "399",
-            description: "Para tu Negocio o servicio",
-            features: [
+            description: mounted ? t('pricing.plan1.description') : "Para tu Negocio o servicio",
+            features: mounted ? t('pricing.plan1.features') : [
                 "Diseño profesional y estático",
                 "Diseño Responsive",
                 "Optimización de carga",
@@ -26,11 +31,11 @@ export default function Precios() {
             highlight: false,
         },
         {
-            title: "Landing",
-            titleAccent: "Page",
+            title: mounted ? t('pricing.plan2.title') : "Landing",
+            titleAccent: mounted ? t('pricing.plan2.titleAccent') : "Page",
             price: "799",
-            description: "Web similar a esta",
-            features: [
+            description: mounted ? t('pricing.plan2.description') : "Web similar a esta",
+            features: mounted ? t('pricing.plan2.features') : [
                 "Diseño único y personalizado",
                 "Animaciones premium",
                 "Diseño Responsive",
@@ -42,14 +47,14 @@ export default function Precios() {
                 "60 Días de garantía",
             ],
             highlight: true,
-            tag: "Más contratado",
+            tag: mounted ? t('pricing.tag') : "Más contratado",
         },
         {
-            title: "Tienda",
-            titleAccent: "Online",
+            title: mounted ? t('pricing.plan3.title') : "Tienda",
+            titleAccent: mounted ? t('pricing.plan3.titleAccent') : "Online",
             price: "1.299",
-            description: "E-commerce completo",
-            features: [
+            description: mounted ? t('pricing.plan3.description') : "E-commerce completo",
+            features: mounted ? t('pricing.plan3.features') : [
                 "Diseño Personalizado",
                 "Diseño Responsive",
                 "Hasta 50 Productos",
@@ -242,7 +247,7 @@ export default function Precios() {
 
                     {/* Features */}
                     <div style={{ display: "flex", flexDirection: "column", gap: "10px", marginBottom: "20px" }}>
-                        {plan.features.map((feature, idx) => (
+                        {(plan.features as string[]).map((feature, idx) => (
                             <motion.div
                                 key={idx}
                                 animate={{
@@ -284,7 +289,7 @@ export default function Precios() {
 
                     {/* CTA Button */}
                     <motion.a
-                        href={`https://wa.me/595982880043?text=${encodeURIComponent(`Hola! Me interesa el plan "${plan.title} ${plan.titleAccent}" ($${plan.price} USD).`)}`}
+                        href={`https://wa.me/595982880043?text=${encodeURIComponent(language === 'en' ? `Hello! I'm interested in the plan "${plan.title} ${plan.titleAccent}" ($${plan.price} USD).` : `Hola! Me interesa el plan "${plan.title} ${plan.titleAccent}" ($${plan.price} USD).`)}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         whileHover={{
@@ -313,7 +318,7 @@ export default function Precios() {
                             textDecoration: "none",
                         }}
                     >
-                        Contratar ahora
+                        {mounted ? t('pricing.cta') : "Contratar ahora"}
                     </motion.a>
 
                     {/* Note */}
@@ -321,7 +326,7 @@ export default function Precios() {
                         animate={{ color: isHovered ? `${theme.accent}90` : "rgba(255,255,255,0.4)" }}
                         style={{ textAlign: "center", fontSize: "9px", marginTop: "12px", transition: "color 0.3s" }}
                     >
-                        * Incluye 1er año de hosting y dominio
+                        {mounted ? t('pricing.cardNote') : "* Incluye 1er año de hosting y dominio"}
                     </motion.p>
                 </motion.div>
             </motion.div>
@@ -329,7 +334,7 @@ export default function Precios() {
     };
 
     return (
-        <section id="precios" style={{ position: "relative", padding: "70px 20px", overflow: "hidden", background: "#000", scrollMarginTop: "100px" }}>
+        <section id="precios" style={{ position: "relative", padding: "70px 20px", overflow: "hidden", background: "transparent", scrollMarginTop: "100px" }}>
             {/* Background glows */}
             <motion.div
                 animate={{ scale: [1, 1.1, 1], opacity: [0.4, 0.6, 0.4] }}
@@ -371,21 +376,21 @@ export default function Precios() {
                             transition={{ duration: 2, repeat: Infinity }}
                         />
                         <span className="text-sm font-bold uppercase tracking-[0.2em]" style={{ color: theme.accent }}>
-                            Inversión Inteligente
+                            {mounted ? t('pricing.badge') : "Inversión Inteligente"}
                         </span>
                     </div>
 
                     <h2 style={{ fontSize: "clamp(2.2rem, 4vw, 3rem)", fontWeight: 800, marginBottom: "10px", color: "#fff" }}>
-                        Precios{" "}
+                        {mounted ? t('pricing.titleStart') : "Precios"}{" "}
                         <motion.span
                             animate={{ textShadow: [`0 0 20px ${theme.accent}40`, `0 0 35px ${theme.accent}70`, `0 0 20px ${theme.accent}40`] }}
                             transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                             style={{ background: `linear-gradient(135deg, ${theme.accent}, ${theme.accentDark})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}
                         >
-                            Webs
+                            {mounted ? t('pricing.titleHighlight') : "Webs"}
                         </motion.span>
                     </h2>
-                    <p style={{ color: "#777", fontSize: "1rem" }}>Elige el plan perfecto para tu proyecto</p>
+                    <p style={{ color: "#777", fontSize: "1rem" }}>{mounted ? t('pricing.subtitle') : "Elige el plan perfecto para tu proyecto"}</p>
                 </motion.div>
 
                 {/* Cards */}
@@ -402,7 +407,7 @@ export default function Precios() {
                     viewport={{ once: true }}
                     style={{ marginTop: "50px", textAlign: "center", fontSize: "11px", color: "rgba(255,255,255,0.5)", maxWidth: "600px", margin: "50px auto 0", lineHeight: 1.6 }}
                 >
-                    * Pago único por desarrollo. Planes de mantención mensual disponibles.
+                    {mounted ? t('pricing.footer') : "* Pago único por desarrollo. Planes de mantención mensual disponibles."}
                 </motion.p>
             </div>
         </section>
