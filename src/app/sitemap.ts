@@ -1,7 +1,21 @@
 import { MetadataRoute } from 'next'
+import { blogPosts } from '@/lib/blog-data'
 
 export default function sitemap(): MetadataRoute.Sitemap {
     const baseUrl = 'https://solvatech.vercel.app' 
+
+    const blogEntries: MetadataRoute.Sitemap = blogPosts.map(post => ({
+        url: `${baseUrl}/blog/${post.slug}`,
+        lastModified: new Date(),
+        changeFrequency: 'monthly',
+        priority: 0.8,
+        alternates: {
+            languages: {
+                es: `${baseUrl}/blog/${post.slug}`,
+                en: `${baseUrl}/blog/${post.slug}`,
+            }
+        }
+    }))
 
     return [
         {
@@ -28,6 +42,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
                 }
             }
         },
-        // Otras rutas estáticas si las hubiera
+        ...blogEntries
     ]
 }
