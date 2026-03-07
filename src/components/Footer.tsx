@@ -30,9 +30,9 @@ export default function Footer() {
 
     const sections = {
         servicios: [
-            { label: mounted ? t('footer.services.web') : "Desarrollo Web", href: "#servicios" },
+            { label: mounted ? t('footer.services.web') : "Desarrollo Web", href: "/servicios/desarrollo-web-paraguay" },
+            { label: mounted ? "Sistemas Informáticos" : "Sistemas Informáticos", href: "/servicios/sistemas-informaticos-paraguay" },
             { label: mounted ? t('footer.services.ecommerce') : "E-commerce", href: "#servicios" },
-            { label: mounted ? t('footer.services.apps') : "Aplicaciones Web", href: "#servicios" },
             { label: mounted ? t('footer.services.design') : "Diseño UI/UX", href: "#servicios" },
         ],
         empresa: [

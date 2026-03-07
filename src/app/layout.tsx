@@ -18,14 +18,14 @@ export const metadata: Metadata = {
   },
   description: "SolvaTech es tu agencia de desarrollo web y marketing digital en Paraguay. Expertos en páginas web, tiendas online (e-commerce), SEO y software a medida para potenciar tu negocio.",
   keywords: [
-    "solvatech",
     "desarrollo web paraguay",
     "diseño web asunción",
-    "agencia de marketing digital",
-    "crear tienda online paraguay",
-    "software a medida",
+    "agencia de software paraguay",
+    "crear pagina web paraguay",
+    "sistemas informaticos asuncion",
+    "software a medida paraguay",
     "programadores en paraguay",
-    "servicios digitales"
+    "landing page economica paraguay"
   ],
   authors: [{ name: "Alan Alcaraz", url: "https://solvatech.vercel.app" }],
   creator: "Alan Alcaraz",

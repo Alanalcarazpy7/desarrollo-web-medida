@@ -10,6 +10,7 @@ const Proyectos = dynamic(() => import("@/components/Proyectos"), { ssr: true })
 const Precios = dynamic(() => import("@/components/Precios"), { ssr: true });
 const BlogCarousel = dynamic(() => import("@/components/BlogCarousel"), { ssr: true });
 const Contacto = dynamic(() => import("@/components/Contacto"), { ssr: true });
+const FAQ = dynamic(() => import("@/components/FAQ"), { ssr: true });
 const Footer = dynamic(() => import("@/components/Footer"), { ssr: true });
 
 // Componente simple para fade-in al hacer scroll
@@ -50,6 +51,10 @@ export default function HomeClient() {
 
             <FadeInSection>
                 <BlogCarousel />
+            </FadeInSection>
+
+            <FadeInSection>
+                <FAQ />
             </FadeInSection>
 
             <FadeInSection>

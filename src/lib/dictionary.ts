@@ -224,6 +224,44 @@ export const dictionary = {
           privacy: "Privacidad",
           cookies: "Cookies"
       }
+    },
+    faq: {
+      badge: "Preguntas Frecuentes",
+      titleStart: "Dudas",
+      titleHighlight: "Comunes",
+      subtitle: "Resolvemos tus inquietudes sobre desarrollo web y sistemas en Paraguay.",
+      items: [
+        {
+          q: "¿Por qué mi negocio en Paraguay necesita una página web?",
+          a: "En Paraguay, cada vez más personas buscan servicios por internet. Una web te da presencia 24/7, profesionalismo y permite que te encuentren en Google desde cualquier ciudad del país."
+        },
+        {
+          q: "¿Cuánto cuesta crear una página web básica?",
+          a: "Depende de tus necesidades, pero tenemos planes accesibles para emprendedores que buscan su primera web con un diseño profesional y rápido."
+        },
+        {
+          q: "¿Hacen sistemas a medida para empresas paraguayas?",
+          a: "Sí, desarrollamos sistemas ERP, CRM y software de gestión totalmente adaptados a las normativas y necesidades del mercado en Paraguay."
+        },
+        {
+          q: "¿El hosting y dominio están incluidos?",
+          a: "¡Sí! Todos nuestros planes incluyen el primer año de hosting y dominio (.com o .com.py según disponibilidad) para que no te preocupes por nada técnico."
+        },
+        {
+          q: "¿Cómo es el soporte técnico?",
+          a: "Ofrecemos soporte local por WhatsApp y correo electrónico, asegurando respuestas rápidas y soluciones efectivas."
+        }
+      ]
+    },
+    servicios_seo: {
+      web: {
+        title: "Desarrollo de Páginas Web en Paraguay",
+        desc: "Llega a más clientes con un sitio web rápido, moderno y optimizado para Google. Ideal para emprendedores y profesionales independientes."
+      },
+      sistemas: {
+        title: "Sistemas Informáticos y Software a Medida",
+        desc: "Digitalizamos procesos complejos con software de alta ingeniería. Expertos en sistemas de gestión para empresas en Paraguay."
+      }
     }
   },
   en: {
@@ -450,6 +488,44 @@ export const dictionary = {
           terms: "Terms",
           privacy: "Privacy",
           cookies: "Cookies"
+      }
+    },
+    faq: {
+      badge: "FAQ",
+      titleStart: "Common",
+      titleHighlight: "Questions",
+      subtitle: "Answering your inquiries about web development and systems in Paraguay.",
+      items: [
+        {
+          q: "Why does my business in Paraguay need a website?",
+          a: "In Paraguay, more and more people search for services online. A website gives you 24/7 presence, professionalism, and allows you to be found on Google from any city in the country."
+        },
+        {
+          q: "How much does it cost to create a basic website?",
+          a: "It depends on your needs, but we have affordable plans for entrepreneurs looking for their first professional and fast website."
+        },
+        {
+          q: "Do you develop custom systems for Paraguayan companies?",
+          a: "Yes, we develop ERP, CRM systems, and management software fully adapted to the regulations and needs of the Paraguayan market."
+        },
+        {
+          q: "Are hosting and domain included?",
+          a: "Yes! All our plans include the first year of hosting and domain (.com or .com.py subject to availability) so you don't have to worry about anything technical."
+        },
+        {
+          q: "How is the technical support?",
+          a: "We offer local support via WhatsApp and email, ensuring fast responses and effective solutions."
+        }
+      ]
+    },
+    servicios_seo: {
+      web: {
+        title: "Web Development in Paraguay",
+        desc: "Reach more customers with a fast, modern, and Google-optimized website. Ideal for entrepreneurs and independent professionals."
+      },
+      sistemas: {
+        title: "Informatics Systems & Custom Software",
+        desc: "We digitalize complex processes with high-engineering software. Experts in management systems for companies in Paraguay."
       }
     }
   }

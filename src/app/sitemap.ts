@@ -42,6 +42,30 @@ export default function sitemap(): MetadataRoute.Sitemap {
                 }
             }
         },
+        {
+            url: `${baseUrl}/servicios/desarrollo-web-paraguay`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.9,
+            alternates: {
+                languages: {
+                    es: `${baseUrl}/servicios/desarrollo-web-paraguay`,
+                    en: `${baseUrl}/servicios/desarrollo-web-paraguay`,
+                }
+            }
+        },
+        {
+            url: `${baseUrl}/servicios/sistemas-informaticos-paraguay`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.9,
+            alternates: {
+                languages: {
+                    es: `${baseUrl}/servicios/sistemas-informaticos-paraguay`,
+                    en: `${baseUrl}/servicios/sistemas-informaticos-paraguay`,
+                }
+            }
+        },
         ...blogEntries
     ]
 }
