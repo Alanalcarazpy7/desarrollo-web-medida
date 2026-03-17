@@ -16,19 +16,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
 
     const coreRoutes = [
-        '',
-        '/blog',
-        '/servicios/desarrollo-web-paraguay',
-        '/servicios/sistemas-informaticos-paraguay'
+        { path: '', date: '2026-03-17' }, 
+        { path: '/blog', date: '2026-03-17' },
+        { path: '/servicios/desarrollo-web-paraguay', date: '2026-03-07' },
+        { path: '/servicios/sistemas-informaticos-paraguay', date: '2026-03-07' }
     ]
 
     const routesMap: MetadataRoute.Sitemap = locales.flatMap(locale => {
         return coreRoutes.map(route => ({
-             url: `${baseUrl}/${locale}${route}`,
-             lastModified: new Date('2026-03-17'),
+             url: `${baseUrl}/${locale}${route.path}`,
+             lastModified: new Date(route.date),
              changeFrequency: 'monthly',
-             priority: route === '' ? 1 : 0.9,
-             alternates: getAlternates(route)
+             priority: route.path === '' ? 1 : 0.9,
+             alternates: getAlternates(route.path)
         }))
     });
 

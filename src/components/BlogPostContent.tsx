@@ -619,7 +619,7 @@ export default function BlogPostContent({ post }: Props) {
                                 return (
                                     <Link 
                                         key={related.slug} 
-                                        href={`/blog/${related.slug}`}
+                                        href={`/${language}/blog/${related.slug}`}
                                         style={{ textDecoration: 'none', display: 'block' }}
                                     >
                                         <motion.div

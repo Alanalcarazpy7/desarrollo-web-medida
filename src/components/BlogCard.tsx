@@ -56,7 +56,7 @@ export default function BlogCard({
             style={{ height: '100%' }}
         >
             <Link 
-                href={`/blog/${slug}`} 
+                href={`/${language}/blog/${slug}`} 
                 style={{ 
                     textDecoration: 'none', 
                     display: 'block',
