@@ -59,7 +59,10 @@ export const metadata: Metadata = {
     type: "website",
   },
   verification: {
-    google: "VlBerPqiUySA7idLeMLX8ijEjX8BHYLYKZ5sOHDD6xg",
+    google: [
+      "VlBerPqiUySA7idLeMLX8ijEjX8BHYLYKZ5sOHDD6xg",
+      "IiVINjdVr64eGi07S4Gt8P4FHQEsqYvbZQPMS7lufNo",
+    ],
   },
   twitter: {
     card: "summary_large_image",
