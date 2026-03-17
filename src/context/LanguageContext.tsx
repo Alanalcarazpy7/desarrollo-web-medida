@@ -1,7 +1,8 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { dictionary, Language } from "@/lib/dictionary";
+import { useParams, useRouter, usePathname } from "next/navigation";
 
 interface LanguageContextType {
     language: Language;
@@ -11,20 +12,27 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-export const LanguageProvider = ({ children }: { children: React.ReactNode }) => {
-    const [language, setLanguage] = useState<Language>("es");
-
-    // Persist language preference
-    useEffect(() => {
-        const savedLang = localStorage.getItem("language") as Language;
-        if (savedLang) {
-            setLanguage(savedLang);
-        }
-    }, []);
+export const LanguageProvider = ({ children, initialLang }: { children: React.ReactNode, initialLang: Language }) => {
+    const params = useParams();
+    const router = useRouter();
+    const pathname = usePathname();
+    
+    // In scenarios where params might not be ready, fallback to initialLang
+    const language = (params?.lang as Language) || initialLang;
 
     const handleSetLanguage = (lang: Language) => {
-        setLanguage(lang);
-        localStorage.setItem("language", lang);
+        if (!pathname) return;
+        
+        document.cookie = `NEXT_LOCALE=${lang}; path=/; max-age=31536000`;
+        
+        let newPath = pathname;
+        if (pathname.startsWith('/es/') || pathname.startsWith('/en/')) {
+             newPath = `/${lang}${pathname.substring(3)}`;
+        } else if (pathname === '/es' || pathname === '/en') {
+             newPath = `/${lang}`;
+        }
+        
+        router.push(newPath);
     };
 
      const t = (key: string) => {

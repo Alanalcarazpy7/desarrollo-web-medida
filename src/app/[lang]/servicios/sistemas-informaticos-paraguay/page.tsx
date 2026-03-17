@@ -7,18 +7,52 @@ const BackgroundParticles = dynamic(() => import("@/components/BackgroundParticl
 import ServiceCard from "@/components/ServiceCard";
 import CTAButton from "@/components/CTAButton";
 
-export const metadata: Metadata = {
-    title: "Sistemas Informáticos en Paraguay | Software a Medida",
-    description: "Desarrollo de software y sistemas informáticos a medida en Asunción, Paraguay. Automatiza tu negocio con plataformas web innovadoras y seguras.",
-    keywords: ["sistemas informaticos asuncion", "software a medida paraguay", "desarrollo de sistemas empresariales", "programación de software paraguay"],
-    openGraph: {
-        title: "Sistemas Informáticos y Software | SolvaTech Paraguay",
-        description: "Automatización y desarrollo de sistemas a medida para empresas paraguayas.",
-        url: "https://solvatech.vercel.app/servicios/sistemas-informaticos-paraguay",
-    }
+type Props = {
+    params: Promise<{ lang: string }>;
 };
 
-export default function SistemasInformaticosParaguayPage() {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    const { lang } = await params;
+    const baseUrl = "https://solvatech.vercel.app";
+    const path = "/servicios/sistemas-informaticos-paraguay";
+    const isEs = lang === 'es';
+
+    const title = isEs
+      ? "Software a Medida en Paraguay | Sistemas Informáticos y Web"
+      : "Custom Software Development | Enterprise Web Systems";
+
+    const description = isEs
+      ? "Creamos sistemas informáticos y software a medida en Paraguay (Asunción) para automatizar procesos y hacer crecer tu empresa."
+      : "Get custom software and enterprise web systems to automate your business processes and scale your operations globally.";
+
+    const keywords = isEs
+      ? ["sistemas informaticos asuncion", "software a medida paraguay", "desarrollo de sistemas empresariales", "programación de software paraguay", "programadores en paraguay"]
+      : ["custom software development", "enterprise web systems", "business automation software", "custom erp crm development", "software programming agency"];
+    
+    return {
+        title,
+        description,
+        keywords,
+        alternates: {
+            canonical: `${baseUrl}/${lang}${path}`,
+            languages: {
+                'es': `${baseUrl}/es${path}`,
+                'en': `${baseUrl}/en${path}`,
+                'x-default': `${baseUrl}/es${path}`,
+            }
+        },
+        openGraph: {
+            title,
+            description,
+            url: `${baseUrl}/${lang}${path}`,
+            locale: isEs ? "es_PY" : "en_US",
+            type: "website",
+        }
+    };
+}
+
+export default async function SistemasInformaticosParaguayPage({ params }: Props) {
+    const { lang } = await params;
     const theme = {
         bg: "#000000",
         card: "#050505",

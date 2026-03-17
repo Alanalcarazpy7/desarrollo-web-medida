@@ -7,18 +7,52 @@ const BackgroundParticles = dynamic(() => import("@/components/BackgroundParticl
 import ServiceCard from "@/components/ServiceCard";
 import CTAButton from "@/components/CTAButton";
 
-export const metadata: Metadata = {
-    title: "Desarrollo Web en Paraguay | Páginas y Sistemas a Medida",
-    description: "Agencia de desarrollo web en Paraguay. Creamos páginas web modernas, tiendas online y software a medida para potenciar negocios en Asunción y todo el país.",
-    keywords: ["desarrollo web paraguay", "crear pagina web paraguay", "agencia de software paraguay", "diseño web asuncion", "programadores en paraguay"],
-    openGraph: {
-        title: "Desarrollo Web en Paraguay | SolvaTech",
-        description: "Expertos en páginas web y software a medida en Paraguay.",
-        url: "https://solvatech.vercel.app/servicios/desarrollo-web-paraguay",
-    }
+type Props = {
+    params: Promise<{ lang: string }>;
 };
 
-export default function DesarrolloWebParaguayPage() {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    const { lang } = await params;
+    const baseUrl = "https://solvatech.vercel.app";
+    const path = "/servicios/desarrollo-web-paraguay";
+    const isEs = lang === 'es';
+    
+    const title = isEs 
+      ? "Desarrollo Web en Paraguay | Páginas Web y Landing Pages"
+      : "Custom Web Development & Landing Pages | SolvaTech";
+      
+    const description = isEs
+      ? "Desarrollamos páginas web y landing pages para negocios en Paraguay (Asunción, Areguá, etc). Más velocidad, mejor SEO y más consultas."
+      : "High-performance custom web development and landing pages for your business. Fast, SEO-optimized, and built to convert.";
+
+    const keywords = isEs
+      ? ["desarrollo web paraguay", "crear pagina web paraguay", "landing page paraguay", "desarrollo web aregua", "diseño web asuncion", "agencia de software paraguay"]
+      : ["custom web development", "landing page design", "seo optimized websites", "web development agency", "nextjs software agency"];
+
+    return {
+        title,
+        description,
+        keywords,
+        alternates: {
+            canonical: `${baseUrl}/${lang}${path}`,
+            languages: {
+                'es': `${baseUrl}/es${path}`,
+                'en': `${baseUrl}/en${path}`,
+                'x-default': `${baseUrl}/es${path}`,
+            }
+        },
+        openGraph: {
+            title,
+            description,
+            url: `${baseUrl}/${lang}${path}`,
+            locale: isEs ? "es_PY" : "en_US",
+            type: "website",
+        }
+    };
+}
+
+export default async function DesarrolloWebParaguayPage({ params }: Props) {
+    const { lang } = await params;
     const theme = {
         bg: "#000000",
         card: "rgba(255, 255, 255, 0.03)",

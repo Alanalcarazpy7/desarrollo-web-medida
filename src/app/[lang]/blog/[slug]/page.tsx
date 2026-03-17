@@ -4,11 +4,11 @@ import { Metadata } from 'next';
 import BlogPostContent from '@/components/BlogPostContent';
 
 type Props = {
-    params: Promise<{ slug: string }>;
+    params: Promise<{ lang: string; slug: string }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-    const { slug } = await params;
+    const { lang, slug } = await params;
     const post = getPostBySlug(slug);
 
     if (!post) {
@@ -18,27 +18,32 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         };
     }
 
+    const title = lang === 'en' ? post.titleEn || post.title : post.title;
+    const description = lang === 'en' ? post.excerptEn || post.excerpt : post.excerpt;
+    const baseUrl = 'https://solvatech.vercel.app';
+
     return {
-        title: post.title,
-        description: post.excerpt,
+        title,
+        description,
         keywords: post.keywords,
         alternates: {
-            canonical: `https://solvatech.vercel.app/blog/${post.slug}`,
+            canonical: `${baseUrl}/${lang}/blog/${post.slug}`,
             languages: {
-                'es-PY': `https://solvatech.vercel.app/blog/${post.slug}`,
-                'en-US': `https://solvatech.vercel.app/blog/${post.slug}`,
+                'es': `${baseUrl}/es/blog/${post.slug}`,
+                'en': `${baseUrl}/en/blog/${post.slug}`,
+                'x-default': `${baseUrl}/es/blog/${post.slug}`,
             }
         },
         openGraph: {
-            title: post.title,
-            description: post.excerpt,
-            url: `https://solvatech.vercel.app/blog/${post.slug}`,
+            title,
+            description,
+            url: `${baseUrl}/${lang}/blog/${post.slug}`,
             images: [
                 {
                     url: post.image,
                     width: 1200,
                     height: 630,
-                    alt: post.title,
+                    alt: title,
                 }
             ],
             type: 'article',
@@ -47,8 +52,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         },
         twitter: {
             card: 'summary_large_image',
-            title: post.title,
-            description: post.excerpt,
+            title,
+            description,
             images: [post.image],
         }
     };

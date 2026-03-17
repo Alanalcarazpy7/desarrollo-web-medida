@@ -5,6 +5,9 @@ import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { useLanguage } from "@/context/LanguageContext";
+import Link from "next/link";
+import Image from "next/image";
+
 
 export default function SpectacularNavbar() {
     const [scrolled, setScrolled] = useState(false);
@@ -65,9 +68,9 @@ export default function SpectacularNavbar() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    const { language, t } = useLanguage();
     const pathname = usePathname();
-    const isHome = pathname === "/";
-    const { t } = useLanguage();
+    const isHome = pathname === "/" || pathname === `/${language}`;
     
     // Check if we are on client to avoid hydration mismatch with localStorage
     const [mounted, setMounted] = useState(false);
@@ -119,12 +122,12 @@ export default function SpectacularNavbar() {
                     <div className="flex items-center justify-between">
 
                         {/* LOGO ORIGINAL SIN MODIFICAR */}
-                        <motion.a
-                            href="#inicio"
-                            className="flex items-center gap-4 group relative z-50 cursor-pointer"
-                            whileHover={{ scale: 1.05 }}
-                            transition={{ duration: 0.4 }}
-                        >
+                        <Link href={isHome ? "#inicio" : `/${language}`} passHref legacyBehavior>
+                            <motion.a
+                                className="flex items-center gap-4 group relative z-50 cursor-pointer"
+                                whileHover={{ scale: 1.05 }}
+                                transition={{ duration: 0.4 }}
+                            >
                             <div className="relative">
                                 {/* Anillos orbitales */}
                                 <motion.div
@@ -153,15 +156,16 @@ export default function SpectacularNavbar() {
                                     }}
                                 >
                                     {/* Logo SolveTech S */}
-                                    <img
+                                    <Image
                                         src="/favicon.png"
                                         alt="SolvaTech"
-                                        width="44"
-                                        height="44"
+                                        width={44}
+                                        height={44}
                                         style={{
                                             filter: `drop-shadow(0 0 10px ${theme.accentDark})`,
                                             objectFit: 'cover'
                                         }}
+                                        priority
                                     />
                                 </motion.div>
                             </div>
@@ -198,16 +202,17 @@ export default function SpectacularNavbar() {
                                 </span>
                             </div>
                         </motion.a>
+                        </Link>
 
                         {/* NAVEGACIÓN DESKTOP - MODERNA Y COMPACTA (Fix Overlap) */}
                         <div className="hidden xl:flex items-center gap-2">
                             {navItems.map((item, i) => {
-                                const isActive = (activeSection === item.href.substring(1) && isHome) || (item.label === "Blog" && pathname.startsWith("/blog"));
+                                const isActive = (activeSection === item.href.substring(1) && isHome) || (item.label === "Blog" && pathname.includes("/blog"));
+                                const destination = isHome ? item.href : `/${language}${item.href}`;
                                 return (
-                                    <motion.a
-                                        key={item.label}
-                                        href={isHome ? item.href : '/' + item.href}
-                                        className="relative group px-6 py-3 rounded-2xl cursor-pointer"
+                                    <Link key={item.label} href={destination} passHref legacyBehavior>
+                                        <motion.a
+                                            className="relative group px-6 py-3 rounded-2xl cursor-pointer"
                                         initial={{ opacity: 0, y: -30 }}
                                         animate={{ opacity: 1, y: 0 }}
                                         transition={{ delay: i * 0.1, duration: 0.6, type: "spring" }}
@@ -321,6 +326,7 @@ export default function SpectacularNavbar() {
                                             transition={{ duration: 2, repeat: Infinity }}
                                         />
                                     </motion.a>
+                                    </Link>
                                 );
                             })}
 
@@ -470,12 +476,13 @@ export default function SpectacularNavbar() {
                                                 boxShadow: `0 0 20px ${theme.accentGlow}`,
                                             }}
                                         >
-                                            <img
+                                            <Image
                                                 src="/favicon.png"
                                                 alt="SolvaTech"
-                                                width="44"
-                                                height="44"
+                                                width={44}
+                                                height={44}
                                                 style={{ objectFit: 'cover' }}
+                                                priority
                                             />
                                         </div>
                                     </div>
@@ -521,12 +528,12 @@ export default function SpectacularNavbar() {
                             {/* Enlaces del menú más compactos */}
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', padding: '0 24px' }}>
                                 {navItems.map((item, i) => {
-                                    const isActive = (activeSection === item.href.substring(1) && isHome) || (item.label === "Blog" && pathname.startsWith("/blog"));
+                                    const isActive = (activeSection === item.href.substring(1) && isHome) || (item.label === "Blog" && pathname.includes("/blog"));
+                                    const destination = isHome ? item.href : `/${language}${item.href}`;
                                     return (
-                                        <motion.a
-                                            key={item.label}
-                                            href={isHome ? item.href : `/${item.href}`}
-                                            onClick={() => setMobileMenuOpen(false)}
+                                        <Link key={item.label} href={destination} passHref legacyBehavior>
+                                            <motion.a
+                                                onClick={() => setMobileMenuOpen(false)}
                                             initial={{ opacity: 0, x: 20 }}
                                             animate={{ opacity: 1, x: 0 }}
                                             transition={{ delay: i * 0.1 }}
@@ -589,6 +596,7 @@ export default function SpectacularNavbar() {
                                                 />
                                             )}
                                         </motion.a>
+                                        </Link>
                                     );
                                 })}
                             </div>

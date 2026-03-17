@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { WhatsAppIcon } from "./Icons";
+import { track } from "@vercel/analytics";
 
 export default function WhatsAppButton() {
     const [isHovered, setIsHovered] = useState(false);
@@ -44,6 +45,7 @@ export default function WhatsAppButton() {
                     rel="noopener noreferrer"
                     onHoverStart={() => setIsHovered(true)}
                     onHoverEnd={() => setIsHovered(false)}
+                    onClick={() => track('click_whatsapp', { source: 'floating_button' })}
                     layout
                     whileHover={{ scale: 1.05, y: -5 }}
                     whileTap={{ scale: 0.95 }}

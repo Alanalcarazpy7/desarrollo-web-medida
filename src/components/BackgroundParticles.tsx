@@ -12,6 +12,10 @@ export default function BackgroundParticles() {
         const ctx = canvas.getContext("2d");
         if (!ctx) return;
 
+        // Respect prefers-reduced-motion
+        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (prefersReducedMotion) return;
+
         let animationFrameId: number;
         let particles: Particle[] = [];
         const particleCount = 120; // Balance entre densidad y TBT

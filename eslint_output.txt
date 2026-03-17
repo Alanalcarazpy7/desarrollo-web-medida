@@ -1,0 +1,221 @@
+
+E:\Documents\Portafolio-Paginas Web\22-desarrollo-web-medida\src\app\[lang]\servicios\desarrollo-web-paraguay\page.tsx
+  40:13   warning  'lang' is assigned a value but never used                        @typescript-eslint/no-unused-vars
+  89:48   error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  89:71   error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  89:91   error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  89:112  error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+
+E:\Documents\Portafolio-Paginas Web\22-desarrollo-web-medida\src\app\[lang]\servicios\sistemas-informaticos-paraguay\page.tsx
+  40:13  warning  'lang' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+E:\Documents\Portafolio-Paginas Web\22-desarrollo-web-medida\src\components\BackgroundParticles.tsx
+  27:9  warning  Compilation Skipped: Inline `class` declarations are not supported
+
+Move class declarations outside of components/hooks.
+
+E:\Documents\Portafolio-Paginas Web\22-desarrollo-web-medida\src\components\BackgroundParticles.tsx:27:9
+  25 |         };
+  26 |
+> 27 |         class Particle {
+     |         ^^^^^^^^^^^^^^^^
+> 28 |             x: number;
+     | ^^^^^^^^^^^^^^^^^^^^^^
+> 29 |             y: number;
+     …
+     | ^^^^^^^^^^^^^^^^^^^^^^
+> 77 |             }
+     | ^^^^^^^^^^^^^^^^^^^^^^
+> 78 |         }
+     | ^^^^^^^^^^ Inline `class` declarations are not supported
+  79 |
+  80 |         const resize = () => {
+  81 |             if (!canvas) return;
+
+  react-hooks/unsupported-syntax
+
+E:\Documents\Portafolio-Paginas Web\22-desarrollo-web-medida\src\components\BlogPostContent.tsx
+  6:10  warning  'useState' is defined but never used   @typescript-eslint/no-unused-vars
+  6:20  warning  'useEffect' is defined but never used  @typescript-eslint/no-unused-vars
+
+E:\Documents\Portafolio-Paginas Web\22-desarrollo-web-medida\src\components\Contacto.tsx
+  10:21  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+E:\Documents\Portafolio-Paginas Web\22-desarrollo-web-medida\src\components\Contacto.tsx:10:21
+   8 |     const { t } = useLanguage();
+   9 |     const [mounted, setMounted] = useState(false);
+> 10 |     useEffect(() => setMounted(true), []);
+     |                     ^^^^^^^^^^ Avoid calling setState() directly within an effect
+  11 |     const [formData, setFormData] = useState({
+  12 |         nombre: "",
+  13 |         email: "",  react-hooks/set-state-in-effect
+
+E:\Documents\Portafolio-Paginas Web\22-desarrollo-web-medida\src\components\Estadisticas.tsx
+    3:45  warning  'useSpring' is defined but never used           @typescript-eslint/no-unused-vars
+  156:46  error    Unexpected any. Specify a different type        @typescript-eslint/no-explicit-any
+  158:11  warning  'rounded' is assigned a value but never used    @typescript-eslint/no-unused-vars
+  163:19  warning  'controls' is assigned a value but never used   @typescript-eslint/no-unused-vars
+  168:19  warning  'animation' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+E:\Documents\Portafolio-Paginas Web\22-desarrollo-web-medida\src\components\FAQ.tsx
+  13:9   error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+E:\Documents\Portafolio-Paginas Web\22-desarrollo-web-medida\src\components\FAQ.tsx:13:9
+  11 |
+  12 |     useEffect(() => {
+> 13 |         setMounted(true);
+     |         ^^^^^^^^^^ Avoid calling setState() directly within an effect
+  14 |     }, []);
+  15 |
+  16 |     const theme = {  react-hooks/set-state-in-effect
+  26:40  error  Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            @typescript-eslint/no-explicit-any
+
+E:\Documents\Portafolio-Paginas Web\22-desarrollo-web-medida\src\components\Footer.tsx
+  24:9  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+E:\Documents\Portafolio-Paginas Web\22-desarrollo-web-medida\src\components\Footer.tsx:24:9
+  22 |
+  23 |     useEffect(() => {
+> 24 |         setMounted(true);
+     |         ^^^^^^^^^^ Avoid calling setState() directly within an effect
+  25 |         const checkMobile = () => {
+  26 |              setIsMobile(window.innerWidth < 1024);
+  27 |         };  react-hooks/set-state-in-effect
+
+E:\Documents\Portafolio-Paginas Web\22-desarrollo-web-medida\src\components\Hero.tsx
+    4:18  warning  'useScroll' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  @typescript-eslint/no-unused-vars
+   25:9   error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+E:\Documents\Portafolio-Paginas Web\22-desarrollo-web-medida\src\components\Hero.tsx:25:9
+  23 |
+  24 |     useEffect(() => {
+> 25 |         setMounted(true);
+     |         ^^^^^^^^^^ Avoid calling setState() directly within an effect
+  26 |         const checkMobile = () => {
+  27 |             setIsMobile(window.innerWidth < 1024);
+  28 |         };  react-hooks/set-state-in-effect
+  277:52  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               @typescript-eslint/no-explicit-any
+  277:79  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               @typescript-eslint/no-explicit-any
+  285:52  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               @typescript-eslint/no-explicit-any
+
+E:\Documents\Portafolio-Paginas Web\22-desarrollo-web-medida\src\components\Navbar.tsx
+   3:29  warning  'useTransform' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           @typescript-eslint/no-unused-vars
+  76:21  error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+E:\Documents\Portafolio-Paginas Web\22-desarrollo-web-medida\src\components\Navbar.tsx:76:21
+  74 |     // Check if we are on client to avoid hydration mismatch with localStorage
+  75 |     const [mounted, setMounted] = useState(false);
+> 76 |     useEffect(() => setMounted(true), []);
+     |                     ^^^^^^^^^^ Avoid calling setState() directly within an effect
+  77 |
+  78 |     const navItems = [
+  79 |         { label: mounted ? t('navbar.home') : "Inicio", href: "#inicio" },  react-hooks/set-state-in-effect
+
+E:\Documents\Portafolio-Paginas Web\22-desarrollo-web-medida\src\components\Proceso.tsx
+  11:21  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+E:\Documents\Portafolio-Paginas Web\22-desarrollo-web-medida\src\components\Proceso.tsx:11:21
+   9 |     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  10 |     const [mounted, setMounted] = useState(false);
+> 11 |     useEffect(() => setMounted(true), []);
+     |                     ^^^^^^^^^^ Avoid calling setState() directly within an effect
+  12 |
+  13 |     const pasos = [
+  14 |         {  react-hooks/set-state-in-effect
+
+E:\Documents\Portafolio-Paginas Web\22-desarrollo-web-medida\src\components\Proyectos.tsx
+    9:40  warning  'theme' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  @typescript-eslint/no-unused-vars
+    9:69  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           @typescript-eslint/no-explicit-any
+    9:96  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           @typescript-eslint/no-explicit-any
+  256:21  error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+E:\Documents\Portafolio-Paginas Web\22-desarrollo-web-medida\src\components\Proyectos.tsx:256:21
+  254 |     const [selectedCategoryKey, setSelectedCategoryKey] = useState("all");
+  255 |     const [mounted, setMounted] = useState(false);
+> 256 |     useEffect(() => setMounted(true), []);
+      |                     ^^^^^^^^^^ Avoid calling setState() directly within an effect
+  257 |
+  258 |     const theme = {
+  259 |         bg: "#000000",  react-hooks/set-state-in-effect
+
+E:\Documents\Portafolio-Paginas Web\22-desarrollo-web-medida\src\components\ScrollProgress.tsx
+  3:40  warning  'useTransform' is defined but never used  @typescript-eslint/no-unused-vars
+
+E:\Documents\Portafolio-Paginas Web\22-desarrollo-web-medida\src\components\Servicios.tsx
+  11:21  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+E:\Documents\Portafolio-Paginas Web\22-desarrollo-web-medida\src\components\Servicios.tsx:11:21
+   9 |     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  10 |     const [mounted, setMounted] = useState(false);
+> 11 |     useEffect(() => setMounted(true), []);
+     |                     ^^^^^^^^^^ Avoid calling setState() directly within an effect
+  12 |
+  13 |     const theme = {
+  14 |         bg: "#000000",  react-hooks/set-state-in-effect
+
+E:\Documents\Portafolio-Paginas Web\22-desarrollo-web-medida\src\components\Testimonios.tsx
+  110:102  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  128:37   error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  128:61   error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+
+E:\Documents\Portafolio-Paginas Web\22-desarrollo-web-medida\src\context\LanguageContext.tsx
+   3:44  warning  'useEffect' is defined but never used     @typescript-eslint/no-unused-vars
+   3:55  warning  'useState' is defined but never used      @typescript-eslint/no-unused-vars
+  10:25  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  40:20  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+E:\Documents\Portafolio-Paginas Web\22-desarrollo-web-medida\src\middleware.ts
+  21:7   error    'languages' is never reassigned. Use 'const' instead  prefer-const
+  25:12  warning  'e' is defined but never used                         @typescript-eslint/no-unused-vars
+
+✖ 41 problems (25 errors, 16 warnings)
+  1 error and 0 warnings potentially fixable with the `--fix` option.
+

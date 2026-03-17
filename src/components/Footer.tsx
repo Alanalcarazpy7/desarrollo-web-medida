@@ -3,6 +3,9 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { useLanguage } from "@/context/LanguageContext";
+import Link from "next/link";
+import Image from "next/image";
+
 
 export default function Footer() {
     const currentYear = 2026;
@@ -139,11 +142,11 @@ export default function Footer() {
                                         boxShadow: `0 0 50px rgba(0, 217, 255, 0.5), inset 0 0 25px ${theme.accent}20`,
                                     }}
                                 >
-                                    <img
+                                    <Image
                                         src="/favicon.png"
                                         alt="SolvaTech"
-                                        width="44"
-                                        height="44"
+                                        width={44}
+                                        height={36}
                                         style={{ objectFit: 'cover' }}
                                     />
                                 </motion.div>
@@ -186,9 +189,9 @@ export default function Footer() {
                         <h4 style={{ color: theme.text, fontWeight: 700, marginBottom: '20px' }}>{mounted ? t('footer.servicesTitle') : "Servicios"}</h4>
                         <div style={listStyle}>
                             {sections.servicios.map((item) => (
-                                <a key={item.label} href={item.href} style={linkStyle} className="footer-link">
+                                <Link key={item.label} href={item.href} style={linkStyle} className="footer-link">
                                     {item.label}
-                                </a>
+                                </Link>
                             ))}
                         </div>
                     </div>
@@ -197,9 +200,9 @@ export default function Footer() {
                         <h4 style={{ color: theme.text, fontWeight: 700, marginBottom: '20px' }}>{mounted ? t('footer.companyTitle') : "Empresa"}</h4>
                         <div style={listStyle}>
                             {sections.empresa.map((item) => (
-                                <a key={item.label} href={item.href} style={linkStyle} className="footer-link">
+                                <Link key={item.label} href={item.href} style={linkStyle} className="footer-link">
                                     {item.label}
-                                </a>
+                                </Link>
                             ))}
                         </div>
                     </div>
@@ -220,7 +223,7 @@ export default function Footer() {
 
                     <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
                         {sections.legal.map((item) => (
-                            <a
+                            <Link
                                 key={item.label}
                                 href={item.href}
                                 style={{
@@ -234,7 +237,7 @@ export default function Footer() {
                                 onMouseLeave={(e) => e.currentTarget.style.color = theme.textMuted}
                             >
                                 {item.label}
-                            </a>
+                            </Link>
                         ))}
                     </div>
                 </div>

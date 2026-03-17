@@ -72,6 +72,8 @@ export default function LanguageSwitcher() {
                     backdropFilter: 'blur(10px)',
                 }}
                 aria-label="Cambiar idioma"
+                aria-expanded={isOpen}
+                aria-haspopup="listbox"
             >
                 {/* Bandera seleccionada */}
                 <span className="flex items-center justify-center w-6 h-6 overflow-hidden rounded-full border border-white/20">
@@ -97,6 +99,7 @@ export default function LanguageSwitcher() {
             {/* Dropdown */}
             {isOpen && (
                 <div
+                    role="listbox"
                     className="absolute left-0 xl:right-0 top-full mt-2 w-48 rounded-xl overflow-hidden shadow-2xl origin-top-left xl:origin-top-right transition-all duration-200"
                     style={{
                         background: '#0a0a0a',
@@ -107,6 +110,8 @@ export default function LanguageSwitcher() {
                     {languages.map((lang) => (
                         <button
                             key={lang.code}
+                            role="option"
+                            aria-selected={selected.code === lang.code}
                             onClick={() => handleSelect(lang.code)}
                             className={`w-full flex items-center gap-3 px-4 py-3 text-sm transition-all duration-200 cursor-pointer hover:bg-white/5 ${
                                 selected.code === lang.code

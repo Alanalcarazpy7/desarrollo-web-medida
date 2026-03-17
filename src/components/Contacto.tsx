@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { useLanguage } from "@/context/LanguageContext";
+import { track } from "@vercel/analytics";
 
 export default function Contacto() {
     const { t } = useLanguage();
@@ -33,6 +34,11 @@ export default function Contacto() {
         setIsSubmitting(true);
 
         setTimeout(() => {
+            track('submit_contact_form', { 
+                presupuesto: formData.presupuesto, 
+                empresa: formData.empresa !== "" ? "si" : "no" 
+            });
+
             const whatsappMessage = `
 🌟 *Nuevo Cliente Potencial* 🌟
 

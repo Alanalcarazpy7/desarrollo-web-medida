@@ -1,0 +1,15 @@
+▲ Next.js 16.1.1 (Turbopack)
+
+⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+  Creating an optimized production build ...
+✓ Compiled successfully in 4.1s
+  Running TypeScript ...
+  Collecting page data using 11 workers ...
+  Generating static pages using 11 workers (0/6) ...
+Error occurred prerendering page "/sitemap.xml". Read more: https://nextjs.org/docs/messages/prerender-error
+RangeError: Invalid time value
+    at Date1.toISOString (<anonymous>)
+    at l (E:\Documents\Portafolio-Paginas Web\22-desarrollo-web-medida\.next\server\chunks\[root-of-the-server]__5e50bd24._.js:13:102)
+    at d (E:\Documents\Portafolio-Paginas Web\22-desarrollo-web-medida\.next\server\chunks\[root-of-the-server]__5e50bd24._.js:16:134)
+Export encountered an error on /sitemap.xml/route: /sitemap.xml, exiting the build.
+⨯ Next.js build worker exited with code: 1 and signal: null

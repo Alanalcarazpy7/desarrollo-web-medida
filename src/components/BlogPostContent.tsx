@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { BlogPost, blogPosts } from '@/lib/blog-data';
 import { useLanguage } from '@/context/LanguageContext';
@@ -21,14 +20,7 @@ type Props = {
 };
 
 export default function BlogPostContent({ post }: Props) {
-    const [isLoaded, setIsLoaded] = useState(false);
     const { language } = useLanguage();
-
-    useEffect(() => {
-        setIsLoaded(true);
-    }, []);
-
-    if (!isLoaded) return null;
 
     const theme = {
         accent: "#00d9ff",

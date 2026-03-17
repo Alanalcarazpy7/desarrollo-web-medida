@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
 import { LanguageProvider } from "@/context/LanguageContext";
-import "./globals.css";
+import "../globals.css";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -13,10 +13,10 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL("https://solvatech.vercel.app"),
   title: {
-    default: "SolvaTech | Agencia de Desarrollo Web & Marketing Digital",
+    default: "Desarrollo Web en Paraguay | SolvaTech",
     template: "%s | SolvaTech"
   },
-  description: "SolvaTech es tu agencia de desarrollo web y marketing digital en Paraguay. Expertos en páginas web, tiendas online (e-commerce), SEO y software a medida para potenciar tu negocio.",
+  description: "Creamos páginas web, landing pages y sistemas a medida en Paraguay. Sitios rápidos, modernos y optimizados para Google. Pedí tu presupuesto.",
   keywords: [
     "desarrollo web paraguay",
     "diseño web asunción",
@@ -51,12 +51,20 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "SolvaTech | Soluciones Digitales & Desarrollo Web",
-    description: "Impulsamos tu negocio con sitios web de alto rendimiento y estrategias de marketing digital efectivas en Paraguay.",
+    title: "Desarrollo Web en Paraguay | SolvaTech",
+    description: "Creamos páginas web, landing pages y sistemas a medida en Paraguay. Sitios rápidos, modernos y optimizados para Google. Pedí tu presupuesto.",
     url: "https://solvatech.vercel.app",
     siteName: "SolvaTech",
     locale: "es_PY",
     type: "website",
+    images: [
+      {
+        url: 'https://solvatech.vercel.app/solvetech-logo.png',
+        width: 1200,
+        height: 630,
+        alt: 'SolvaTech - Desarrollo Web y Software a Medida',
+      }
+    ],
   },
   verification: {
     google: [
@@ -66,12 +74,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "SolvaTech | Agencia Digital Premium",
-    description: "Expertos en desarrollo web, e-commerce y posicionamiento SEO.",
+    title: "Desarrollo Web en Paraguay | SolvaTech",
+    description: "Creamos páginas web, landing pages y sistemas a medida en Paraguay. Sitios rápidos, modernos y optimizados para Google. Pedí tu presupuesto.",
     creator: "@alanalcarazpy", // Ajustar si el usuario tiene otro handle
-  },
-  alternates: {
-    canonical: "https://solvatech.vercel.app",
   },
 };
 
@@ -79,16 +84,19 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   "name": "SolvaTech",
-  "image": "https://solvatech.vercel.app/icon.svg",
+  "description": "Agencia de desarrollo de software a medida y diseño web en Paraguay.",
+  "image": "https://solvatech.vercel.app/icon.png",
+  "logo": "https://solvatech.vercel.app/solvetech-logo.png",
   "@id": "https://solvatech.vercel.app",
   "url": "https://solvatech.vercel.app",
-  "telephone": "+595981000000", // Ejemplo, el usuario debe ajustar
+  "telephone": "+595982880043",
+  "priceRange": "$$",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "Asunción",
     "addressLocality": "Asunción",
-    "addressRegion": "Asunción",
-    "postalCode": "0000",
+    "addressRegion": "Capital",
+    "postalCode": "1209",
     "addressCountry": "PY"
   },
   "geo": {
@@ -98,8 +106,16 @@ const jsonLd = {
   },
   "sameAs": [
     "https://www.linkedin.com/in/alanalcaraz",
-    "https://github.com/alanalcarazpy7"
+    "https://github.com/alanalcarazpy7",
+    "https://www.instagram.com/alandev_py/"
   ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+595982880043",
+    "contactType": "Customer Service",
+    "areaServed": "PY",
+    "availableLanguage": ["es", "en"]
+  },
   "openingHoursSpecification": {
     "@type": "OpeningHoursSpecification",
     "dayOfWeek": [
@@ -114,15 +130,18 @@ const jsonLd = {
   }
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
+  params: Promise<{ lang: string }>;
 }>) {
+  const { lang } = await params;
   return (
-    <html lang="es">
+    <html lang={lang || "es"}>
       <body className={inter.className}>
-        <LanguageProvider>
+        <LanguageProvider initialLang={(lang as "es" | "en") || "es"}>
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

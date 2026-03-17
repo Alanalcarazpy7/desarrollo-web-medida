@@ -2,6 +2,7 @@
 
 import { ReactNode } from "react";
 import Link from "next/link";
+import { track } from "@vercel/analytics";
 
 interface CTAButtonProps {
     href: string;
@@ -11,6 +12,7 @@ interface CTAButtonProps {
     fontSize?: string;
     fontWeight?: number;
     withShadow?: boolean;
+    eventName?: string;
 }
 
 export default function CTAButton({ 
@@ -20,10 +22,11 @@ export default function CTAButton({
     padding = "16px 32px", 
     fontSize = "1.125rem", 
     fontWeight = 700, 
-    withShadow = false 
+    withShadow = false,
+    eventName = 'click_cta' 
 }: CTAButtonProps) {
     return (
-        <a 
+        <Link 
             href={href}
             style={{ 
                 display: "inline-block", 
@@ -41,12 +44,13 @@ export default function CTAButton({
                 e.currentTarget.style.transform = "scale(1.05)";
                 if (withShadow) e.currentTarget.style.boxShadow = `0 0 20px ${accent}66`; // 40% opacity hex
             }}
+            onClick={() => track(eventName, { href })}
             onMouseLeave={(e) => {
                 e.currentTarget.style.transform = "scale(1)";
                 if (withShadow) e.currentTarget.style.boxShadow = "none";
             }}
         >
             {children}
-        </a>
+        </Link>
     );
 }
