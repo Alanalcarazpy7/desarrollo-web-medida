@@ -105,7 +105,7 @@ export default async function DesarrolloWebParaguayPage({ params }: Props) {
                         utilizamos tecnologías de punta para garantizar el éxito de tu proyecto.
                     </p>
                     <CTAButton 
-                        href="/#contacto" 
+                        href={`/${lang}/#contacto`} 
                         accent={theme.accent}
                         padding="16px 32px"
                         fontSize="1.125rem"

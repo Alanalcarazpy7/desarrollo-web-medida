@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { motion, useScroll, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
@@ -76,14 +76,16 @@ export default function SpectacularNavbar() {
     const [mounted, setMounted] = useState(false);
     useEffect(() => setMounted(true), []);
 
+    const getNavHref = (hash: string) => isHome ? hash : `/${language}${hash}`;
+
     const navItems = [
-        { label: mounted ? t('navbar.home') : "Inicio", href: "#inicio" },
-        { label: mounted ? t('navbar.services') : "Servicios", href: "#servicios" },
-        { label: mounted ? t('navbar.process') : "Proceso", href: "#proceso" },
-        { label: mounted ? t('navbar.projects') : "Proyectos", href: "#proyectos" },
-        { label: mounted ? t('navbar.pricing') : "Precios", href: "#precios" },
-        { label: mounted ? t('navbar.blog') : "Blog", href: "#blog" },
-        { label: mounted ? t('navbar.contact') : "Contacto", href: "#contacto" },
+        { label: mounted ? t('navbar.home') : "Inicio", href: getNavHref("#inicio") },
+        { label: mounted ? t('navbar.services') : "Servicios", href: getNavHref("#servicios") },
+        { label: mounted ? t('navbar.process') : "Proceso", href: getNavHref("#proceso") },
+        { label: mounted ? t('navbar.projects') : "Proyectos", href: getNavHref("#proyectos") },
+        { label: mounted ? t('navbar.pricing') : "Precios", href: getNavHref("#precios") },
+        { label: mounted ? t('navbar.blog') : "Blog", href: `/${language}/blog` },
+        { label: mounted ? t('navbar.contact') : "Contacto", href: getNavHref("#contacto") },
     ];
 
     return (
@@ -334,13 +336,14 @@ export default function SpectacularNavbar() {
                             <LanguageSwitcher />
 
                             {/* CTA BUTTON - ULTRA ESPECTACULAR */}
-                            <motion.button
+                            <Link href={getNavHref("#contacto")} passHref legacyBehavior>
+                            <motion.a
                                 initial={{ opacity: 0, scale: 0.7 }}
                                 animate={{ opacity: 1, scale: 1 }}
                                 transition={{ delay: 0.6, duration: 0.6, type: "spring" }}
                                 whileHover={{ scale: 1.05, y: -2 }}
                                 whileTap={{ scale: 0.95 }}
-                                className="relative ml-4 px-8 py-4 rounded-2xl overflow-hidden group cursor-pointer"
+                                className="relative ml-4 px-8 py-4 rounded-2xl overflow-hidden group cursor-pointer flex items-center justify-center font-bold tracking-widest text-sm"
                             >
                                 {/* Fondo animado súper brillante */}
                                 <motion.div
@@ -384,7 +387,13 @@ export default function SpectacularNavbar() {
                                     }}
                                     transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
                                 />
-                            </motion.button>
+
+                                {/* Texto Visible */}
+                                <span className="relative z-10" style={{ color: theme.bgNav, textShadow: "0 2px 4px rgba(0,0,0,0.3)" }}>
+                                    {mounted ? t('navbar.cta') : "HABLEMOS"}
+                                </span>
+                            </motion.a>
+                            </Link>
                         </div>
 
                         {/* HAMBURGER MEJORADO - DISEÑO LIMPIO */}
@@ -392,6 +401,8 @@ export default function SpectacularNavbar() {
                             <motion.button
                                 onClick={() => setMobileMenuOpen(true)}
                                 aria-label="Abrir menú de navegación"
+                                aria-expanded={mobileMenuOpen}
+                                aria-controls="mobile-menu"
                                 className="relative p-3 group cursor-pointer flex items-center justify-center"
                                 whileTap={{ scale: 0.9 }}
                             >
@@ -441,6 +452,7 @@ export default function SpectacularNavbar() {
                         />
 
                         <motion.div
+                            id="mobile-menu"
                             initial={{ x: "100%" }}
                             animate={{ x: 0 }}
                             exit={{ x: "100%" }}

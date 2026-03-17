@@ -159,7 +159,7 @@ export default function BlogPostContent({ post }: Props) {
                             <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
                         </svg>
                         <Link 
-                            href="/" 
+                            href={`/${language}`} 
                             style={{ 
                                 color: '#999', 
                                 textDecoration: 'none',
@@ -172,7 +172,7 @@ export default function BlogPostContent({ post }: Props) {
                         </Link>
                         <span style={{ color: '#666' }}>›</span>
                         <Link 
-                            href="/blog" 
+                            href={`/${language}/blog`} 
                             style={{ 
                                 color: '#999',
                                 textDecoration: 'none',
@@ -499,7 +499,7 @@ export default function BlogPostContent({ post }: Props) {
                             gap: '20px',
                             flexWrap: 'wrap'
                         }}>
-                            <Link href="/#contacto" style={{ textDecoration: 'none' }}>
+                            <Link href={`/${language}/#contacto`} style={{ textDecoration: 'none' }}>
                                 <motion.button
                                     whileHover={{ scale: 1.05, y: -2 }}
                                     whileTap={{ scale: 0.98 }}
@@ -522,7 +522,7 @@ export default function BlogPostContent({ post }: Props) {
                                 </motion.button>
                             </Link>
                             
-                            <Link href="/blog" style={{ textDecoration: 'none' }}>
+                            <Link href={`/${language}/blog`} style={{ textDecoration: 'none' }}>
                                 <motion.button
                                     whileHover={{ scale: 1.05, y: -2 }}
                                     whileTap={{ scale: 0.98 }}

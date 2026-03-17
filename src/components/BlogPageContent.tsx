@@ -543,7 +543,7 @@ export default function BlogPageContent() {
                                                 : "Let's talk about your project and discover how we can help you achieve your goals."}
                                         </p>
 
-                                        <Link href="/#contacto" style={{ textDecoration: 'none' }}>
+                                        <Link href={`/${language}/#contacto`} style={{ textDecoration: 'none' }}>
                                             <motion.button
                                                 whileHover={{ scale: 1.05, boxShadow: '0 12px 48px rgba(0, 217, 255, 0.4)' }}
                                                 whileTap={{ scale: 0.95 }}

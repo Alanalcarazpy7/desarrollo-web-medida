@@ -17,7 +17,7 @@ export default function Footer() {
         textMuted: "#888888",
     };
 
-    const { t } = useLanguage();
+    const { t, language } = useLanguage();
     const [mounted, setMounted] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
 
@@ -31,18 +31,20 @@ export default function Footer() {
         return () => window.removeEventListener('resize', checkMobile);
     }, []);
 
+    const getNavHref = (hashOrPath: string) => `/${language}${hashOrPath}`;
+
     const sections = {
         servicios: [
-            { label: mounted ? t('footer.services.web') : "Desarrollo Web", href: "/servicios/desarrollo-web-paraguay" },
-            { label: mounted ? "Sistemas Informáticos" : "Sistemas Informáticos", href: "/servicios/sistemas-informaticos-paraguay" },
-            { label: mounted ? t('footer.services.ecommerce') : "E-commerce", href: "#servicios" },
-            { label: mounted ? t('footer.services.design') : "Diseño UI/UX", href: "#servicios" },
+            { label: mounted ? t('footer.services.web') : "Desarrollo Web", href: getNavHref("/servicios/desarrollo-web-paraguay") },
+            { label: mounted ? "Sistemas Informáticos" : "Sistemas Informáticos", href: getNavHref("/servicios/sistemas-informaticos-paraguay") },
+            { label: mounted ? t('footer.services.ecommerce') : "E-commerce", href: getNavHref("/#servicios") },
+            { label: mounted ? t('footer.services.design') : "Diseño UI/UX", href: getNavHref("/#servicios") },
         ],
         empresa: [
-             { label: mounted ? t('footer.company.about') : "Sobre Nosotros", href: "#inicio" },
-             { label: mounted ? t('footer.company.projects') : "Proyectos", href: "#proyectos" },
-             { label: mounted ? t('footer.company.process') : "Proceso", href: "#proceso" },
-             { label: mounted ? t('footer.company.contact') : "Contacto", href: "#contacto" },
+             { label: mounted ? t('footer.company.about') : "Sobre Nosotros", href: getNavHref("/#inicio") },
+             { label: mounted ? t('footer.company.projects') : "Proyectos", href: getNavHref("/#proyectos") },
+             { label: mounted ? t('footer.company.process') : "Proceso", href: getNavHref("/#proceso") },
+             { label: mounted ? t('footer.company.contact') : "Contacto", href: getNavHref("/#contacto") },
         ],
         legal: [
             { label: mounted ? t('footer.legal.terms') : "Términos", href: "#" },

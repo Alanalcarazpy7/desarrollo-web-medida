@@ -91,19 +91,13 @@ const jsonLd = {
   "url": "https://solvatech.vercel.app",
   "telephone": "+595982880043",
   "priceRange": "$$",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Asunción",
-    "addressLocality": "Asunción",
-    "addressRegion": "Capital",
-    "postalCode": "1209",
-    "addressCountry": "PY"
-  },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": -25.2637,
-    "longitude": -57.5759
-  },
+  "areaServed": [
+    "PY",
+    "US",
+    "AR",
+    "ES",
+    "MX"
+  ],
   "sameAs": [
     "https://www.linkedin.com/in/alanalcaraz",
     "https://github.com/alanalcarazpy7",

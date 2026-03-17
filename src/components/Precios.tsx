@@ -400,7 +400,6 @@ export default function Precios() {
                     ))}
                 </div>
 
-                {/* Footer */}
                 <motion.p
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
@@ -409,6 +408,15 @@ export default function Precios() {
                 >
                     {mounted ? t('pricing.footer') : "* Pago único por desarrollo. Planes de mantención mensual disponibles."}
                 </motion.p>
+                <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.2 }}
+                    style={{ marginTop: "15px", textAlign: "center", fontSize: "12px", color: theme.accent, maxWidth: "600px", margin: "15px auto 0", lineHeight: 1.6, fontWeight: 600, padding: "8px 16px", borderRadius: "100px", background: `rgba(0, 217, 255, 0.05)`, border: `1px solid rgba(0, 217, 255, 0.1)` }}
+                >
+                    {language === 'es' ? "🇵🇾 Empresas en Paraguay: Planes preferenciales y facturación en Guaraníes (PYG) disponibles. ¡Consultanos!" : "🌎 International Clients: Contact us for customized enterprise plans and payment options."}
+                </motion.div>
             </div>
         </section>
     );

@@ -201,11 +201,15 @@ export default function BlogCarousel() {
                         onDragStart={() => setIsHovered(true)}
                         onDragEnd={() => setIsHovered(false)}
                     >
-                        {extendedPosts.map((post, index) => (
+                        {extendedPosts.map((post, index) => {
+                            const isDuplicate = index >= recentPosts.length;
+                            return (
                             <Link 
                                 key={`${post.slug}-${index}-extended`} 
-                                href={`/blog/${post.slug}`}
+                                href={`/${language}/blog/${post.slug}`}
                                 className="relative block flex-shrink-0 group" 
+                                aria-hidden={isDuplicate ? "true" : "false"}
+                                tabIndex={isDuplicate ? -1 : 0}
                             >
                                 <div 
                                     className="w-[220px] md:w-[260px] h-[300px] md:h-[340px] rounded-2xl overflow-hidden bg-[#0a0a0a] border border-white/10 hover:border-[#00d9ff] relative transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,217,255,0.2)]"
@@ -264,14 +268,15 @@ export default function BlogCarousel() {
                                     </div>
                                 </div>
                             </Link>
-                        ))}
+                            );
+                        })}
                     </motion.div>
                 </motion.div>
             </div>
 
             {/* Espaciado EXTRA antes del botón */}
             <div className="mt-20 text-center z-10 w-full flex justify-center" style={{margin:"2rem 0"}}>
-                <Link href="/blog" className="relative group inline-block">
+                <Link href={`/${language}/blog`} className="relative group inline-block">
                     <div className="absolute inset-0 bg-[#00d9ff]/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     <motion.div
                         className="relative px-12 py-5 bg-[#0a0a0a] border border-[#00d9ff]/30 rounded-full flex items-center gap-4 overflow-hidden shadow-lg shadow-[#00d9ff]/5" style={{padding:"0.5rem"}}

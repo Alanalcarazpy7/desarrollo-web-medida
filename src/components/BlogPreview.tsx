@@ -3,8 +3,10 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { blogPosts } from "@/lib/blog-data";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function BlogPreview() {
+    const { language } = useLanguage();
     const theme = {
         accent: "#00d9ff",
         accentDark: "#0099cc",
@@ -91,7 +93,7 @@ export default function BlogPreview() {
                             transition={{ delay: index * 0.15, duration: 0.6, type: "spring" }}
                             whileHover={{ y: -8 }}
                         >
-                            <Link href={`/blog/${post.slug}`} className="block h-full">
+                            <Link href={`/${language}/blog/${post.slug}`} className="block h-full">
                                 <div
                                     className="group relative h-full rounded-2xl overflow-hidden cursor-pointer"
                                     style={{
@@ -179,7 +181,7 @@ export default function BlogPreview() {
                     viewport={{ once: true }}
                     transition={{ delay: 0.3 }}
                 >
-                    <Link href="/blog">
+                    <Link href={`/${language}/blog`}>
                         <motion.button
                             className="relative px-10 py-4 rounded-full font-bold text-lg overflow-hidden group cursor-pointer"
                             style={{

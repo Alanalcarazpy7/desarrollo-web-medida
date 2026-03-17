@@ -110,7 +110,7 @@ export default async function SistemasInformaticosParaguayPage({ params }: Props
                         Nuestro equipo de desarrolladores Full Stack está listo para analizar tu proyecto. Agenda una reunión gratuita para discutir tu próximo sistema informático o software empresarial a medida.
                     </p>
                     <CTAButton 
-                        href="/#contacto" 
+                        href={`/${lang}/#contacto`} 
                         accent={theme.accent}
                         padding="16px 40px"
                         fontSize="1.25rem"
