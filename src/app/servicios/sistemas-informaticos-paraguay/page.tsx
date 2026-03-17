@@ -4,6 +4,8 @@ import dynamic from "next/dynamic";
 const Navbar = dynamic(() => import("@/components/Navbar"));
 const Footer = dynamic(() => import("@/components/Footer"));
 const BackgroundParticles = dynamic(() => import("@/components/BackgroundParticles"));
+import ServiceCard from "@/components/ServiceCard";
+import CTAButton from "@/components/CTAButton";
 
 export const metadata: Metadata = {
     title: "Sistemas Informáticos en Paraguay | Software a Medida",
@@ -46,34 +48,26 @@ export default function SistemasInformaticosParaguayPage() {
                 </div>
 
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: "24px", marginTop: "80px" }}>
-                    <div style={{ backgroundColor: theme.card, padding: "24px", borderRadius: "16px", border: `1px solid ${theme.border}`, transition: "border-color 0.3s ease" }}
-                         onMouseEnter={(e) => e.currentTarget.style.borderColor = theme.accent}
-                         onMouseLeave={(e) => e.currentTarget.style.borderColor = theme.border}>
+                    <ServiceCard accent={theme.accent} border={theme.border} cardBg={theme.card}>
                         <div style={{ fontSize: "2.25rem", marginBottom: "16px" }}>⚙️</div>
                         <h3 style={{ fontSize: "1.25rem", fontWeight: 700, marginBottom: "8px" }}>Automatización</h3>
                         <p style={{ color: theme.textSide, fontSize: "0.875rem" }}>Reduce tareas manuales y optimiza el tiempo de tu equipo en un 60%.</p>
-                    </div>
-                    <div style={{ backgroundColor: theme.card, padding: "24px", borderRadius: "16px", border: `1px solid ${theme.border}`, transition: "border-color 0.3s ease" }}
-                         onMouseEnter={(e) => e.currentTarget.style.borderColor = theme.accent}
-                         onMouseLeave={(e) => e.currentTarget.style.borderColor = theme.border}>
+                    </ServiceCard>
+                    <ServiceCard accent={theme.accent} border={theme.border} cardBg={theme.card}>
                         <div style={{ fontSize: "2.25rem", marginBottom: "16px" }}>📊</div>
                         <h3 style={{ fontSize: "1.25rem", fontWeight: 700, marginBottom: "8px" }}>Control Total</h3>
                         <p style={{ color: theme.textSide, fontSize: "0.875rem" }}>Métricas en tiempo real, control de stock y reportes financieros desde cualquier lugar.</p>
-                    </div>
-                    <div style={{ backgroundColor: theme.card, padding: "24px", borderRadius: "16px", border: `1px solid ${theme.border}`, transition: "border-color 0.3s ease" }}
-                         onMouseEnter={(e) => e.currentTarget.style.borderColor = theme.accent}
-                         onMouseLeave={(e) => e.currentTarget.style.borderColor = theme.border}>
+                    </ServiceCard>
+                    <ServiceCard accent={theme.accent} border={theme.border} cardBg={theme.card}>
                         <div style={{ fontSize: "2.25rem", marginBottom: "16px" }}>🔒</div>
                         <h3 style={{ fontSize: "1.25rem", fontWeight: 700, marginBottom: "8px" }}>Máxima Seguridad</h3>
                         <p style={{ color: theme.textSide, fontSize: "0.875rem" }}>Tus datos encriptados y respaldados con estándares bancarios internacionales.</p>
-                    </div>
-                    <div style={{ backgroundColor: theme.card, padding: "24px", borderRadius: "16px", border: `1px solid ${theme.border}`, transition: "border-color 0.3s ease" }}
-                         onMouseEnter={(e) => e.currentTarget.style.borderColor = theme.accent}
-                         onMouseLeave={(e) => e.currentTarget.style.borderColor = theme.border}>
+                    </ServiceCard>
+                    <ServiceCard accent={theme.accent} border={theme.border} cardBg={theme.card}>
                         <div style={{ fontSize: "2.25rem", marginBottom: "16px" }}>🚀</div>
                         <h3 style={{ fontSize: "1.25rem", fontWeight: 700, marginBottom: "8px" }}>Escalabilidad</h3>
                         <p style={{ color: theme.textSide, fontSize: "0.875rem" }}>Tu sistema informático crece a medida que tu negocio en Paraguay aumenta sus ventas.</p>
-                    </div>
+                    </ServiceCard>
                 </div>
 
                 <div style={{ marginTop: "96px", backgroundColor: "#0a0a0a", border: `1px solid rgba(0, 217, 255, 0.3)`, padding: "40px", borderRadius: "24px", textAlign: "center" }}>
@@ -81,12 +75,16 @@ export default function SistemasInformaticosParaguayPage() {
                     <p style={{ color: theme.textSide, fontSize: "1.125rem", marginBottom: "32px", maxWidth: "800px", margin: "0 auto" }}>
                         Nuestro equipo de desarrolladores Full Stack está listo para analizar tu proyecto. Agenda una reunión gratuita para discutir tu próximo sistema informático o software empresarial a medida.
                     </p>
-                    <a href="/#contacto" 
-                       style={{ display: "inline-block", padding: "16px 40px", marginTop: "32px", backgroundColor: theme.accent, color: "#000", fontWeight: 800, fontSize: "1.25rem", borderRadius: "9999px", textDecoration: "none", transition: "all 0.3s ease" }}
-                       onMouseEnter={(e) => { e.currentTarget.style.transform = "scale(1.05)"; e.currentTarget.style.boxShadow = `0 0 20px rgba(0, 217, 255, 0.4)`; }}
-                       onMouseLeave={(e) => { e.currentTarget.style.transform = "scale(1)"; e.currentTarget.style.boxShadow = "none"; }}>
+                    <CTAButton 
+                        href="/#contacto" 
+                        accent={theme.accent}
+                        padding="16px 40px"
+                        fontSize="1.25rem"
+                        fontWeight={800}
+                        withShadow={true}
+                    >
                         Cotizar mi Sistema
-                    </a>
+                    </CTAButton>
                 </div>
             </section>
 

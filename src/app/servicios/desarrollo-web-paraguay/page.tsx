@@ -4,6 +4,8 @@ import dynamic from "next/dynamic";
 const Navbar = dynamic(() => import("@/components/Navbar"));
 const Footer = dynamic(() => import("@/components/Footer"));
 const BackgroundParticles = dynamic(() => import("@/components/BackgroundParticles"));
+import ServiceCard from "@/components/ServiceCard";
+import CTAButton from "@/components/CTAButton";
 
 export const metadata: Metadata = {
     title: "Desarrollo Web en Paraguay | Páginas y Sistemas a Medida",
@@ -48,24 +50,18 @@ export default function DesarrolloWebParaguayPage() {
                 </div>
 
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "32px", marginTop: "48px" }}>
-                    <article style={{ padding: "32px", borderRadius: "16px", backgroundColor: "#0a0a0a", border: `1px solid #1f2937`, transition: "border-color 0.3s ease" }}
-                             onMouseEnter={(e) => e.currentTarget.style.borderColor = theme.accent}
-                             onMouseLeave={(e) => e.currentTarget.style.borderColor = "#1f2937"}>
+                    <ServiceCard accent={theme.accent} border={"#1f2937"} cardBg={"#0a0a0a"}>
                         <h3 style={{ fontSize: "1.5rem", fontWeight: 700, marginBottom: "16px", color: theme.accent }}>Diseño Web Moderno</h3>
                         <p style={{ color: "#9ca3af", lineHeight: 1.5 }}>Páginas web responsivas que se ven increíbles en cualquier dispositivo, listas para captar clientes.</p>
-                    </article>
-                    <article style={{ padding: "32px", borderRadius: "16px", backgroundColor: "#0a0a0a", border: `1px solid #1f2937`, transition: "border-color 0.3s ease" }}
-                             onMouseEnter={(e) => e.currentTarget.style.borderColor = theme.accent}
-                             onMouseLeave={(e) => e.currentTarget.style.borderColor = "#1f2937"}>
+                    </ServiceCard>
+                    <ServiceCard accent={theme.accent} border={"#1f2937"} cardBg={"#0a0a0a"}>
                         <h3 style={{ fontSize: "1.5rem", fontWeight: 700, marginBottom: "16px", color: theme.accent }}>Tiendas Online (E-commerce)</h3>
                         <p style={{ color: "#9ca3af", lineHeight: 1.5 }}>Vende tus productos por todo Paraguay las 24 horas del día con una plataforma segura y fácil de usar.</p>
-                    </article>
-                    <article style={{ padding: "32px", borderRadius: "16px", backgroundColor: "#0a0a0a", border: `1px solid #1f2937`, transition: "border-color 0.3s ease" }}
-                             onMouseEnter={(e) => e.currentTarget.style.borderColor = theme.accent}
-                             onMouseLeave={(e) => e.currentTarget.style.borderColor = "#1f2937"}>
+                    </ServiceCard>
+                    <ServiceCard accent={theme.accent} border={"#1f2937"} cardBg={"#0a0a0a"}>
                         <h3 style={{ fontSize: "1.5rem", fontWeight: 700, marginBottom: "16px", color: theme.accent }}>Posicionamiento SEO</h3>
                         <p style={{ color: "#9ca3af", lineHeight: 1.5 }}>Estructura técnica optimizada nativamente para que Google te encuentre rápidamente.</p>
-                    </article>
+                    </ServiceCard>
                 </div>
                 
                 <div style={{ marginTop: "64px", textAlign: "center" }}>
@@ -74,12 +70,16 @@ export default function DesarrolloWebParaguayPage() {
                         Ya sea que busques una "landing page económica" para empezar o un "sistema web completo",
                         utilizamos tecnologías de punta para garantizar el éxito de tu proyecto.
                     </p>
-                    <a href="/#contacto" 
-                       style={{ display: "inline-block", padding: "16px 32px", marginTop: "32px", borderRadius: "9999px", backgroundColor: theme.accent, color: "#000", fontWeight: 700, fontSize: "1.125rem", textDecoration: "none", transition: "transform 0.2s ease" }}
-                       onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.05)"}
-                       onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}>
+                    <CTAButton 
+                        href="/#contacto" 
+                        accent={theme.accent}
+                        padding="16px 32px"
+                        fontSize="1.125rem"
+                        fontWeight={700}
+                        withShadow={false}
+                    >
                         Solicitar Presupuesto Gratis
-                    </a>
+                    </CTAButton>
                 </div>
             </section>
 
