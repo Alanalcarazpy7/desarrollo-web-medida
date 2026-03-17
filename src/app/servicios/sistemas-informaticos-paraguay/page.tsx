@@ -1,9 +1,9 @@
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
 
-const Navbar = dynamic(() => import("@/components/Navbar"), { ssr: false });
-const Footer = dynamic(() => import("@/components/Footer"), { ssr: false });
-const BackgroundParticles = dynamic(() => import("@/components/BackgroundParticles"), { ssr: false });
+const Navbar = dynamic(() => import("@/components/Navbar"));
+const Footer = dynamic(() => import("@/components/Footer"));
+const BackgroundParticles = dynamic(() => import("@/components/BackgroundParticles"));
 
 export const metadata: Metadata = {
     title: "Sistemas Informáticos en Paraguay | Software a Medida",
