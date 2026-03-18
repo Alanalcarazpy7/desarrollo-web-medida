@@ -210,7 +210,7 @@ export default function SpectacularNavbar() {
                         <div className="hidden xl:flex items-center gap-2">
                             {navItems.map((item, i) => {
                                 const isActive = (activeSection === item.href.substring(1) && isHome) || (item.label === "Blog" && pathname.includes("/blog"));
-                                const destination = isHome ? item.href : `/${language}${item.href}`;
+                                const destination = item.href;
                                 return (
                                     <Link key={item.label} href={destination} passHref legacyBehavior>
                                         <motion.a
@@ -335,65 +335,7 @@ export default function SpectacularNavbar() {
                             {/* LANGUAGE SWITCHER */}
                             <LanguageSwitcher />
 
-                            {/* CTA BUTTON - ULTRA ESPECTACULAR */}
-                            <Link href={getNavHref("#contacto")} passHref legacyBehavior>
-                            <motion.a
-                                initial={{ opacity: 0, scale: 0.7 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                transition={{ delay: 0.6, duration: 0.6, type: "spring" }}
-                                whileHover={{ scale: 1.05, y: -2 }}
-                                whileTap={{ scale: 0.95 }}
-                                className="relative ml-4 px-8 py-4 rounded-2xl overflow-hidden group cursor-pointer flex items-center justify-center font-bold tracking-widest text-sm"
-                            >
-                                {/* Fondo animado súper brillante */}
-                                <motion.div
-                                    className="absolute inset-0"
-                                    style={{
-                                        background: `linear-gradient(135deg, ${theme.accent}, ${theme.accentDark}, ${theme.accent})`,
-                                        boxShadow: `0 0 50px ${theme.accentGlow}, 0 10px 50px ${theme.accentGlow}`,
-                                    }}
-                                    whileHover={{
-                                        boxShadow: `0 0 80px ${theme.accentGlow}, 0 15px 60px ${theme.accentGlow}, 0 0 120px ${theme.accentGlow}`,
-                                    }}
-                                />
 
-                                {/* Efecto de luz deslizante ultra ancho */}
-                                <motion.div
-                                    className="absolute inset-0"
-                                    style={{
-                                        background: `linear-gradient(90deg, transparent 20%, rgba(255, 255, 255, 0.5), transparent 80%)`,
-                                    }}
-                                    animate={{ x: ["-200%", "200%"] }}
-                                    transition={{ duration: 3, repeat: Infinity, ease: "linear", repeatDelay: 0.5 }}
-                                />
-
-                                {/* Bordes pulsantes múltiples */}
-                                <motion.div
-                                    className="absolute inset-0 rounded-3xl"
-                                    style={{ border: `4px solid ${theme.accent}` }}
-                                    animate={{
-                                        scale: [1, 1.15, 1],
-                                        opacity: [0.7, 0, 0.7],
-                                    }}
-                                    transition={{ duration: 2.5, repeat: Infinity }}
-                                />
-
-                                <motion.div
-                                    className="absolute inset-0 rounded-3xl"
-                                    style={{ border: `3px solid rgba(255, 255, 255, 0.5)` }}
-                                    animate={{
-                                        scale: [1, 1.1, 1],
-                                        opacity: [0.5, 0, 0.5],
-                                    }}
-                                    transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
-                                />
-
-                                {/* Texto Visible */}
-                                <span className="relative z-10" style={{ color: theme.bgNav, textShadow: "0 2px 4px rgba(0,0,0,0.3)" }}>
-                                    {mounted ? t('navbar.cta') : "HABLEMOS"}
-                                </span>
-                            </motion.a>
-                            </Link>
                         </div>
 
                         {/* HAMBURGER MEJORADO - DISEÑO LIMPIO */}
@@ -541,7 +483,7 @@ export default function SpectacularNavbar() {
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', padding: '0 24px' }}>
                                 {navItems.map((item, i) => {
                                     const isActive = (activeSection === item.href.substring(1) && isHome) || (item.label === "Blog" && pathname.includes("/blog"));
-                                    const destination = isHome ? item.href : `/${language}${item.href}`;
+                                    const destination = item.href;
                                     return (
                                         <Link key={item.label} href={destination} passHref legacyBehavior>
                                             <motion.a
