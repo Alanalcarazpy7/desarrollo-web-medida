@@ -80,49 +80,6 @@ export const metadata: Metadata = {
   },
 };
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  "name": "SolvaTech",
-  "description": "Agencia de desarrollo de software a medida y diseño web en Paraguay.",
-  "image": "https://solvatech.vercel.app/icon.png",
-  "logo": "https://solvatech.vercel.app/solvetech-logo.png",
-  "@id": "https://solvatech.vercel.app",
-  "url": "https://solvatech.vercel.app",
-  "telephone": "+595982880043",
-  "priceRange": "$$",
-  "areaServed": [
-    "PY",
-    "US",
-    "AR",
-    "ES",
-    "MX"
-  ],
-  "sameAs": [
-    "https://www.linkedin.com/in/alanalcaraz",
-    "https://github.com/alanalcarazpy7",
-    "https://www.instagram.com/alandev_py/"
-  ],
-  "contactPoint": {
-    "@type": "ContactPoint",
-    "telephone": "+595982880043",
-    "contactType": "Customer Service",
-    "areaServed": "PY",
-    "availableLanguage": ["es", "en"]
-  },
-  "openingHoursSpecification": {
-    "@type": "OpeningHoursSpecification",
-    "dayOfWeek": [
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday"
-    ],
-    "opens": "09:00",
-    "closes": "18:00"
-  }
-};
 
 export default async function RootLayout({
   children,
@@ -132,6 +89,52 @@ export default async function RootLayout({
   params: Promise<{ lang: string }>;
 }>) {
   const { lang } = await params;
+  
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "SolvaTech",
+    "description": lang === 'en' 
+      ? "Custom software development and web design agency in Paraguay." 
+      : "Agencia de desarrollo de software a medida y diseño web en Paraguay.",
+    "image": "https://solvatech.vercel.app/icon.png",
+    "logo": "https://solvatech.vercel.app/solvetech-logo.png",
+    "@id": "https://solvatech.vercel.app",
+    "url": "https://solvatech.vercel.app",
+    "telephone": "+595982880043",
+    "priceRange": "$$",
+    "areaServed": [
+      "PY",
+      "US",
+      "AR",
+      "ES",
+      "MX"
+    ],
+    "sameAs": [
+      "https://www.linkedin.com/in/alanalcaraz",
+      "https://github.com/alanalcarazpy7",
+      "https://www.instagram.com/alandev_py/"
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+595982880043",
+      "contactType": "Customer Service",
+      "areaServed": "PY",
+      "availableLanguage": ["es", "en"]
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      "opens": "09:00",
+      "closes": "18:00"
+    }
+  };
   return (
     <html lang={lang || "es"}>
       <body className={inter.className}>

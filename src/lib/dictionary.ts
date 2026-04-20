@@ -211,6 +211,7 @@ export const dictionary = {
           web: "Desarrollo Web",
           ecommerce: "E-commerce",
           apps: "Aplicaciones Web",
+          systems: "Sistemas Informáticos",
           design: "Diseño UI/UX"
       },
       company: {
@@ -476,6 +477,7 @@ export const dictionary = {
           web: "Web Development",
           ecommerce: "E-commerce",
           apps: "Web Apps",
+          systems: "Custom Software",
           design: "UI/UX Design"
       },
       company: {

@@ -18,11 +18,9 @@ export default function Footer() {
     };
 
     const { t, language } = useLanguage();
-    const [mounted, setMounted] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
-        setMounted(true);
         const checkMobile = () => {
              setIsMobile(window.innerWidth < 1024);
         };
@@ -35,21 +33,21 @@ export default function Footer() {
 
     const sections = {
         servicios: [
-            { label: mounted ? t('footer.services.web') : "Desarrollo Web", href: getNavHref("/servicios/desarrollo-web-paraguay") },
-            { label: mounted ? "Sistemas Informáticos" : "Sistemas Informáticos", href: getNavHref("/servicios/sistemas-informaticos-paraguay") },
-            { label: mounted ? t('footer.services.ecommerce') : "E-commerce", href: getNavHref("/#servicios") },
-            { label: mounted ? t('footer.services.design') : "Diseño UI/UX", href: getNavHref("/#servicios") },
+            { label: t('footer.services.web'), href: getNavHref("/servicios/desarrollo-web-paraguay") },
+            { label: t('footer.services.systems') || "Sistemas Informáticos", href: getNavHref("/servicios/sistemas-informaticos-paraguay") },
+            { label: t('footer.services.ecommerce'), href: getNavHref("/#servicios") },
+            { label: t('footer.services.design'), href: getNavHref("/#servicios") },
         ],
         empresa: [
-             { label: mounted ? t('footer.company.about') : "Sobre Nosotros", href: getNavHref("/#inicio") },
-             { label: mounted ? t('footer.company.projects') : "Proyectos", href: getNavHref("/#proyectos") },
-             { label: mounted ? t('footer.company.process') : "Proceso", href: getNavHref("/#proceso") },
-             { label: mounted ? t('footer.company.contact') : "Contacto", href: getNavHref("/#contacto") },
+             { label: t('footer.company.about'), href: getNavHref("/#inicio") },
+             { label: t('footer.company.projects'), href: getNavHref("/#proyectos") },
+             { label: t('footer.company.process'), href: getNavHref("/#proceso") },
+             { label: t('footer.company.contact'), href: getNavHref("/#contacto") },
         ],
         legal: [
-            { label: mounted ? t('footer.legal.terms') : "Términos", href: "#" },
-            { label: mounted ? t('footer.legal.privacy') : "Privacidad", href: "#" },
-            { label: mounted ? t('footer.legal.cookies') : "Cookies", href: "#" },
+            { label: t('footer.legal.terms'), href: "#" },
+            { label: t('footer.legal.privacy'), href: "#" },
+            { label: t('footer.legal.cookies'), href: "#" },
         ],
     };
 
@@ -107,7 +105,7 @@ export default function Footer() {
                         alignItems: isMobile ? 'center' : 'flex-start'
                     }}>
                         <motion.a
-                            href="#inicio"
+                            href={`/${language}#inicio`}
                             onClick={(e) => {
                                 e.preventDefault();
                                 window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -182,13 +180,13 @@ export default function Footer() {
                             </div>
                         </motion.a>
                         <p style={{ color: theme.textMuted, lineHeight: 1.6, maxWidth: '400px', fontSize: '15px' }}>
-                            {mounted ? t('footer.description') : "Impulsamos negocios con soluciones de ingeniería de software premium, diseño de vanguardia y tecnología de alto rendimiento."}
+                            {t('footer.description')}
                         </p>
                     </div>
 
                     {/* Enlaces */}
                     <div className="flex flex-col items-center lg:items-start">
-                        <h4 style={{ color: theme.text, fontWeight: 700, marginBottom: '20px' }}>{mounted ? t('footer.servicesTitle') : "Servicios"}</h4>
+                        <h4 style={{ color: theme.text, fontWeight: 700, marginBottom: '20px' }}>{t('footer.servicesTitle')}</h4>
                         <div style={listStyle}>
                             {sections.servicios.map((item) => (
                                 <Link key={item.label} href={item.href} style={linkStyle} className="footer-link">
@@ -199,7 +197,7 @@ export default function Footer() {
                     </div>
 
                     <div className="flex flex-col items-center lg:items-start">
-                        <h4 style={{ color: theme.text, fontWeight: 700, marginBottom: '20px' }}>{mounted ? t('footer.companyTitle') : "Empresa"}</h4>
+                        <h4 style={{ color: theme.text, fontWeight: 700, marginBottom: '20px' }}>{t('footer.companyTitle')}</h4>
                         <div style={listStyle}>
                             {sections.empresa.map((item) => (
                                 <Link key={item.label} href={item.href} style={linkStyle} className="footer-link">
@@ -221,7 +219,7 @@ export default function Footer() {
                     alignItems: 'center',
                     justifyContent: isMobile ? 'center' : 'space-between',
                 }}>
-                    © {currentYear} SolvaTech. {mounted ? t('footer.rights') : "Todos los derechos reservados."}
+                    © {currentYear} SolvaTech. {t('footer.rights')}
 
                     <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
                         {sections.legal.map((item) => (

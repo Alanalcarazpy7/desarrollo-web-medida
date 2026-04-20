@@ -7,11 +7,6 @@ import { useLanguage } from "@/context/LanguageContext";
 export default function FAQ() {
     const { t } = useLanguage();
     const [openIndex, setOpenIndex] = useState<number | null>(null);
-    const [mounted, setMounted] = useState(false);
-
-    useEffect(() => {
-        setMounted(true);
-    }, []);
 
     const theme = {
         bg: "#000000",
@@ -38,7 +33,7 @@ export default function FAQ() {
                         viewport={{ once: true }}
                         style={{ display: "inline-block", padding: "8px 16px", marginBottom: "24px", borderRadius: "9999px", fontSize: "0.875rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: theme.accent, border: `1px solid ${theme.accent}40`, backgroundColor: `${theme.accent}10` }}
                     >
-                        {mounted ? t('faq.badge') : "Preguntas Frecuentes"}
+                        {t('faq.badge')}
                     </motion.div>
                     
                     <motion.h2
@@ -48,9 +43,9 @@ export default function FAQ() {
                         transition={{ delay: 0.1 }}
                         style={{ fontSize: "clamp(2rem, 5vw, 3rem)", fontWeight: 900, marginBottom: "24px", color: theme.textMain }}
                     >
-                        {mounted ? t('faq.titleStart') : "Dudas"} {" "}
+                        {t('faq.titleStart')} {" "}
                         <span style={{ background: `linear-gradient(135deg, ${theme.accent}, ${theme.accentDark})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-                            {mounted ? t('faq.titleHighlight') : "Comunes"}
+                            {t('faq.titleHighlight')}
                         </span>
                     </motion.h2>
                     
@@ -61,7 +56,7 @@ export default function FAQ() {
                         transition={{ delay: 0.2 }}
                         style={{ fontSize: "1.125rem", color: theme.textSide, maxWidth: "600px", margin: "0 auto" }}
                     >
-                        {mounted ? t('faq.subtitle') : "Resolvemos tus inquietudes sobre desarrollo web y sistemas en Paraguay."}
+                        {t('faq.subtitle')}
                     </motion.p>
                 </div>
 

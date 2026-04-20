@@ -60,10 +60,48 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function BlogPostPage({ params }: Props) {
-    const { slug } = await params;
+    const { lang, slug } = await params;
     const post = getPostBySlug(slug);
 
     if (!post) return notFound();
 
-    return <BlogPostContent post={post} />;
+    const title = lang === 'en' ? post.titleEn || post.title : post.title;
+    const description = lang === 'en' ? post.excerptEn || post.excerpt : post.excerpt;
+    const baseUrl = 'https://solvatech.vercel.app';
+
+    const jsonLd = {
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline: title,
+        description: description,
+        image: post.image,
+        author: {
+            '@type': 'Person',
+            name: post.author,
+        },
+        publisher: {
+            '@type': 'Organization',
+            name: 'SolvaTech',
+            logo: {
+                '@type': 'ImageObject',
+                url: `${baseUrl}/icon.png`
+            }
+        },
+        datePublished: post.date,
+        dateModified: post.date,
+        mainEntityOfPage: {
+            '@type': 'WebPage',
+            '@id': `${baseUrl}/${lang}/blog/${post.slug}`
+        }
+    };
+
+    return (
+        <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
+            <BlogPostContent post={post} />
+        </>
+    );
 }

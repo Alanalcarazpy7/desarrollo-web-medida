@@ -72,20 +72,16 @@ export default function SpectacularNavbar() {
     const pathname = usePathname();
     const isHome = pathname === "/" || pathname === `/${language}`;
     
-    // Check if we are on client to avoid hydration mismatch with localStorage
-    const [mounted, setMounted] = useState(false);
-    useEffect(() => setMounted(true), []);
-
-    const getNavHref = (hash: string) => isHome ? hash : `/${language}${hash}`;
+    const getNavHref = (hash: string) => `/${language}${hash}`;
 
     const navItems = [
-        { label: mounted ? t('navbar.home') : "Inicio", href: getNavHref("#inicio") },
-        { label: mounted ? t('navbar.services') : "Servicios", href: getNavHref("#servicios") },
-        { label: mounted ? t('navbar.process') : "Proceso", href: getNavHref("#proceso") },
-        { label: mounted ? t('navbar.projects') : "Proyectos", href: getNavHref("#proyectos") },
-        { label: mounted ? t('navbar.pricing') : "Precios", href: getNavHref("#precios") },
-        { label: mounted ? t('navbar.blog') : "Blog", href: `/${language}/blog` },
-        { label: mounted ? t('navbar.contact') : "Contacto", href: getNavHref("#contacto") },
+        { label: t('navbar.home'), href: getNavHref("#inicio") },
+        { label: t('navbar.services'), href: getNavHref("#servicios") },
+        { label: t('navbar.process'), href: getNavHref("#proceso") },
+        { label: t('navbar.projects'), href: getNavHref("#proyectos") },
+        { label: t('navbar.pricing'), href: getNavHref("#precios") },
+        { label: t('navbar.blog'), href: `/${language}/blog` },
+        { label: t('navbar.contact'), href: getNavHref("#contacto") },
     ];
 
     return (
@@ -124,7 +120,7 @@ export default function SpectacularNavbar() {
                     <div className="flex items-center justify-between">
 
                         {/* LOGO ORIGINAL SIN MODIFICAR */}
-                        <Link href={isHome ? "#inicio" : `/${language}`} passHref legacyBehavior>
+                        <Link href={`/${language}`} passHref legacyBehavior>
                             <motion.a
                                 className="flex items-center gap-4 group relative z-50 cursor-pointer"
                                 whileHover={{ scale: 1.05 }}

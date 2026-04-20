@@ -252,8 +252,6 @@ function ProjectCard({ project, index, theme, ctaText }: { project: any, index: 
 export default function Proyectos() {
     const { t } = useLanguage();
     const [selectedCategoryKey, setSelectedCategoryKey] = useState("all");
-    const [mounted, setMounted] = useState(false);
-    useEffect(() => setMounted(true), []);
 
     const theme = {
         bg: "#000000",
@@ -272,18 +270,18 @@ export default function Proyectos() {
         {
             titulo: "ModaShoppy",
             categoryKey: "ecommerce",
-            categoria: mounted ? t('projects.categories.ecommerce') : "E-commerce",
+            categoria: t('projects.categories.ecommerce'),
             tecnologias: ["React", "Supabase", "Zustand"],
-            descripcion: mounted ? t('projects.items.modashoppy.description') : "Plataforma de moda escalable con gestión de stock integrada y experiencia de compra optimizada.",
+            descripcion: t('projects.items.modashoppy.description'),
             imagen: "/projects/modashoppy.png",
             link: "https://modashoppy.netlify.app/",
         },
         {
             titulo: "StockPRO",
             categoryKey: "systems",
-            categoria: mounted ? t('projects.categories.systems') : "Sistemas",
+            categoria: t('projects.categories.systems'),
             tecnologias: ["React", "Supabase", "Zustand", "TanStack"],
-            descripcion: mounted ? t('projects.items.stockpro.description') : "Gestión de inventarios de alto rendimiento con sincronización en tiempo real y dashboard analítico modular.",
+            descripcion: t('projects.items.stockpro.description'),
             imagen: "/projects/stockpro.jpg",
             objectPosition: "left",
             link: "https://control-inventarios.netlify.app/login",
@@ -291,9 +289,9 @@ export default function Proyectos() {
         {
             titulo: "Global Exchange",
             categoryKey: "systems",
-            categoria: mounted ? t('projects.categories.systems') : "Sistemas",
+            categoria: t('projects.categories.systems'),
             tecnologias: ["Django", "Python", "PostgreSQL", "Docker", "JS"],
-            descripcion: mounted ? t('projects.items.globalexchange.description') : "Sistema integral para casa de cambios. Gestión de divisas, cálculo de ganancias, reportes y control de usuarios.",
+            descripcion: t('projects.items.globalexchange.description'),
             imagen: "/projects/global-exchange-1.png",
             imagenBack: "/projects/global-exchange-2-admin.png",
             link: "https://github.com/MertinGIT/Casa-De-Cambios-De-Divisas",
@@ -301,36 +299,36 @@ export default function Proyectos() {
         {
             titulo: "Gestion Inmobiliaria",
             categoryKey: "website",
-            categoria: mounted ? t('projects.categories.website') : "Sitio Web",
+            categoria: t('projects.categories.website'),
             tecnologias: ["React", "HTML5", "CSS3"],
-            descripcion: mounted ? t('projects.items.inmobiliaria.description') : "Plataforma elegante para la gestión y visualización de propiedades con filtrado inteligente y UX fluida.",
+            descripcion: t('projects.items.inmobiliaria.description'),
             imagen: "/projects/inmobiliaria.jpg",
             link: "https://alanalcarazpy7.github.io/gestion-inmobiliaria/",
         },
         {
             titulo: "Amsterdam Bar",
             categoryKey: "website",
-            categoria: mounted ? t('projects.categories.website') : "Sitio Web",
+            categoria: t('projects.categories.website'),
             tecnologias: ["HTML5", "CSS3", "JavaScript"],
-            descripcion: mounted ? t('projects.items.amsterdam.description') : "Menú digital interactivo y presencia online sofisticada diseñada para elevar la experiencia gastronómica.",
+            descripcion: t('projects.items.amsterdam.description'),
             imagen: "/projects/amsterdam.png",
             link: "https://amsterdam-resto-bar.netlify.app/",
         },
         {
             titulo: "Electro-Master",
             categoryKey: "ecommerce",
-            categoria: mounted ? t('projects.categories.ecommerce') : "E-commerce",
+            categoria: t('projects.categories.ecommerce'),
             tecnologias: ["HTML5", "CSS3", "JavaScript"],
-            descripcion: mounted ? t('projects.items.electromaster.description') : "E-commerce de tecnología optimizado para conversiones con catálogo dinámico y diseño de alto impacto.",
+            descripcion: t('projects.items.electromaster.description'),
             imagen: "/projects/electromaster.png",
             link: "https://github.com/Alanalcarazpy7/tienda-ecommerce",
         },
         {
             titulo: "Foodluck Resto",
             categoryKey: "website",
-            categoria: mounted ? t('projects.categories.website') : "Sitio Web",
+            categoria: t('projects.categories.website'),
             tecnologias: ["HTML5", "CSS3", "JavaScript"],
-            descripcion: mounted ? t('projects.items.foodluck.description') : "Landing page gastronómica premium enfocada en el impacto visual y la reserva directa de clientes.",
+            descripcion: t('projects.items.foodluck.description'),
             imagen: "/projects/foodluck.png",
             link: "https://alanalcarazpy7.github.io/restaurante-de-comida/",
         },
@@ -407,13 +405,13 @@ export default function Proyectos() {
                             transition={{ duration: 2, repeat: Infinity }}
                         />
                         <span className="text-sm font-bold uppercase tracking-[0.2em]" style={{ color: theme.accent }}>
-                            {mounted ? t('projects.badge') : "Portfolio"}
+                            {t('projects.badge')}
                         </span>
                     </motion.div>
 
                     {/* Título */}
                     <h2 className="text-4xl md:text-6xl lg:text-7xl font-black mb-6 px-4" style={{ margin: '1rem 0' }}>
-                        <span style={{ color: theme.text }}>{mounted ? t('projects.titleStart') : "Proyectos"} </span>
+                        <span style={{ color: theme.text }}>{t('projects.titleStart')} </span>
                         <br className="md:hidden" />
                         <span
                             style={{
@@ -422,7 +420,7 @@ export default function Proyectos() {
                                 WebkitTextFillColor: "transparent",
                             }}
                         >
-                            {mounted ? t('projects.titleHighlight') : "Destacados"}
+                            {t('projects.titleHighlight')}
                         </span>
                     </h2>
 
@@ -435,7 +433,7 @@ export default function Proyectos() {
                         className="flex justify-center w-full px-6"
                     >
                         <p className="text-base md:text-xl lg:text-2xl max-w-3xl leading-relaxed text-center opacity-80" style={{ color: theme.textMuted, margin: '1rem 0' }}>
-                            {mounted ? t('projects.subtitle') : "Experiencias digitales de vanguardia que transforman negocios."}
+                            {t('projects.subtitle')}
                         </p>
                     </motion.div>
 
@@ -473,7 +471,7 @@ export default function Proyectos() {
                                     }
                                 }}
                             >
-                                {mounted ? t(`projects.categories.${catKey}`) : catKey}
+                                {t(`projects.categories.${catKey}`)}
                             </button>
                         ))}
                     </div>
@@ -488,7 +486,7 @@ export default function Proyectos() {
                                 project={proyecto}
                                 index={index}
                                 theme={theme}
-                                ctaText={mounted ? t('projects.cta') : "Ver Proyecto"}
+                                ctaText={t('projects.cta')}
                             />
                         ))}
                     </AnimatePresence>

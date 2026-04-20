@@ -19,10 +19,7 @@ export default function Hero() {
     };
 
     const [isMobile, setIsMobile] = useState(false);
-    const [mounted, setMounted] = useState(false);
-
     useEffect(() => {
-        setMounted(true);
         const checkMobile = () => {
             setIsMobile(window.innerWidth < 1024);
         };
@@ -35,7 +32,7 @@ export default function Hero() {
     const stats = [
         {
             value: "10+",
-            label: mounted ? t('hero.stat1') : "Proyectos",
+            label: t('hero.stat1'),
             icon: (
                 <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -44,7 +41,7 @@ export default function Hero() {
         },
         {
             value: "6+",
-            label: mounted ? t('hero.stat2') : "Clientes",
+            label: t('hero.stat2'),
             icon: (
                 <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -53,7 +50,7 @@ export default function Hero() {
         },
         {
             value: "100%",
-            label: mounted ? t('hero.stat3') : "Satisfacción",
+            label: t('hero.stat3'),
             icon: (
                 <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -114,7 +111,7 @@ export default function Hero() {
                                 className="text-xs font-semibold tracking-wide uppercase"
                                 style={{ color: theme.accent }}
                             >
-                                {mounted ? t('hero.badge') : "Disponible para proyectos"}
+                                {t('hero.badge')}
                             </span>
                         </div>
 
@@ -124,7 +121,7 @@ export default function Hero() {
                             style={{ transform: 'translate3d(0,0,0)' }}
                         >
                             <span style={{ color: theme.text }}>
-                                {mounted ? t('hero.titleStart') : "Agencia de"}
+                                {t('hero.titleStart')}
                             </span>
                             <br />
                             <span
@@ -134,11 +131,11 @@ export default function Hero() {
                                     WebkitTextFillColor: "transparent",
                                 }}
                             >
-                                {mounted ? t('hero.titleHighlight') : "Desarrollo Web"}
+                                {t('hero.titleHighlight')}
                             </span>
-                            {mounted && <br />}
+                            <br />
                             <span style={{ color: theme.text, fontSize: '0.8em' }}>
-                                {mounted ? t('hero.titleEnd') : ""}
+                                {t('hero.titleEnd')}
                             </span>
                         </h1>
 
@@ -147,7 +144,7 @@ export default function Hero() {
                             className="text-base md:text-lg max-w-lg leading-relaxed opacity-80 animate-fade-in"
                             style={{ color: theme.textMuted, animationDelay: '0.4s' }}
                         >
-                            {mounted ? t('hero.description') : "En SolvaTech transformamos ideas en sistemas modernos y funcionales. Soluciones digitales para negocios que quieren evolucionar."}
+                            {t('hero.description')}
                         </p>
 
                         {/* Botones de acción */}
@@ -206,7 +203,7 @@ export default function Hero() {
                                     className="relative flex items-center justify-center gap-4 px-4"
                                     style={{ color: theme.bg }}
                                 >
-                                    {mounted ? t('hero.ctaPrimary') : "Ver Proyectos"}
+                                    {t('hero.ctaPrimary')}
                                     <motion.svg
                                         className="w-5 h-5"
                                         fill="none"
@@ -254,7 +251,7 @@ export default function Hero() {
                                     transition={{ duration: 0.3 }}
                                 />
 
-                                <span className="relative px-4">{mounted ? t('hero.ctaSecondary') : "Hablar con un Experto"}</span>
+                                <span className="relative px-4">{t('hero.ctaSecondary')}</span>
                             </motion.a>
                         </motion.div>
                     </div>

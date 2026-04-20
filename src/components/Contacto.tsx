@@ -7,8 +7,6 @@ import { track } from "@vercel/analytics";
 
 export default function Contacto() {
     const { t } = useLanguage();
-    const [mounted, setMounted] = useState(false);
-    useEffect(() => setMounted(true), []);
     const [formData, setFormData] = useState({
         nombre: "",
         email: "",
@@ -77,8 +75,8 @@ ${formData.mensaje}
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
                 </svg>
             ),
-            titulo: mounted ? t('contact.methods.whatsapp.title') : "WhatsApp",
-            descripcion: mounted ? t('contact.methods.whatsapp.desc') : "Respuesta inmediata",
+            titulo: t('contact.methods.whatsapp.title'),
+            descripcion: t('contact.methods.whatsapp.desc'),
             valor: "+595 982 880 043",
             link: "https://wa.me/595982880043",
         },
@@ -88,8 +86,8 @@ ${formData.mensaje}
                     <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
             ),
-            titulo: mounted ? t('contact.methods.email.title') : "Email",
-            descripcion: mounted ? t('contact.methods.email.desc') : "Escríbenos",
+            titulo: t('contact.methods.email.title'),
+            descripcion: t('contact.methods.email.desc'),
             valor: "alantechxpy@gmail.com",
             link: "mailto:alantechxpy@gmail.com",
         },
@@ -99,14 +97,14 @@ ${formData.mensaje}
                     <path strokeLinecap="round" strokeLinejoin="round" d="M3 9.75L12 3l9 6.75M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
                 </svg>
             ),
-            titulo: mounted ? t('contact.methods.instagram.title') : "Instagram",
-            descripcion: mounted ? t('contact.methods.instagram.desc') : "Síguenos",
+            titulo: t('contact.methods.instagram.title'),
+            descripcion: t('contact.methods.instagram.desc'),
             valor: "@alandev_py",
             link: "https://www.instagram.com/alandev_py/",
         },
     ];
 
-    const budgetOptions = mounted ? t('contact.form.budgetOptions') : [
+    const budgetOptions = t('contact.form.budgetOptions') as string[] || [
         "Menos de 1.000.000 Gs",
         "1.000.000 Gs - 3.000.000 Gs",
         "3.000.000 Gs - 5.000.000 Gs",
@@ -155,13 +153,13 @@ ${formData.mensaje}
                             transition={{ duration: 2, repeat: Infinity }}
                         />
                         <span className="text-sm font-bold uppercase tracking-[0.2em]" style={{ color: theme.accent }}>
-                            {mounted ? t('contact.badge') : "Hablemos de Tu Proyecto"}
+                            {t('contact.badge')}
                         </span>
                     </motion.div>
 
                     {/* Título */}
                     <h2 className="text-4xl md:text-6xl lg:text-7xl font-black mb-6 px-4" style={{ margin: '1rem 0' }}>
-                        <span style={{ color: theme.text }}>{mounted ? t('contact.titleStart') : "¿Listo para"} </span>
+                        <span style={{ color: theme.text }}>{t('contact.titleStart')} </span>
                         <br className="md:hidden" />
                         <span
                             style={{
@@ -170,14 +168,14 @@ ${formData.mensaje}
                                 WebkitTextFillColor: "transparent",
                             }}
                         >
-                            {mounted ? t('contact.titleHighlight') : "Empezar?"}
+                            {t('contact.titleHighlight')}
                         </span>
                     </h2>
 
                     {/* Subtítulo */}
                     <div className="flex justify-center w-full px-6">
                         <p className="text-base md:text-xl text-slate-400 max-w-2xl leading-relaxed text-center opacity-80" style={{ margin: '1rem 0' }}>
-                            {mounted ? t('contact.subtitle') : "Conversemos sobre cómo podemos llevar tu negocio al siguiente nivel digital"}
+                            {t('contact.subtitle')}
                         </p>
                     </div>
                 </motion.div>
@@ -280,9 +278,9 @@ ${formData.mensaje}
                         }}>
                             <div style={{ marginBottom: '0px' }}>
                                 <h3 style={{ fontSize: '24px', fontWeight: 800, color: theme.text, marginBottom: '2px', letterSpacing: '-0.02em' }}>
-                                    {mounted ? t('contact.form.title') : "Cuéntanos tu Visión"}
+                                    {t('contact.form.title')}
                                 </h3>
-                                <p style={{ color: theme.textMuted, fontSize: '13px' }}>{mounted ? t('contact.form.subtitle') : "Completa el formulario y te responderemos en breve."}</p>
+                                <p style={{ color: theme.textMuted, fontSize: '13px' }}>{t('contact.form.subtitle')}</p>
                             </div>
 
                             {submitSuccess && (
@@ -299,13 +297,13 @@ ${formData.mensaje}
                                         fontWeight: 600,
                                         fontSize: '13px'
                                     }}>
-                                    {mounted ? t('contact.form.success') : "✅ ¡Mensaje enviado!"}
+                                    {t('contact.form.success')}
                                 </motion.div>
                             )}
 
                             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '12px' }}>
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                                    <label htmlFor="nombre" style={{ fontSize: '12px', fontWeight: 600, color: theme.textMuted, marginLeft: '4px' }}>{mounted ? t('contact.form.name') : "NOMBRE"}</label>
+                                    <label htmlFor="nombre" style={{ fontSize: '12px', fontWeight: 600, color: theme.textMuted, marginLeft: '4px' }}>{t('contact.form.name')}</label>
                                     <motion.input
                                         id="nombre"
                                         whileFocus={{ scale: 1.01, backgroundColor: 'rgba(255, 255, 255, 0.05)' }}
@@ -313,7 +311,7 @@ ${formData.mensaje}
                                         required
                                         value={formData.nombre}
                                         onChange={(e) => setFormData({ ...formData, nombre: e.target.value })}
-                                        placeholder={mounted ? t('contact.form.namePlaceholder') : "Tu nombre completo"}
+                                        placeholder={t('contact.form.namePlaceholder')}
                                         style={{
                                             width: '100%',
                                             padding: '12px 16px', // Padding menor
@@ -330,7 +328,7 @@ ${formData.mensaje}
                                     />
                                 </div>
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                                    <label htmlFor="email" style={{ fontSize: '12px', fontWeight: 600, color: theme.textMuted, marginLeft: '4px' }}>{mounted ? t('contact.form.email') : "EMAIL"}</label>
+                                    <label htmlFor="email" style={{ fontSize: '12px', fontWeight: 600, color: theme.textMuted, marginLeft: '4px' }}>{t('contact.form.email')}</label>
                                     <motion.input
                                         id="email"
                                         whileFocus={{ scale: 1.01, backgroundColor: 'rgba(255, 255, 255, 0.05)' }}
@@ -338,7 +336,7 @@ ${formData.mensaje}
                                         required
                                         value={formData.email}
                                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                        placeholder={mounted ? t('contact.form.emailPlaceholder') : "tu@email.com"}
+                                        placeholder={t('contact.form.emailPlaceholder')}
                                         style={{
                                             width: '100%',
                                             padding: '12px 16px',
@@ -358,7 +356,7 @@ ${formData.mensaje}
 
                             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '12px' }}>
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                                    <label htmlFor="whatsapp-form" style={{ fontSize: '12px', fontWeight: 600, color: theme.textMuted, marginLeft: '4px' }}>{mounted ? t('contact.form.whatsapp') : "WHATSAPP"}</label>
+                                    <label htmlFor="whatsapp-form" style={{ fontSize: '12px', fontWeight: 600, color: theme.textMuted, marginLeft: '4px' }}>{t('contact.form.whatsapp')}</label>
                                     <motion.input
                                         id="whatsapp-form"
                                         whileFocus={{ scale: 1.01, backgroundColor: 'rgba(255, 255, 255, 0.05)' }}
@@ -382,7 +380,7 @@ ${formData.mensaje}
                                     />
                                 </div>
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                                    <label htmlFor="presupuesto" style={{ fontSize: '12px', fontWeight: 600, color: theme.textMuted, marginLeft: '4px' }}>{mounted ? t('contact.form.budget') : "PRESUPUESTO"}</label>
+                                    <label htmlFor="presupuesto" style={{ fontSize: '12px', fontWeight: 600, color: theme.textMuted, marginLeft: '4px' }}>{t('contact.form.budget')}</label>
                                     <div className="relative">
                                         <motion.select
                                             id="presupuesto"
@@ -405,7 +403,7 @@ ${formData.mensaje}
                                             onFocus={(e) => { e.target.style.borderColor = theme.accent; e.target.style.boxShadow = `0 0 0 2px ${theme.accent}15`; }}
                                             onBlur={(e) => { e.target.style.borderColor = 'rgba(255, 255, 255, 0.1)'; e.target.style.boxShadow = 'none'; }}
                                         >
-                                            <option value="" style={{ backgroundColor: '#000', color: '#fff' }}>{mounted ? t('contact.form.budgetPlaceholder') : "Seleccionar rango..."}</option>
+                                            <option value="" style={{ backgroundColor: '#000', color: '#fff' }}>{t('contact.form.budgetPlaceholder')}</option>
                                             {budgetOptions.map((option: string) => (
                                                 <option key={option} value={option} style={{ backgroundColor: '#000', color: '#fff' }}>{option}</option>
                                             ))}
@@ -420,7 +418,7 @@ ${formData.mensaje}
                             </div>
 
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                                <label htmlFor="detalles" style={{ fontSize: '12px', fontWeight: 600, color: theme.textMuted, marginLeft: '4px' }}>{mounted ? t('contact.form.details') : "DETALLES"}</label>
+                                <label htmlFor="detalles" style={{ fontSize: '12px', fontWeight: 600, color: theme.textMuted, marginLeft: '4px' }}>{t('contact.form.details')}</label>
                                 <motion.textarea
                                     id="detalles"
                                     whileFocus={{ scale: 1.01, backgroundColor: 'rgba(255, 255, 255, 0.05)' }}
@@ -428,7 +426,7 @@ ${formData.mensaje}
                                     rows={6}
                                     value={formData.mensaje}
                                     onChange={(e) => setFormData({ ...formData, mensaje: e.target.value })}
-                                    placeholder={mounted ? t('contact.form.detailsPlaceholder') : "Descríbenos brevemente el sistema, aplicación o sitio web que tienes en mente..."}
+                                    placeholder={t('contact.form.detailsPlaceholder')}
                                     style={{
                                         width: '100%',
                                         padding: '12px 16px',
@@ -470,7 +468,7 @@ ${formData.mensaje}
                                     overflow: 'hidden'
                                 }}
                             >
-                                <span className="relative z-10">{isSubmitting ? (mounted ? t('contact.form.sending') : "...") : (mounted ? t('contact.form.submit') : "Enviar")}</span>
+                                <span className="relative z-10">{isSubmitting ? t('contact.form.sending') : t('contact.form.submit')}</span>
                                 <motion.div
                                     style={{
                                         position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
