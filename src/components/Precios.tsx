@@ -346,7 +346,7 @@ export default function Precios() {
                         </span>
                     </div>
 
-                    <h2 style={{ fontSize: "clamp(2.2rem, 4vw, 3.2rem)", fontWeight: 900, marginBottom: "10px", color: "#fff", tracking: "-0.02em" }}>
+                    <h2 style={{ fontSize: "clamp(2.2rem, 4vw, 3.2rem)", fontWeight: 900, marginBottom: "10px", color: "#fff", letterSpacing: "-0.02em" }}>
                         {t('pricing.titleStart')}{" "}
                         <motion.span
                             animate={{ textShadow: [`0 0 20px ${theme.accent}40`, `0 0 35px ${theme.accent}70`, `0 0 20px ${theme.accent}40`] }}
