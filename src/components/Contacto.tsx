@@ -1,22 +1,24 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 import { track } from "@vercel/analytics";
+import { getWhatsAppLink } from "@/lib/whatsapp";
 
 export default function Contacto() {
-    const { t } = useLanguage();
+    const { t, language } = useLanguage();
     const [formData, setFormData] = useState({
         nombre: "",
         email: "",
         telefono: "",
-        empresa: "",
+        tipoProyecto: "",
         presupuesto: "",
         mensaje: "",
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitSuccess, setSubmitSuccess] = useState(false);
+    const [validationError, setValidationError] = useState<string | null>(null);
 
     const theme = {
         bg: "#000000",
@@ -29,28 +31,42 @@ export default function Contacto() {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+        setValidationError(null);
+
+        // Required field validation
+        if (!formData.nombre.trim() || !formData.telefono.trim() || !formData.tipoProyecto || !formData.presupuesto || !formData.mensaje.trim()) {
+            setValidationError(t('contact.form.validationError') || "Por favor, completa todos los campos obligatorios (*)");
+            return;
+        }
+
         setIsSubmitting(true);
 
         setTimeout(() => {
-            track('submit_contact_form', { 
-                presupuesto: formData.presupuesto, 
-                empresa: formData.empresa !== "" ? "si" : "no" 
+            track("submit_contact_form", {
+                project_type: formData.tipoProyecto,
+                budget: formData.presupuesto,
+                lang: language
             });
 
-            const whatsappMessage = `
-🌟 *Nuevo Cliente Potencial* 🌟
+            const whatsappMessage = language === 'en'
+                ? `Hello, I want to inquire about a project for SolvaTech.
 
-👤 *Nombre:* ${formData.nombre}
-📧 *Email:* ${formData.email}
-📱 *Teléfono:* ${formData.telefono}
-🏢 *Empresa:* ${formData.empresa}
-💰 *Presupuesto:* ${formData.presupuesto}
+Name: ${formData.nombre.trim()}
+Email: ${formData.email.trim() || 'Not specified'}
+WhatsApp: ${formData.telefono.trim()}
+Project Type: ${formData.tipoProyecto}
+Budget: ${formData.presupuesto}
+Details: ${formData.mensaje.trim()}`
+                : `Hola, quiero consultar por un proyecto para SolvaTech.
 
-📝 *Mensaje:*
-${formData.mensaje}
-      `.trim();
+Nombre: ${formData.nombre.trim()}
+Email: ${formData.email.trim() || 'No especificado'}
+WhatsApp: ${formData.telefono.trim()}
+Tipo de proyecto: ${formData.tipoProyecto}
+Presupuesto: ${formData.presupuesto}
+Detalles: ${formData.mensaje.trim()}`;
 
-            const whatsappUrl = `https://wa.me/595982880043?text=${encodeURIComponent(whatsappMessage)}`;
+            const whatsappUrl = getWhatsAppLink(whatsappMessage);
             window.open(whatsappUrl, "_blank");
 
             setIsSubmitting(false);
@@ -59,7 +75,7 @@ ${formData.mensaje}
                 nombre: "",
                 email: "",
                 telefono: "",
-                empresa: "",
+                tipoProyecto: "",
                 presupuesto: "",
                 mensaje: "",
             });
@@ -77,8 +93,9 @@ ${formData.mensaje}
             ),
             titulo: t('contact.methods.whatsapp.title'),
             descripcion: t('contact.methods.whatsapp.desc'),
-            valor: "+595 982 880 043",
-            link: "https://wa.me/595982880043",
+            valor: "+595 994 295092",
+            link: "https://wa.me/595994295092",
+            onClick: () => track('click_whatsapp', { source: 'contact_card', lang: language })
         },
         {
             icon: (
@@ -90,6 +107,7 @@ ${formData.mensaje}
             descripcion: t('contact.methods.email.desc'),
             valor: "alantechxpy@gmail.com",
             link: "mailto:alantechxpy@gmail.com",
+            onClick: () => track('click_email', { source: 'contact_card', lang: language })
         },
         {
             icon: (
@@ -101,15 +119,12 @@ ${formData.mensaje}
             descripcion: t('contact.methods.instagram.desc'),
             valor: "@alandev_py",
             link: "https://www.instagram.com/alandev_py/",
+            onClick: () => track('click_instagram', { source: 'contact_card', lang: language })
         },
     ];
 
-    const budgetOptions = t('contact.form.budgetOptions') as string[] || [
-        "Menos de 1.000.000 Gs",
-        "1.000.000 Gs - 3.000.000 Gs",
-        "3.000.000 Gs - 5.000.000 Gs",
-        "Más de 5.000.000 Gs"
-    ];
+    const budgetOptions = t('contact.form.budgetOptions') as string[] || [];
+    const projectOptions = t('contact.form.projectOptions') as Array<{ value: string; label: string }> || [];
 
     return (
         <section
@@ -120,7 +135,6 @@ ${formData.mensaje}
                 scrollMarginTop: '100px'
             }}
         >
-
             <div className="w-full max-w-7xl px-6 md:px-8 relative z-10">
                 {/* Encabezado */}
                 <motion.div
@@ -174,14 +188,14 @@ ${formData.mensaje}
 
                     {/* Subtítulo */}
                     <div className="flex justify-center w-full px-6">
-                        <p className="text-base md:text-xl text-slate-400 max-w-2xl leading-relaxed text-center opacity-80" style={{ margin: '1rem 0' }}>
+                        <p className="text-base md:text-xl text-slate-300 max-w-2xl leading-relaxed text-center" style={{ margin: '1rem 0' }}>
                             {t('contact.subtitle')}
                         </p>
                     </div>
                 </motion.div>
 
                 <div className="grid lg:grid-cols-3 gap-8 md:gap-12 items-stretch">
-                    {/* Left Side - Contact Methods (1 col) - Balanced Height */}
+                    {/* Left Side - Contact Methods */}
                     <motion.div
                         initial={{ opacity: 0, x: -50 }}
                         whileInView={{ opacity: 1, x: 0 }}
@@ -191,7 +205,7 @@ ${formData.mensaje}
                         style={{
                             display: 'flex',
                             flexDirection: 'column',
-                            justifyContent: 'space-between', // Distribución de botones
+                            justifyContent: 'space-between',
                             height: '100%'
                         }}
                     >
@@ -199,6 +213,7 @@ ${formData.mensaje}
                             <motion.a
                                 key={method.titulo}
                                 href={method.link}
+                                onClick={method.onClick}
                                 aria-label={`Contactar por ${method.titulo}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
@@ -221,8 +236,8 @@ ${formData.mensaje}
                                     cursor: 'pointer',
                                     position: 'relative',
                                     overflow: 'hidden',
-                                    flex: 1, // Permitir que los elementos crezcan si es necesario
-                                    maxHeight: '160px', // Evitar estiramiento excesivo
+                                    flex: 1,
+                                    maxHeight: '160px',
                                     marginBottom: index !== contactMethods.length - 1 ? '24px' : '0'
                                 }}
                                 onMouseEnter={(e) => {
@@ -256,7 +271,7 @@ ${formData.mensaje}
                         ))}
                     </motion.div>
 
-                    {/* Right Side - Contact Form (2 cols) - Compacted */}
+                    {/* Right Side - Contact Form */}
                     <motion.div
                         initial={{ opacity: 0, x: 50 }}
                         whileInView={{ opacity: 1, x: 0 }}
@@ -265,18 +280,18 @@ ${formData.mensaje}
                         className="lg:col-span-2"
                     >
                         <form onSubmit={handleSubmit} style={{
-                            padding: '24px', // Padding reducido
-                            borderRadius: '24px', // Radio de borde reducido
+                            padding: '24px',
+                            borderRadius: '24px',
                             backgroundColor: 'rgba(10, 10, 10, 0.8)',
                             border: '1px solid rgba(255, 255, 255, 0.08)',
                             backdropFilter: 'blur(20px)',
                             display: 'flex',
                             flexDirection: 'column',
-                            gap: '16px', // Espaciado ajustado
+                            gap: '16px',
                             boxShadow: '0 20px 50px rgba(0,0,0,0.5)',
                             justifyContent: 'center'
                         }}>
-                            <div style={{ marginBottom: '0px' }}>
+                            <div>
                                 <h3 style={{ fontSize: '24px', fontWeight: 800, color: theme.text, marginBottom: '2px', letterSpacing: '-0.02em' }}>
                                     {t('contact.form.title')}
                                 </h3>
@@ -301,6 +316,21 @@ ${formData.mensaje}
                                 </motion.div>
                             )}
 
+                            {validationError && (
+                                <div style={{
+                                    padding: '10px',
+                                    borderRadius: '8px',
+                                    backgroundColor: 'rgba(255, 50, 100, 0.1)',
+                                    border: '1px solid rgba(255, 50, 100, 0.2)',
+                                    color: '#ff3264',
+                                    textAlign: 'center',
+                                    fontWeight: 600,
+                                    fontSize: '13px'
+                                }}>
+                                    {validationError}
+                                </div>
+                            )}
+
                             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '12px' }}>
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                                     <label htmlFor="nombre" style={{ fontSize: '12px', fontWeight: 600, color: theme.textMuted, marginLeft: '4px' }}>{t('contact.form.name')}</label>
@@ -308,13 +338,12 @@ ${formData.mensaje}
                                         id="nombre"
                                         whileFocus={{ scale: 1.01, backgroundColor: 'rgba(255, 255, 255, 0.05)' }}
                                         type="text"
-                                        required
                                         value={formData.nombre}
-                                        onChange={(e) => setFormData({ ...formData, nombre: e.target.value })}
+                                        onChange={(e) => { setValidationError(null); setFormData({ ...formData, nombre: e.target.value }); }}
                                         placeholder={t('contact.form.namePlaceholder')}
                                         style={{
                                             width: '100%',
-                                            padding: '12px 16px', // Padding menor
+                                            padding: '12px 16px',
                                             borderRadius: '10px',
                                             backgroundColor: 'rgba(255, 255, 255, 0.03)',
                                             border: '1px solid rgba(255, 255, 255, 0.1)',
@@ -333,7 +362,6 @@ ${formData.mensaje}
                                         id="email"
                                         whileFocus={{ scale: 1.01, backgroundColor: 'rgba(255, 255, 255, 0.05)' }}
                                         type="email"
-                                        required
                                         value={formData.email}
                                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                                         placeholder={t('contact.form.emailPlaceholder')}
@@ -362,8 +390,8 @@ ${formData.mensaje}
                                         whileFocus={{ scale: 1.01, backgroundColor: 'rgba(255, 255, 255, 0.05)' }}
                                         type="tel"
                                         value={formData.telefono}
-                                        onChange={(e) => setFormData({ ...formData, telefono: e.target.value })}
-                                        placeholder="+595 9..."
+                                        onChange={(e) => { setValidationError(null); setFormData({ ...formData, telefono: e.target.value }); }}
+                                        placeholder={t('contact.form.whatsappPlaceholder') || "+595 9..."}
                                         style={{
                                             width: '100%',
                                             padding: '12px 16px',
@@ -380,13 +408,52 @@ ${formData.mensaje}
                                     />
                                 </div>
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                                    <label htmlFor="projectType" style={{ fontSize: '12px', fontWeight: 600, color: theme.textMuted, marginLeft: '4px' }}>{t('contact.form.projectType')}</label>
+                                    <div className="relative">
+                                        <motion.select
+                                            id="projectType"
+                                            whileFocus={{ scale: 1.01, backgroundColor: 'rgba(255, 255, 255, 0.05)' }}
+                                            value={formData.tipoProyecto}
+                                            onChange={(e) => { setValidationError(null); setFormData({ ...formData, tipoProyecto: e.target.value }); }}
+                                            style={{
+                                                width: '100%',
+                                                padding: '12px 16px',
+                                                borderRadius: '10px',
+                                                backgroundColor: 'rgba(255, 255, 255, 0.03)',
+                                                border: '1px solid rgba(255, 255, 255, 0.1)',
+                                                color: theme.text,
+                                                outline: 'none',
+                                                transition: 'border-color 0.3s ease, box-shadow 0.3s ease',
+                                                cursor: 'pointer',
+                                                appearance: 'none',
+                                                fontSize: '14px'
+                                            }}
+                                            onFocus={(e) => { e.target.style.borderColor = theme.accent; e.target.style.boxShadow = `0 0 0 2px ${theme.accent}15`; }}
+                                            onBlur={(e) => { e.target.style.borderColor = 'rgba(255, 255, 255, 0.1)'; e.target.style.boxShadow = 'none'; }}
+                                        >
+                                            <option value="" style={{ backgroundColor: '#000', color: '#fff' }}>{t('contact.form.projectTypePlaceholder')}</option>
+                                            {projectOptions.map((option) => (
+                                                <option key={option.value} value={option.label} style={{ backgroundColor: '#000', color: '#fff' }}>{option.label}</option>
+                                            ))}
+                                        </motion.select>
+                                        <div style={{ position: 'absolute', right: '16px', top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none', color: theme.accent }}>
+                                            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '12px' }}>
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                                     <label htmlFor="presupuesto" style={{ fontSize: '12px', fontWeight: 600, color: theme.textMuted, marginLeft: '4px' }}>{t('contact.form.budget')}</label>
                                     <div className="relative">
                                         <motion.select
                                             id="presupuesto"
                                             whileFocus={{ scale: 1.01, backgroundColor: 'rgba(255, 255, 255, 0.05)' }}
                                             value={formData.presupuesto}
-                                            onChange={(e) => setFormData({ ...formData, presupuesto: e.target.value })}
+                                            onChange={(e) => { setValidationError(null); setFormData({ ...formData, presupuesto: e.target.value }); }}
                                             style={{
                                                 width: '100%',
                                                 padding: '12px 16px',
@@ -404,7 +471,7 @@ ${formData.mensaje}
                                             onBlur={(e) => { e.target.style.borderColor = 'rgba(255, 255, 255, 0.1)'; e.target.style.boxShadow = 'none'; }}
                                         >
                                             <option value="" style={{ backgroundColor: '#000', color: '#fff' }}>{t('contact.form.budgetPlaceholder')}</option>
-                                            {budgetOptions.map((option: string) => (
+                                            {budgetOptions.map((option) => (
                                                 <option key={option} value={option} style={{ backgroundColor: '#000', color: '#fff' }}>{option}</option>
                                             ))}
                                         </motion.select>
@@ -422,10 +489,9 @@ ${formData.mensaje}
                                 <motion.textarea
                                     id="detalles"
                                     whileFocus={{ scale: 1.01, backgroundColor: 'rgba(255, 255, 255, 0.05)' }}
-                                    required
                                     rows={6}
                                     value={formData.mensaje}
-                                    onChange={(e) => setFormData({ ...formData, mensaje: e.target.value })}
+                                    onChange={(e) => { setValidationError(null); setFormData({ ...formData, mensaje: e.target.value }); }}
                                     placeholder={t('contact.form.detailsPlaceholder')}
                                     style={{
                                         width: '100%',
@@ -452,7 +518,7 @@ ${formData.mensaje}
                                 whileTap={{ scale: 0.98 }}
                                 style={{
                                     width: '100%',
-                                    padding: '16px', // Botón más compacto
+                                    padding: '16px',
                                     borderRadius: '12px',
                                     background: `linear-gradient(135deg, ${theme.accent}, #0099ff)`,
                                     color: '#000',

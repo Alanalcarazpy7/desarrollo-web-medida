@@ -3,9 +3,11 @@
 import { useRef, useState, useEffect } from "react";
 import { motion, useTransform, useMotionValue, useSpring } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
+import { track } from "@vercel/analytics";
+import { getWhatsAppLink, whatsappMessages } from "@/lib/whatsapp";
 
 export default function Hero() {
-    const { t } = useLanguage();
+    const { t, language } = useLanguage();
     const theme = {
         bg: "#000000",
         bgNav: "#050505",
@@ -59,7 +61,7 @@ export default function Hero() {
         },
         {
             value: "5★",
-            label: "Calificación",
+            label: t('hero.stat4'),
             icon: (
                 <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
@@ -156,7 +158,10 @@ export default function Hero() {
                         >
                             {/* Botón primario */}
                             <motion.a
-                                href="#proyectos"
+                                href={getWhatsAppLink(whatsappMessages[language].hero)}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={() => track('click_whatsapp', { source: 'hero_primary', lang: language })}
                                 whileHover={{ scale: 1.05, y: -2 }}
                                 whileTap={{ scale: 0.98 }}
                                 className="relative rounded-full font-bold text-lg overflow-hidden group cursor-pointer flex items-center justify-center"
@@ -220,7 +225,8 @@ export default function Hero() {
 
                             {/* Botón secundario */}
                             <motion.a
-                                href="#contacto"
+                                href="#proyectos"
+                                onClick={() => track('click_hero_projects', { lang: language })}
                                 whileHover={{ scale: 1.05, y: -2 }}
                                 whileTap={{ scale: 0.98 }}
                                 className="relative rounded-full font-bold text-lg overflow-hidden group cursor-pointer flex items-center justify-center"

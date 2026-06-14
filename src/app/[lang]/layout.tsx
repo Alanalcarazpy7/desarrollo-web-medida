@@ -101,7 +101,7 @@ export default async function RootLayout({
     "logo": "https://solvatech.vercel.app/solvetech-logo.png",
     "@id": "https://solvatech.vercel.app",
     "url": "https://solvatech.vercel.app",
-    "telephone": "+595982880043",
+    "telephone": "+595994295092",
     "priceRange": "$$",
     "areaServed": [
       "PY",
@@ -117,7 +117,7 @@ export default async function RootLayout({
     ],
     "contactPoint": {
       "@type": "ContactPoint",
-      "telephone": "+595982880043",
+      "telephone": "+595994295092",
       "contactType": "Customer Service",
       "areaServed": "PY",
       "availableLanguage": ["es", "en"]

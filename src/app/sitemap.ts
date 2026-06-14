@@ -7,7 +7,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const getAlternates = (path: string) => ({
     languages: {
-      es: `${baseUrl}/es${path}`,
+      "es-PY": `${baseUrl}/es${path}`,
       en: `${baseUrl}/en${path}`,
       'x-default': `${baseUrl}/es${path}`,
     },
@@ -42,7 +42,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
       alternates: {
         languages: {
-          es: `${baseUrl}/es${path}`,
+          "es-PY": `${baseUrl}/es${path}`,
           ...(hasEn ? { en: `${baseUrl}/en${path}` } : {}),
           'x-default': `${baseUrl}/es${path}`,
         },

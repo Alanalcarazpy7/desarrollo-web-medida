@@ -2,7 +2,7 @@
 
 import { motion, useScroll, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { useLanguage } from "@/context/LanguageContext";
 import Link from "next/link";
@@ -70,6 +70,7 @@ export default function SpectacularNavbar() {
 
     const { language, t } = useLanguage();
     const pathname = usePathname();
+    const router = useRouter();
     const isHome = pathname === "/" || pathname === `/${language}`;
     
     const getNavHref = (hash: string) => `/${language}${hash}`;
@@ -119,10 +120,10 @@ export default function SpectacularNavbar() {
                 <div className="w-full max-w-[1440px] px-6 md:px-8 relative" style={{ margin: '0.7rem 0' }}>
                     <div className="flex items-center justify-between">
 
-                        {/* LOGO ORIGINAL SIN MODIFICAR */}
-                        <Link href={`/${language}`} passHref legacyBehavior>
-                            <motion.a
-                                className="flex items-center gap-4 group relative z-50 cursor-pointer"
+                        {/* LOGO */}
+                        <Link href={`/${language}`} className="flex items-center gap-4 group relative z-50 cursor-pointer">
+                            <motion.div
+                                className="flex items-center gap-4"
                                 whileHover={{ scale: 1.05 }}
                                 transition={{ duration: 0.4 }}
                             >
@@ -199,7 +200,7 @@ export default function SpectacularNavbar() {
                                     TECNOLOGÍA & DESARROLLO WEB
                                 </span>
                             </div>
-                        </motion.a>
+                        </motion.div>
                         </Link>
 
                         {/* NAVEGACIÓN DESKTOP - MODERNA Y COMPACTA (Fix Overlap) */}
@@ -208,9 +209,10 @@ export default function SpectacularNavbar() {
                                 const isActive = (activeSection === item.href.substring(1) && isHome) || (item.label === "Blog" && pathname.includes("/blog"));
                                 const destination = item.href;
                                 return (
-                                    <Link key={item.label} href={destination} passHref legacyBehavior>
-                                        <motion.a
-                                            className="relative group px-6 py-3 rounded-2xl cursor-pointer"
+                                    <motion.div
+                                        key={item.label}
+                                        onClick={() => router.push(destination)}
+                                        className="relative group px-6 py-3 rounded-2xl cursor-pointer"
                                         initial={{ opacity: 0, y: -30 }}
                                         animate={{ opacity: 1, y: 0 }}
                                         transition={{ delay: i * 0.1, duration: 0.6, type: "spring" }}
@@ -323,8 +325,7 @@ export default function SpectacularNavbar() {
                                             }}
                                             transition={{ duration: 2, repeat: Infinity }}
                                         />
-                                    </motion.a>
-                                    </Link>
+                                    </motion.div>
                                 );
                             })}
 
@@ -481,9 +482,9 @@ export default function SpectacularNavbar() {
                                     const isActive = (activeSection === item.href.substring(1) && isHome) || (item.label === "Blog" && pathname.includes("/blog"));
                                     const destination = item.href;
                                     return (
-                                        <Link key={item.label} href={destination} passHref legacyBehavior>
-                                            <motion.a
-                                                onClick={() => setMobileMenuOpen(false)}
+                                        <motion.div
+                                            key={item.label}
+                                            onClick={() => { router.push(destination); setMobileMenuOpen(false); }}
                                             initial={{ opacity: 0, x: 20 }}
                                             animate={{ opacity: 1, x: 0 }}
                                             transition={{ delay: i * 0.1 }}
@@ -545,8 +546,7 @@ export default function SpectacularNavbar() {
                                                     }}
                                                 />
                                             )}
-                                        </motion.a>
-                                        </Link>
+                                        </motion.div>
                                     );
                                 })}
                             </div>

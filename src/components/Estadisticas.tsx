@@ -2,42 +2,44 @@
 
 import { motion, useInView, useMotionValue, useTransform } from "framer-motion";
 import { useEffect, useRef } from "react";
+import { useLanguage } from "@/context/LanguageContext";
 
 
 export default function Estadisticas() {
+    const { language } = useLanguage();
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, margin: "-100px" });
 
     const stats = [
         {
-            numero: 50,
+            numero: 10,
             sufijo: "+",
-            titulo: "Proyectos Completados",
-            descripcion: "Sitios web, apps y sistemas entregados con éxito",
+            titulo: language === 'en' ? "Projects delivered" : "Proyectos entregados",
+            descripcion: language === 'en' ? "Websites, digital catalogs and systems delivered" : "Páginas web, catálogos y sistemas entregados",
             icon: "🚀",
             gradient: "from-purple-500 to-pink-500",
         },
         {
-            numero: 100,
-            sufijo: "%",
-            titulo: "Clientes Satisfechos",
-            descripcion: "Satisfacción garantizada en cada proyecto",
+            numero: 6,
+            sufijo: "+",
+            titulo: language === 'en' ? "Happy clients" : "Clientes satisfechos",
+            descripcion: language === 'en' ? "Local businesses growing their sales" : "Negocios locales que aumentaron sus ventas",
             icon: "⭐",
             gradient: "from-cyan-500 to-blue-500",
         },
         {
-            numero: 5,
-            sufijo: "+",
-            titulo: "Años de Experiencia",
-            descripcion: "Desarrollando soluciones digitales innovadoras",
+            numero: 100,
+            sufijo: "%",
+            titulo: language === 'en' ? "Commitment" : "Compromiso",
+            descripcion: language === 'en' ? "Total dedication to your project's success" : "Dedicación total al éxito de tu proyecto",
             icon: "💼",
             gradient: "from-emerald-500 to-teal-500",
         },
         {
-            numero: 24,
-            sufijo: "/7",
-            titulo: "Soporte Técnico",
-            descripcion: "Disponibles cuando nos necesites",
+            numero: 5,
+            sufijo: "★",
+            titulo: language === 'en' ? "Rating" : "Calificación",
+            descripcion: language === 'en' ? "Excellent review score from our clients" : "Excelente calificación de nuestros clientes",
             icon: "🛟",
             gradient: "from-orange-500 to-red-500",
         },
@@ -90,16 +92,18 @@ export default function Estadisticas() {
                         transition={{ duration: 0.5 }}
                         className="inline-block px-4 py-2 mb-6 text-sm font-semibold text-purple-400 bg-purple-500/10 rounded-full border border-purple-500/20"
                     >
-                        Números que Hablan
+                        {language === 'en' ? "Numbers That Speak" : "Números que Hablan"}
                     </motion.span>
 
                     <h2 className="text-5xl md:text-6xl font-black mb-6">
-                        Resultados{" "}
-                        <span className="gradient-text">Medibles</span>
+                        {language === 'en' ? "Measurable " : "Resultados "}
+                        <span className="gradient-text">{language === 'en' ? "Results" : "Medibles"}</span>
                     </h2>
 
-                    <p className="text-xl text-slate-400 max-w-2xl mx-auto">
-                        Datos reales que demuestran nuestro compromiso con la excelencia
+                    <p className="text-xl text-slate-300 max-w-2xl mx-auto">
+                        {language === 'en' 
+                            ? "Real data demonstrating our dedication to digital success" 
+                            : "Datos reales que demuestran nuestro compromiso con la excelencia"}
                     </p>
                 </motion.div>
 
@@ -119,18 +123,18 @@ export default function Estadisticas() {
                 >
                     {[
                         {
-                            titulo: "Tecnología Moderna",
-                            descripcion: "Utilizamos las últimas herramientas y frameworks del mercado",
+                            titulo: language === 'en' ? "Modern Technology" : "Tecnología Moderna",
+                            descripcion: language === 'en' ? "We use the latest tools and frameworks in the market" : "Utilizamos las últimas herramientas y frameworks del mercado",
                             icon: "⚡",
                         },
                         {
-                            titulo: "Código Limpio",
-                            descripcion: "Seguimos las mejores prácticas de desarrollo y arquitectura",
+                            titulo: language === 'en' ? "Clean Code" : "Código Limpio",
+                            descripcion: language === 'en' ? "We follow development and architectural best practices" : "Seguimos las mejores prácticas de desarrollo y arquitectura",
                             icon: "💎",
                         },
                         {
-                            titulo: "Escalabilidad",
-                            descripcion: "Soluciones preparadas para crecer con tu negocio",
+                            titulo: language === 'en' ? "Scalability" : "Escalabilidad",
+                            descripcion: language === 'en' ? "Solutions built ready to grow along with your business" : "Soluciones preparadas para crecer con tu negocio",
                             icon: "📈",
                         },
                     ].map((item, index) => (
@@ -144,7 +148,7 @@ export default function Estadisticas() {
                         >
                             <div className="text-4xl mb-4">{item.icon}</div>
                             <h3 className="text-xl font-bold text-white mb-2">{item.titulo}</h3>
-                            <p className="text-slate-400 text-sm">{item.descripcion}</p>
+                            <p className="text-slate-300 text-sm">{item.descripcion}</p>
                         </motion.div>
                     ))}
                 </motion.div>
@@ -222,7 +226,7 @@ function StatCard({ stat, index, isInView }: any) {
                 </motion.div>
 
                 {/* Número */}
-                <div className="mb-4 relative z-10">
+                <div className="mb-4 relative z-10" style={{ opacity: 0.85 }}>
                     <motion.span
                         className={`text-5xl md:text-6xl font-black bg-gradient-to-r ${stat.gradient} bg-clip-text text-transparent`}
                     >
@@ -239,7 +243,7 @@ function StatCard({ stat, index, isInView }: any) {
                 </h3>
 
                 {/* Descripción */}
-                <p className="text-slate-400 text-sm leading-relaxed relative z-10">
+                <p className="text-slate-300 text-sm leading-relaxed relative z-10">
                     {stat.descripcion}
                 </p>
 

@@ -1,12 +1,28 @@
 "use client";
 
 import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from "framer-motion";
-import { useState, MouseEvent, useEffect } from "react";
+import { useState, MouseEvent } from "react";
 import Image from "next/image";
 import { useLanguage } from "@/context/LanguageContext";
+import { track } from "@vercel/analytics";
+import { getWhatsAppLink } from "@/lib/whatsapp";
 
 // Componente de tarjeta 3D
-function ProjectCard({ project, index, theme, ctaText }: { project: any, index: number, theme: any, ctaText: string }) {
+function ProjectCard({ 
+    project, 
+    index, 
+    theme, 
+    ctaText, 
+    similarText, 
+    language 
+}: { 
+    project: any, 
+    index: number, 
+    theme: any, 
+    ctaText: string, 
+    similarText: string, 
+    language: string 
+}) {
     const x = useMotionValue(0);
     const y = useMotionValue(0);
 
@@ -31,10 +47,17 @@ function ProjectCard({ project, index, theme, ctaText }: { project: any, index: 
         y.set(0);
     };
 
+    const whatsappMessage = language === 'en'
+        ? `Hi! I saw the project "${project.titulo}" and I would like to quote something similar for my business.`
+        : `Hola! Vi el proyecto "${project.titulo}" y me gustaría cotizar algo similar para mi negocio.`;
+
+    const whatsappUrl = getWhatsAppLink(whatsappMessage);
+
     return (
         <motion.div
             initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
             style={{
                 perspective: 1200,
@@ -43,9 +66,7 @@ function ProjectCard({ project, index, theme, ctaText }: { project: any, index: 
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
         >
-            <motion.a
-                href={project.link}
-                aria-label={`Ver detalles del proyecto ${project.titulo}`}
+            <motion.div
                 style={{
                     rotateX,
                     rotateY,
@@ -61,8 +82,15 @@ function ProjectCard({ project, index, theme, ctaText }: { project: any, index: 
                 {/* Contenedor de contenido de la tarjeta */}
                 <div className="relative w-full h-full rounded-[24px] overflow-hidden border border-white/10 flex flex-col grow shadow-2xl" style={{ backgroundColor: '#13141C' }}>
 
-                    {/* Sección de imagen - CON LÓGICA DE FLIP SI EXISTE IMAGEN BACK */}
-                    <div className="relative aspect-[16/10] w-full shrink-0 group-image-container" style={{ perspective: '1000px' }}>
+                    {/* Sección de imagen - clickable */}
+                    <a 
+                        href={project.link} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        onClick={() => track('click_project_view', { project: project.titulo, lang: language, source: 'image' })}
+                        className="relative aspect-[16/10] w-full shrink-0 block overflow-hidden group-image-container" 
+                        style={{ perspective: '1000px' }}
+                    >
                         {project.imagenBack ? (
                             <motion.div
                                 className="w-full h-full relative"
@@ -142,6 +170,29 @@ function ProjectCard({ project, index, theme, ctaText }: { project: any, index: 
                             </motion.div>
                         </div>
 
+                        {/* Etiqueta de Demo */}
+                        {project.isDemo && (
+                            <div className="absolute top-5 left-5 z-20 pointer-events-none" style={{ transform: 'translateZ(20px)' }}>
+                                <div style={{
+                                    backgroundColor: 'rgba(255, 50, 100, 0.9)',
+                                    border: '1px solid rgba(255, 50, 100, 0.3)',
+                                    borderRadius: '6px',
+                                    padding: '6px 16px',
+                                    backdropFilter: 'blur(4px)',
+                                    boxShadow: '0 4px 20px rgba(0,0,0,0.5)'
+                                }}>
+                                    <span style={{
+                                        fontSize: '11px',
+                                        fontWeight: 700,
+                                        color: '#ffffff',
+                                        letterSpacing: '0.05em',
+                                        textTransform: 'uppercase'
+                                    }}>
+                                        Demo
+                                    </span>
+                                </div>
+                            </div>
+                        )}
 
                         {/* Superposición al pasar el cursor */}
                         <motion.div
@@ -154,7 +205,7 @@ function ProjectCard({ project, index, theme, ctaText }: { project: any, index: 
                             style={{ backgroundColor: "rgba(0, 50, 100, 0.4)" }}
                         />
 
-                        {/* Botón Ver Proyecto */}
+                        {/* Hover Overlay Icon */}
                         <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden z-20">
                             <motion.div
                                 variants={{
@@ -166,30 +217,29 @@ function ProjectCard({ project, index, theme, ctaText }: { project: any, index: 
                                     display: 'flex',
                                     alignItems: 'center',
                                     gap: '10px',
-                                    padding: '16px 36px',
-                                    backgroundColor: '#00d9ff', // Solid Cyan
-                                    borderRadius: '50px', // Pill shape
-                                    boxShadow: '0 0 40px rgba(0, 217, 255, 0.6)', // Strong glow
-                                    fontSize: '14px',
+                                    padding: '12px 24px',
+                                    backgroundColor: '#00d9ff',
+                                    borderRadius: '50px',
+                                    boxShadow: '0 0 35px rgba(0, 217, 255, 0.6)',
+                                    fontSize: '12px',
                                     fontWeight: 800,
-                                    color: '#000000', // Black text for contrast
+                                    color: '#000000',
                                     textTransform: 'uppercase',
-                                    letterSpacing: '0.1em',
-                                    cursor: 'pointer'
+                                    letterSpacing: '0.1em'
                                 }}
                             >
                                 <span>{ctaText}</span>
-                                <svg style={{ width: '18px', height: '18px', color: '#000000' }} fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2.5}>
+                                <svg style={{ width: '16px', height: '16px', color: '#000000' }} fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2.5}>
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                                 </svg>
                             </motion.div>
                         </div>
-                    </div>
+                    </a>
 
                     {/* Sección de contenido */}
                     <div
-                        className="relative flex flex-col gap-5 z-10 grow"
-                        style={{ padding: '32px 32px 40px 32px', backgroundColor: 'transparent' }}
+                        className="relative flex flex-col gap-4 z-10 grow"
+                        style={{ padding: '24px 24px 32px 24px', backgroundColor: 'transparent' }}
                     >
                         {/* Tecnologías */}
                         <div className="flex flex-wrap gap-2">
@@ -197,8 +247,8 @@ function ProjectCard({ project, index, theme, ctaText }: { project: any, index: 
                                 <span
                                     key={tech}
                                     style={{
-                                        padding: '5px 14px',
-                                        fontSize: '11px',
+                                        padding: '4px 10px',
+                                        fontSize: '10px',
                                         fontWeight: 600,
                                         textTransform: 'uppercase',
                                         letterSpacing: '0.05em',
@@ -228,13 +278,80 @@ function ProjectCard({ project, index, theme, ctaText }: { project: any, index: 
                         </div>
 
                         {/* Contenido de texto principal */}
-                        <div className="space-y-3 pb-2">
-                            <h3 className="text-2xl font-black text-white uppercase tracking-tight leading-none group-hover:text-[#00d9ff] transition-colors duration-300">
+                        <div className="space-y-2 pb-2">
+                            <h3 className="text-xl font-bold text-white uppercase tracking-tight leading-none group-hover:text-[#00d9ff] transition-colors duration-300">
                                 {project.titulo}
                             </h3>
-                            <p className="text-sm text-slate-300 font-medium leading-relaxed pr-2">
+                            <p className="text-xs text-slate-300 leading-relaxed pr-2">
                                 {project.descripcion}
                             </p>
+                        </div>
+
+                        {/* Card Actions Bottom Row */}
+                        <div className="mt-auto pt-4 border-t border-white/5 flex items-center justify-between gap-3">
+                            <a
+                                href={project.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={() => track('click_project_view', { project: project.titulo, lang: language, source: 'cta' })}
+                                style={{
+                                    display: "inline-flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    gap: "6px",
+                                    padding: "10px 16px",
+                                    fontSize: "11px",
+                                    fontWeight: 900,
+                                    color: "#000",
+                                    backgroundColor: theme.accent,
+                                    borderRadius: "100px",
+                                    textTransform: "uppercase",
+                                    letterSpacing: "0.05em",
+                                    textDecoration: "none",
+                                    boxShadow: `0 4px 15px ${theme.accentGlow}`,
+                                    cursor: "pointer",
+                                    flex: 1
+                                }}
+                            >
+                                {ctaText}
+                            </a>
+
+                            <a
+                                href={whatsappUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={() => track('click_whatsapp', { source: 'project_similar', project: project.titulo, lang: language })}
+                                style={{
+                                    display: "inline-flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    padding: "10px 16px",
+                                    fontSize: "11px",
+                                    fontWeight: 900,
+                                    color: theme.accent,
+                                    border: `1px solid ${theme.accent}50`,
+                                    backgroundColor: "rgba(0, 217, 255, 0.05)",
+                                    borderRadius: "100px",
+                                    textTransform: "uppercase",
+                                    letterSpacing: "0.05em",
+                                    textDecoration: "none",
+                                    transition: "all 0.3s ease",
+                                    cursor: "pointer",
+                                    flex: 1,
+                                    textAlign: "center",
+                                    whiteSpace: "nowrap"
+                                }}
+                                onMouseEnter={(e) => {
+                                    e.currentTarget.style.backgroundColor = "rgba(0, 217, 255, 0.15)";
+                                    e.currentTarget.style.borderColor = theme.accent;
+                                }}
+                                onMouseLeave={(e) => {
+                                    e.currentTarget.style.backgroundColor = "rgba(0, 217, 255, 0.05)";
+                                    e.currentTarget.style.borderColor = `${theme.accent}50`;
+                                }}
+                            >
+                                {similarText}
+                            </a>
                         </div>
                     </div>
 
@@ -244,13 +361,13 @@ function ProjectCard({ project, index, theme, ctaText }: { project: any, index: 
                     {/* Borde de resplandor interior */}
                     <div className="absolute inset-0 border-2 border-cyan-500/0 group-hover:border-cyan-500/50 rounded-[24px] transition-colors duration-300 pointer-events-none" />
                 </div>
-            </motion.a>
+            </motion.div >
         </motion.div >
     );
 }
 
 export default function Proyectos() {
-    const { t } = useLanguage();
+    const { t, language } = useLanguage();
     const [selectedCategoryKey, setSelectedCategoryKey] = useState("all");
 
     const theme = {
@@ -258,7 +375,7 @@ export default function Proyectos() {
         bgCard: "#0a0a0a",
         bgCardHover: "#111111",
         accent: "#00d9ff",
-         accentDark: "#0099cc",
+        accentDark: "#0099cc",
         accentGlow: "rgba(0, 217, 255, 0.5)",
         text: "#ffffff",
         textMuted: "#888888"
@@ -275,6 +392,7 @@ export default function Proyectos() {
             descripcion: t('projects.items.modashoppy.description'),
             imagen: "/projects/modashoppy.png",
             link: "https://modashoppy.netlify.app/",
+            isDemo: true
         },
         {
             titulo: "StockPRO",
@@ -285,6 +403,7 @@ export default function Proyectos() {
             imagen: "/projects/stockpro.jpg",
             objectPosition: "left",
             link: "https://control-inventarios.netlify.app/login",
+            isDemo: true
         },
         {
             titulo: "Global Exchange",
@@ -295,6 +414,7 @@ export default function Proyectos() {
             imagen: "/projects/global-exchange-1.png",
             imagenBack: "/projects/global-exchange-2-admin.png",
             link: "https://github.com/MertinGIT/Casa-De-Cambios-De-Divisas",
+            isDemo: true
         },
         {
             titulo: "Gestion Inmobiliaria",
@@ -304,6 +424,7 @@ export default function Proyectos() {
             descripcion: t('projects.items.inmobiliaria.description'),
             imagen: "/projects/inmobiliaria.jpg",
             link: "https://alanalcarazpy7.github.io/gestion-inmobiliaria/",
+            isDemo: true
         },
         {
             titulo: "Amsterdam Bar",
@@ -313,6 +434,7 @@ export default function Proyectos() {
             descripcion: t('projects.items.amsterdam.description'),
             imagen: "/projects/amsterdam.png",
             link: "https://amsterdam-resto-bar.netlify.app/",
+            isDemo: true
         },
         {
             titulo: "Electro-Master",
@@ -322,6 +444,7 @@ export default function Proyectos() {
             descripcion: t('projects.items.electromaster.description'),
             imagen: "/projects/electromaster.png",
             link: "https://github.com/Alanalcarazpy7/tienda-ecommerce",
+            isDemo: true
         },
         {
             titulo: "Foodluck Resto",
@@ -331,6 +454,7 @@ export default function Proyectos() {
             descripcion: t('projects.items.foodluck.description'),
             imagen: "/projects/foodluck.png",
             link: "https://alanalcarazpy7.github.io/restaurante-de-comida/",
+            isDemo: true
         },
     ];
 
@@ -432,7 +556,7 @@ export default function Proyectos() {
                         transition={{ duration: 0.8, delay: 0.2 }}
                         className="flex justify-center w-full px-6"
                     >
-                        <p className="text-base md:text-xl lg:text-2xl max-w-3xl leading-relaxed text-center opacity-80" style={{ color: theme.textMuted, margin: '1rem 0' }}>
+                        <p className="text-base md:text-xl lg:text-2xl max-w-3xl leading-relaxed text-center" style={{ color: theme.textMuted, margin: '1rem 0' }}>
                             {t('projects.subtitle')}
                         </p>
                     </motion.div>
@@ -487,6 +611,8 @@ export default function Proyectos() {
                                 index={index}
                                 theme={theme}
                                 ctaText={t('projects.cta')}
+                                similarText={t('projects.ctaSimilar')}
+                                language={language}
                             />
                         ))}
                     </AnimatePresence>

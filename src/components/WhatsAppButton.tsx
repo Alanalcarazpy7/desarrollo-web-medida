@@ -4,8 +4,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { WhatsAppIcon } from "./Icons";
 import { track } from "@vercel/analytics";
+import { useLanguage } from "@/context/LanguageContext";
+import { getWhatsAppLink, whatsappMessages } from "@/lib/whatsapp";
 
 export default function WhatsAppButton() {
+    const { language } = useLanguage();
     const [isHovered, setIsHovered] = useState(false);
 
     const theme = {
@@ -17,7 +20,7 @@ export default function WhatsAppButton() {
 
     return (
         <motion.div
-            className="fixed bottom-8 right-8 z-[100]"
+            className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-[100]"
             initial={{ scale: 0, opacity: 0, y: 50 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             transition={{ delay: 1, duration: 0.8, type: "spring", bounce: 0.4 }}
@@ -39,13 +42,13 @@ export default function WhatsAppButton() {
                 />
 
                 <motion.a
-                    href="https://wa.me/595982880043?text=Hola! Me interesa conocer más sobre los servicios de desarrollo web de SolvaTech."
+                    href={getWhatsAppLink(whatsappMessages[language].general)}
                     aria-label="Contactar por WhatsApp"
                     target="_blank"
                     rel="noopener noreferrer"
                     onHoverStart={() => setIsHovered(true)}
                     onHoverEnd={() => setIsHovered(false)}
-                    onClick={() => track('click_whatsapp', { source: 'floating_button' })}
+                    onClick={() => track('click_whatsapp', { source: 'floating_button', lang: language })}
                     layout
                     whileHover={{ scale: 1.05, y: -5 }}
                     whileTap={{ scale: 0.95 }}
