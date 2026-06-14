@@ -1,8 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useLanguage } from "@/context/LanguageContext";
+import { track } from "@vercel/analytics";
+import { getWhatsAppLink, whatsappMessages } from "@/lib/whatsapp";
 
 export default function Precios() {
     const { t, language } = useLanguage();
@@ -10,35 +12,22 @@ export default function Precios() {
     const theme = {
         accent: "#00d9ff",
         accentDark: "#0099cc",
+        accentGlow: "rgba(0, 217, 255, 0.4)",
     };
 
-    const plans = [
-        {
-            title: t('pricing.plan1.title'),
-            titleAccent: t('pricing.plan1.titleAccent'),
-            price: "399",
-            description: t('pricing.plan1.description'),
-            features: t('pricing.plan1.features'),
-            highlight: false,
-        },
-        {
-            title: t('pricing.plan2.title'),
-            titleAccent: t('pricing.plan2.titleAccent'),
-            price: "799",
-            description: t('pricing.plan2.description'),
-            features: t('pricing.plan2.features'),
-            highlight: true,
-            tag: t('pricing.tag'),
-        },
-        {
-            title: t('pricing.plan3.title'),
-            titleAccent: t('pricing.plan3.titleAccent'),
-            price: "1.299",
-            description: t('pricing.plan3.description'),
-            features: t('pricing.plan3.features'),
-            highlight: false,
-        },
-    ];
+    const plans = t('pricing.plans') as Array<{
+        id: string;
+        title: string;
+        titleAccent: string;
+        description: string;
+        priceGs: string;
+        priceUsd: string;
+        specialDesc?: string;
+        features: string[];
+        btnText: string;
+        whatsappKey: string;
+        highlight: boolean;
+    }>;
 
     const CheckIcon = () => (
         <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
@@ -48,6 +37,8 @@ export default function Precios() {
 
     const PricingCard = ({ plan, index }: { plan: typeof plans[0]; index: number }) => {
         const [isHovered, setIsHovered] = useState(false);
+        const whatsappMsg = whatsappMessages[language][plan.whatsappKey as keyof typeof whatsappMessages['es']];
+        const href = getWhatsAppLink(whatsappMsg);
 
         return (
             <motion.div
@@ -60,9 +51,8 @@ export default function Precios() {
                 style={{
                     position: "relative",
                     width: "100%",
-                    maxWidth: "340px",
-                    minWidth: "280px",
-                    flex: "1 1 300px",
+                    maxWidth: "280px",
+                    flex: "1 1 250px",
                 }}
             >
                 {/* External Glow - appears on hover */}
@@ -93,7 +83,7 @@ export default function Precios() {
                     transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                     style={{
                         position: "relative",
-                        padding: plan.highlight ? "30px 24px 24px" : "24px 22px",
+                        padding: plan.highlight ? "30px 22px 22px" : "24px 20px",
                         background: "#0a0a0f",
                         borderRadius: "22px",
                         border: plan.highlight
@@ -133,9 +123,10 @@ export default function Precios() {
                                 textTransform: "uppercase",
                                 letterSpacing: "0.5px",
                                 boxShadow: `0 5px 20px ${theme.accent}50`,
+                                whiteSpace: "nowrap"
                             }}
                         >
-                            ✨ {plan.tag}
+                            ✨ {t('pricing.tag')}
                         </motion.div>
                     )}
 
@@ -147,7 +138,7 @@ export default function Precios() {
                                 textShadow: isHovered ? `0 0 15px ${theme.accent}50` : "none",
                             }}
                             transition={{ duration: 0.3 }}
-                            style={{ fontSize: "1.6rem", fontWeight: 800, lineHeight: 1.1, marginBottom: "2px" }}
+                            style={{ fontSize: "1.45rem", fontWeight: 800, lineHeight: 1.1, marginBottom: "2px" }}
                         >
                             {plan.title}
                         </motion.h3>
@@ -158,7 +149,7 @@ export default function Precios() {
                             transition={{ duration: 0.3 }}
                             style={{
                                 display: "block",
-                                fontSize: "1.6rem",
+                                fontSize: "1.45rem",
                                 fontWeight: 300,
                                 fontStyle: "italic",
                                 background: `linear-gradient(135deg, ${theme.accent}, ${theme.accentDark})`,
@@ -175,25 +166,19 @@ export default function Precios() {
                     {/* Price */}
                     <motion.div
                         animate={{
-                            scale: isHovered ? 1.08 : 1,
+                            scale: isHovered ? 1.05 : 1,
                             background: isHovered ? `rgba(0, 217, 255, 0.08)` : plan.highlight ? `rgba(0, 217, 255, 0.05)` : "rgba(255,255,255,0.02)",
                         }}
                         transition={{ duration: 0.3, ease: "easeOut" }}
                         style={{
                             textAlign: "center",
                             marginBottom: "20px",
-                            padding: "16px 0",
+                            padding: "12px 0",
                             borderRadius: "14px",
                             border: plan.highlight ? `1px solid ${theme.accent}25` : "1px solid rgba(255,255,255,0.04)",
                         }}
                     >
-                        <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "center", gap: "3px" }}>
-                            <motion.span
-                                animate={{ color: isHovered ? theme.accent : "#666" }}
-                                style={{ fontSize: "1.1rem", marginTop: "6px", transition: "color 0.3s" }}
-                            >
-                                $
-                            </motion.span>
+                        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
                             <motion.span
                                 animate={{
                                     color: plan.highlight ? theme.accent : isHovered ? theme.accent : "#fff",
@@ -201,25 +186,33 @@ export default function Precios() {
                                 }}
                                 transition={{ duration: 0.3 }}
                                 style={{
-                                    fontSize: plan.highlight ? "3rem" : "2.7rem",
+                                    fontSize: "1.65rem",
                                     fontWeight: 900,
-                                    lineHeight: 1,
+                                    lineHeight: 1.1,
+                                    marginBottom: "4px"
                                 }}
                             >
-                                {plan.price}
+                                {plan.priceGs}
                             </motion.span>
                             <motion.span
-                                animate={{ color: isHovered ? theme.accent : "#666" }}
-                                style={{ fontSize: "0.9rem", marginTop: "10px", fontWeight: 600, transition: "color 0.3s" }}
+                                animate={{ color: isHovered ? theme.accent : "#888" }}
+                                style={{ fontSize: "0.85rem", fontWeight: 600, transition: "color 0.3s" }}
                             >
-                                USD
+                                {plan.priceUsd}
                             </motion.span>
                         </div>
                     </motion.div>
 
+                    {/* Special description for custom plan */}
+                    {plan.specialDesc && (
+                        <p style={{ color: "#888", fontSize: "11px", margin: "-8px 0 16px 0", lineHeight: 1.4, textAlign: "center" }}>
+                            {plan.specialDesc}
+                        </p>
+                    )}
+
                     {/* Features */}
                     <div style={{ display: "flex", flexDirection: "column", gap: "10px", marginBottom: "20px" }}>
-                        {(plan.features as string[]).map((feature, idx) => (
+                        {plan.features.map((feature, idx) => (
                             <motion.div
                                 key={idx}
                                 animate={{
@@ -251,7 +244,7 @@ export default function Precios() {
                                 </motion.div>
                                 <motion.span
                                     animate={{ color: isHovered ? "#fff" : "#bbb" }}
-                                    style={{ fontSize: "12px", transition: "color 0.3s" }}
+                                    style={{ fontSize: "11px", transition: "color 0.3s" }}
                                 >
                                     {feature}
                                 </motion.span>
@@ -261,9 +254,10 @@ export default function Precios() {
 
                     {/* CTA Button */}
                     <motion.a
-                        href={`https://wa.me/595982880043?text=${encodeURIComponent(language === 'en' ? `Hello! I'm interested in the plan "${plan.title} ${plan.titleAccent}" ($${plan.price} USD).` : `Hola! Me interesa el plan "${plan.title} ${plan.titleAccent}" ($${plan.price} USD).`)}`}
+                        href={href}
                         target="_blank"
                         rel="noopener noreferrer"
+                        onClick={() => track('click_whatsapp', { source: 'pricing', plan: plan.id, lang: language })}
                         whileHover={{
                             scale: 1.05,
                             boxShadow: `0 10px 35px ${theme.accent}50`,
@@ -280,23 +274,23 @@ export default function Precios() {
                         style={{
                             display: "block",
                             width: "100%",
-                            padding: "14px 22px",
+                            padding: "12px 16px",
                             borderRadius: "14px",
-                            fontSize: "14px",
-                            fontWeight: 700,
+                            fontSize: "13px",
+                            fontWeight: 800,
                             cursor: "pointer",
                             boxShadow: plan.highlight ? `0 8px 25px ${theme.accent}40` : "none",
                             textAlign: "center",
                             textDecoration: "none",
                         }}
                     >
-                        {t('pricing.cta')}
+                        {plan.btnText}
                     </motion.a>
 
                     {/* Note */}
                     <motion.p
                         animate={{ color: isHovered ? `${theme.accent}90` : "rgba(255,255,255,0.4)" }}
-                        style={{ textAlign: "center", fontSize: "9px", marginTop: "12px", transition: "color 0.3s" }}
+                        style={{ textAlign: "center", fontSize: "9px", marginTop: "12px", transition: "color 0.3s", lineHeight: 1.3 }}
                     >
                         {t('pricing.cardNote')}
                     </motion.p>
@@ -306,7 +300,7 @@ export default function Precios() {
     };
 
     return (
-        <section id="precios" style={{ position: "relative", padding: "70px 20px", overflow: "hidden", background: "transparent", scrollMarginTop: "100px" }}>
+        <section id="precios" style={{ position: "relative", padding: "80px 20px", overflow: "hidden", background: "transparent", scrollMarginTop: "100px" }}>
             {/* Background glows */}
             <motion.div
                 animate={{ scale: [1, 1.1, 1], opacity: [0.4, 0.6, 0.4] }}
@@ -319,7 +313,7 @@ export default function Precios() {
                 style={{ position: "absolute", bottom: "5%", right: "0", width: "30%", height: "60%", background: `radial-gradient(circle, ${theme.accentDark}15 0%, transparent 70%)`, filter: "blur(90px)", pointerEvents: "none" }}
             />
 
-            <div style={{ maxWidth: "1100px", margin: "0 auto", position: "relative", zIndex: 10 }}>
+            <div style={{ maxWidth: "1200px", margin: "0 auto", position: "relative", zIndex: 10 }}>
                 {/* Title */}
                 <motion.div
                     initial={{ opacity: 0, y: 25 }}
@@ -352,7 +346,7 @@ export default function Precios() {
                         </span>
                     </div>
 
-                    <h2 style={{ fontSize: "clamp(2.2rem, 4vw, 3rem)", fontWeight: 800, marginBottom: "10px", color: "#fff" }}>
+                    <h2 style={{ fontSize: "clamp(2.2rem, 4vw, 3.2rem)", fontWeight: 900, marginBottom: "10px", color: "#fff", tracking: "-0.02em" }}>
                         {t('pricing.titleStart')}{" "}
                         <motion.span
                             animate={{ textShadow: [`0 0 20px ${theme.accent}40`, `0 0 35px ${theme.accent}70`, `0 0 20px ${theme.accent}40`] }}
@@ -362,13 +356,13 @@ export default function Precios() {
                             {t('pricing.titleHighlight')}
                         </motion.span>
                     </h2>
-                    <p style={{ color: "#777", fontSize: "1rem" }}>{t('pricing.subtitle')}</p>
+                    <p style={{ color: "#777", fontSize: "1.05rem", maxWidth: "700px", margin: "0 auto" }}>{t('pricing.subtitle')}</p>
                 </motion.div>
 
-                {/* Cards */}
-                <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", alignItems: "flex-start", gap: "24px" }}>
-                    {plans.map((plan, index) => (
-                        <PricingCard key={index} plan={plan} index={index} />
+                {/* Cards Grid - Responsive Wrap */}
+                <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", alignItems: "stretch", gap: "24px" }}>
+                    {plans && plans.map((plan, index) => (
+                        <PricingCard key={plan.id || index} plan={plan} index={index} />
                     ))}
                 </div>
 
@@ -376,19 +370,81 @@ export default function Precios() {
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
-                    style={{ marginTop: "50px", textAlign: "center", fontSize: "11px", color: "rgba(255,255,255,0.5)", maxWidth: "600px", margin: "50px auto 0", lineHeight: 1.6 }}
+                    style={{ marginTop: "32px", textAlign: "center", fontSize: "11px", color: "rgba(255,255,255,0.4)", maxWidth: "800px", margin: "32px auto 0", lineHeight: 1.6 }}
                 >
                     {t('pricing.footer')}
                 </motion.p>
-                <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.2 }}
-                    style={{ marginTop: "15px", textAlign: "center", fontSize: "12px", color: theme.accent, maxWidth: "600px", margin: "15px auto 0", lineHeight: 1.6, fontWeight: 600, padding: "8px 16px", borderRadius: "100px", background: `rgba(0, 217, 255, 0.05)`, border: `1px solid rgba(0, 217, 255, 0.1)` }}
-                >
-                    {language === 'es' ? "🇵🇾 Empresas en Paraguay: Planes preferenciales y facturación en Guaraníes (PYG) disponibles. ¡Consultanos!" : "🌎 International Clients: Contact us for customized enterprise plans and payment options."}
-                </motion.div>
+
+                {/* Optional Maintenance & Payment Method Section */}
+                <div style={{
+                    marginTop: "56px",
+                    display: "grid",
+                    gridTemplateColumns: "repeat(auto-fit, minmax(290px, 1fr))",
+                    gap: "24px",
+                    borderTop: "1px solid rgba(255, 255, 255, 0.08)",
+                    paddingTop: "40px"
+                }}>
+                    {/* Payment Method */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6 }}
+                        style={{
+                            padding: "24px",
+                            background: "#0a0a0f",
+                            borderRadius: "20px",
+                            border: "1px solid rgba(255,255,255,0.06)",
+                            boxShadow: "0 10px 25px rgba(0,0,0,0.3)"
+                        }}
+                    >
+                        <h4 style={{ fontSize: "1.15rem", fontWeight: 800, color: "#fff", marginBottom: "10px" }}>
+                            💳 {t('pricing.paymentTitle')}
+                        </h4>
+                        <p style={{ fontSize: "0.875rem", color: "#ccc", lineHeight: 1.6, marginBottom: "8px", margin: 0 }}>
+                            {t('pricing.paymentText')}
+                        </p>
+                        <p style={{ fontSize: "0.775rem", color: "#666", lineHeight: 1.5, margin: 0 }}>
+                            {t('pricing.paymentSubtext')}
+                        </p>
+                    </motion.div>
+
+                    {/* Monthly Maintenance */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: 0.1 }}
+                        style={{
+                            padding: "24px",
+                            background: "#0a0a0f",
+                            borderRadius: "20px",
+                            border: `1px solid rgba(0, 217, 255, 0.15)`,
+                            boxShadow: "0 10px 25px rgba(0,217,255,0.05)"
+                        }}
+                    >
+                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: "10px", flexWrap: "wrap", gap: "8px" }}>
+                            <h4 style={{ fontSize: "1.15rem", fontWeight: 800, color: "#fff", margin: 0 }}>
+                                🛠️ {t('pricing.maintenanceTitle')}
+                            </h4>
+                            <div style={{ textAlign: "right" }}>
+                                <span style={{ fontSize: "0.95rem", fontWeight: 800, color: theme.accent, display: "block" }}>
+                                    {t('pricing.maintenancePrice')}
+                                </span>
+                                <span style={{ fontSize: "0.75rem", color: "#666" }}>
+                                    {t('pricing.maintenancePriceSub')}
+                                </span>
+                            </div>
+                        </div>
+                        <ul style={{ paddingLeft: "16px", margin: 0, display: "flex", flexDirection: "column", gap: "6px" }}>
+                            {(t('pricing.maintenanceIncludes') as string[] || []).map((inc, i) => (
+                                <li key={i} style={{ fontSize: "0.8rem", color: "#bbb", listStyleType: "disc" }}>
+                                    {inc}
+                                </li>
+                            ))}
+                        </ul>
+                    </motion.div>
+                </div>
             </div>
         </section>
     );

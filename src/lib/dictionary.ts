@@ -12,46 +12,47 @@ export const dictionary = {
       company: "Empresa"
     },
     hero: {
-      badge: "Disponible para proyectos",
-      titleStart: "Agencia de",
-      titleHighlight: "Desarrollo Web",
+      badge: "Disponible para nuevos proyectos",
+      titleStart: "Webs y Sistemas para",
+      titleHighlight: "Hacer crecer tu negocio",
       titleEnd: "",
-      description: "En SolvaTech transformamos ideas en sistemas modernos y funcionales. Soluciones digitales para negocios que quieren evolucionar.",
-      ctaPrimary: "Ver Proyectos",
-      ctaSecondary: "Hablar con un Experto",
-      stat1: "Proyectos Entregados",
-      stat2: "Clientes Satisfechos",
-      stat3: "Años de Experiencia",
+      description: "Creamos páginas web, catálogos digitales y sistemas simples para que tu negocio se vea profesional, reciba más consultas y venda mejor por WhatsApp.",
+      ctaPrimary: "Quiero mi web",
+      ctaSecondary: "Ver proyectos",
+      stat1: "Proyectos entregados",
+      stat2: "Clientes satisfechos",
+      stat3: "Compromiso",
+      stat4: "Calificación",
     },
     services: {
-      badge: "Nuestros Servicios",
-      titleStart: "Soluciones",
-      titleHighlight: "Digitales",
-      subtitle: "Servicios diseñados para escalar tu negocio",
+      badge: "Soluciones Digitales",
+      titleStart: "Soluciones Digitales para",
+      titleHighlight: "Tu Negocio",
+      subtitle: "Servicios pensados para negocios que quieren verse profesionales, ordenar su información y recibir más clientes desde internet.",
       items: {
         web: {
           title: "Desarrollo Web",
-          desc: "Sitios web modernos, rápidos y optimizados para conversión."
+          desc: "Páginas modernas para mostrar tu negocio, servicios, ubicación y contacto por WhatsApp."
+        },
+        landing: {
+          title: "Landing Pages",
+          desc: "Páginas enfocadas en vender un servicio, captar consultas o promocionar una oferta."
+        },
+        catalogo: {
+          title: "Catálogos Digitales",
+          desc: "Mostrá tus productos con categorías, fotos, precios y botón de pedido por WhatsApp."
         },
         ecommerce: {
-          title: "E-commerce",
-          desc: "Tiendas online que venden 24/7 con gestión total."
+          title: "Tiendas Online",
+          desc: "E-commerce para negocios que quieren vender productos en internet de forma más completa."
         },
         apps: {
-          title: "Aplicaciones Web",
-          desc: "Sistemas a medida para optimizar tus procesos."
-        },
-        design: {
-          title: "Diseño UI/UX",
-          desc: "Interfaces modernas e intuitivas para maximizar la experiencia."
-        },
-        seo: {
-          title: "SEO & Marketing",
-          desc: "Posicionamiento y estrategias para atraer clientes."
+          title: "Sistemas Simples",
+          desc: "Aplicaciones web a medida para registrar, organizar o automatizar procesos de tu negocio."
         },
         maintenance: {
           title: "Mantenimiento",
-          desc: "Soporte técnico 24/7, actualizaciones y monitoreo constante."
+          desc: "Soporte, cambios, mejoras, actualizaciones y monitoreo para que tu web siga funcionando."
         }
       }
     },
@@ -59,46 +60,47 @@ export const dictionary = {
       badge: "Metodología",
       titleStart: "Nuestro",
       titleHighlight: "Proceso",
-      subtitle: "Un enfoque estructurado para garantizar resultados excepcionales.",
+      subtitle: "Trabajamos de forma clara y ordenada para que sepas qué se hará, cuánto costará y cuándo estará listo.",
       steps: {
         consultation: {
           title: "Consulta Inicial",
-          desc: "Reunión para entender tus necesidades, objetivos y visión.",
-          duration: "1-4 días"
+          desc: "Conversamos sobre tu negocio, objetivos, servicios y qué necesitás mostrar o vender.",
+          duration: "1 día"
         },
         proposal: {
           title: "Propuesta & Cotización",
-          desc: "Presentamos un plan detallado con cronograma y presupuesto.",
-          duration: "2-3 días"
+          desc: "Te enviamos una propuesta clara con alcance, precio, tiempos y forma de pago.",
+          duration: "1-2 días"
         },
         design: {
-          title: "Diseño UI/UX",
-          desc: "Creamos prototipos interactivos y diseños visuales.",
-          duration: "1-2 semanas"
+          title: "Diseño",
+          desc: "Preparamos una propuesta visual moderna, adaptada a tu marca y tipo de negocio.",
+          duration: "2-5 días"
         },
         development: {
           title: "Desarrollo",
-          desc: "Construimos tu solución con código limpio y moderno.",
-          duration: "2-6 semanas"
+          desc: "Construimos la web o sistema con diseño responsive, velocidad y buena estructura.",
+          duration: "5-15 días"
         },
         quality: {
-          title: "Testing & QA",
-          desc: "Pruebas exhaustivas en múltiples dispositivos y navegadores.",
-          duration: "1 semana"
+          title: "Revisión & Ajustes",
+          desc: "Probamos en celular y computadora, corregimos detalles y ajustamos el contenido.",
+          duration: "2-4 días"
         },
         launch: {
           title: "Lanzamiento",
-          desc: "Despliegue en producción con monitoreo continuo.",
-          duration: "1-2 días"
+          desc: "Publicamos tu proyecto y dejamos funcionando el contacto, enlaces, dominio y hosting.",
+          duration: "1 día"
         }
       }
     },
     projects: {
       badge: "Portfolio",
       titleStart: "Proyectos",
-      titleHighlight: "Destacados",
-      subtitle: "Experiencias digitales de vanguardia que transforman negocios.",
+      titleHighlight: "Realizados",
+      subtitle: "Algunos trabajos desarrollados para negocios, marcas y servicios.",
       cta: "Ver Proyecto",
+      ctaSimilar: "Quiero algo similar",
       categories: {
         all: "Todos",
         systems: "Sistemas",
@@ -117,89 +119,162 @@ export const dictionary = {
     },
     pricing: {
       badge: "Inversión Inteligente",
-      titleStart: "Precios",
-      titleHighlight: "Webs",
-      subtitle: "Elige el plan perfecto para tu proyecto",
-      tag: "Más contratado",
+      titleStart: "Planes para llevar tu",
+      titleHighlight: "Negocio a Internet",
+      subtitle: "Precios pensados para negocios locales, emprendedores y empresas que quieren empezar o mejorar su presencia digital.",
+      tag: "Más recomendado",
       cta: "Contratar ahora",
-      footer: "* Pago único por desarrollo. Planes de mantención mensual disponibles.",
-      cardNote: "* Incluye 1er año de hosting y dominio",
-      plan1: {
-        title: "Página",
-        titleAccent: "Informativa",
-        description: "Para tu Negocio o servicio",
-        features: [
-            "Diseño profesional y estático",
-            "Diseño Responsive",
-            "Optimización de carga",
-            "Integración con redes sociales",
-            "Formulario de contacto",
-            "Hosting y dominio incluido"
-        ]
-      },
-      plan2: {
-        title: "Landing",
-        titleAccent: "Page",
-        description: "Web similar a esta",
-        features: [
-            "Diseño único y personalizado",
-            "Animaciones premium",
-            "Diseño Responsive",
+      footer: "* Los precios pueden variar según el alcance, cantidad de secciones, funciones y contenido necesario.",
+      cardNote: "* El hosting está incluido por el primer año en los planes principales. El dominio puede incluirse según disponibilidad y extensión. Luego del primer año, hosting y dominio requieren renovación anual.",
+      paymentTitle: "Forma de pago",
+      paymentText: "Trabajamos con 50% para iniciar el proyecto y 50% al finalizar, antes de la entrega o publicación final.",
+      paymentSubtext: "En proyectos más grandes, también podemos dividir el desarrollo por etapas.",
+      maintenanceTitle: "Mantenimiento mensual opcional",
+      maintenancePrice: "Desde Gs. 150.000/mes",
+      maintenancePriceSub: "Aprox. USD 20/mes",
+      maintenanceIncludes: [
+        "Cambios pequeños de texto o imágenes",
+        "Revisión de funcionamiento",
+        "Soporte técnico básico",
+        "Actualizaciones menores"
+      ],
+      plans: [
+        {
+          id: "web_presencia",
+          title: "Web",
+          titleAccent: "Presencia",
+          description: "Ideal para negocios y profesionales",
+          priceGs: "Gs. 900.000",
+          priceUsd: "USD 130",
+          features: [
+            "Diseño profesional y responsive",
             "Hasta 4 secciones",
-            "Optimización de carga",
-            "Integración redes sociales",
+            "Botón directo a WhatsApp",
+            "Ubicación en Google Maps",
+            "Redes sociales",
             "Formulario de contacto",
-            "Hosting y dominio incluido",
-            "60 Días de garantía"
-        ]
-      },
-      plan3: {
-        title: "Tienda",
-        titleAccent: "Online",
-        description: "E-commerce completo",
-        features: [
-            "Diseño Personalizado",
-            "Diseño Responsive",
-            "Hasta 50 Productos",
-            "SEO optimizado",
-            "Optimización de carga",
-            "Integración redes sociales",
+            "Optimización básica de carga",
+            "Hosting incluido por 1 año",
+            "30 días de soporte"
+          ],
+          btnText: "Solicitar presupuesto",
+          whatsappKey: "web",
+          highlight: false
+        },
+        {
+          id: "landing_profesional",
+          title: "Landing",
+          titleAccent: "Profesional",
+          description: "Para vender un servicio o captar clientes",
+          priceGs: "Gs. 1.800.000",
+          priceUsd: "USD 260",
+          features: [
+            "Diseño personalizado",
+            "Hasta 6 secciones",
+            "Textos comerciales básicos",
+            "Animaciones suaves",
+            "Botón de WhatsApp",
             "Formulario de contacto",
-            "90 Días de garantía"
-        ]
-      }
+            "SEO básico",
+            "Optimización de carga",
+            "Hosting incluido por 1 año",
+            "60 días de soporte"
+          ],
+          btnText: "Quiero una landing",
+          whatsappKey: "landing",
+          highlight: true
+        },
+        {
+          id: "catalogo_digital",
+          title: "Catálogo",
+          titleAccent: "Digital",
+          description: "Para mostrar productos y recibir pedidos",
+          priceGs: "Gs. 2.800.000",
+          priceUsd: "USD 400",
+          features: [
+            "Diseño personalizado",
+            "Categorías de productos",
+            "Hasta 30 productos iniciales",
+            "Botón de pedido por WhatsApp",
+            "Buscador o filtros simples si aplica",
+            "Página de contacto",
+            "Optimización responsive",
+            "Hosting incluido por 1 año",
+            "60 días de soporte"
+          ],
+          btnText: "Quiero mi catálogo",
+          whatsappKey: "catalogo",
+          highlight: false
+        },
+        {
+          id: "tienda_sistema",
+          title: "Tienda o Sistema",
+          titleAccent: "A Medida",
+          description: "Para proyectos más completos",
+          priceGs: "Gs. 5.900.000",
+          priceUsd: "USD 850",
+          specialDesc: "Para proyectos como carritos de compra, paneles administrativos, gestión de pedidos, reservas, usuarios, automatizaciones o sistemas internos.",
+          features: [
+            "Cotización personalizada",
+            "Diseño responsive",
+            "Funciones a medida",
+            "Panel administrativo si aplica",
+            "Integraciones según necesidad",
+            "Pruebas y lanzamiento",
+            "Soporte según alcance"
+          ],
+          btnText: "Cotizar proyecto",
+          whatsappKey: "sistema",
+          highlight: false
+        }
+      ]
     },
     contact: {
       badge: "Hablemos de Tu Proyecto",
-      titleStart: "¿Listo para",
-      titleHighlight: "Empezar?",
-      subtitle: "Conversemos sobre cómo podemos llevar tu negocio al siguiente nivel digital",
+      titleStart: "¿Listo para llevar tu",
+      titleHighlight: "Negocio a Internet?",
+      subtitle: "Contanos qué necesitás y te respondemos con una propuesta clara para tu proyecto.",
       form: {
-        title: "Cuéntanos tu Visión",
-        subtitle: "Completa el formulario y te responderemos en breve.",
-        name: "NOMBRE",
-        email: "EMAIL",
-        whatsapp: "WHATSAPP",
-        budget: "PRESUPUESTO",
-        details: "DETALLES",
-        budgetPlaceholder: "Seleccionar rango...",
-        detailsPlaceholder: "Descríbenos brevemente el sistema, aplicación o sitio web que tienes en mente...",
-        submit: "ENVIAR",
-        sending: "ENVIANDO...",
-        success: "✅ ¡Mensaje enviado!",
+        title: "Contanos sobre tu proyecto",
+        subtitle: "Completa el formulario y te responderemos por WhatsApp o Email.",
+        name: "Nombre Completo *",
+        email: "Email (Opcional)",
+        whatsapp: "WhatsApp (Paraguay) *",
+        projectType: "Tipo de proyecto *",
+        budget: "Presupuesto estimado *",
+        details: "Detalles *",
+        projectTypePlaceholder: "Seleccionar tipo...",
+        budgetPlaceholder: "Seleccionar presupuesto...",
+        detailsPlaceholder: "Contanos brevemente sobre tu negocio, qué necesitás y si ya tenés logo, fotos o contenido...",
+        submit: "Enviar consulta",
+        sending: "Enviando...",
+        success: "✅ ¡Consulta enviada!",
         namePlaceholder: "Tu nombre completo",
         emailPlaceholder: "tu@email.com",
+        whatsappPlaceholder: "+595 9...",
+        validationError: "Por favor, completa todos los campos obligatorios (*)",
+        projectOptions: [
+          { value: "web", label: "Página web para negocio" },
+          { value: "landing", label: "Landing page" },
+          { value: "catalogo", label: "Catálogo digital" },
+          { value: "ecommerce", label: "Tienda online" },
+          { value: "sistema", label: "Sistema a medida" },
+          { value: "mantenimiento", label: "Mantenimiento / mejora de web existente" },
+          { value: "orientacion", label: "No estoy seguro, necesito orientación" }
+        ],
         budgetOptions: [
-            "Menos de 1.000.000 Gs",
-            "1.000.000 Gs - 3.000.000 Gs",
-            "3.000.000 Gs - 5.000.000 Gs",
-            "Más de 5.000.000 Gs"
+          "Menos de Gs. 1.000.000",
+          "Gs. 1.000.000 - 2.000.000",
+          "Gs. 2.000.000 - 4.000.000",
+          "Gs. 4.000.000 - 6.000.000",
+          "Más de Gs. 6.000.000",
+          "Quiero orientación"
         ]
       },
       methods: {
-        whatsapp: { title: "WhatsApp", desc: "Respuesta inmediata" },
-        email: { title: "Email", desc: "Escríbenos" },
-        instagram: { title: "Instagram", desc: "Síguenos" }
+        whatsapp: { title: "WhatsApp", desc: "Respuesta rápida por WhatsApp", valor: "+595 994 295092" },
+        email: { title: "Email", desc: "Escribinos por email", valor: "alantechxpy@gmail.com" },
+        instagram: { title: "Instagram", desc: "Seguinos en Instagram", valor: "@alandev_py" }
       }
     },
     footer: {
@@ -208,22 +283,22 @@ export const dictionary = {
       servicesTitle: "Servicios",
       companyTitle: "Empresa",
       services: {
-          web: "Desarrollo Web",
-          ecommerce: "E-commerce",
-          apps: "Aplicaciones Web",
-          systems: "Sistemas Informáticos",
-          design: "Diseño UI/UX"
+        web: "Desarrollo Web",
+        ecommerce: "E-commerce",
+        apps: "Aplicaciones Web",
+        systems: "Sistemas Informáticos",
+        design: "Diseño UI/UX"
       },
       company: {
-          about: "Sobre Nosotros",
-          projects: "Proyectos",
-          process: "Proceso",
-          contact: "Contacto"
+        about: "Sobre Nosotros",
+        projects: "Proyectos",
+        process: "Proceso",
+        contact: "Contacto"
       },
       legal: {
-          terms: "Términos",
-          privacy: "Privacidad",
-          cookies: "Cookies"
+        terms: "Términos",
+        privacy: "Privacidad",
+        cookies: "Cookies"
       }
     },
     faq: {
@@ -233,24 +308,36 @@ export const dictionary = {
       subtitle: "Resolvemos tus inquietudes sobre desarrollo web y sistemas en Paraguay.",
       items: [
         {
-          q: "¿Por qué mi negocio en Paraguay necesita una página web?",
-          a: "En Paraguay, cada vez más personas buscan servicios por internet. Una web te da presencia 24/7, profesionalismo y permite que te encuentren en Google desde cualquier ciudad del país."
+          q: "¿Por qué mi negocio necesita una página web?",
+          a: "Porque una web ordena toda la información importante de tu negocio en un solo lugar: servicios, precios, ubicación, horarios, redes y contacto directo por WhatsApp. Además, transmite más confianza que depender solo de Instagram o Facebook."
         },
         {
           q: "¿Cuánto cuesta crear una página web básica?",
-          a: "Depende de tus necesidades, pero tenemos planes accesibles para emprendedores que buscan su primera web con un diseño profesional y rápido."
-        },
-        {
-          q: "¿Hacen sistemas a medida para empresas paraguayas?",
-          a: "Sí, desarrollamos sistemas ERP, CRM y software de gestión totalmente adaptados a las normativas y necesidades del mercado en Paraguay."
+          a: "Una web básica para presencia digital empieza desde Gs. 900.000. El precio final depende de la cantidad de secciones, diseño, funciones y contenido necesario."
         },
         {
           q: "¿El hosting y dominio están incluidos?",
-          a: "¡Sí! Todos nuestros planes incluyen el primer año de hosting y dominio (.com o .com.py según disponibilidad) para que no te preocupes por nada técnico."
+          a: "Sí, en los planes principales incluimos el primer año de hosting. El dominio también puede incluirse según disponibilidad y tipo de extensión. Luego del primer año, hosting y dominio requieren renovación anual."
         },
         {
-          q: "¿Cómo es el soporte técnico?",
-          a: "Ofrecemos soporte local por WhatsApp y correo electrónico, asegurando respuestas rápidas y soluciones efectivas."
+          q: "¿Tengo que tener logo, fotos y textos?",
+          a: "Lo ideal es que tengas logo, fotos y la información básica de tu negocio. Si todavía no tenés todo, podemos ayudarte a organizar el contenido y armar textos iniciales."
+        },
+        {
+          q: "¿Hacen catálogos digitales o tiendas online?",
+          a: "Sí. Podemos crear catálogos digitales conectados a WhatsApp o tiendas online más completas con productos, categorías, carrito y gestión de pedidos."
+        },
+        {
+          q: "¿Hacen sistemas a medida?",
+          a: "Sí. Desarrollamos sistemas simples para registrar datos, gestionar pedidos, reservas, clientes, productos o procesos internos. Estos proyectos se cotizan según las funciones necesarias."
+        },
+        {
+          q: "¿Cuál es la forma de pago?",
+          a: "Trabajamos con 50% para iniciar y 50% al finalizar, antes de la entrega o publicación final. En proyectos grandes podemos dividir el trabajo por etapas."
+        },
+        {
+          q: "¿Cuánto tarda una web?",
+          a: "Una web simple puede estar lista entre 5 y 10 días hábiles si el contenido está disponible. Proyectos más completos pueden tomar más tiempo según el alcance."
         }
       ]
     },
@@ -278,46 +365,47 @@ export const dictionary = {
       company: "Company"
     },
     hero: {
-      badge: "Available for projects",
-      titleStart: "Web Development",
-      titleHighlight: "Agency",
+      badge: "Available for new projects",
+      titleStart: "Websites and Systems to",
+      titleHighlight: "Grow your business",
       titleEnd: "",
-      description: "At SolvaTech we transform ideas into modern and functional systems. Digital solutions for businesses that want to evolve.",
-      ctaPrimary: "View Projects",
-      ctaSecondary: "Talk to an Expert",
-      stat1: "Projects Delivered",
-      stat2: "Happy Clients",
-      stat3: "Years of Experience",
+      description: "We build websites, digital catalogs and simple systems so your business looks professional, gets more inquiries and sells better through WhatsApp.",
+      ctaPrimary: "Get my website",
+      ctaSecondary: "View projects",
+      stat1: "Projects delivered",
+      stat2: "Happy clients",
+      stat3: "Commitment",
+      stat4: "Rating",
     },
     services: {
-      badge: "Our Services",
-      titleStart: "Digital",
-      titleHighlight: "Solutions",
-      subtitle: "Services designed to scale your business",
+      badge: "Digital Solutions",
+      titleStart: "Digital Solutions for",
+      titleHighlight: "Your Business",
+      subtitle: "Services designed for businesses that want to look professional, organize their information and get more customers online.",
       items: {
         web: {
           title: "Web Development",
-          desc: "Modern, fast websites optimized for conversion."
+          desc: "Modern websites to show your business, services, location and WhatsApp contact."
+        },
+        landing: {
+          title: "Landing Pages",
+          desc: "Pages focused on selling a service, getting inquiries or promoting an offer."
+        },
+        catalogo: {
+          title: "Digital Catalogs",
+          desc: "Show your products with categories, photos, prices and WhatsApp order buttons."
         },
         ecommerce: {
-          title: "E-commerce",
-          desc: "Online stores that sell 24/7 with total management."
+          title: "Online Stores",
+          desc: "E-commerce solutions for businesses that want to sell products online."
         },
         apps: {
-          title: "Web Apps",
-          desc: "Custom systems to optimize your processes."
-        },
-        design: {
-          title: "UI/UX Design",
-          desc: "Modern and intuitive interfaces to maximize experience."
-        },
-        seo: {
-          title: "SEO & Marketing",
-          desc: "Positioning and strategies to attract customers."
+          title: "Simple Systems",
+          desc: "Custom web applications to register, organize or automate your business processes."
         },
         maintenance: {
           title: "Maintenance",
-          desc: "24/7 technical support, updates, and constant monitoring."
+          desc: "Support, changes, improvements, updates and monitoring to keep your website working."
         }
       }
     },
@@ -325,46 +413,47 @@ export const dictionary = {
       badge: "Methodology",
       titleStart: "Our",
       titleHighlight: "Process",
-      subtitle: "A structured approach to ensure exceptional results.",
+      subtitle: "We work in a clear and structured way so you know what will be done, how much it will cost, and when it will be ready.",
       steps: {
         consultation: {
-          title: "Discovery",
-          desc: "Meeting to understand your needs, goals, and vision.",
-          duration: "1-4 days"
+          title: "Initial Consultation",
+          desc: "We talk about your business, goals, services, and what you need to display or sell.",
+          duration: "1 day"
         },
         proposal: {
           title: "Proposal & Quote",
-          desc: "We present a detailed plan with timeline and budget.",
-          duration: "2-3 days"
+          desc: "We send you a clear proposal with scope, price, delivery times, and payment terms.",
+          duration: "1-2 days"
         },
         design: {
-          title: "UI/UX Design",
-          desc: "We create interactive prototypes and visual designs.",
-          duration: "1-2 weeks"
+          title: "Design",
+          desc: "We prepare a modern visual proposal, tailored to your brand and type of business.",
+          duration: "2-5 days"
         },
         development: {
           title: "Development",
-          desc: "We build your solution with clean and modern code.",
-          duration: "2-6 weeks"
+          desc: "We build the website or system with responsive design, high speed, and clean code structure.",
+          duration: "5-15 days"
         },
         quality: {
-          title: "Testing & QA",
-          desc: "Exhaustive testing on multiple devices and browsers.",
-          duration: "1 week"
+          title: "Review & Adjustments",
+          desc: "We test on phones and computers, fix details, and adjust the content.",
+          duration: "2-4 days"
         },
         launch: {
           title: "Launch",
-          desc: "Production deployment with continuous monitoring.",
-          duration: "1-2 days"
+          desc: "We publish your project and leave the contact, links, domain, and hosting fully operational.",
+          duration: "1 day"
         }
       }
     },
     projects: {
       badge: "Portfolio",
-      titleStart: "Featured",
+      titleStart: "Completed",
       titleHighlight: "Projects",
-      subtitle: "Cutting-edge digital experiences that transform businesses.",
+      subtitle: "Some projects developed for businesses, brands, and services.",
       cta: "View Project",
+      ctaSimilar: "I want something similar",
       categories: {
         all: "All",
         systems: "Systems",
@@ -383,89 +472,162 @@ export const dictionary = {
     },
     pricing: {
       badge: "Smart Investment",
-      titleStart: "Web",
-      titleHighlight: "Pricing",
-      subtitle: "Choose the perfect plan for your project",
-      tag: "Most hired",
+      titleStart: "Plans to take your",
+      titleHighlight: "Business Online",
+      subtitle: "Pricing designed for local businesses, entrepreneurs and companies that want to start or improve their digital presence.",
+      tag: "Most recommended",
       cta: "Hire now",
-      footer: "* One-time payment for development. Monthly maintenance plans available.",
-      cardNote: "* Includes 1st year of hosting and domain",
-      plan1: {
-        title: "Informational",
-        titleAccent: "Page",
-        description: "For your Business or service",
-        features: [
-            "Professional and static design",
-            "Responsive Design",
-            "Load optimization",
-            "Social media integration",
-            "Contact form",
-            "Hosting and domain included"
-        ]
-      },
-      plan2: {
-        title: "Landing",
-        titleAccent: "Page",
-        description: "Web similar to this one",
-        features: [
-            "Unique and customized design",
-            "Premium animations",
-            "Responsive Design",
+      footer: "* Prices may vary depending on scope, number of sections, features, and required content.",
+      cardNote: "* Hosting is included for the first year on main plans. The domain can be included based on availability and extension. After the first year, hosting and domain require annual renewal.",
+      paymentTitle: "Payment method",
+      paymentText: "We work with 50% upfront to start the project and 50% upon completion, before final delivery or launch.",
+      paymentSubtext: "For larger projects, development can also be divided into stages.",
+      maintenanceTitle: "Optional monthly maintenance",
+      maintenancePrice: "Starting at Gs. 150,000/month",
+      maintenancePriceSub: "Approx. USD 20/month",
+      maintenanceIncludes: [
+        "Small text or image edits",
+        "Functionality checks",
+        "Basic technical support",
+        "Minor updates"
+      ],
+      plans: [
+        {
+          id: "web_presencia",
+          title: "Business Presence",
+          titleAccent: "Website",
+          description: "Ideal for businesses and professionals",
+          priceGs: "Starting at Gs. 900,000",
+          priceUsd: "Approx. USD 130",
+          features: [
+            "Professional and responsive design",
             "Up to 4 sections",
-            "Load optimization",
+            "Direct button to WhatsApp",
+            "Google Maps location",
             "Social media integration",
             "Contact form",
-            "Hosting and domain included",
-            "60 Days warranty"
-        ]
-      },
-      plan3: {
-        title: "Online",
-        titleAccent: "Store",
-        description: "Complete E-commerce",
-        features: [
-            "Custom Design",
-            "Responsive Design",
-            "Up to 50 Products",
-            "SEO optimized",
-            "Load optimization",
-            "Social media integration",
+            "Basic loading optimization",
+            "Hosting included for 1 year",
+            "30 days of support"
+          ],
+          btnText: "Request a quote",
+          whatsappKey: "web",
+          highlight: false
+        },
+        {
+          id: "landing_profesional",
+          title: "Professional",
+          titleAccent: "Landing Page",
+          description: "To sell a service or capture customers",
+          priceGs: "Starting at Gs. 1,800,000",
+          priceUsd: "Approx. USD 260",
+          features: [
+            "Customized design",
+            "Up to 6 sections",
+            "Basic commercial copy",
+            "Smooth animations",
+            "WhatsApp button",
             "Contact form",
-            "90 Days warranty"
-        ]
-      }
+            "Basic SEO setup",
+            "Loading optimization",
+            "Hosting included for 1 year",
+            "60 days of support"
+          ],
+          btnText: "Get a landing",
+          whatsappKey: "landing",
+          highlight: true
+        },
+        {
+          id: "catalogo_digital",
+          title: "Digital",
+          titleAccent: "Catalog",
+          description: "To show products and receive orders",
+          priceGs: "Starting at Gs. 2,800,000",
+          priceUsd: "Approx. USD 400",
+          features: [
+            "Custom design layout",
+            "Product categories",
+            "Up to 30 initial products",
+            "WhatsApp order button",
+            "Simple search or filters if applicable",
+            "Contact page integration",
+            "Responsive optimization",
+            "Hosting included for 1 year",
+            "60 days of support"
+          ],
+          btnText: "Get my catalog",
+          whatsappKey: "catalogo",
+          highlight: false
+        },
+        {
+          id: "tienda_sistema",
+          title: "Online Store or",
+          titleAccent: "Custom System",
+          description: "For more complex projects",
+          priceGs: "Starting at Gs. 5,900,000",
+          priceUsd: "Approx. USD 850",
+          specialDesc: "For projects like shopping carts, admin panels, order management, reservations, users, automations or internal systems.",
+          features: [
+            "Custom quote based on scope",
+            "Responsive design layouts",
+            "Custom tailormade features",
+            "Administrative panel if applicable",
+            "Integrations as required",
+            "Testing and launch support",
+            "Support based on scope"
+          ],
+          btnText: "Quote project",
+          whatsappKey: "sistema",
+          highlight: false
+        }
+      ]
     },
     contact: {
       badge: "Let's Talk About Your Project",
-      titleStart: "Ready to",
-      titleHighlight: "Start?",
-      subtitle: "Let's chat about how we can take your business to the next digital level",
+      titleStart: "Ready to take your",
+      titleHighlight: "Business Online?",
+      subtitle: "Tell us what you need and we will reply with a clear proposal for your project.",
       form: {
-        title: "Tell us your Vision",
-        subtitle: "Complete the form and we will reply shortly.",
-        name: "NAME",
-        email: "EMAIL",
-        whatsapp: "WHATSAPP",
-        budget: "BUDGET",
-        details: "DETAILS",
-        budgetPlaceholder: "Select range...",
-        detailsPlaceholder: "Briefly describe the system, application or website you have in mind...",
-        submit: "SEND",
-        sending: "SENDING...",
-        success: "✅ Message sent!",
+        title: "Tell us about your project",
+        subtitle: "Complete the form and we will reply via WhatsApp or Email.",
+        name: "Full Name *",
+        email: "Email (Optional)",
+        whatsapp: "WhatsApp (Paraguay) *",
+        projectType: "Project type *",
+        budget: "Estimated budget *",
+        details: "Details *",
+        projectTypePlaceholder: "Select type...",
+        budgetPlaceholder: "Select budget...",
+        detailsPlaceholder: "Briefly tell us about your business, what you need and if you already have a logo, photos or content...",
+        submit: "Send inquiry",
+        sending: "Sending...",
+        success: "✅ Inquiry sent!",
         namePlaceholder: "Your full name",
         emailPlaceholder: "you@email.com",
+        whatsappPlaceholder: "+595 9...",
+        validationError: "Please complete all required fields (*)",
+        projectOptions: [
+          { value: "web", label: "Website for business" },
+          { value: "landing", label: "Landing page" },
+          { value: "catalogo", label: "Digital catalog" },
+          { value: "ecommerce", label: "Online store" },
+          { value: "sistema", label: "Custom system" },
+          { value: "mantenimiento", label: "Maintenance / existing web improvement" },
+          { value: "orientacion", label: "I am not sure, I need guidance" }
+        ],
         budgetOptions: [
-            "Less than $500 USD",
-            "$500 - $1,000 USD",
-            "$1,000 - $3,000 USD",
-            "More than $3,000 USD"
+          "Less than Gs. 1.000.000",
+          "Gs. 1.000.000 - 2.000.000",
+          "Gs. 2.000.000 - 4.000.000",
+          "Gs. 4.000.000 - 6.000.000",
+          "More than Gs. 6.000.000",
+          "I need orientation"
         ]
       },
       methods: {
-        whatsapp: { title: "WhatsApp", desc: "Immediate response" },
-        email: { title: "Email", desc: "Write to us" },
-        instagram: { title: "Instagram", desc: "Follow us" }
+        whatsapp: { title: "WhatsApp", desc: "Quick response via WhatsApp", valor: "+595 994 295092" },
+        email: { title: "Email", desc: "Write to us via email", valor: "alantechxpy@gmail.com" },
+        instagram: { title: "Instagram", desc: "Follow us on Instagram", valor: "@alandev_py" }
       }
     },
     footer: {
@@ -474,22 +636,22 @@ export const dictionary = {
       servicesTitle: "Services",
       companyTitle: "Company",
       services: {
-          web: "Web Development",
-          ecommerce: "E-commerce",
-          apps: "Web Apps",
-          systems: "Custom Software",
-          design: "UI/UX Design"
+        web: "Web Development",
+        ecommerce: "E-commerce",
+        apps: "Web Apps",
+        systems: "Custom Software",
+        design: "UI/UX Design"
       },
       company: {
-          about: "About Us",
-          projects: "Projects",
-          process: "Process",
-          contact: "Contact"
+        about: "About Us",
+        projects: "Projects",
+        process: "Process",
+        contact: "Contact"
       },
       legal: {
-          terms: "Terms",
-          privacy: "Privacy",
-          cookies: "Cookies"
+        terms: "Terms",
+        privacy: "Privacy",
+        cookies: "Cookies"
       }
     },
     faq: {
@@ -499,24 +661,36 @@ export const dictionary = {
       subtitle: "Answering your inquiries about web development and systems in Paraguay.",
       items: [
         {
-          q: "Why does my business in Paraguay need a website?",
-          a: "In Paraguay, more and more people search for services online. A website gives you 24/7 presence, professionalism, and allows you to be found on Google from any city in the country."
+          q: "Why does my business need a website?",
+          a: "Because a website organizes all the important information of your business in one place: services, prices, location, schedules, social networks, and direct contact via WhatsApp. In addition, it transmits more trust than depending solely on Instagram or Facebook."
         },
         {
           q: "How much does it cost to create a basic website?",
-          a: "It depends on your needs, but we have affordable plans for entrepreneurs looking for their first professional and fast website."
-        },
-        {
-          q: "Do you develop custom systems for Paraguayan companies?",
-          a: "Yes, we develop ERP, CRM systems, and management software fully adapted to the regulations and needs of the Paraguayan market."
+          a: "A basic website for digital presence starts at Gs. 900,000. The final price depends on the number of sections, design, features, and required content."
         },
         {
           q: "Are hosting and domain included?",
-          a: "Yes! All our plans include the first year of hosting and domain (.com or .com.py subject to availability) so you don't have to worry about anything technical."
+          a: "Yes, in the main plans we include the first year of hosting. The domain can also be included depending on availability and extension type. After the first year, hosting and domain require annual renewal."
         },
         {
-          q: "How is the technical support?",
-          a: "We offer local support via WhatsApp and email, ensuring fast responses and effective solutions."
+          q: "Do I need to have a logo, photos and text?",
+          a: "Ideally you should have a logo, photos and the basic information of your business. If you don't have everything yet, we can help you organize the content and draft initial copy."
+        },
+        {
+          q: "Do you build digital catalogs or online stores?",
+          a: "Yes. We can create digital catalogs connected to WhatsApp or more complete online stores with products, categories, shopping cart, and order management."
+        },
+        {
+          q: "Do you build custom systems?",
+          a: "Yes. We develop simple systems to record data, manage orders, bookings, customers, products or internal processes. These projects are quoted based on the required features."
+        },
+        {
+          q: "What is the payment method?",
+          a: "We work with 50% upfront to start and 50% upon completion, before final delivery or launch. For large projects, we can divide the work into stages."
+        },
+        {
+          q: "How long does a website take?",
+          a: "A simple website can be ready in 5 to 10 business days if the content is available. More complete projects may take more time depending on the scope."
         }
       ]
     },

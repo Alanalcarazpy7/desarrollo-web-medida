@@ -173,6 +173,7 @@ export default function Proceso() {
                                 stiffness: 100,
                             }}
                             whileHover={{ y: -10 }}
+                            onHoverStart={() => setHoveredIndex(index)}
                             onHoverEnd={() => setHoveredIndex(null)}
                             className="relative group w-full max-w-[400px] mx-auto md:max-w-none h-full"
                         >
