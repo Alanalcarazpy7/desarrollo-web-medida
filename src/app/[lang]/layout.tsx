@@ -11,7 +11,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://solvatech.vercel.app"),
+  metadataBase: new URL("https://solvatech.com.py"),
   title: {
     default: "Desarrollo Web en Paraguay | SolvaTech",
     template: "%s | SolvaTech"
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     "programadores en paraguay",
     "landing page economica paraguay"
   ],
-  authors: [{ name: "Alan Alcaraz", url: "https://solvatech.vercel.app" }],
+  authors: [{ name: "Alan Alcaraz", url: "https://solvatech.com.py" }],
   creator: "Alan Alcaraz",
   publisher: "Alan Alcaraz",
   icons: {
@@ -53,13 +53,13 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Desarrollo Web en Paraguay | SolvaTech",
     description: "Creamos páginas web, landing pages y sistemas a medida en Paraguay. Sitios rápidos, modernos y optimizados para Google. Pedí tu presupuesto.",
-    url: "https://solvatech.vercel.app",
+    url: "https://solvatech.com.py",
     siteName: "SolvaTech",
     locale: "es_PY",
     type: "website",
     images: [
       {
-        url: 'https://solvatech.vercel.app/solvetech-logo.png',
+        url: 'https://solvatech.com.py/solvetech-logo.png',
         width: 1200,
         height: 630,
         alt: 'SolvaTech - Desarrollo Web y Software a Medida',
@@ -97,10 +97,10 @@ export default async function RootLayout({
     "description": lang === 'en' 
       ? "Custom software development and web design agency in Paraguay." 
       : "Agencia de desarrollo de software a medida y diseño web en Paraguay.",
-    "image": "https://solvatech.vercel.app/icon.png",
-    "logo": "https://solvatech.vercel.app/solvetech-logo.png",
-    "@id": "https://solvatech.vercel.app",
-    "url": "https://solvatech.vercel.app",
+    "image": "https://solvatech.com.py/icon.png",
+    "logo": "https://solvatech.com.py/solvetech-logo.png",
+    "@id": "https://solvatech.com.py",
+    "url": "https://solvatech.com.py",
     "telephone": "+595994295092",
     "priceRange": "$$",
     "areaServed": [

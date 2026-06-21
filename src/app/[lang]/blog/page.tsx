@@ -7,7 +7,7 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { lang } = await params;
-    const baseUrl = 'https://solvatech.vercel.app';
+    const baseUrl = 'https://solvatech.com.py';
     
     return {
         title: {
@@ -21,6 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             canonical: `${baseUrl}/${lang}/blog`,
             languages: {
                 'es': `${baseUrl}/es/blog`,
+                'es-PY': `${baseUrl}/es/blog`,
                 'en': `${baseUrl}/en/blog`,
                 'x-default': `${baseUrl}/es/blog`,
             }
