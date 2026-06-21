@@ -17,8 +17,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const coreRoutes = [
     { path: '', date: '2026-03-17' },
     { path: '/blog', date: '2026-03-17' },
+    { path: '/servicios', date: '2026-06-21' },
     { path: '/servicios/desarrollo-web-paraguay', date: '2026-03-07' },
-    { path: '/servicios/sistemas-informaticos-paraguay', date: '2026-03-07' },
+    { path: '/servicios/sistemas-informaticos-paraguay', date: '2026-06-21' },
+    { path: '/servicios/desarrollo-web-basica', date: '2026-06-21' },
+    { path: '/servicios/desarrollo-web-estandar', date: '2026-06-21' },
+    { path: '/servicios/desarrollo-web-pro', date: '2026-06-21' },
+    { path: '/servicios/desarrollo-web-catalogo', date: '2026-06-21' },
+    { path: '/servicios/posicionamiento-google', date: '2026-06-21' },
+    { path: '/servicios/dominio-hosting', date: '2026-06-21' },
+    { path: '/servicios/soporte-web-basico', date: '2026-06-21' },
   ] as const
 
   const routesMap: MetadataRoute.Sitemap = locales.flatMap((locale) =>
@@ -54,3 +62,4 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [...routesMap, ...blogEntries]
 }
+

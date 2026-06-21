@@ -77,7 +77,7 @@ export default function SpectacularNavbar() {
 
     const navItems = [
         { label: t('navbar.home'), href: getNavHref("#inicio") },
-        { label: t('navbar.services'), href: getNavHref("#servicios") },
+        { label: t('navbar.services'), href: `/${language}/servicios` },
         { label: t('navbar.process'), href: getNavHref("#proceso") },
         { label: t('navbar.projects'), href: getNavHref("#proyectos") },
         { label: t('navbar.pricing'), href: getNavHref("#precios") },
