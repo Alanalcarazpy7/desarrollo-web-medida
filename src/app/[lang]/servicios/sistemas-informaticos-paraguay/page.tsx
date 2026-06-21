@@ -13,7 +13,7 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { lang } = await params;
-    const baseUrl = "https://solvatech.vercel.app";
+    const baseUrl = "https://solvatech.com.py";
     const path = "/servicios/sistemas-informaticos-paraguay";
     const isEs = lang === 'es';
 
@@ -37,6 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             canonical: `${baseUrl}/${lang}${path}`,
             languages: {
                 'es': `${baseUrl}/es${path}`,
+                'es-PY': `${baseUrl}/es${path}`,
                 'en': `${baseUrl}/en${path}`,
                 'x-default': `${baseUrl}/es${path}`,
             }

@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
     const title = lang === 'en' ? post.titleEn || post.title : post.title;
     const description = lang === 'en' ? post.excerptEn || post.excerpt : post.excerpt;
-    const baseUrl = 'https://solvatech.vercel.app';
+    const baseUrl = 'https://solvatech.com.py';
 
     return {
         title,
@@ -30,6 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             canonical: `${baseUrl}/${lang}/blog/${post.slug}`,
             languages: {
                 'es': `${baseUrl}/es/blog/${post.slug}`,
+                'es-PY': `${baseUrl}/es/blog/${post.slug}`,
                 'en': `${baseUrl}/en/blog/${post.slug}`,
                 'x-default': `${baseUrl}/es/blog/${post.slug}`,
             }
@@ -67,7 +68,7 @@ export default async function BlogPostPage({ params }: Props) {
 
     const title = lang === 'en' ? post.titleEn || post.title : post.title;
     const description = lang === 'en' ? post.excerptEn || post.excerpt : post.excerpt;
-    const baseUrl = 'https://solvatech.vercel.app';
+    const baseUrl = 'https://solvatech.com.py';
 
     const jsonLd = {
         '@context': 'https://schema.org',
