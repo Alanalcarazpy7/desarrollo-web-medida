@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 import { track } from "@vercel/analytics";
 import { getWhatsAppLink, whatsappMessages } from "@/lib/whatsapp";
+import Link from "next/link";
 
 export default function Precios() {
     const { t, language } = useLanguage();
@@ -35,10 +36,13 @@ export default function Precios() {
         </svg>
     );
 
-    const PricingCard = ({ plan, index }: { plan: typeof plans[0]; index: number }) => {
+    const PricingCard = ({ plan, index }: { plan: typeof plans[0] & { link?: string }; index: number }) => {
         const [isHovered, setIsHovered] = useState(false);
         const whatsappMsg = whatsappMessages[language][plan.whatsappKey as keyof typeof whatsappMessages['es']];
-        const href = getWhatsAppLink(whatsappMsg);
+        const whatsappHref = getWhatsAppLink(whatsappMsg);
+        
+        const isWhatsApp = plan.id === "promo_lanzamiento";
+        const href = isWhatsApp ? whatsappHref : (plan.link || "#");
 
         return (
             <motion.div
@@ -255,9 +259,15 @@ export default function Precios() {
                     {/* CTA Button */}
                     <motion.a
                         href={href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={() => track('click_whatsapp', { source: 'pricing', plan: plan.id, lang: language })}
+                        target={isWhatsApp ? "_blank" : undefined}
+                        rel={isWhatsApp ? "noopener noreferrer" : undefined}
+                        onClick={() => {
+                            if (isWhatsApp) {
+                                track('click_whatsapp', { source: 'pricing', plan: plan.id, lang: language });
+                            } else {
+                                track('click_service_detail', { source: 'pricing', plan: plan.id, lang: language });
+                            }
+                        }}
                         whileHover={{
                             scale: 1.05,
                             boxShadow: `0 10px 35px ${theme.accent}50`,
@@ -364,6 +374,166 @@ export default function Precios() {
                     {plans && plans.map((plan, index) => (
                         <PricingCard key={plan.id || index} plan={plan} index={index} />
                     ))}
+                </div>
+
+                {/* Servicios Complementarios */}
+                <div style={{ marginTop: "64px", marginBottom: "32px", textAlign: "center" }}>
+                    <h3 style={{ fontSize: "1.75rem", fontWeight: 800, color: "#fff", marginBottom: "32px" }}>
+                        {language === 'es' ? "Servicios Adicionales" : "Additional Services"}
+                    </h3>
+                    <div style={{
+                        display: "grid",
+                        gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+                        gap: "24px",
+                        justifyContent: "center"
+                    }}>
+                        {/* SEO Card */}
+                        <motion.div
+                            whileHover={{ y: -5 }}
+                            style={{
+                                padding: "24px",
+                                background: "#0a0a0f",
+                                borderRadius: "20px",
+                                border: "1px solid rgba(255,255,255,0.06)",
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "space-between",
+                                gap: "16px",
+                                transition: "all 0.3s ease"
+                            }}
+                        >
+                            <div>
+                                <span style={{ fontSize: "1.75rem" }}>📈</span>
+                                <h4 style={{ fontSize: "1.15rem", fontWeight: 800, color: "#fff", marginTop: "12px", marginBottom: "8px" }}>
+                                    {language === 'es' ? "Posicionamiento en Google y Maps" : "Google SEO & Maps"}
+                                </h4>
+                                <p style={{ fontSize: "0.85rem", color: "#888", margin: 0, lineHeight: 1.5 }}>
+                                    {language === 'es' ? "Mejorá la presencia local de tu negocio y hacé que te encuentren fácilmente." : "Improve local presence and get found easily."}
+                                </p>
+                            </div>
+                            <div>
+                                <div style={{ fontSize: "1.25rem", fontWeight: 900, color: theme.accent, marginBottom: "12px" }}>
+                                    {language === 'es' ? "Desde Gs. 275.000 / mes" : "From Gs. 275.000 / month"}
+                                </div>
+                                <Link 
+                                    href="/es/servicios/posicionamiento-google"
+                                    style={{
+                                        display: "block",
+                                        padding: "10px",
+                                        borderRadius: "10px",
+                                        background: "rgba(255,255,255,0.05)",
+                                        color: "#fff",
+                                        fontSize: "0.85rem",
+                                        fontWeight: 700,
+                                        textDecoration: "none",
+                                        transition: "background 0.3s"
+                                    }}
+                                    onMouseEnter={(e) => e.currentTarget.style.background = theme.accent}
+                                    onMouseLeave={(e) => e.currentTarget.style.background = "rgba(255,255,255,0.05)"}
+                                >
+                                    {language === 'es' ? "Ver detalles" : "View details"}
+                                </Link>
+                            </div>
+                        </motion.div>
+
+                        {/* Hosting/Dominio Card */}
+                        <motion.div
+                            whileHover={{ y: -5 }}
+                            style={{
+                                padding: "24px",
+                                background: "#0a0a0f",
+                                borderRadius: "20px",
+                                border: "1px solid rgba(255,255,255,0.06)",
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "space-between",
+                                gap: "16px",
+                                transition: "all 0.3s ease"
+                            }}
+                        >
+                            <div>
+                                <span style={{ fontSize: "1.75rem" }}>🌐</span>
+                                <h4 style={{ fontSize: "1.15rem", fontWeight: 800, color: "#fff", marginTop: "12px", marginBottom: "8px" }}>
+                                    {language === 'es' ? "Dominio + Hosting" : "Domain + Hosting"}
+                                </h4>
+                                <p style={{ fontSize: "0.85rem", color: "#888", margin: 0, lineHeight: 1.5 }}>
+                                    {language === 'es' ? "La base para que tu sitio esté online con una dirección profesional y estable." : "The foundation for a stable, professional web address."}
+                                </p>
+                            </div>
+                            <div>
+                                <div style={{ fontSize: "1.25rem", fontWeight: 900, color: theme.accent, marginBottom: "12px" }}>
+                                    {language === 'es' ? "Desde Gs. 250.000 / año" : "From Gs. 250.000 / year"}
+                                </div>
+                                <Link 
+                                    href="/es/servicios/dominio-hosting"
+                                    style={{
+                                        display: "block",
+                                        padding: "10px",
+                                        borderRadius: "10px",
+                                        background: "rgba(255,255,255,0.05)",
+                                        color: "#fff",
+                                        fontSize: "0.85rem",
+                                        fontWeight: 700,
+                                        textDecoration: "none",
+                                        transition: "background 0.3s"
+                                    }}
+                                    onMouseEnter={(e) => e.currentTarget.style.background = theme.accent}
+                                    onMouseLeave={(e) => e.currentTarget.style.background = "rgba(255,255,255,0.05)"}
+                                >
+                                    {language === 'es' ? "Ver detalles" : "View details"}
+                                </Link>
+                            </div>
+                        </motion.div>
+
+                        {/* Soporte Card */}
+                        <motion.div
+                            whileHover={{ y: -5 }}
+                            style={{
+                                padding: "24px",
+                                background: "#0a0a0f",
+                                borderRadius: "20px",
+                                border: "1px solid rgba(255,255,255,0.06)",
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "space-between",
+                                gap: "16px",
+                                transition: "all 0.3s ease"
+                            }}
+                        >
+                            <div>
+                                <span style={{ fontSize: "1.75rem" }}>🛠️</span>
+                                <h4 style={{ fontSize: "1.15rem", fontWeight: 800, color: "#fff", marginTop: "12px", marginBottom: "8px" }}>
+                                    {language === 'es' ? "Soporte Web Básico" : "Basic Web Support"}
+                                </h4>
+                                <p style={{ fontSize: "0.85rem", color: "#888", margin: 0, lineHeight: 1.5 }}>
+                                    {language === 'es' ? "Cambios simples, ajustes menores y actualización básica de contenido." : "Simple edits, minor updates, and content management."}
+                                </p>
+                            </div>
+                            <div>
+                                <div style={{ fontSize: "1.25rem", fontWeight: 900, color: theme.accent, marginBottom: "12px" }}>
+                                    {language === 'es' ? "Desde Gs. 45.000 / mes" : "From Gs. 45.000 / month"}
+                                </div>
+                                <Link 
+                                    href="/es/servicios/soporte-web-basico"
+                                    style={{
+                                        display: "block",
+                                        padding: "10px",
+                                        borderRadius: "10px",
+                                        background: "rgba(255,255,255,0.05)",
+                                        color: "#fff",
+                                        fontSize: "0.85rem",
+                                        fontWeight: 700,
+                                        textDecoration: "none",
+                                        transition: "background 0.3s"
+                                    }}
+                                    onMouseEnter={(e) => e.currentTarget.style.background = theme.accent}
+                                    onMouseLeave={(e) => e.currentTarget.style.background = "rgba(255,255,255,0.05)"}
+                                >
+                                    {language === 'es' ? "Ver detalles" : "View details"}
+                                </Link>
+                            </div>
+                        </motion.div>
+                    </div>
                 </div>
 
                 <motion.p

@@ -81,6 +81,8 @@ export const metadata: Metadata = {
 };
 
 
+import WhatsAppButton from "@/components/WhatsAppButton";
+
 export default async function RootLayout({
   children,
   params,
@@ -144,6 +146,7 @@ export default async function RootLayout({
             dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
           />
           {children}
+          <WhatsAppButton />
           <SpeedInsights />
           <Analytics />
         </LanguageProvider>

@@ -140,92 +140,118 @@ export const dictionary = {
       ],
       plans: [
         {
-          id: "web_presencia",
-          title: "Web",
-          titleAccent: "Presencia",
-          description: "Ideal para negocios y profesionales",
-          priceGs: "Gs. 900.000",
-          priceUsd: "USD 130",
+          id: "promo_lanzamiento",
+          title: "Promo",
+          titleAccent: "Lanzamiento",
+          description: "Ideal para nuevos proyectos",
+          priceGs: "Gs. 550.000",
+          priceUsd: "Precio regular Gs. 750.000",
           features: [
-            "Diseño profesional y responsive",
-            "Hasta 4 secciones",
+            "Diseño responsive",
             "Botón directo a WhatsApp",
-            "Ubicación en Google Maps",
-            "Redes sociales",
-            "Formulario de contacto",
-            "Optimización básica de carga",
-            "Hosting incluido por 1 año",
-            "30 días de soporte"
+            "Secciones para servicios y contacto",
+            "Ideal para negocios locales",
+            "Pago único"
           ],
-          btnText: "Solicitar presupuesto",
-          whatsappKey: "web",
-          highlight: false
+          btnText: "Pedí info",
+          whatsappKey: "promo",
+          highlight: true,
+          link: "/es#contacto"
         },
         {
-          id: "landing_profesional",
-          title: "Landing",
-          titleAccent: "Profesional",
-          description: "Para vender un servicio o captar clientes",
-          priceGs: "Gs. 1.800.000",
-          priceUsd: "USD 260",
+          id: "web_basica",
+          title: "Web",
+          titleAccent: "Básica",
+          description: "Para negocios que quieren presencia online",
+          priceGs: "Gs. 750.000",
+          priceUsd: "Pago único",
           features: [
-            "Diseño personalizado",
-            "Hasta 6 secciones",
-            "Textos comerciales básicos",
-            "Animaciones suaves",
-            "Botón de WhatsApp",
-            "Formulario de contacto",
-            "SEO básico",
-            "Optimización de carga",
-            "Hosting incluido por 1 año",
-            "60 días de soporte"
+            "Diseño profesional",
+            "Adaptada a celulares",
+            "Secciones principales",
+            "Contacto y ubicación",
+            "Botón a WhatsApp"
           ],
-          btnText: "Quiero una landing",
-          whatsappKey: "landing",
-          highlight: true
+          btnText: "Solicitar web",
+          whatsappKey: "basica",
+          highlight: false,
+          link: "/es/servicios/desarrollo-web-basica"
         },
         {
           id: "catalogo_digital",
           title: "Catálogo",
           titleAccent: "Digital",
-          description: "Para mostrar productos y recibir pedidos",
-          priceGs: "Gs. 2.800.000",
-          priceUsd: "USD 400",
+          description: "Para mostrar productos, servicios o menú",
+          priceGs: "Desde Gs. 650.000",
+          priceUsd: "Regular desde Gs. 750.000",
           features: [
-            "Diseño personalizado",
-            "Categorías de productos",
-            "Hasta 30 productos iniciales",
-            "Botón de pedido por WhatsApp",
-            "Buscador o filtros simples si aplica",
-            "Página de contacto",
-            "Optimización responsive",
-            "Hosting incluido por 1 año",
-            "60 días de soporte"
+            "Productos o servicios",
+            "Categorías",
+            "Fotos",
+            "Botón a WhatsApp",
+            "Ideal para tiendas y comidas"
           ],
           btnText: "Quiero mi catálogo",
           whatsappKey: "catalogo",
-          highlight: false
+          highlight: false,
+          link: "/es/servicios/desarrollo-web-catalogo"
         },
         {
-          id: "tienda_sistema",
-          title: "Tienda o Sistema",
-          titleAccent: "A Medida",
-          description: "Para proyectos más completos",
-          priceGs: "Gs. 5.900.000",
-          priceUsd: "USD 850",
-          specialDesc: "Para proyectos como carritos de compra, paneles administrativos, gestión de pedidos, reservas, usuarios, automatizaciones o sistemas internos.",
+          id: "web_estandar",
+          title: "Web",
+          titleAccent: "Estándar",
+          description: "Una web más completa para tu negocio",
+          priceGs: "Gs. 1.250.000",
+          priceUsd: "Pago único",
           features: [
-            "Cotización personalizada",
-            "Diseño responsive",
-            "Funciones a medida",
+            "Varias secciones",
+            "Diseño más completo",
+            "Inicio, servicios, nosotros y contacto",
+            "Ubicación y redes",
+            "Adaptada a celulares"
+          ],
+          btnText: "Consultar web",
+          whatsappKey: "estandar",
+          highlight: false,
+          link: "/es/servicios/desarrollo-web-estandar"
+        },
+        {
+          id: "web_pro",
+          title: "Web",
+          titleAccent: "Pro",
+          description: "Para empresas y proyectos más avanzados",
+          priceGs: "Desde Gs. 3.550.000",
+          priceUsd: "Pago único o desde ese monto",
+          features: [
+            "Más páginas internas",
+            "Diseño personalizado",
+            "Estructura profesional",
+            "Funcionalidades según proyecto",
+            "Mejor presentación de marca"
+          ],
+          btnText: "Solicitar propuesta",
+          whatsappKey: "pro",
+          highlight: false,
+          link: "/es/servicios/desarrollo-web-pro"
+        },
+        {
+          id: "sistemas_medida",
+          title: "Sistemas",
+          titleAccent: "a Medida",
+          description: "Para proyectos más complejos",
+          priceGs: "Desde Gs. 5.900.000",
+          priceUsd: "Presupuesto según alcance",
+          features: [
+            "Funcionalidades personalizadas",
             "Panel administrativo si aplica",
+            "Gestión de pedidos, reservas o usuarios",
             "Integraciones según necesidad",
-            "Pruebas y lanzamiento",
-            "Soporte según alcance"
+            "Presupuesto según alcance"
           ],
           btnText: "Cotizar proyecto",
           whatsappKey: "sistema",
-          highlight: false
+          highlight: false,
+          link: "/es/servicios/sistemas-informaticos-paraguay"
         }
       ]
     },
@@ -313,7 +339,7 @@ export const dictionary = {
         },
         {
           q: "¿Cuánto cuesta crear una página web básica?",
-          a: "Una web básica para presencia digital empieza desde Gs. 900.000. El precio final depende de la cantidad de secciones, diseño, funciones y contenido necesario."
+          a: "Una web básica para presencia digital empieza desde Gs. 750.000. El precio final depende de la cantidad de secciones, diseño, funciones y contenido necesario."
         },
         {
           q: "¿El hosting y dominio están incluidos?",
@@ -493,92 +519,118 @@ export const dictionary = {
       ],
       plans: [
         {
-          id: "web_presencia",
-          title: "Business Presence",
-          titleAccent: "Website",
-          description: "Ideal for businesses and professionals",
-          priceGs: "Starting at Gs. 900,000",
-          priceUsd: "Approx. USD 130",
+          id: "promo_lanzamiento",
+          title: "Launch",
+          titleAccent: "Promo",
+          description: "Ideal for new projects",
+          priceGs: "Gs. 550.000",
+          priceUsd: "Regular price Gs. 750.000",
           features: [
-            "Professional and responsive design",
-            "Up to 4 sections",
+            "Responsive design",
             "Direct button to WhatsApp",
-            "Google Maps location",
-            "Social media integration",
-            "Contact form",
-            "Basic loading optimization",
-            "Hosting included for 1 year",
-            "30 days of support"
+            "Sections for services and contact",
+            "Ideal for local businesses",
+            "One-time payment"
           ],
-          btnText: "Request a quote",
-          whatsappKey: "web",
-          highlight: false
+          btnText: "Get info",
+          whatsappKey: "promo",
+          highlight: true,
+          link: "/en#contacto"
         },
         {
-          id: "landing_profesional",
-          title: "Professional",
-          titleAccent: "Landing Page",
-          description: "To sell a service or capture customers",
-          priceGs: "Starting at Gs. 1,800,000",
-          priceUsd: "Approx. USD 260",
+          id: "web_basica",
+          title: "Basic",
+          titleAccent: "Web",
+          description: "For businesses that want online presence",
+          priceGs: "Gs. 750.000",
+          priceUsd: "One-time payment",
           features: [
-            "Customized design",
-            "Up to 6 sections",
-            "Basic commercial copy",
-            "Smooth animations",
-            "WhatsApp button",
-            "Contact form",
-            "Basic SEO setup",
-            "Loading optimization",
-            "Hosting included for 1 year",
-            "60 days of support"
+            "Professional design",
+            "Mobile friendly",
+            "Main sections",
+            "Contact and location",
+            "WhatsApp button"
           ],
-          btnText: "Get a landing",
-          whatsappKey: "landing",
-          highlight: true
+          btnText: "Request web",
+          whatsappKey: "basica",
+          highlight: false,
+          link: "/es/servicios/desarrollo-web-basica"
         },
         {
           id: "catalogo_digital",
           title: "Digital",
           titleAccent: "Catalog",
-          description: "To show products and receive orders",
-          priceGs: "Starting at Gs. 2,800,000",
-          priceUsd: "Approx. USD 400",
+          description: "To show products, services or menu",
+          priceGs: "From Gs. 650.000",
+          priceUsd: "Regular from Gs. 750.000",
           features: [
-            "Custom design layout",
-            "Product categories",
-            "Up to 30 initial products",
-            "WhatsApp order button",
-            "Simple search or filters if applicable",
-            "Contact page integration",
-            "Responsive optimization",
-            "Hosting included for 1 year",
-            "60 days of support"
+            "Products or services",
+            "Categories",
+            "Photos",
+            "WhatsApp button",
+            "Ideal for stores and food"
           ],
           btnText: "Get my catalog",
           whatsappKey: "catalogo",
-          highlight: false
+          highlight: false,
+          link: "/es/servicios/desarrollo-web-catalogo"
         },
         {
-          id: "tienda_sistema",
-          title: "Online Store or",
-          titleAccent: "Custom System",
-          description: "For more complex projects",
-          priceGs: "Starting at Gs. 5,900,000",
-          priceUsd: "Approx. USD 850",
-          specialDesc: "For projects like shopping carts, admin panels, order management, reservations, users, automations or internal systems.",
+          id: "web_estandar",
+          title: "Standard",
+          titleAccent: "Web",
+          description: "A more complete web for your business",
+          priceGs: "Gs. 1.250.000",
+          priceUsd: "One-time payment",
           features: [
-            "Custom quote based on scope",
-            "Responsive design layouts",
-            "Custom tailormade features",
-            "Administrative panel if applicable",
-            "Integrations as required",
-            "Testing and launch support",
-            "Support based on scope"
+            "Several sections",
+            "More complete design",
+            "Home, services, about and contact",
+            "Location and social networks",
+            "Mobile friendly"
+          ],
+          btnText: "Inquire web",
+          whatsappKey: "estandar",
+          highlight: false,
+          link: "/es/servicios/desarrollo-web-estandar"
+        },
+        {
+          id: "web_pro",
+          title: "Web",
+          titleAccent: "Pro",
+          description: "For companies and more advanced projects",
+          priceGs: "From Gs. 3.550.000",
+          priceUsd: "One-time or starting price",
+          features: [
+            "More internal pages",
+            "Customized design",
+            "Professional structure",
+            "Features based on project",
+            "Better brand presentation"
+          ],
+          btnText: "Request proposal",
+          whatsappKey: "pro",
+          highlight: false,
+          link: "/es/servicios/desarrollo-web-pro"
+        },
+        {
+          id: "sistemas_medida",
+          title: "Custom",
+          titleAccent: "Systems",
+          description: "For more complex projects",
+          priceGs: "From Gs. 5.900.000",
+          priceUsd: "Budget based on scope",
+          features: [
+            "Custom features",
+            "Admin panel if applicable",
+            "Order, reservation or user management",
+            "Integrations as needed",
+            "Budget based on scope"
           ],
           btnText: "Quote project",
           whatsappKey: "sistema",
-          highlight: false
+          highlight: false,
+          link: "/es/servicios/sistemas-informaticos-paraguay"
         }
       ]
     },
@@ -666,7 +718,7 @@ export const dictionary = {
         },
         {
           q: "How much does it cost to create a basic website?",
-          a: "A basic website for digital presence starts at Gs. 900,000. The final price depends on the number of sections, design, features, and required content."
+          a: "A basic website for digital presence starts at Gs. 750,000. The final price depends on the number of sections, design, features, and required content."
         },
         {
           q: "Are hosting and domain included?",

@@ -7,21 +7,24 @@ interface ServiceCardProps {
     accent: string;
     border: string;
     cardBg: string;
+    className?: string;
+    style?: React.CSSProperties;
 }
 
-export default function ServiceCard({ children, accent, border, cardBg }: ServiceCardProps) {
+export default function ServiceCard({ children, accent, border, cardBg, className = "", style = {} }: ServiceCardProps) {
     return (
         <article 
+            className={className}
             style={{ 
                 padding: "32px", 
                 borderRadius: "16px", 
                 backgroundColor: cardBg, 
                 border: `1px solid ${border}`, 
-                transition: "border-color 0.3s ease",
-                cursor: "default"
+                transition: "all 0.4s cubic-bezier(0.22, 1, 0.36, 1)",
+                cursor: "default",
+                width: "100%",
+                ...style
             }}
-            onMouseEnter={(e) => e.currentTarget.style.borderColor = accent}
-            onMouseLeave={(e) => e.currentTarget.style.borderColor = border}
         >
             {children}
         </article>

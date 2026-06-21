@@ -4,8 +4,6 @@ import ScrollProgress from "@/components/ScrollProgress";
 import HomeClient from "@/components/HomeClient";
 import dynamic from "next/dynamic";
 
-const WhatsAppButton = dynamic(() => import("@/components/WhatsAppButton"), { ssr: true });
-
 import { Metadata } from "next";
 
 type Props = {
@@ -61,7 +59,6 @@ export default function Home() {
       <ScrollProgress />
       <Navbar />
       <HomeClient />
-      <WhatsAppButton />
     </main>
   );
 }
