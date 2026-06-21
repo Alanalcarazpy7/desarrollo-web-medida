@@ -2,7 +2,7 @@
 
 import { ReactNode } from "react";
 import Link from "next/link";
-import { track } from "@vercel/analytics";
+import { trackEvent } from "@/lib/analytics";
 import { getWhatsAppLink } from "@/lib/whatsapp";
 
 interface CTAButtonProps {
@@ -56,7 +56,7 @@ export default function CTAButton({
     };
 
     const handleClick = () => {
-        track(eventName, { href: finalHref, isWhatsApp: isExternal });
+        trackEvent(eventName, { href: finalHref, isWhatsApp: isExternal });
     };
 
     if (isExternal) {

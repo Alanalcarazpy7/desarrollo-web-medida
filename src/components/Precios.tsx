@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { useLanguage } from "@/context/LanguageContext";
-import { track } from "@vercel/analytics";
+import { trackEvent } from "@/lib/analytics";
 import { getWhatsAppLink, whatsappMessages } from "@/lib/whatsapp";
 import Link from "next/link";
 
@@ -263,9 +263,9 @@ export default function Precios() {
                         rel={isWhatsApp ? "noopener noreferrer" : undefined}
                         onClick={() => {
                             if (isWhatsApp) {
-                                track('click_whatsapp', { source: 'pricing', plan: plan.id, lang: language });
+                                trackEvent('click_whatsapp', { source: 'pricing', plan: plan.id, lang: language });
                             } else {
-                                track('click_service_detail', { source: 'pricing', plan: plan.id, lang: language });
+                                trackEvent('click_service_detail', { source: 'pricing', plan: plan.id, lang: language });
                             }
                         }}
                         whileHover={{

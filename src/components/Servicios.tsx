@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { useLanguage } from "@/context/LanguageContext";
+import { trackEvent } from "@/lib/analytics";
 
 export default function Servicios() {
     const { t, language } = useLanguage();
@@ -227,6 +228,7 @@ export default function Servicios() {
                             <motion.a
                                 href={servicio.href || "#contacto"}
                                 key={servicio.numero}
+                                onClick={() => trackEvent('click_service_detail', { source: 'home_services', service: servicio.titulo, lang: language })}
                                 initial={{ opacity: 0, y: 40 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true, margin: "-50px" }}

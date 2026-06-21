@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
 import { LanguageProvider } from "@/context/LanguageContext";
+import Script from "next/script";
 import "../globals.css";
 
 const inter = Inter({
@@ -141,6 +142,18 @@ export default async function RootLayout({
     <html lang={lang || "es"}>
       <body className={inter.className}>
         <LanguageProvider initialLang={(lang as "es" | "en") || "es"}>
+          <Script
+            src="https://www.googletagmanager.com/gtag/js?id=G-1MW5KV003E"
+            strategy="afterInteractive"
+          />
+          <Script id="google-analytics" strategy="afterInteractive">
+            {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-1MW5KV003E');
+            `}
+          </Script>
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

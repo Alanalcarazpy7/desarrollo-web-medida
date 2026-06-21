@@ -4,7 +4,7 @@ import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from
 import { useState, MouseEvent } from "react";
 import Image from "next/image";
 import { useLanguage } from "@/context/LanguageContext";
-import { track } from "@vercel/analytics";
+import { trackEvent } from "@/lib/analytics";
 import { getWhatsAppLink } from "@/lib/whatsapp";
 
 // Componente de tarjeta 3D
@@ -87,7 +87,7 @@ function ProjectCard({
                         href={project.link} 
                         target="_blank" 
                         rel="noopener noreferrer" 
-                        onClick={() => track('click_project_view', { project: project.titulo, lang: language, source: 'image' })}
+                        onClick={() => trackEvent('click_project_view', { project: project.titulo, lang: language, source: 'image' })}
                         className="relative aspect-[16/10] w-full shrink-0 block overflow-hidden group-image-container" 
                         style={{ perspective: '1000px' }}
                     >
@@ -293,7 +293,7 @@ function ProjectCard({
                                 href={project.link}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                onClick={() => track('click_project_view', { project: project.titulo, lang: language, source: 'cta' })}
+                                onClick={() => trackEvent('click_project_view', { project: project.titulo, lang: language, source: 'cta' })}
                                 style={{
                                     display: "inline-flex",
                                     alignItems: "center",
@@ -320,7 +320,7 @@ function ProjectCard({
                                 href={whatsappUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                onClick={() => track('click_whatsapp', { source: 'project_similar', project: project.titulo, lang: language })}
+                                onClick={() => trackEvent('click_whatsapp', { source: 'project_similar', project: project.titulo, lang: language })}
                                 style={{
                                     display: "inline-flex",
                                     alignItems: "center",
