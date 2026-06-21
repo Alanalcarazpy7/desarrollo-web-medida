@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { useLanguage } from "@/context/LanguageContext";
-import { track } from "@vercel/analytics";
+import { trackEvent } from "@/lib/analytics";
 import { getWhatsAppLink } from "@/lib/whatsapp";
 
 export default function Contacto() {
@@ -42,7 +42,7 @@ export default function Contacto() {
         setIsSubmitting(true);
 
         setTimeout(() => {
-            track("submit_contact_form", {
+            trackEvent("submit_contact_form", {
                 project_type: formData.tipoProyecto,
                 budget: formData.presupuesto,
                 lang: language
@@ -95,7 +95,7 @@ Detalles: ${formData.mensaje.trim()}`;
             descripcion: t('contact.methods.whatsapp.desc'),
             valor: "+595 994 295092",
             link: "https://wa.me/595994295092",
-            onClick: () => track('click_whatsapp', { source: 'contact_card', lang: language })
+            onClick: () => trackEvent('click_whatsapp', { source: 'contact_card', lang: language })
         },
         {
             icon: (
@@ -107,7 +107,7 @@ Detalles: ${formData.mensaje.trim()}`;
             descripcion: t('contact.methods.email.desc'),
             valor: "alantechxpy@gmail.com",
             link: "mailto:alantechxpy@gmail.com",
-            onClick: () => track('click_email', { source: 'contact_card', lang: language })
+            onClick: () => trackEvent('click_email', { source: 'contact_card', lang: language })
         },
         {
             icon: (
@@ -119,7 +119,7 @@ Detalles: ${formData.mensaje.trim()}`;
             descripcion: t('contact.methods.instagram.desc'),
             valor: "@alandev_py",
             link: "https://www.instagram.com/alandev_py/",
-            onClick: () => track('click_instagram', { source: 'contact_card', lang: language })
+            onClick: () => trackEvent('click_instagram', { source: 'contact_card', lang: language })
         },
     ];
 

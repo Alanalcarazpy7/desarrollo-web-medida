@@ -3,7 +3,7 @@
 import { useRef, useState, useEffect } from "react";
 import { motion, useTransform, useMotionValue, useSpring } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
-import { track } from "@vercel/analytics";
+import { trackEvent } from "@/lib/analytics";
 import { getWhatsAppLink, whatsappMessages } from "@/lib/whatsapp";
 
 export default function Hero() {
@@ -161,7 +161,7 @@ export default function Hero() {
                                 href={getWhatsAppLink(whatsappMessages[language].hero)}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                onClick={() => track('click_whatsapp', { source: 'hero_primary', lang: language })}
+                                onClick={() => trackEvent('click_whatsapp', { source: 'hero_primary', lang: language })}
                                 whileHover={{ scale: 1.05, y: -2 }}
                                 whileTap={{ scale: 0.98 }}
                                 className="relative rounded-full font-bold text-lg overflow-hidden group cursor-pointer flex items-center justify-center"
@@ -226,7 +226,7 @@ export default function Hero() {
                             {/* Botón secundario */}
                             <motion.a
                                 href="#proyectos"
-                                onClick={() => track('click_hero_projects', { lang: language })}
+                                onClick={() => trackEvent('click_hero_projects', { lang: language })}
                                 whileHover={{ scale: 1.05, y: -2 }}
                                 whileTap={{ scale: 0.98 }}
                                 className="relative rounded-full font-bold text-lg overflow-hidden group cursor-pointer flex items-center justify-center"

@@ -12,6 +12,9 @@ const SnowEffect = dynamic(() => import("@/components/SnowEffect"), {
     loading: () => null
 });
 
+import { trackEvent } from "@/lib/analytics";
+
+const Navbar = dynamic(() => import("@/components/Navbar"));
 const Footer = dynamic(() => import("@/components/Footer"), { ssr: true });
 
 interface ServiceItem {
@@ -261,6 +264,7 @@ export default function ServiciosPageContent({ lang }: ServiciosPageContentProps
 
     return (
         <main style={{ minHeight: "100vh", backgroundColor: "#000", color: "#fff", position: "relative", overflowX: "hidden", display: "flex", flexDirection: "column" }}>
+            <Navbar />
             
             {/* Snow Effect - Background Layer */}
             <div style={{ position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 0 }}>
@@ -467,6 +471,7 @@ export default function ServiciosPageContent({ lang }: ServiciosPageContentProps
                                             if (target.closest('.whatsapp-pill-btn')) {
                                                 return;
                                             }
+                                            trackEvent('click_service_detail', { source: 'services_list', service: service.title, lang });
                                             router.push(service.link);
                                         };
 
@@ -717,6 +722,7 @@ export default function ServiciosPageContent({ lang }: ServiciosPageContentProps
                                                                 href={whatsappLink} 
                                                                 target="_blank" 
                                                                 rel="noopener noreferrer" 
+                                                                onClick={() => trackEvent('click_whatsapp', { source: 'services_list', service: service.title, lang })}
                                                                 style={{
                                                                     display: 'flex',
                                                                     alignItems: 'center',
@@ -842,7 +848,11 @@ export default function ServiciosPageContent({ lang }: ServiciosPageContentProps
                                 ? "Escribinos y te orientamos de forma gratuita según las necesidades específicas de tu negocio."
                                 : "Write to us and we will guide you for free based on the specific needs of your business."}
                         </p>
-                        <a href={generalCtaLink} style={{ textDecoration: 'none' }}>
+                        <a 
+                            href={generalCtaLink} 
+                            style={{ textDecoration: 'none' }}
+                            onClick={() => trackEvent('click_whatsapp', { source: 'services_footer_cta', lang })}
+                        >
                             <motion.button
                                 whileHover={{ scale: 1.05, boxShadow: `0 12px 48px ${theme.accent}40` }}
                                 whileTap={{ scale: 0.95 }}

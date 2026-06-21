@@ -63,16 +63,21 @@ export default function BackgroundParticles() {
                 const currentOpacity = this.opacity * (0.8 + Math.sin(this.pulse) * 0.2);
 
                 ctx.save();
+                
+                // Simula un brillo suave con un círculo mayor de baja opacidad (mucho más rápido que shadowBlur)
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size * 2, 0, Math.PI * 2);
+                ctx.fillStyle = theme.accent;
+                ctx.globalAlpha = currentOpacity * 0.15;
+                ctx.fill();
+
+                // Dibuja el núcleo de la partícula
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fillStyle = theme.accent;
                 ctx.globalAlpha = currentOpacity;
-
-                // Brillo del sistema
-                ctx.shadowBlur = 8;
-                ctx.shadowColor = "rgba(0, 217, 255, 0.8)";
-
                 ctx.fill();
+                
                 ctx.restore();
             }
         }
