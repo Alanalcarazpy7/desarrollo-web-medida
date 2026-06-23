@@ -34,7 +34,7 @@ export const projectsData: Project[] = [
         technologies: ["React", "Supabase", "Zustand"],
         image: "/projects/modashoppy.png",
         featured: true,
-        demoUrl: "https://modashoppy.netlify.app/",
+        demoUrl: "https://modashoppyy.netlify.app/",
         accessType: "live",
         translations: {
             es: {
@@ -57,8 +57,9 @@ export const projectsData: Project[] = [
         technologies: ["React", "Supabase", "Zustand", "TanStack"],
         image: "/projects/stockpro.jpg",
         objectPosition: "left",
-        featured: false,
-        accessType: "image-only",
+        featured: true,
+        //demoUrl: "https://control-inventarios.netlify.app/login",
+        accessType: "live",
         translations: {
             es: {
                 title: "StockPRO",
@@ -103,7 +104,7 @@ export const projectsData: Project[] = [
         categoryKey: "website",
         technologies: ["React", "HTML5", "CSS3"],
         image: "/projects/inmobiliaria.jpg",
-        featured: true,
+        featured: false,
         demoUrl: "https://alanalcarazpy7.github.io/gestion-inmobiliaria/",
         accessType: "live",
         translations: {
@@ -127,7 +128,7 @@ export const projectsData: Project[] = [
         technologies: ["HTML5", "CSS3", "JavaScript"],
         image: "/projects/amsterdam.png",
         featured: false,
-        demoUrl: "https://amsterdam-resto-bar.netlify.app/",
+        demoUrl: "https://amsterdam-resto-barpy.netlify.app/",
         accessType: "live",
         translations: {
             es: {
@@ -196,8 +197,7 @@ export const projectsData: Project[] = [
         technologies: ["React", "Zustand", "Firebase", "CSS3"],
         image: "/projects/VasosPy-termos.png",
         featured: true,
-        demoUrl: "https://vasos-py-demo.vercel.app/",
-        accessType: "live",
+        accessType: "image-only",
         translations: {
             es: {
                 title: "VasosPy",
@@ -218,9 +218,8 @@ export const projectsData: Project[] = [
         categoryKey: "website",
         technologies: ["HTML5", "CSS3", "JavaScript"],
         image: "/projects/bar-san-roque.png",
-        featured: true,
-        demoUrl: "https://bar-san-roque-demo.vercel.app/",
-        accessType: "live",
+        featured: false,
+        accessType: "image-only",
         translations: {
             es: {
                 title: "Bar San Roque",
@@ -242,8 +241,7 @@ export const projectsData: Project[] = [
         technologies: ["React", "TailwindCSS", "Framer Motion"],
         image: "/projects/barberia-master-barber.png",
         featured: true,
-        demoUrl: "https://master-barber-vip.vercel.app/",
-        accessType: "live",
+        accessType: "image-only",
         translations: {
             es: {
                 title: "Barbería Master Barber",
