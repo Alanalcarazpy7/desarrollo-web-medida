@@ -61,6 +61,37 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }))
   })
 
-  return [...routesMap, ...blogEntries]
+  const projectsEntries: MetadataRoute.Sitemap = [
+    {
+      url: `${baseUrl}/es/proyectos`,
+      lastModified: new Date('2026-06-23'),
+      changeFrequency: 'monthly' as const,
+      priority: 0.9,
+      alternates: {
+        languages: {
+          es: `${baseUrl}/es/proyectos`,
+          "es-PY": `${baseUrl}/es/proyectos`,
+          en: `${baseUrl}/en/projects`,
+          'x-default': `${baseUrl}/es/proyectos`,
+        }
+      }
+    },
+    {
+      url: `${baseUrl}/en/projects`,
+      lastModified: new Date('2026-06-23'),
+      changeFrequency: 'monthly' as const,
+      priority: 0.9,
+      alternates: {
+        languages: {
+          es: `${baseUrl}/es/proyectos`,
+          "es-PY": `${baseUrl}/es/proyectos`,
+          en: `${baseUrl}/en/projects`,
+          'x-default': `${baseUrl}/es/proyectos`,
+        }
+      }
+    }
+  ]
+
+  return [...routesMap, ...blogEntries, ...projectsEntries]
 }
 

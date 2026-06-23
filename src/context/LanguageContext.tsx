@@ -27,7 +27,14 @@ export const LanguageProvider = ({ children, initialLang }: { children: React.Re
         
         let newPath = pathname;
         if (pathname.startsWith('/es/') || pathname.startsWith('/en/')) {
-             newPath = `/${lang}${pathname.substring(3)}`;
+            const cleanPath = pathname.replace(/\/$/, '');
+            if (lang === 'en' && cleanPath === '/es/proyectos') {
+                newPath = '/en/projects';
+            } else if (lang === 'es' && cleanPath === '/en/projects') {
+                newPath = '/es/proyectos';
+            } else {
+                newPath = `/${lang}${pathname.substring(3)}`;
+            }
         } else if (pathname === '/es' || pathname === '/en') {
              newPath = `/${lang}`;
         }
