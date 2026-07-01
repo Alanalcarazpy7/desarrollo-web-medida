@@ -58,8 +58,7 @@ export const projectsData: Project[] = [
         image: "/projects/stockpro.jpg",
         objectPosition: "left",
         featured: true,
-        //demoUrl: "https://control-inventarios.netlify.app/login",
-        accessType: "live",
+        accessType: "image-only",
         translations: {
             es: {
                 title: "StockPRO",
@@ -197,7 +196,8 @@ export const projectsData: Project[] = [
         technologies: ["React", "Zustand", "Firebase", "CSS3"],
         image: "/projects/VasosPy-termos.png",
         featured: true,
-        accessType: "image-only",
+        demoUrl: "https://vasos-py-demo.vercel.app/",
+        accessType: "live",
         translations: {
             es: {
                 title: "VasosPy",
@@ -219,7 +219,8 @@ export const projectsData: Project[] = [
         technologies: ["HTML5", "CSS3", "JavaScript"],
         image: "/projects/bar-san-roque.png",
         featured: false,
-        accessType: "image-only",
+        demoUrl: "https://bar-san-roque-demo.vercel.app/",
+        accessType: "live",
         translations: {
             es: {
                 title: "Bar San Roque",
@@ -241,7 +242,8 @@ export const projectsData: Project[] = [
         technologies: ["React", "TailwindCSS", "Framer Motion"],
         image: "/projects/barberia-master-barber.png",
         featured: true,
-        accessType: "image-only",
+        demoUrl: "https://master-barber-vip.vercel.app/",
+        accessType: "live",
         translations: {
             es: {
                 title: "Barbería Master Barber",
