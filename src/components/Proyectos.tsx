@@ -483,7 +483,10 @@ export default function Proyectos() {
             id="proyectos"
             className="relative overflow-hidden flex flex-col items-center w-full min-h-screen"
             style={{
-                marginTop: '140px',
+                // Antes 140px, pensado para cuando venía justo después del
+                // Hero. Con Proceso ahora en el medio (con su propio
+                // padding), ese margen extra sumaba un salto grande.
+                marginTop: '48px',
                 scrollMarginTop: '100px'
             }}
         >
@@ -511,7 +514,7 @@ export default function Proyectos() {
             </div>
 
             {/* Elementos de fondo */}
-            <div className="w-full max-w-7xl px-6 md:px-8 relative z-10">
+            <div className="section-tablet-pad w-full max-w-7xl px-6 md:px-8 relative z-10">
 
                 {/* Encabezado Principal Centrado */}
                 <div className="flex flex-col items-center text-center w-full mb-12">
@@ -549,8 +552,11 @@ export default function Proyectos() {
                             </span>
                         </motion.div>
 
-                        {/* Título (Una Sola Línea) */}
-                        <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-center" style={{ marginTop: '16px', marginBottom: '24px', lineHeight: '1.15', whiteSpace: 'nowrap' }}>
+                        {/* Título en una sola línea desde sm: (640px) hacia arriba. En
+                            mobile chico, forzar nowrap con text-3xl no entra en el ancho
+                            disponible (~272px con el padding de la sección) y el título
+                            se cortaba — mejor que envuelva a 2 líneas ahí. */}
+                        <h2 className="projects-title text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-center" style={{ marginTop: '16px', marginBottom: '24px', lineHeight: '1.15' }}>
                             <span style={{ color: theme.text }}>{t('projects.titleStart')} </span>
                             <span
                                 style={{
@@ -694,7 +700,7 @@ export default function Proyectos() {
                 </div>
 
                 {/* Cuadrícula 3D de proyectos */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center md:justify-items-stretch perspective-2000 pb-24 items-stretch">
+                <div className="section-tablet-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center md:justify-items-stretch perspective-2000 pb-24 items-stretch">
                     <AnimatePresence mode="popLayout">
                         {proyectosFiltrados.map((proyecto, index) => (
                             <ProjectCard

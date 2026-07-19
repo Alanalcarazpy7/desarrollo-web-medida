@@ -51,6 +51,12 @@ export default function Footer() {
         ],
     };
 
+    const contactLinks = [
+        { label: "WhatsApp: +595 994 295092", href: "https://wa.me/595994295092", external: true },
+        { label: "Instagram: @alandev_py", href: "https://www.instagram.com/alandev_py/", external: true },
+        { label: "solvatech.com.py", href: "https://solvatech.com.py", external: true },
+    ];
+
     const listStyle = {
         display: 'flex',
         flexDirection: 'column' as const,
@@ -92,7 +98,7 @@ export default function Footer() {
             <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 10 }}>
                 <div style={{
                     display: 'grid',
-                    gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : '1.5fr 1fr 1fr',
+                    gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : '1.3fr 1fr 1fr 1fr',
                     gap: isMobile ? '40px 20px' : '60px',
                     marginBottom: '64px',
                     textAlign: isMobile ? 'center' : 'left'
@@ -207,7 +213,23 @@ export default function Footer() {
                         </div>
                     </div>
 
-
+                    <div className="flex flex-col items-center lg:items-start">
+                        <h4 style={{ color: theme.text, fontWeight: 700, marginBottom: '20px' }}>{t('footer.contactTitle')}</h4>
+                        <div style={listStyle}>
+                            {contactLinks.map((item) => (
+                                <a
+                                    key={item.label}
+                                    href={item.href}
+                                    target={item.external ? "_blank" : undefined}
+                                    rel={item.external ? "noopener noreferrer" : undefined}
+                                    style={linkStyle}
+                                    className="footer-link"
+                                >
+                                    {item.label}
+                                </a>
+                            ))}
+                        </div>
+                    </div>
                 </div>
 
                 <div style={{

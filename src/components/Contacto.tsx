@@ -135,7 +135,7 @@ Detalles: ${formData.mensaje.trim()}`;
                 scrollMarginTop: '100px'
             }}
         >
-            <div className="w-full max-w-7xl px-6 md:px-8 relative z-10">
+            <div className="section-tablet-pad w-full max-w-7xl px-6 md:px-8 relative z-10">
                 {/* Encabezado */}
                 <motion.div
                     initial={{ opacity: 0, y: 40 }}

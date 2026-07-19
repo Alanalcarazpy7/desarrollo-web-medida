@@ -27,6 +27,53 @@ export interface Project {
 
 export const projectsData: Project[] = [
     {
+        id: "academia-gps",
+        slug: "academia-gps",
+        title: "Academia GPS",
+        categoryKey: "website",
+        technologies: ["Landing de conversión", "WhatsApp", "Pagopar"],
+        image: "/projects/academia-gps-trilogia-tol.png",
+        objectPosition: "left",
+        featured: true,
+        demoUrl: "https://www.academiagps.com/",
+        accessType: "live",
+        translations: {
+            es: {
+                title: "Academia GPS / La Trilogía TOL",
+                description: "Landing page de venta para formación online, con manejo de objeciones y botones directos a Pagopar y WhatsApp.",
+                alt: "Logo de Academia GPS, landing de venta para formación online"
+            },
+            en: {
+                title: "Academia GPS / La Trilogía TOL",
+                description: "Sales landing page for online training, with objection handling and direct buttons to Pagopar and WhatsApp.",
+                alt: "Academia GPS logo, sales landing page for online training"
+            }
+        }
+    },
+    {
+        id: "morinigo-asociados",
+        slug: "morinigo-y-asociados",
+        title: "Morinigo y Asociados",
+        categoryKey: "website",
+        technologies: ["Sitio institucional", "Diseño responsive", "Formulario de contacto"],
+        image: "/projects/morinigo-y-asociados.png",
+        featured: true,
+        demoUrl: "https://www.morinigoyasociados.com.py/",
+        accessType: "live",
+        translations: {
+            es: {
+                title: "Morinigo y Asociados",
+                description: "Web institucional para estudio de auditores y consultores, con presentación de servicios y diseño adaptado a celular.",
+                alt: "Morinigo y Asociados, estudio jurídico y contable"
+            },
+            en: {
+                title: "Morinigo y Asociados",
+                description: "Institutional website for a firm of auditors and consultants, with services and mobile-friendly design.",
+                alt: "Morinigo y Asociados, legal and accounting firm"
+            }
+        }
+    },
+    {
         id: "modashoppy",
         slug: "modashoppy",
         title: "ModaShoppy",

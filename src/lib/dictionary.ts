@@ -19,10 +19,7 @@ export const dictionary = {
       description: "Creamos páginas web, catálogos digitales y sistemas simples para que tu negocio se vea profesional, reciba más consultas y venda mejor por WhatsApp.",
       ctaPrimary: "Quiero mi web",
       ctaSecondary: "Ver proyectos",
-      stat1: "Proyectos entregados",
-      stat2: "Clientes satisfechos",
-      stat3: "Compromiso",
-      stat4: "Calificación",
+      trustedByLabel: "Negocios que ya confían en SolvaTech",
     },
     services: {
       badge: "Soluciones Digitales",
@@ -94,6 +91,30 @@ export const dictionary = {
         }
       }
     },
+    caseStudies: {
+      statusDevelopment: "Proyecto en desarrollo",
+      statusPublished: "Publicado",
+      viewSite: "Ver sitio"
+    },
+    testimonials: {
+      badge: "Casos y Clientes",
+      titleStart: "Confianza construida",
+      titleHighlight: "proyecto a proyecto",
+      subtitle: "Cada proyecto se trabaja con orden, comunicación clara y foco en que el negocio se vea más profesional.",
+      videoBadge: "Testimonios en Video",
+      videoTitleStart: "Lo que dicen",
+      videoTitleHighlight: "nuestros clientes",
+      videoSubtitle: "Historias reales, contadas por quienes ya confiaron en SolvaTech.",
+      coverflowHint: "Tocá una tarjeta lateral para llevarla al frente",
+      playVideo: "Reproducir video",
+      pendingText: "Testimonio pendiente de aprobación del cliente.",
+      developmentText: "Proyecto en desarrollo. Opinión del cliente próximamente.",
+      videoUpcoming: "Video próximamente",
+      viewMore: "Ver más",
+      viewLess: "Ver menos",
+      ctaTitle: "¿Tu negocio va a ser el próximo caso de éxito?",
+      ctaButton: "Consultar por WhatsApp"
+    },
     projects: {
       badge: "Portfolio",
       titleStart: "Proyectos",
@@ -134,7 +155,7 @@ export const dictionary = {
       titleStart: "Planes para llevar tu",
       titleHighlight: "Negocio a Internet",
       subtitle: "Precios pensados para negocios locales, emprendedores y empresas que quieren empezar o mejorar su presencia digital.",
-      tag: "Más recomendado",
+      tag: "Más elegido",
       cta: "Contratar ahora",
       footer: "* Los precios pueden variar según el alcance, cantidad de secciones, funciones y contenido necesario.",
       cardNote: "* El hosting está incluido por el primer año en los planes principales. El dominio puede incluirse según disponibilidad y extensión. Luego del primer año, hosting y dominio requieren renovación anual.",
@@ -152,37 +173,19 @@ export const dictionary = {
       ],
       plans: [
         {
-          id: "promo_lanzamiento",
-          title: "Promo",
-          titleAccent: "Lanzamiento",
-          description: "Ideal para nuevos proyectos",
-          priceGs: "Gs. 550.000",
-          priceUsd: "Precio regular Gs. 750.000",
-          features: [
-            "Diseño responsive",
-            "Botón directo a WhatsApp",
-            "Secciones para servicios y contacto",
-            "Ideal para negocios locales",
-            "Pago único"
-          ],
-          btnText: "Pedí info",
-          whatsappKey: "promo",
-          highlight: true,
-          link: "/es#contacto"
-        },
-        {
           id: "web_basica",
           title: "Web",
           titleAccent: "Básica",
-          description: "Para negocios que quieren presencia online",
-          priceGs: "Gs. 750.000",
-          priceUsd: "Pago único",
+          description: "Ideal para presencia inicial",
+          priceGs: "Gs. 550.000",
+          priceUsd: "Precio regular Gs. 750.000 · Pago único",
+          specialDesc: "Hasta 4 secciones. Para webs más completas, recomendamos el plan Web Estándar.",
           features: [
-            "Diseño profesional",
-            "Adaptada a celulares",
-            "Secciones principales",
-            "Contacto y ubicación",
-            "Botón a WhatsApp"
+            "Diseño responsive",
+            "Botón directo a WhatsApp",
+            "Hasta 4 secciones",
+            "Ideal para negocios locales",
+            "Pago único"
           ],
           btnText: "Solicitar web",
           whatsappKey: "basica",
@@ -212,11 +215,11 @@ export const dictionary = {
           id: "web_estandar",
           title: "Web",
           titleAccent: "Estándar",
-          description: "Una web más completa para tu negocio",
+          description: "Ideal para negocios que quieren una web más completa",
           priceGs: "Gs. 1.250.000",
           priceUsd: "Pago único",
           features: [
-            "Varias secciones",
+            "Más de 4 secciones",
             "Diseño más completo",
             "Inicio, servicios, nosotros y contacto",
             "Ubicación y redes",
@@ -224,7 +227,7 @@ export const dictionary = {
           ],
           btnText: "Consultar web",
           whatsappKey: "estandar",
-          highlight: false,
+          highlight: true,
           link: "/es/servicios/desarrollo-web-estandar"
         },
         {
@@ -320,6 +323,7 @@ export const dictionary = {
       rights: "Todos los derechos reservados.",
       servicesTitle: "Servicios",
       companyTitle: "Empresa",
+      contactTitle: "Contacto",
       services: {
         web: "Desarrollo Web",
         ecommerce: "E-commerce",
@@ -351,7 +355,7 @@ export const dictionary = {
         },
         {
           q: "¿Cuánto cuesta crear una página web básica?",
-          a: "Una web básica para presencia digital empieza desde Gs. 750.000. El precio final depende de la cantidad de secciones, diseño, funciones y contenido necesario."
+          a: "Una web básica para presencia digital (hasta 4 secciones) empieza desde Gs. 550.000. Si necesitás más secciones, el plan Web Estándar es la opción recomendada. El precio final depende del alcance, diseño y contenido necesario."
         },
         {
           q: "¿El hosting y dominio están incluidos?",
@@ -410,10 +414,7 @@ export const dictionary = {
       description: "We build websites, digital catalogs and simple systems so your business looks professional, gets more inquiries and sells better through WhatsApp.",
       ctaPrimary: "Get my website",
       ctaSecondary: "View projects",
-      stat1: "Projects delivered",
-      stat2: "Happy clients",
-      stat3: "Commitment",
-      stat4: "Rating",
+      trustedByLabel: "Businesses that already trust SolvaTech",
     },
     services: {
       badge: "Digital Solutions",
@@ -485,6 +486,30 @@ export const dictionary = {
         }
       }
     },
+    caseStudies: {
+      statusDevelopment: "In development",
+      statusPublished: "Published",
+      viewSite: "View site"
+    },
+    testimonials: {
+      badge: "Cases & Clients",
+      titleStart: "Trust built",
+      titleHighlight: "project by project",
+      subtitle: "Every project is handled with order, clear communication, and a focus on making your business look more professional.",
+      videoBadge: "Video Testimonials",
+      videoTitleStart: "What our",
+      videoTitleHighlight: "clients say",
+      videoSubtitle: "Real stories, told by those who already trusted SolvaTech.",
+      coverflowHint: "Tap a card to bring it into focus",
+      playVideo: "Play video",
+      pendingText: "Testimonial pending client approval.",
+      developmentText: "Project in development. Client feedback coming soon.",
+      videoUpcoming: "Video coming soon",
+      viewMore: "Read more",
+      viewLess: "Read less",
+      ctaTitle: "Will your business be the next success story?",
+      ctaButton: "Ask on WhatsApp"
+    },
     projects: {
       badge: "Portfolio",
       titleStart: "Completed",
@@ -525,7 +550,7 @@ export const dictionary = {
       titleStart: "Plans to take your",
       titleHighlight: "Business Online",
       subtitle: "Pricing designed for local businesses, entrepreneurs and companies that want to start or improve their digital presence.",
-      tag: "Most recommended",
+      tag: "Most Chosen",
       cta: "Hire now",
       footer: "* Prices may vary depending on scope, number of sections, features, and required content.",
       cardNote: "* Hosting is included for the first year on main plans. The domain can be included based on availability and extension. After the first year, hosting and domain require annual renewal.",
@@ -543,37 +568,19 @@ export const dictionary = {
       ],
       plans: [
         {
-          id: "promo_lanzamiento",
-          title: "Launch",
-          titleAccent: "Promo",
-          description: "Ideal for new projects",
-          priceGs: "Gs. 550.000",
-          priceUsd: "Regular price Gs. 750.000",
-          features: [
-            "Responsive design",
-            "Direct button to WhatsApp",
-            "Sections for services and contact",
-            "Ideal for local businesses",
-            "One-time payment"
-          ],
-          btnText: "Get info",
-          whatsappKey: "promo",
-          highlight: true,
-          link: "/en#contacto"
-        },
-        {
           id: "web_basica",
           title: "Basic",
           titleAccent: "Web",
-          description: "For businesses that want online presence",
-          priceGs: "Gs. 750.000",
-          priceUsd: "One-time payment",
+          description: "Ideal for an initial presence",
+          priceGs: "Gs. 550.000",
+          priceUsd: "Regular price Gs. 750.000 · One-time payment",
+          specialDesc: "Up to 4 sections. For a more complete website, we recommend the Standard Web plan.",
           features: [
-            "Professional design",
-            "Mobile friendly",
-            "Main sections",
-            "Contact and location",
-            "WhatsApp button"
+            "Responsive design",
+            "Direct button to WhatsApp",
+            "Up to 4 sections",
+            "Ideal for local businesses",
+            "One-time payment"
           ],
           btnText: "Request web",
           whatsappKey: "basica",
@@ -603,11 +610,11 @@ export const dictionary = {
           id: "web_estandar",
           title: "Standard",
           titleAccent: "Web",
-          description: "A more complete web for your business",
+          description: "Ideal for businesses that want a more complete website",
           priceGs: "Gs. 1.250.000",
           priceUsd: "One-time payment",
           features: [
-            "Several sections",
+            "More than 4 sections",
             "More complete design",
             "Home, services, about and contact",
             "Location and social networks",
@@ -615,7 +622,7 @@ export const dictionary = {
           ],
           btnText: "Inquire web",
           whatsappKey: "estandar",
-          highlight: false,
+          highlight: true,
           link: "/es/servicios/desarrollo-web-estandar"
         },
         {
@@ -711,6 +718,7 @@ export const dictionary = {
       rights: "All rights reserved.",
       servicesTitle: "Services",
       companyTitle: "Company",
+      contactTitle: "Contact",
       services: {
         web: "Web Development",
         ecommerce: "E-commerce",
@@ -742,7 +750,7 @@ export const dictionary = {
         },
         {
           q: "How much does it cost to create a basic website?",
-          a: "A basic website for digital presence starts at Gs. 750,000. The final price depends on the number of sections, design, features, and required content."
+          a: "A basic website for digital presence (up to 4 sections) starts at Gs. 550,000. If you need more sections, the Standard Web plan is the recommended option. The final price depends on scope, design, and required content."
         },
         {
           q: "Are hosting and domain included?",

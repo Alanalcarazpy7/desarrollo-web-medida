@@ -26,7 +26,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/servicios/desarrollo-web-pro', date: '2026-06-21' },
     { path: '/servicios/desarrollo-web-catalogo', date: '2026-06-21' },
     { path: '/servicios/posicionamiento-google', date: '2026-06-21' },
-    { path: '/servicios/dominio-hosting', date: '2026-06-21' },
+    { path: '/servicios/hosting-web-administrado', date: '2026-07-19' },
+    { path: '/servicios/dominio-configuracion-web', date: '2026-07-19' },
     { path: '/servicios/soporte-web-basico', date: '2026-06-21' },
   ] as const
 
