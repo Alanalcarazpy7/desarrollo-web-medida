@@ -105,8 +105,8 @@ Detalles: ${formData.mensaje.trim()}`;
             ),
             titulo: t('contact.methods.email.title'),
             descripcion: t('contact.methods.email.desc'),
-            valor: "alantechxpy@gmail.com",
-            link: "mailto:alantechxpy@gmail.com",
+            valor: "solvatech.dev@gmail.com",
+            link: "mailto:solvatech.dev@gmail.com",
             onClick: () => trackEvent('click_email', { source: 'contact_card', lang: language })
         },
         {

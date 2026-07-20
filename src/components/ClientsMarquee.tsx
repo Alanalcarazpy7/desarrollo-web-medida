@@ -53,7 +53,7 @@ function LogoChip({ item, width, height }: { item: { id: string; businessName: s
             title={item.businessName}
         >
             <div style={{ position: "relative", width: "100%", height: "100%" }}>
-                <Image src={item.logo as string} alt={`Logo ${item.businessName}`} fill style={{ objectFit: "contain" }} />
+                <Image src={item.logo as string} alt={`Logo ${item.businessName}`} fill sizes="150px" style={{ objectFit: "contain" }} />
             </div>
         </div>
     );

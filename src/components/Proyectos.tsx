@@ -141,6 +141,7 @@ function ProjectCard({
                                         src={project.image}
                                         alt={currentTranslation.alt}
                                         fill
+                                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                         className={`object-cover ${project.objectPosition === 'left' ? 'object-left' : 'object-center'}`}
                                         priority={index < 2}
                                     />
@@ -152,6 +153,7 @@ function ProjectCard({
                                         src={project.imageBack}
                                         alt={`${currentTranslation.title} Admin`}
                                         fill
+                                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                         className="object-cover object-left-top"
                                     />
                                 </div>
@@ -159,7 +161,7 @@ function ProjectCard({
                         ) : (
                             // SIN FLIP
                             <motion.div
-                                className="w-full h-full"
+                                className="relative w-full h-full"
                                 variants={{
                                     rest: { scale: 1 },
                                     hover: { scale: 1.1 }

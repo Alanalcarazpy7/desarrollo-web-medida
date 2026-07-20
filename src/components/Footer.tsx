@@ -45,14 +45,15 @@ export default function Footer() {
              { label: t('footer.company.contact'), href: getNavHref("/#contacto") },
         ],
         legal: [
-            { label: t('footer.legal.terms'), href: "#" },
-            { label: t('footer.legal.privacy'), href: "#" },
-            { label: t('footer.legal.cookies'), href: "#" },
+            { label: t('footer.legal.terms'), href: getNavHref("/terminos-de-servicio") },
+            { label: t('footer.legal.privacy'), href: getNavHref("/politica-de-privacidad") },
+            { label: t('footer.legal.cookies'), href: getNavHref("/politica-de-privacidad#cookies") },
         ],
     };
 
     const contactLinks = [
         { label: "WhatsApp: +595 994 295092", href: "https://wa.me/595994295092", external: true },
+        { label: "solvatech.dev@gmail.com", href: "mailto:solvatech.dev@gmail.com", external: true },
         { label: "Instagram: @alandev_py", href: "https://www.instagram.com/alandev_py/", external: true },
         { label: "solvatech.com.py", href: "https://solvatech.com.py", external: true },
     ];
@@ -153,7 +154,7 @@ export default function Footer() {
                                         alt="SolvaTech"
                                         width={44}
                                         height={36}
-                                        style={{ objectFit: 'cover' }}
+                                        style={{ width: '44px', height: '36px', objectFit: 'cover' }}
                                     />
                                 </motion.div>
                             </div>

@@ -314,7 +314,7 @@ export const dictionary = {
       },
       methods: {
         whatsapp: { title: "WhatsApp", desc: "Respuesta rápida por WhatsApp", valor: "+595 994 295092" },
-        email: { title: "Email", desc: "Escribinos por email", valor: "alantechxpy@gmail.com" },
+        email: { title: "Email", desc: "Escribinos por email", valor: "solvatech.dev@gmail.com" },
         instagram: { title: "Instagram", desc: "Seguinos en Instagram", valor: "@alandev_py" }
       }
     },
@@ -709,7 +709,7 @@ export const dictionary = {
       },
       methods: {
         whatsapp: { title: "WhatsApp", desc: "Quick response via WhatsApp", valor: "+595 994 295092" },
-        email: { title: "Email", desc: "Write to us via email", valor: "alantechxpy@gmail.com" },
+        email: { title: "Email", desc: "Write to us via email", valor: "solvatech.dev@gmail.com" },
         instagram: { title: "Instagram", desc: "Follow us on Instagram", valor: "@alandev_py" }
       }
     },

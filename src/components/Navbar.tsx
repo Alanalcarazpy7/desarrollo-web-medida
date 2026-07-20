@@ -180,6 +180,13 @@ export default function SpectacularNavbar() {
                                         width={44}
                                         height={44}
                                         style={{
+                                            // Ancho y alto explícitos acá (no solo en las props):
+                                            // el preflight de Tailwind pone height:auto en todo
+                                            // <img>, y como width se quedaba sin un valor CSS que
+                                            // lo acompañe, Next generaba el warning de aspect
+                                            // ratio "modified but not the other".
+                                            width: '44px',
+                                            height: '44px',
                                             filter: `drop-shadow(0 0 10px ${theme.accentDark})`,
                                             objectFit: 'cover'
                                         }}
@@ -451,7 +458,7 @@ export default function SpectacularNavbar() {
                                                 alt="SolvaTech"
                                                 width={44}
                                                 height={44}
-                                                style={{ objectFit: 'cover' }}
+                                                style={{ width: '44px', height: '44px', objectFit: 'cover' }}
                                                 priority
                                             />
                                         </div>
