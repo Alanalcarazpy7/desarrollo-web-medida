@@ -20,14 +20,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const isEs = lang === 'es';
 
     const baseUrl = "https://solvatech.com.py";
-    const path = "/servicios/dominio-hosting";
-    
-    const title = isEs 
-      ? "Registro de Dominio y Hosting en Paraguay | SolvaTech"
-      : "Domain Name Registration & Hosting in Paraguay | SolvaTech";
+    const path = "/servicios/dominio-configuracion-web";
+
+    const title = isEs
+      ? "Registro de Dominio y Configuración Web en Paraguay | SolvaTech"
+      : "Domain Registration & Web Setup in Paraguay | SolvaTech";
     const description = isEs
-      ? "Registro de dominios profesionales (incluyendo .com.py) y planes de hosting web ultrarrápidos y seguros en Paraguay. Soporte técnico garantizado."
-      : "Professional domain registration (including .com.py) and fast, secure web hosting plans in Paraguay. Guaranteed technical support.";
+      ? "Registro de dominios profesionales (incluyendo .com.py), configuración de DNS y correos corporativos. Dejamos tu web lista y funcionando desde el día uno."
+      : "Professional domain registration (including .com.py), DNS setup, and corporate email. We leave your website ready and working from day one.";
 
     return {
         title,
@@ -51,10 +51,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
 }
 
-export default async function DominioHostingPage({ params }: Props) {
+export default async function DominioConfiguracionWebPage({ params }: Props) {
     const { lang } = await params;
     const isEs = lang === 'es';
-    
+
     if (lang !== 'es' && lang !== 'en') {
         notFound();
     }
@@ -70,107 +70,107 @@ export default async function DominioHostingPage({ params }: Props) {
     };
 
     const benefits = isEs ? [
-        "Registro y configuración de dominio personalizado (.com, .net, .com.py)",
-        "Servidor web de alta velocidad optimizado con discos de almacenamiento SSD NVMe",
-        "Certificado de seguridad SSL (HTTPS) Let's Encrypt gratis e ilimitado",
-        "Copias de seguridad semanales automáticas de seguridad de tu base de datos",
-        "Configuración y vinculación rápida de DNS con Cloudflare CDN",
+        "Registro de tu dominio personalizado (.com, .net, .com.py)",
+        "Gestión completa del registro oficial ante NIC.py para dominios .com.py",
+        "Configuración y vinculación de DNS apuntando a tu hosting o plataforma",
         "Creación de correos corporativos profesionales (ej. info@tuempresa.com)",
-        "Soporte técnico local en Paraguay ante cualquier duda, bloqueo o caída",
-        "Servidor estable con 99.9% de disponibilidad (Uptime) garantizada"
+        "Configuración inicial de tu web para que quede lista y funcionando",
+        "Asesoramiento en la elección del nombre de dominio más adecuado para tu marca",
+        "Protección de privacidad WHOIS incluida",
+        "Soporte técnico durante todo el proceso de activación"
     ] : [
-        "Custom domain name registration and configuration (.com, .net, .com.py)",
-        "High-speed web server optimized with SSD NVMe storage disks",
-        "Free and unlimited SSL security certificate (HTTPS) Let's Encrypt",
-        "Automatic weekly security backups of your database",
-        "Quick DNS linking and configuration with Cloudflare CDN",
+        "Custom domain name registration (.com, .net, .com.py)",
+        "Full management of the official registration with NIC.py for .com.py domains",
+        "DNS setup and linking pointing to your hosting or platform",
         "Creation of professional corporate emails (e.g. info@yourcompany.com)",
-        "Local technical support in Paraguay for any questions, blocks, or crashes",
-        "Stable server with 99.9% guaranteed availability (Uptime)"
+        "Initial setup of your website so it's ready and working",
+        "Guidance choosing the domain name that best fits your brand",
+        "WHOIS privacy protection included",
+        "Technical support throughout the entire activation process"
     ];
 
     const chooseReasons = isEs ? [
-        {
-            title: "Velocidad Optimizada para Paraguay",
-            desc: "Nuestros servidores usan cachés avanzadas y redes CDN configuradas para que tu página web cargue instantáneamente desde conexiones móviles (Tigo, Personal, Claro) en cualquier punto de Paraguay."
-        },
         {
             title: "Gestión de Dominio .com.py",
             desc: "Te ayudamos con todo el proceso burocrático y técnico de registro ante el Centro Nacional de Computación (CNC / NIC-PY) para delegar de forma exitosa tu dominio nacional oficial."
         },
         {
-            title: "Seguridad Corporativa",
-            desc: "Configuramos firewalls a nivel de servidor que previenen inyecciones de código malicioso, ataques DDoS y malware, manteniendo la información de tus clientes totalmente a salvo."
+            title: "Configuración Lista para Usar",
+            desc: "No tenés que tocar nada técnico: nosotros configuramos el DNS, los correos corporativos y dejamos tu web funcionando de punta a punta."
+        },
+        {
+            title: "Asesoramiento en la Elección del Nombre",
+            desc: "Te ayudamos a elegir el nombre de dominio que mejor represente tu marca y sea fácil de recordar para tus clientes."
         }
     ] : [
-        {
-            title: "Optimized Speed for Paraguay",
-            desc: "Our servers use advanced caching and CDN networks configured so that your website loads instantly from mobile connections (Tigo, Personal, Claro) anywhere in Paraguay."
-        },
         {
             title: "Domain .com.py Management",
             desc: "We assist you with the entire bureaucratic and technical registration process at the National Computing Center (CNC / NIC-PY) to successfully delegate your official national domain."
         },
         {
-            title: "Corporate Security",
-            desc: "We configure server-level firewalls that prevent malicious code injections, DDoS attacks, and malware, keeping your clients' information fully secure."
+            title: "Ready-to-Use Setup",
+            desc: "You don't have to touch anything technical: we configure the DNS, corporate emails, and leave your website fully working end to end."
+        },
+        {
+            title: "Guidance Choosing the Name",
+            desc: "We help you choose the domain name that best represents your brand and is easy for your customers to remember."
         }
     ];
 
     const faqs = isEs ? [
         {
             q: "¿Qué diferencia hay entre Hosting y Dominio?",
-            a: "El dominio es el nombre único de tu página web (ej. solvatech.com.py) que los clientes escriben en su navegador. El hosting es el espacio físico de almacenamiento en un servidor de internet donde se guardan tus correos, fotos y el código de tu sitio."
+            a: "El dominio es el nombre único de tu página web (ej. solvatech.com.py) que los clientes escriben en su navegador. El hosting es el espacio físico de almacenamiento en un servidor de internet donde se guardan tus correos, fotos y el código de tu sitio. Son dos servicios separados y complementarios."
         },
         {
             q: "¿Cómo se gestiona el dominio oficial .com.py?",
             a: "Los dominios con terminación .py pertenecen al registro oficial de Paraguay y se gestionan a través del NIC.py. Nos encargamos de realizar la solicitud de registro, el pago de tasas de delegación y el mantenimiento DNS para que no tengas que lidiar con trámites complejos."
         },
         {
-            q: "¿Puedo migrar mi sitio web actual de otro hosting con ustedes?",
-            a: "Sí. Realizamos la migración técnica de forma gratuita. Transferimos tu base de datos, correos corporativos y archivos sin que tu página web actual experimente caídas durante el proceso."
+            q: "¿Qué pasa si no renuevo mi dominio a tiempo?",
+            a: "Te avisamos con anticipación antes de cada vencimiento. Si un dominio no se renueva a tiempo corre riesgo de quedar disponible para que otra persona lo registre, así que te acompañamos para que eso nunca pase."
         }
     ] : [
         {
             q: "What is the difference between Hosting and Domain?",
-            a: "The domain is the unique name of your website (e.g. solvatech.com.py) that clients type in their browser. Hosting is the physical storage space on an internet server where your emails, photos, and site code are saved."
+            a: "The domain is the unique name of your website (e.g. solvatech.com.py) that clients type in their browser. Hosting is the physical storage space on an internet server where your emails, photos, and site code are saved. They're two separate, complementary services."
         },
         {
             q: "How is the official .com.py domain managed?",
             a: "Domains ending in .py belong to the official registry of Paraguay and are managed through NIC.py. We handle the registration request, payment of delegation fees, and DNS maintenance so you don't have to deal with complex paperwork."
         },
         {
-            q: "Can I migrate my current website from another hosting to you?",
-            a: "Yes. We perform the technical migration free of charge. We transfer your database, corporate emails, and files without your current website experiencing downtime during the process."
+            q: "What happens if I don't renew my domain on time?",
+            a: "We notify you ahead of each renewal date. If a domain isn't renewed on time, it risks becoming available for someone else to register, so we make sure that never happens."
         }
     ];
 
     const dict = {
-        h1: isEs ? "Registro de Dominio y Hosting Profesional" : "Professional Domain Name & High-Speed Hosting",
-        whyTitle: isEs ? "Infraestructura Segura y Rápida" : "Fast & Secure Infrastructure",
-        whyDesc: isEs 
-            ? "Un hosting lento o inestable destruye tus esfuerzos publicitarios y de SEO. Con nuestro plan de Dominio y Hosting, garantizamos que tu página web responda al instante. Configuramos correos electrónicos profesionales con tu propio nombre de marca, lo que aumenta la confianza en cada propuesta comercial que envíes a tus clientes."
-            : "A slow or unstable hosting destroys your advertising and SEO efforts. With our Domain and Hosting plan, we guarantee that your website responds instantly. We configure professional emails with your own brand name, increasing trust in every business proposal you send to your clients.",
+        h1: isEs ? "Dominio + Configuración Web" : "Domain + Web Setup",
+        whyTitle: isEs ? "Tu Dirección Profesional en Internet" : "Your Professional Address on the Internet",
+        whyDesc: isEs
+            ? "Un dominio propio es la base de tu identidad online: reemplaza direcciones genéricas por una dirección profesional con tu marca. Nos encargamos de todo el registro, la configuración de DNS y los correos corporativos, dejando tu web lista para funcionar sin que tengas que tocar nada técnico."
+            : "A custom domain is the foundation of your online identity: it replaces generic addresses with a professional one carrying your brand. We handle the entire registration, DNS setup, and corporate emails, leaving your website ready to work without you touching anything technical.",
         featuresTitle: isEs ? "¿Qué incluye este plan?" : "What is included in this plan?",
         ventajasTitle: isEs ? "Ventajas Técnicas" : "Technical Advantages",
         faqsTitle: isEs ? "Preguntas Frecuentes" : "Frequently Asked Questions",
-        ctaBtn: isEs ? "Registrar mi hosting y dominio" : "Register my hosting and domain",
-        price: isEs ? "Desde Gs. 250.000 / año" : "Starting at Gs. 250,000 / year",
+        ctaBtn: isEs ? "Registrar mi dominio" : "Register my domain",
+        price: isEs ? "Gs. 250.000 / año" : "Gs. 250,000 / year",
         metaBadge: isEs ? "Servicio Comercial" : "Commercial Service",
-        metaSub: isEs ? "Infraestructura Web" : "Web Infrastructure",
+        metaSub: isEs ? "Identidad Web" : "Web Identity",
         advisorRole: isEs ? "Asesor Tecnológico SolvaTech" : "Technology Advisor SolvaTech",
         breadcrumbsHome: isEs ? "Inicio" : "Home",
         breadcrumbsServices: isEs ? "Servicios" : "Services",
-        breadcrumbsService: isEs ? "Hosting y Dominio" : "Hosting & Domain",
+        breadcrumbsService: isEs ? "Dominio y Configuración" : "Domain & Setup",
     };
 
-    const ctaMsg = whatsappMessages[lang as "es" | "en"]?.hosting || whatsappMessages.es.hosting;
+    const ctaMsg = whatsappMessages[lang as "es" | "en"]?.dominioConfiguracion || whatsappMessages.es.dominioConfiguracion;
 
     return (
         <main style={{ minHeight: "100vh", backgroundColor: theme.bg, color: theme.textMain, overflowX: "hidden", position: "relative" }}>
             <BackgroundParticles />
             <Navbar />
-            
+
             <section style={{ position: "relative", zIndex: 10, width: "100%", maxWidth: "900px", margin: "0 auto", padding: "140px 24px 80px", display: "flex", flexDirection: "column", gap: "32px" }}>
                 {/* Breadcrumbs */}
                 <div style={{
@@ -241,7 +241,7 @@ export default async function DominioHostingPage({ params }: Props) {
                         background: `linear-gradient(90deg, ${theme.accent}, transparent)`,
                         borderRadius: '4px'
                     }} />
-                    
+
                     <h1 style={{
                         fontSize: 'clamp(2rem, 5vw, 3.5rem)',
                         fontWeight: 900,
@@ -255,7 +255,7 @@ export default async function DominioHostingPage({ params }: Props) {
                     }}>
                         {dict.h1}
                     </h1>
-                    
+
                     <div style={{
                         height: '2px',
                         background: `linear-gradient(90deg, ${theme.accent}, ${theme.accentDark}, transparent)`,
@@ -364,11 +364,11 @@ export default async function DominioHostingPage({ params }: Props) {
 
                 {/* Final CTA */}
                 <div style={{ marginTop: "32px", textAlign: "center" }}>
-                    <CTAButton 
+                    <CTAButton
                         whatsappMessage={ctaMsg}
                         accent={theme.accent}
                         withShadow={true}
-                        eventName="click_cta_hosting"
+                        eventName="click_cta_dominio_configuracion"
                     >
                         {dict.ctaBtn}
                     </CTAButton>

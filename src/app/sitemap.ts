@@ -26,16 +26,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/servicios/desarrollo-web-pro', date: '2026-06-21' },
     { path: '/servicios/desarrollo-web-catalogo', date: '2026-06-21' },
     { path: '/servicios/posicionamiento-google', date: '2026-06-21' },
-    { path: '/servicios/dominio-hosting', date: '2026-06-21' },
+    { path: '/servicios/hosting-web-administrado', date: '2026-07-19' },
+    { path: '/servicios/dominio-configuracion-web', date: '2026-07-19' },
     { path: '/servicios/soporte-web-basico', date: '2026-06-21' },
+    { path: '/terminos-de-servicio', date: '2026-07-19' },
+    { path: '/politica-de-privacidad', date: '2026-07-19' },
   ] as const
+
+  const legalPaths = ['/terminos-de-servicio', '/politica-de-privacidad']
 
   const routesMap: MetadataRoute.Sitemap = locales.flatMap((locale) =>
     coreRoutes.map((route) => ({
       url: `${baseUrl}/${locale}${route.path}`,
       lastModified: new Date(route.date),
       changeFrequency: 'monthly' as const,
-      priority: route.path === '' ? 1 : 0.9,
+      priority: route.path === '' ? 1 : legalPaths.includes(route.path) ? 0.3 : 0.9,
       alternates: getAlternates(route.path),
     }))
   )

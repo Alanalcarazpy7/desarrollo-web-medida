@@ -105,8 +105,8 @@ Detalles: ${formData.mensaje.trim()}`;
             ),
             titulo: t('contact.methods.email.title'),
             descripcion: t('contact.methods.email.desc'),
-            valor: "alantechxpy@gmail.com",
-            link: "mailto:alantechxpy@gmail.com",
+            valor: "solvatech.dev@gmail.com",
+            link: "mailto:solvatech.dev@gmail.com",
             onClick: () => trackEvent('click_email', { source: 'contact_card', lang: language })
         },
         {
@@ -135,7 +135,7 @@ Detalles: ${formData.mensaje.trim()}`;
                 scrollMarginTop: '100px'
             }}
         >
-            <div className="w-full max-w-7xl px-6 md:px-8 relative z-10">
+            <div className="section-tablet-pad w-full max-w-7xl px-6 md:px-8 relative z-10">
                 {/* Encabezado */}
                 <motion.div
                     initial={{ opacity: 0, y: 40 }}

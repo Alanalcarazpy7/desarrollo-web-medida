@@ -27,6 +27,25 @@ export default function SpectacularNavbar() {
         textMuted: "#888888"
     };
 
+    // El botón que ABRE el drawer mobile está oculto en desktop vía CSS
+    // (xl:hidden), pero el drawer en sí (el overlay que aparece cuando
+    // mobileMenuOpen es true) no tenía ningún control por ancho de pantalla
+    // — solo depende del estado de React. Si lo abrís en mobile/tablet y
+    // después la ventana pasa a ancho de notebook/desktop (achicando el
+    // devtools, rotando, o resize real), el overlay se queda montado y
+    // visible tapando todo, aunque el botón que lo abrió ya no se vea. Este
+    // efecto lo cierra en cuanto el viewport cruza el mismo breakpoint (xl,
+    // 1280px) que usa el CSS para mostrar la navegación de desktop.
+    useEffect(() => {
+        const xl = window.matchMedia("(min-width: 1280px)");
+        const closeIfDesktop = () => {
+            if (xl.matches) setMobileMenuOpen(false);
+        };
+        closeIfDesktop();
+        xl.addEventListener("change", closeIfDesktop);
+        return () => xl.removeEventListener("change", closeIfDesktop);
+    }, []);
+
     useEffect(() => {
         const handleScroll = () => {
             const scrollY = window.scrollY;
@@ -121,7 +140,7 @@ export default function SpectacularNavbar() {
                     <div className="flex items-center justify-between">
 
                         {/* LOGO */}
-                        <Link href={`/${language}`} className="flex items-center gap-4 group relative z-50 cursor-pointer">
+                        <Link href={`/${language}`} className="navbar-logo-link flex items-center gap-4 group relative z-50 cursor-pointer">
                             <motion.div
                                 className="flex items-center gap-4"
                                 whileHover={{ scale: 1.05 }}
@@ -161,6 +180,13 @@ export default function SpectacularNavbar() {
                                         width={44}
                                         height={44}
                                         style={{
+                                            // Ancho y alto explícitos acá (no solo en las props):
+                                            // el preflight de Tailwind pone height:auto en todo
+                                            // <img>, y como width se quedaba sin un valor CSS que
+                                            // lo acompañe, Next generaba el warning de aspect
+                                            // ratio "modified but not the other".
+                                            width: '44px',
+                                            height: '44px',
                                             filter: `drop-shadow(0 0 10px ${theme.accentDark})`,
                                             objectFit: 'cover'
                                         }}
@@ -342,7 +368,7 @@ export default function SpectacularNavbar() {
                                 aria-label="Abrir menú de navegación"
                                 aria-expanded={mobileMenuOpen}
                                 aria-controls="mobile-menu"
-                                className="relative p-3 group cursor-pointer flex items-center justify-center"
+                                className="navbar-hamburger-btn relative p-3 group cursor-pointer flex items-center justify-center"
                                 whileTap={{ scale: 0.9 }}
                             >
                                 <div className="relative w-8 flex flex-col items-end gap-2">
@@ -404,14 +430,14 @@ export default function SpectacularNavbar() {
                             }}
                         >
                             {/* Header del menú premium */}
-                            <div style={{
+                            <div className="navbar-drawer-header" style={{
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'space-between',
                                 padding: '48px 32px 40px 32px',
                                 borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
                             }}>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                                <div className="navbar-drawer-logo" style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
                                     <div className="relative" style={{ width: '48px', height: '48px' }}>
                                         <motion.div
                                             className="absolute inset-0 rounded-full border"
@@ -432,7 +458,7 @@ export default function SpectacularNavbar() {
                                                 alt="SolvaTech"
                                                 width={44}
                                                 height={44}
-                                                style={{ objectFit: 'cover' }}
+                                                style={{ width: '44px', height: '44px', objectFit: 'cover' }}
                                                 priority
                                             />
                                         </div>
@@ -489,6 +515,7 @@ export default function SpectacularNavbar() {
                                             animate={{ opacity: 1, x: 0 }}
                                             transition={{ delay: i * 0.1 }}
                                             whileHover={{ x: 12, backgroundColor: 'rgba(0, 217, 255, 0.08)' }}
+                                            className="navbar-drawer-navitem"
                                             style={{
                                                 position: 'relative',
                                                 display: 'flex',
@@ -519,7 +546,7 @@ export default function SpectacularNavbar() {
                                             }}
                                         >
                                             <span
-                                                className="nav-item-text"
+                                                className="nav-item-text navbar-drawer-navitem-text"
                                                 style={{
                                                     fontSize: '20px',
                                                     fontWeight: 800,

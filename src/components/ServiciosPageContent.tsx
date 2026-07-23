@@ -180,18 +180,36 @@ export default function ServiciosPageContent({ lang }: ServiciosPageContentProps
             type: isEs ? "PLAN MENSUAL" : "MONTHLY PLAN"
         },
         {
-            id: "dominio_hosting",
-            title: isEs ? "Dominio + Hosting" : "Domain + Hosting",
-            subtitle: isEs ? "Infraestructura inicial" : "Initial infrastructure",
+            id: "hosting_web_administrado",
+            title: isEs ? "Hosting Web Administrado" : "Managed Web Hosting",
+            subtitle: isEs ? "Servidor rápido y sin preocupaciones" : "Fast, worry-free server",
+            price: isEs ? "Gs. 120.000 / mes" : "Gs. 120,000 / month",
+            priceSub: isEs ? "Suscripción mensual" : "Monthly subscription",
+            benefits: isEs
+                ? ["Servidor SSD rápido y estable", "SSL y backups incluidos", "Monitoreo y soporte técnico"]
+                : ["Fast, stable SSD server", "SSL and backups included", "Monitoring & technical support"],
+            whatsappKey: "hostingAdministrado",
+            link: `/${lang}/servicios/hosting-web-administrado`,
+            icon: "🖥️",
+            image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=600&q=80",
+            category: "Hosting & Soporte",
+            categoryEn: "Hosting & Support",
+            delivery: isEs ? "Activación en 24hs" : "24h activation",
+            type: isEs ? "PLAN MENSUAL" : "MONTHLY PLAN"
+        },
+        {
+            id: "dominio_configuracion_web",
+            title: isEs ? "Dominio + Configuración Web" : "Domain + Web Setup",
+            subtitle: isEs ? "Tu dirección profesional" : "Your professional address",
             price: isEs ? "Gs. 250.000 / año" : "Gs. 250,000 / year",
             priceSub: isEs ? "Renovación anual" : "Annual renewal",
-            benefits: isEs 
-                ? ["Dominio personalizado", "Hosting rápido y estable", "Configuración inicial"]
-                : ["Custom domain name", "Fast & stable server", "Initial setup"],
-            whatsappKey: "hosting",
-            link: `/${lang}/servicios/dominio-hosting`,
+            benefits: isEs
+                ? ["Dominio personalizado", "Configuración de DNS y correos", "Web lista y funcionando"]
+                : ["Custom domain name", "DNS & email setup", "Website ready and working"],
+            whatsappKey: "dominioConfiguracion",
+            link: `/${lang}/servicios/dominio-configuracion-web`,
             icon: "🌐",
-            image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=600&q=80",
+            image: "https://images.unsplash.com/photo-1564760290292-23341e4df6ec?auto=format&fit=crop&w=600&q=80",
             category: "Hosting & Soporte",
             categoryEn: "Hosting & Support",
             delivery: isEs ? "Activación en 24hs" : "24h activation",

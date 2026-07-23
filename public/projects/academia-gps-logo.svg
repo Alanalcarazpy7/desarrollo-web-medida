@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 360" role="img" aria-labelledby="title desc">
+  <title id="title">Academia GPS</title>
+  <desc id="desc">Logo de Academia GPS en azul y turquesa sobre fondo transparente.</desc>
+  <g id="academia-gps-icon" transform="translate(25 22)">
+    <ellipse cx="160" cy="292" rx="135" ry="38" fill="none" stroke="#004877" stroke-width="12"/>
+    <ellipse cx="160" cy="292" rx="78" ry="21" fill="#004877"/>
+    <path d="M160 12C85 12 31 69 31 141c0 91 129 168 129 168s129-77 129-168C289 69 235 12 160 12Z"
+          fill="#ffffff" stroke="#004877" stroke-width="12" stroke-linejoin="round"/>
+    <rect x="133" y="72" width="54" height="133" rx="18" fill="#008080"/>
+    <rect x="94" y="111" width="132" height="54" rx="18" fill="#008080"/>
+  </g>
+  <g id="academy-gps-wordmark">
+    <text x="350" y="128" font-family="Poppins, Arial, sans-serif" font-size="105" font-weight="400" fill="#008080">Academia</text>
+    <text x="350" y="310" font-family="Poppins, Arial, sans-serif" font-size="245" font-weight="800" letter-spacing="-10" fill="#004877">GPS</text>
+  </g>
+</svg>

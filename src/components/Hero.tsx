@@ -1,10 +1,11 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
-import { motion, useTransform, useMotionValue, useSpring } from "framer-motion";
+import { motion } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
 import { trackEvent } from "@/lib/analytics";
 import { getWhatsAppLink, whatsappMessages } from "@/lib/whatsapp";
+import ClientsMarquee from "@/components/ClientsMarquee";
+import HeroImageGrid from "@/components/HeroImageGrid";
 
 export default function Hero() {
     const { t, language } = useLanguage();
@@ -20,64 +21,17 @@ export default function Hero() {
         textMuted: "#888888"
     };
 
-    const [isMobile, setIsMobile] = useState(false);
-    useEffect(() => {
-        const checkMobile = () => {
-            setIsMobile(window.innerWidth < 1024);
-        };
-
-        checkMobile();
-        window.addEventListener('resize', checkMobile);
-        return () => window.removeEventListener('resize', checkMobile);
-    }, []);
-
-    const stats = [
-        {
-            value: "10+",
-            label: t('hero.stat1'),
-            icon: (
-                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-            )
-        },
-        {
-            value: "6+",
-            label: t('hero.stat2'),
-            icon: (
-                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
-            )
-        },
-        {
-            value: "100%",
-            label: t('hero.stat3'),
-            icon: (
-                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-            )
-        },
-        {
-            value: "5★",
-            label: t('hero.stat4'),
-            icon: (
-                <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                </svg>
-            )
-        },
-    ];
-
     return (
         <section
             id="inicio"
-            className="relative min-h-screen flex flex-col items-center justify-start lg:justify-center overflow-hidden"
-            style={{
-                paddingTop: isMobile ? 'clamp(100px, 15vh, 200px)' : '0',
-                scrollMarginTop: '100px'
-            }}
+            // hero-padding-top: antes esto dependía de un useState/useEffect
+            // que leía window.innerWidth — arranca en `false` y solo se
+            // corrige después del primer render, así que hay una ventana
+            // (SSR, hidratación, o si el efecto tarda) donde el padding no
+            // coincide con el viewport real. Ahora es un media query CSS puro
+            // (definido en globals.css), correcto desde la primera pintada.
+            className="relative min-h-screen flex flex-col items-center justify-start lg:justify-center overflow-hidden hero-padding-top"
+            style={{ scrollMarginTop: '100px' }}
         >
             {/* Glow ambiental optimizado (contain: paint para evitar CLS) */}
             <div className="absolute inset-0 pointer-events-none" style={{ contain: 'paint' }}>
@@ -92,11 +46,16 @@ export default function Hero() {
             </div>
 
             {/* Contenido principal */}
-            <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 md:px-8 pb-12 md:pb-20">
-                <div className="grid lg:grid-cols-[1.2fr_0.8fr] gap-12 lg:gap-20 items-center">
+            <div className="hero-content-wrap relative z-10 w-full max-w-[1440px] mx-auto px-6 md:px-8 pb-12 md:pb-20">
+                {/* items-stretch (no items-center): en desktop, la columna de
+                    texto y la del grid de imágenes pasan a tener la MISMA
+                    altura real (la del contenido de texto) en vez de que el
+                    grid de imágenes, más bajo, quede centrado con espacio
+                    vacío arriba/abajo. */}
+                <div className="grid lg:grid-cols-[1.15fr_0.95fr] gap-12 lg:gap-16 items-stretch">
 
                     {/* IZQUIERDA: Texto */}
-                    <div className="flex flex-col gap-6 md:gap-8 items-center lg:items-start text-center lg:text-left">
+                    <div className="hero-text-col flex flex-col justify-center gap-6 md:gap-8 items-center lg:items-start text-center lg:text-left">
                         {/* Badge con animación CSS para evitar retraso de hidratación */}
                         <div
                             className="inline-flex items-center gap-2 px-4 py-2 rounded-full w-fit cursor-default animate-fade-in-up"
@@ -119,7 +78,7 @@ export default function Hero() {
 
                         {/* Título optimizado para LCP con CSS Puro */}
                         <h1
-                            className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight animate-hero-fade"
+                            className="hero-h1 text-4xl md:text-6xl lg:text-7xl font-bold leading-tight animate-hero-fade"
                             style={{ transform: 'translate3d(0,0,0)' }}
                         >
                             <span style={{ color: theme.text }}>
@@ -262,166 +221,16 @@ export default function Hero() {
                         </motion.div>
                     </div>
 
-                    {/* DERECHA: Tarjetas de estadísticas 2x2 */}
+                    {/* DERECHA: grid cinético de imágenes (2 columnas en mobile,
+                        3 en desktop; las de los extremos suben, la del medio
+                        baja) */}
                     <div className="flex justify-center lg:justify-end w-full lg:w-auto mt-8 lg:mt-0">
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-8 max-w-[280px] sm:max-w-md w-full">
-                            {stats.map((stat, i) => (
-                                <StatsCard key={i} stat={stat} index={i} theme={theme} />
-                            ))}
-                        </div>
+                        <HeroImageGrid />
                     </div>
                 </div>
             </div>
+
+            <ClientsMarquee />
         </section>
-    );
-}
-
-// Tarjeta de estadística con efectos 3D
-function StatsCard({ stat, index, theme }: { stat: any; index: number; theme: any }) {
-    const x = useMotionValue(0);
-    const y = useMotionValue(0);
-    const mouseX = useSpring(x, { stiffness: 500, damping: 100 });
-    const mouseY = useSpring(y, { stiffness: 500, damping: 100 });
-
-    const cardRef = useRef<HTMLDivElement>(null);
-
-    function handleMouseMove({ clientX, clientY }: any) {
-        if (!cardRef.current) return;
-        const rect = cardRef.current.getBoundingClientRect();
-        x.set((clientX - rect.left) / rect.width - 0.5);
-        y.set((clientY - rect.top) / rect.height - 0.5);
-    }
-
-    function handleMouseLeave() {
-        x.set(0);
-        y.set(0);
-    }
-
-    const rotateX = useTransform(mouseY, [-0.5, 0.5], [10, -10]);
-    const rotateY = useTransform(mouseX, [-0.5, 0.5], [-10, 10]);
-
-    return (
-        <motion.div
-            ref={cardRef}
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.3 + index * 0.05, type: "spring" }} // Delay optimizado
-            style={{
-                rotateX,
-                rotateY,
-                transformStyle: "preserve-3d",
-            }}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-            className="relative p-6 md:p-10 rounded-3xl cursor-pointer group"
-        >
-            {/* Fondo de la tarjeta */}
-            <div
-                className="absolute inset-0 rounded-3xl backdrop-blur-xl transition-all duration-500"
-                style={{
-                    background: `linear-gradient(135deg, ${theme.bgCard}dd, ${theme.bgCardHover}dd)`,
-                    border: `2px solid ${theme.accent}30`,
-                    boxShadow: `0 8px 32px rgba(0, 0, 0, 0.6), 0 0 40px ${theme.accentGlow}`,
-                }}
-            />
-
-            {/* Resplandor al pasar el cursor */}
-            <motion.div
-                className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                style={{
-                    background: `radial-gradient(circle at 50% 0%, ${theme.accent}30, transparent 70%)`,
-                    boxShadow: `0 0 60px ${theme.accentGlow}, inset 0 0 40px ${theme.accent}10`,
-                }}
-            />
-
-            {/* Borde superior brillante */}
-            <motion.div
-                className="absolute inset-x-0 top-0 h-px"
-                style={{
-                    background: `linear-gradient(90deg, transparent, ${theme.accent}, transparent)`,
-                    boxShadow: `0 0 20px ${theme.accentGlow}`,
-                }}
-                animate={{
-                    opacity: [0.3, 1, 0.3],
-                }}
-                transition={{ duration: 2.5, repeat: Infinity, delay: index * 0.4 }}
-            />
-
-            {/* Contenido */}
-            <div className="relative z-10 flex flex-col items-center gap-4 text-center" style={{ padding: '1.5rem 0' }}>
-                {/* Icono profesional */}
-                <motion.div
-                    className="w-16 h-16 rounded-2xl flex items-center justify-center transition-all duration-500 group-hover:scale-110"
-                    style={{
-                        background: `linear-gradient(135deg, ${theme.accent}20, ${theme.accent}10)`,
-                        border: `2px solid ${theme.accent}40`,
-                        boxShadow: `0 4px 20px ${theme.accentGlow}`,
-                        color: theme.accent,
-                    }}
-                >
-                    {stat.icon}
-                </motion.div>
-
-                {/* Valor grande */}
-                <span
-                    className="text-4xl font-black"
-                    style={{
-                        background: `linear-gradient(135deg, ${theme.accent}, ${theme.accentDark})`,
-                        WebkitBackgroundClip: "text",
-                        WebkitTextFillColor: "transparent",
-                        filter: `drop-shadow(0 0 15px ${theme.accentGlow})`,
-                    }}
-                >
-                    {stat.value}
-                </span>
-
-                {/* Label */}
-                <span
-                    className="text-sm font-semibold uppercase tracking-wider"
-                    style={{ color: theme.textMuted }}
-                >
-                    {stat.label}
-                </span>
-            </div>
-
-            {/* Partículas flotantes */}
-            <div className="absolute inset-0 rounded-3xl overflow-hidden opacity-0 group-hover:opacity-100 pointer-events-none">
-                {[...Array(8)].map((_, idx) => (
-                    <motion.div
-                        key={idx}
-                        className="absolute w-1.5 h-1.5 rounded-full"
-                        style={{
-                            background: theme.accent,
-                            boxShadow: `0 0 10px ${theme.accentGlow}`,
-                            left: `${15 + idx * 12}%`,
-                            top: "85%",
-                        }}
-                        animate={{
-                            y: [0, -70, -90],
-                            opacity: [0, 1, 0],
-                            scale: [0.5, 1.5, 0.5],
-                        }}
-                        transition={{
-                            duration: 2.5,
-                            repeat: Infinity,
-                            delay: idx * 0.15,
-                        }}
-                    />
-                ))}
-            </div>
-
-            {/* Borde animado 3D */}
-            <motion.div
-                className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 pointer-events-none"
-                style={{
-                    border: `3px solid ${theme.accent}`,
-                }}
-                animate={{
-                    scale: [1, 1.05, 1],
-                    opacity: [0, 0.6, 0],
-                }}
-                transition={{ duration: 2, repeat: Infinity }}
-            />
-        </motion.div>
     );
 }

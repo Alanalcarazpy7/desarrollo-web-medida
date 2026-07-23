@@ -95,7 +95,11 @@ export default function Servicios() {
             id="servicios"
             className="min-h-screen relative overflow-hidden flex flex-col items-start lg:items-center justify-start lg:justify-center"
             style={{
-                marginTop: '140px',
+                // Antes 140px: pensado para cuando esta sección venía justo
+                // después del Hero. Ahora tiene VideoTestimonials en el medio
+                // (que ya trae su propio padding inferior), así que ese
+                // margen se sumaba y quedaba un salto enorme entre ambas.
+                marginTop: '48px',
                 scrollMarginTop: '100px'
             }}
         >
@@ -155,7 +159,7 @@ export default function Servicios() {
                 />
             </div>
 
-            <div className="w-full max-w-7xl mx-auto px-6 md:px-8 relative z-10">
+            <div className="section-tablet-pad w-full max-w-7xl mx-auto px-6 md:px-8 relative z-10">
                 {/* Encabezado */}
                 <motion.div
                     initial={{ opacity: 0, y: 40 }}
@@ -221,7 +225,7 @@ export default function Servicios() {
                 </motion.div>
 
                 {/* Cuadrícula de servicios */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 justify-items-center md:justify-items-stretch mb-24">
+                <div className="section-tablet-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 justify-items-center md:justify-items-stretch mb-24">
                     {servicios.map((servicio, index) => {
                         const isHovered = hoveredIndex === index;
                         return (

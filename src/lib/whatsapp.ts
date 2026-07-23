@@ -13,7 +13,8 @@ export const whatsappMessages = {
     estandar: "Hola, quiero info sobre una web estándar para mi negocio.",
     pro: "Hola, quiero info sobre una web pro para mi empresa.",
     seo: "Hola, quiero mejorar el posicionamiento de mi negocio en Google y Maps.",
-    hosting: "Hola, quiero consultar sobre dominio y hosting para mi web.",
+    hostingAdministrado: "Hola, quiero consultar sobre el hosting web administrado para mi sitio.",
+    dominioConfiguracion: "Hola, quiero consultar sobre el registro de dominio y configuración web.",
     soporte: "Hola, quiero consultar por el soporte web básico para mi sitio."
   },
   en: {
@@ -28,7 +29,8 @@ export const whatsappMessages = {
     estandar: "Hi, I want information about a standard web for my business.",
     pro: "Hi, I want information about a pro web for my company.",
     seo: "Hi, I want to improve my business positioning in Google and Maps.",
-    hosting: "Hi, I want to consult about domain and hosting for my web.",
+    hostingAdministrado: "Hi, I want to ask about managed web hosting for my site.",
+    dominioConfiguracion: "Hi, I want to ask about domain registration and web setup.",
     soporte: "Hi, I want to consult about basic web support for my site."
   },
 };

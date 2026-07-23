@@ -392,6 +392,192 @@ body {
   animation: fade-in-up 0.6s ease-out forwards;
 }
 
+/* ============= HERO IMAGE GRID (carrusel vertical) =============
+   Vivía como <style jsx global> dentro de HeroImageGrid.tsx, pero esa
+   inyección depende de que React hidrate y styled-jsx corra en el cliente.
+   En una recarga completa hay una ventana donde el <style> todavía no está
+   en el DOM: la animación referencia un @keyframes que aún no existe, así
+   que el navegador simplemente no anima (se queda quieta) hasta el próximo
+   HMR. Puesto acá, en el CSS estático del sitio, está disponible desde la
+   primera pintada sin depender de JS. */
+@keyframes hero-grid-scroll {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-grid-track-anim {
+    animation: none !important;
+  }
+}
+
+/* Hover de cada tile individual del grid del Hero. No puede ir como estilo
+   inline (:hover no existe en un objeto de React), por eso vive acá. El
+   scroll NUNCA se pausa (a propósito, sigue siempre); al pasar el mouse la
+   card solo se agranda un poco y sube de z-index por encima de los
+   degradados de arriba/abajo (que antes la tapaban en los bordes del grid). */
+.hero-grid-tile {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease, border-color 0.3s ease;
+}
+
+.hero-grid-tile:hover {
+  transform: scale(1.08);
+  z-index: 10;
+  border-color: rgba(0, 217, 255, 0.6);
+  box-shadow: 0 22px 50px rgba(0, 0, 0, 0.55), 0 0 34px rgba(0, 217, 255, 0.3);
+}
+
+/* ============= HERO PADDING-TOP ============= */
+/* Antes era '0' en desktop y dependía de que justify-center generara espacio
+   libre para separar el badge del navbar fijo. Al crecer el contenido del
+   Hero (carrusel de logos), ese espacio se achicaba y el badge quedaba
+   pegado/tapado por el navbar. Ahora hay un piso fijo que siempre lo
+   despeja, sin importar cuánto contenido tenga el Hero. */
+.hero-padding-top {
+  padding-top: clamp(100px, 15vh, 200px);
+}
+
+@media (min-width: 1024px) {
+  .hero-padding-top {
+    padding-top: 140px;
+  }
+}
+
+/* ============= HERO — LAPTOP DE POCA ALTURA (ej. 1366x768) =============
+   A 1024px+ de ancho el Hero ya usa el layout de desktop (padding-top fijo
+   de 140px, columna de imagen estirada a la altura del texto), pero en
+   pantallas anchas y BAJAS típicas de notebook (768px de alto o menos) esa
+   suma no entraba en un solo pantallazo: Hero + franja de marcas quedaban
+   más altos que el viewport y había que hacer scroll para ver las marcas.
+   Estas reglas solo se activan cuando el alto es corto (no afectan monitores
+   de escritorio normales, que suelen tener 900px+ de alto). Todo con
+   !important porque hay que ganarle a estilos inline / utilidades de
+   Tailwind con más especificidad. */
+@media (max-height: 800px) and (min-width: 1024px) {
+  .hero-padding-top {
+    padding-top: 90px !important;
+  }
+  .hero-content-wrap {
+    padding-bottom: 32px !important;
+  }
+  .hero-text-col {
+    gap: 14px !important;
+  }
+  .hero-h1 {
+    font-size: clamp(1.75rem, 3.2vw, 2.75rem) !important;
+  }
+  .hero-grid-outer {
+    min-height: 320px !important;
+    max-height: 400px !important;
+  }
+  .clients-marquee-wrap {
+    margin-top: 28px !important;
+    margin-bottom: 8px !important;
+  }
+  .clients-marquee-inner-pad {
+    padding: 18px clamp(20px, 4vw, 40px) !important;
+  }
+}
+
+/* ============= HERO — PADDING LATERAL EN TABLET/LAPTOP (1024-1700px) =============
+   El contenedor del Hero tiene max-width:1440px con solo 24-32px de padding
+   interno (px-6/md:px-8). En monitores grandes (1920px+) el margen "extra"
+   entre el borde de la pantalla y esos 1440px hace que se vea bien separado
+   de los costados. Pero entre 1024 y ~1440-1536px de ancho (notebooks,
+   tablets en horizontal) el contenedor ocupa casi todo el viewport y ese
+   padding interno chico hace que el texto y el carrusel de cards queden
+   pegados al borde — a diferencia de otras secciones del sitio, que usan un
+   max-width más angosto (1150-1280px) y por eso sí respiran en ese mismo
+   rango. Le sumamos padding acá sin tocar el max-width de 1440px. No se
+   activa en 1920px+ (ahí ya se ve bien). */
+@media (min-width: 1024px) and (max-width: 1700px) {
+  .hero-content-wrap {
+    padding-left: 56px !important;
+    padding-right: 56px !important;
+  }
+}
+
+/* ============= HERO — GRID DE IMÁGENES EN MOBILE (2x2 a la vista) =============
+   Sin este tope, en mobile el alto quedaba gobernado por maxHeight:700px
+   (pensado para desktop) y con tiles angostos entraban ~4 filas visibles.
+   Acá lo bajamos para que se vean ~2 filas x 2 columnas nomás, sin invitar
+   a seguir scrolleando adentro del grid antes de llegar a las marcas. */
+@media (max-width: 1023px) {
+  .hero-grid-outer {
+    min-height: 300px !important;
+    max-height: 360px !important;
+  }
+}
+
+/* ============= NAVBAR — TELÉFONOS CHICOS (≤400px, ej. 390x844) =============
+   El logo, el botón hamburguesa y el menú abierto están pensados para el
+   rango normal de celulares; en pantallas más angostas (390px o menos) se
+   sienten grandes/pesados. En vez de reescribir cada tamaño, se escala el
+   bloque del logo entero (ícono + texto) con transform, que mantiene todas
+   las proporciones internas sin tocar cada pieza por separado. */
+@media (max-width: 400px) {
+  .navbar-logo-link {
+    transform: scale(0.82);
+    transform-origin: left center;
+  }
+  .navbar-hamburger-btn {
+    padding: 8px !important;
+  }
+  .navbar-hamburger-btn > div {
+    width: 26px !important;
+  }
+  .navbar-drawer-header {
+    padding: 32px 20px 24px 20px !important;
+  }
+  .navbar-drawer-logo {
+    transform: scale(0.85);
+    transform-origin: left center;
+  }
+  .navbar-drawer-navitem {
+    padding: 12px 18px !important;
+  }
+  .navbar-drawer-navitem-text {
+    font-size: 17px !important;
+  }
+}
+
+/* ============= PADDING LATERAL EN TABLET (768-1024px) =============
+   Servicios, Proceso, Proyectos y Contacto usan max-w-7xl con solo
+   px-6/md:px-8 (24-32px) de padding interno. En 768-1024px (iPad, tablets
+   en horizontal) el contenedor ocupa casi todo el viewport sin margen
+   externo (max-w-7xl = 1280px, recién por encima de eso aparece aire extra
+   afuera), así que ese padding chico deja el texto/las cards pegadas a los
+   bordes. Mismo problema que ya resolvimos en el Hero, acá para estas
+   secciones y en el rango de tablet específicamente. */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .section-tablet-pad {
+    padding-left: 48px !important;
+    padding-right: 48px !important;
+  }
+  .section-tablet-grid {
+    gap: 20px !important;
+  }
+}
+
+/* ============= TÍTULO "PROYECTOS REALIZADOS" =============
+   Forzado a una sola línea (white-space: nowrap) con text-3xl (30px) no
+   entraba en el ancho disponible en mobile chico (~272px con el padding de
+   la sección) y se cortaba. Envuelve a 2 líneas por debajo de 640px; de ahí
+   para arriba mantiene el diseño original de una sola línea. */
+.projects-title {
+  white-space: normal;
+}
+@media (min-width: 640px) {
+  .projects-title {
+    white-space: nowrap;
+  }
+}
+
 /* ============= SELECTION ============= */
 ::selection {
   background: rgba(139, 92, 246, 0.3);
@@ -402,3 +588,6 @@ body {
   background: rgba(139, 92, 246, 0.3);
   color: #ffffff;
 }
+
+
+

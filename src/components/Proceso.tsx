@@ -93,7 +93,10 @@ export default function Proceso() {
             id="proceso"
             className="relative overflow-hidden flex justify-center"
             style={{
-                marginTop: '140px',
+                // Antes 140px, pensado para cuando venía justo después del
+                // Hero. Ahora tiene Confianza/IdealPara en el medio (con su
+                // propio padding), y ese margen extra sumaba un salto grande.
+                marginTop: '48px',
                 scrollMarginTop: '100px'
             }}
         >
@@ -103,7 +106,7 @@ export default function Proceso() {
                 <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '2s' }} />
             </div>
 
-            <div className="w-full max-w-7xl px-6 md:px-8 relative z-10">
+            <div className="section-tablet-pad w-full max-w-7xl px-6 md:px-8 relative z-10">
                 {/* Encabezado */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
@@ -159,7 +162,7 @@ export default function Proceso() {
                 </motion.div>
 
                 {/* Cuadrícula del proceso */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16 justify-items-center md:justify-items-stretch relative">
+                <div className="section-tablet-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16 justify-items-center md:justify-items-stretch relative">
                     {pasos.map((paso, index) => (
                         <motion.div
                             key={paso.numero}
