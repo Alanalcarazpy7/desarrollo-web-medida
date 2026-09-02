@@ -43,5 +43,50 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ServiciosGeneralPage({ params }: Props) {
     const { lang } = await params;
-    return <ServiciosPageContent lang={lang} />;
+    const isEs = lang !== "en";
+    const loc = isEs ? "es" : "en";
+    const base = "https://solvatech.com.py";
+
+    const services: [string, string][] = [
+        ["Desarrollo Web en Paraguay", "/servicios/desarrollo-web-paraguay"],
+        [isEs ? "Landing / Promo Lanzamiento" : "Landing / Launch Promo", "/servicios/desarrollo-web-lanzamiento"],
+        [isEs ? "Web Básica" : "Basic Website", "/servicios/desarrollo-web-basica"],
+        [isEs ? "Catálogo digital / Menú" : "Digital Catalog / Menu", "/servicios/desarrollo-web-catalogo"],
+        [isEs ? "Web Estándar" : "Standard Website", "/servicios/desarrollo-web-estandar"],
+        [isEs ? "Web Pro" : "Web Pro", "/servicios/desarrollo-web-pro"],
+        [isEs ? "Sistemas a medida" : "Custom systems", "/servicios/sistemas-informaticos-paraguay"],
+        [isEs ? "Posicionamiento en Google" : "Google & Maps SEO", "/servicios/posicionamiento-google"],
+        [isEs ? "Hosting web administrado" : "Managed web hosting", "/servicios/hosting-web-administrado"],
+        [isEs ? "Dominio y configuración" : "Domain & setup", "/servicios/dominio-configuracion-web"],
+        [isEs ? "Soporte web básico" : "Basic web support", "/servicios/soporte-web-basico"],
+    ];
+
+    const itemListLd = {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        name: isEs ? "Servicios de SolvaTech" : "SolvaTech services",
+        itemListElement: services.map(([name, p], i) => ({
+            "@type": "ListItem",
+            position: i + 1,
+            name,
+            url: `${base}/${loc}${p}`,
+        })),
+    };
+
+    const breadcrumbLd = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+            { "@type": "ListItem", position: 1, name: isEs ? "Inicio" : "Home", item: `${base}/${loc}` },
+            { "@type": "ListItem", position: 2, name: isEs ? "Servicios" : "Services", item: `${base}/${loc}/servicios` },
+        ],
+    };
+
+    return (
+        <>
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListLd) }} />
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
+            <ServiciosPageContent lang={lang} />
+        </>
+    );
 }

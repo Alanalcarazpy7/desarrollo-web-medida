@@ -9,6 +9,8 @@ const Footer = dynamic(() => import("@/components/Footer"));
 const BackgroundParticles = dynamic(() => import("@/components/BackgroundParticles"));
 import ServiceCard from "@/components/ServiceCard";
 import CTAButton from "@/components/CTAButton";
+import ServiceJsonLd from "@/components/ServiceJsonLd";
+import { buildServiceJsonLd } from "@/lib/service-schema";
 import { whatsappMessages } from "@/lib/whatsapp";
 
 type Props = {
@@ -166,8 +168,21 @@ export default async function HostingWebAdministradoPage({ params }: Props) {
 
     const ctaMsg = whatsappMessages[lang as "es" | "en"]?.hostingAdministrado || whatsappMessages.es.hostingAdministrado;
 
+    const serviceLd = buildServiceJsonLd({
+        lang,
+        path: "/servicios/hosting-web-administrado",
+        name: dict.h1,
+        description: dict.whyDesc,
+        breadcrumbLabel: dict.breadcrumbsService,
+        breadcrumbHome: dict.breadcrumbsHome,
+        breadcrumbServices: dict.breadcrumbsServices,
+        faqs,
+        serviceType: lang === "en" ? "Managed web hosting" : "Hosting web administrado",
+    });
+
     return (
         <main style={{ minHeight: "100vh", backgroundColor: theme.bg, color: theme.textMain, overflowX: "hidden", position: "relative" }}>
+            <ServiceJsonLd nodes={serviceLd} />
             <BackgroundParticles />
             <Navbar />
 

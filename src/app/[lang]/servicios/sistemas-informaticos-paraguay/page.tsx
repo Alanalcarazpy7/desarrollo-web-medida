@@ -9,6 +9,8 @@ const Footer = dynamic(() => import("@/components/Footer"));
 const BackgroundParticles = dynamic(() => import("@/components/BackgroundParticles"));
 import ServiceCard from "@/components/ServiceCard";
 import CTAButton from "@/components/CTAButton";
+import ServiceJsonLd from "@/components/ServiceJsonLd";
+import { buildServiceJsonLd } from "@/lib/service-schema";
 
 type Props = {
     params: Promise<{ lang: string }>;
@@ -100,8 +102,20 @@ export default async function SistemasInformaticosParaguayPage({ params }: Props
 
     const ctaMsg = whatsappMessages[lang as "es" | "en"]?.sistema || whatsappMessages.es.sistema;
 
+    const serviceLd = buildServiceJsonLd({
+        lang,
+        path: "/servicios/sistemas-informaticos-paraguay",
+        name: dict.title,
+        description: dict.description,
+        breadcrumbLabel: isEs ? "Sistemas a Medida" : "Custom Software",
+        breadcrumbHome: isEs ? "Inicio" : "Home",
+        breadcrumbServices: isEs ? "Servicios" : "Services",
+        serviceType: lang === "en" ? "Custom software development" : "Desarrollo de software a medida",
+    });
+
     return (
         <main style={{ minHeight: "100vh", backgroundColor: theme.bg, color: theme.textMain, position: "relative", overflow: "hidden" }}>
+            <ServiceJsonLd nodes={serviceLd} />
             <BackgroundParticles />
             <Navbar />
             

@@ -8,6 +8,8 @@ const Footer = dynamic(() => import("@/components/Footer"));
 const BackgroundParticles = dynamic(() => import("@/components/BackgroundParticles"));
 import ServiceCard from "@/components/ServiceCard";
 import CTAButton from "@/components/CTAButton";
+import ServiceJsonLd from "@/components/ServiceJsonLd";
+import { buildServiceJsonLd } from "@/lib/service-schema";
 import { whatsappMessages } from "@/lib/whatsapp";
 
 type Props = {
@@ -165,8 +167,21 @@ export default async function PosicionamientoGooglePage({ params }: Props) {
 
     const ctaMsg = whatsappMessages[lang as "es" | "en"]?.seo || whatsappMessages.es.seo;
 
+    const serviceLd = buildServiceJsonLd({
+        lang,
+        path: "/servicios/posicionamiento-google",
+        name: dict.h1,
+        description: dict.whyDesc,
+        breadcrumbLabel: dict.breadcrumbsService,
+        breadcrumbHome: dict.breadcrumbsHome,
+        breadcrumbServices: dict.breadcrumbsServices,
+        faqs,
+        serviceType: lang === "en" ? "Local SEO" : "Posicionamiento SEO local",
+    });
+
     return (
         <main style={{ minHeight: "100vh", backgroundColor: theme.bg, color: theme.textMain, overflowX: "hidden", position: "relative" }}>
+            <ServiceJsonLd nodes={serviceLd} />
             <BackgroundParticles />
             <Navbar />
             
