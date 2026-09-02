@@ -74,6 +74,29 @@ export const projectsData: Project[] = [
         }
     },
     {
+        id: "gestion-de-residencias",
+        slug: "gestion-de-residencias",
+        title: "Gestión de Residencias",
+        categoryKey: "website",
+        technologies: ["Sitio institucional", "Diseño responsive", "Captación de consultas"],
+        image: "/projects/gestion-de-residencias.png",
+        featured: true,
+        demoUrl: "https://www.gestionderesidencias.com.py/",
+        accessType: "live",
+        translations: {
+            es: {
+                title: "Gestión de Residencias",
+                description: "Sitio web para una gestoría especializada en trámites de residencia para extranjeros en Paraguay, con presentación de servicios y contacto directo.",
+                alt: "Gestión de Residencias, gestoría de trámites de residencia para extranjeros en Paraguay"
+            },
+            en: {
+                title: "Gestión de Residencias",
+                description: "Website for a firm specialized in residence permit procedures for foreigners in Paraguay, presenting services and direct contact.",
+                alt: "Gestión de Residencias, residence permit management firm for foreigners in Paraguay"
+            }
+        }
+    },
+    {
         id: "modashoppy",
         slug: "modashoppy",
         title: "ModaShoppy",
