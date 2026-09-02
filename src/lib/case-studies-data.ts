@@ -84,6 +84,31 @@ export const caseStudiesData: CaseStudy[] = [
             }
         }
     },
+    {
+        id: "gestion-de-residencias",
+        slug: "gestion-de-residencias",
+        name: "Gestión de Residencias",
+        businessName: "Gestión de Residencias",
+        logo: "/projects/gestion-de-residencia-logo.png",
+        image: "/projects/gestion-de-residencias.png",
+        status: "published",
+        visible: true,
+        projectUrl: "https://www.gestionderesidencias.com.py/",
+        hasPermission: true,
+        tags: ["Sitio institucional", "Diseño responsive", "Captación de consultas"],
+        translations: {
+            es: {
+                type: "Web para gestoría de residencias",
+                problem: "Presentar de forma clara y confiable los servicios de gestión de residencia para extranjeros y facilitar el contacto de nuevos interesados.",
+                solution: "Sitio institucional con explicación de servicios, proceso y datos de contacto, con diseño adaptado a celular y foco en generar consultas."
+            },
+            en: {
+                type: "Website for a residence-permit firm",
+                problem: "Clearly and reliably present residence-permit services for foreigners and make it easy for new prospects to get in touch.",
+                solution: "Institutional website explaining services, process, and contact details, with mobile-friendly design focused on generating enquiries."
+            }
+        }
+    },
     // Propuesta comercial en conversación, cliente aún no confirmado.
     // NO debe mostrarse públicamente como caso de éxito (visible: false).
     {

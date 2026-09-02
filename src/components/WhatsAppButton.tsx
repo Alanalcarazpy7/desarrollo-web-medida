@@ -20,6 +20,7 @@ export default function WhatsAppButton() {
 
     return (
         <motion.div
+            data-fab
             className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-[100]"
             initial={{ scale: 0, opacity: 0, y: 50 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}

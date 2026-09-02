@@ -97,6 +97,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
   ]
 
-  return [...routesMap, ...blogEntries, ...projectsEntries]
+  const landingEntries: MetadataRoute.Sitemap = [
+    {
+      url: `${baseUrl}/es/pagina-web`,
+      lastModified: new Date('2026-09-01'),
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+      alternates: {
+        languages: {
+          es: `${baseUrl}/es/pagina-web`,
+          'es-PY': `${baseUrl}/es/pagina-web`,
+          'x-default': `${baseUrl}/es/pagina-web`,
+        },
+      },
+    },
+  ]
+
+  return [...routesMap, ...blogEntries, ...projectsEntries, ...landingEntries]
 }
 

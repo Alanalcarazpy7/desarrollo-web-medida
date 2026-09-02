@@ -58,6 +58,27 @@ export const testimonialsData: Testimonial[] = [
         rating: 5
     },
     {
+        id: "gestion-de-residencias",
+        businessName: "Gestión de Residencias",
+        projectName: "Web institucional",
+        role: "Gestión de residencia para extranjeros",
+        projectType: "Web institucional",
+        projectUrl: "https://www.gestionderesidencias.com.py/",
+        status: "published",
+        logo: "/projects/gestion-de-residencia-logo.png",
+        screenshot: "/projects/gestion-de-residencias.png",
+        initials: "GR",
+        testimonialType: "text",
+        // Texto provisorio cargado con autorización del dueño de SolvaTech
+        // (el cliente aprobó publicar testimonio). Reemplazar por las
+        // palabras textuales del cliente cuando las envíe.
+        testimonialText: "Queríamos algo serio y fácil de entender para clientes del exterior. Quedó claro, rápido y empezaron a llegar más consultas.",
+        hasPermission: true,
+        isApproved: true,
+        featured: false,
+        rating: 5
+    },
+    {
         id: "academia-gps",
         businessName: "Academia GPS / La Trilogía TOL",
         projectName: "Landing page de venta",
