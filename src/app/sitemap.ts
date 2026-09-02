@@ -18,7 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '', date: '2026-03-17' },
     { path: '/blog', date: '2026-03-17' },
     { path: '/servicios', date: '2026-06-21' },
-    { path: '/servicios/desarrollo-web-paraguay', date: '2026-03-07' },
+    { path: '/servicios/desarrollo-web-paraguay', date: '2026-09-01' },
     { path: '/servicios/sistemas-informaticos-paraguay', date: '2026-06-21' },
     { path: '/servicios/desarrollo-web-lanzamiento', date: '2026-06-21' },
     { path: '/servicios/desarrollo-web-basica', date: '2026-06-21' },
