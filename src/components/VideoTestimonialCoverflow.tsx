@@ -36,8 +36,11 @@ function CoverflowCard({ item, t }: { item: Testimonial; t: (k: string) => strin
             {item.videoUrl && isPlaying ? (
                 <video
                     src={item.videoUrl}
+                    poster={item.screenshot}
                     controls
                     autoPlay
+                    playsInline
+                    preload="metadata"
                     className="absolute inset-0 w-full h-full object-cover"
                 />
             ) : (
@@ -111,12 +114,35 @@ function CoverflowCard({ item, t }: { item: Testimonial; t: (k: string) => strin
                 </>
             )}
 
-            <div className="relative pointer-events-none flex flex-col gap-2.5 p-5">
+            <div className="relative pointer-events-none flex flex-col gap-2 p-5">
                 <div className="min-w-0">
-                    <div className="text-white font-bold text-base leading-snug" style={{ textShadow: "0 2px 8px rgba(0,0,0,0.6)", display: "-webkit-box", WebkitLineClamp: 1, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
+                    {/* Nombres largos (ej. "Academia GPS / La Trilogía TOL") pasan a
+                        2 líneas en vez de cortarse a mitad de palabra en 1 sola. */}
+                    <div
+                        className="text-white font-bold leading-tight"
+                        style={{
+                            fontSize: "15px",
+                            textShadow: "0 2px 8px rgba(0,0,0,0.6)",
+                            display: "-webkit-box",
+                            WebkitLineClamp: 2,
+                            WebkitBoxOrient: "vertical",
+                            overflow: "hidden",
+                        }}
+                    >
                         {item.clientName || item.businessName}
                     </div>
-                    <div className="text-xs leading-snug mt-1" style={{ color: theme.accent, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
+                    <div
+                        className="leading-snug mt-1.5"
+                        style={{
+                            fontSize: "12px",
+                            fontWeight: 600,
+                            color: theme.accent,
+                            display: "-webkit-box",
+                            WebkitLineClamp: 1,
+                            WebkitBoxOrient: "vertical",
+                            overflow: "hidden",
+                        }}
+                    >
                         {item.clientName ? item.businessName : item.projectType}
                     </div>
                 </div>
