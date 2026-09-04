@@ -177,8 +177,8 @@ export const dictionary = {
           title: "Web",
           titleAccent: "Básica",
           description: "Ideal para presencia inicial",
-          priceGs: "Gs. 550.000",
-          priceUsd: "Precio regular Gs. 750.000 · Pago único",
+          priceGs: "Gs. 850.000",
+          priceUsd: "Precio regular Gs. 950.000 · Pago único",
           specialDesc: "Hasta 4 secciones. Para webs más completas, recomendamos el plan Web Estándar.",
           features: [
             "Diseño responsive",
@@ -355,7 +355,7 @@ export const dictionary = {
         },
         {
           q: "¿Cuánto cuesta crear una página web básica?",
-          a: "Una web básica para presencia digital (hasta 4 secciones) empieza desde Gs. 550.000. Si necesitás más secciones, el plan Web Estándar es la opción recomendada. El precio final depende del alcance, diseño y contenido necesario."
+          a: "Una web básica para presencia digital (hasta 4 secciones) empieza desde Gs. 850.000. Si necesitás más secciones, el plan Web Estándar es la opción recomendada. El precio final depende del alcance, diseño y contenido necesario."
         },
         {
           q: "¿El hosting y dominio están incluidos?",
@@ -572,8 +572,8 @@ export const dictionary = {
           title: "Basic",
           titleAccent: "Web",
           description: "Ideal for an initial presence",
-          priceGs: "Gs. 550.000",
-          priceUsd: "Regular price Gs. 750.000 · One-time payment",
+          priceGs: "Gs. 850.000",
+          priceUsd: "Regular price Gs. 950.000 · One-time payment",
           specialDesc: "Up to 4 sections. For a more complete website, we recommend the Standard Web plan.",
           features: [
             "Responsive design",
@@ -750,7 +750,7 @@ export const dictionary = {
         },
         {
           q: "How much does it cost to create a basic website?",
-          a: "A basic website for digital presence (up to 4 sections) starts at Gs. 550,000. If you need more sections, the Standard Web plan is the recommended option. The final price depends on scope, design, and required content."
+          a: "A basic website for digital presence (up to 4 sections) starts at Gs. 850,000. If you need more sections, the Standard Web plan is the recommended option. The final price depends on scope, design, and required content."
         },
         {
           q: "Are hosting and domain included?",

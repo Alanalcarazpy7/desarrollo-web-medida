@@ -157,7 +157,7 @@ export default async function PromoLanzamientoPage({ params }: Props) {
         ventajasTitle: isEs ? "Ventajas de Lanzar con SolvaTech" : "Advantages of Launching with SolvaTech",
         faqsTitle: isEs ? "Preguntas Frecuentes" : "Frequently Asked Questions",
         ctaBtn: isEs ? "Quiero contratar la Promo Lanzamiento" : "I want to get the Launch Promo",
-        price: isEs ? "Gs. 550.000 / pago único" : "Gs. 550,000 / one-time payment",
+        price: isEs ? "Gs. 850.000 / pago único" : "Gs. 850,000 / one-time payment",
         metaBadge: isEs ? "Servicio Comercial" : "Commercial Service",
         metaSub: isEs ? "Desarrollo Web Inicial" : "Initial Web Development",
         advisorRole: isEs ? "Asesor Tecnológico SolvaTech" : "Technology Advisor SolvaTech",

@@ -57,8 +57,8 @@ export default function ServiciosPageContent({ lang }: ServiciosPageContentProps
             id: "promo_lanzamiento",
             title: isEs ? "Promo Lanzamiento" : "Launch Promo",
             subtitle: isEs ? "Ideal para empezar online" : "Ideal to start online",
-            price: isEs ? "Gs. 550.000" : "Gs. 550,000",
-            priceSub: isEs ? "Precio regular Gs. 750.000" : "Regular price Gs. 750,000",
+            price: isEs ? "Gs. 850.000" : "Gs. 850,000",
+            priceSub: isEs ? "Precio regular Gs. 950.000" : "Regular price Gs. 950,000",
             benefits: isEs 
                 ? ["Diseño responsive", "Botón directo a WhatsApp", "Sección de contacto"]
                 : ["Responsive design", "Direct WhatsApp button", "Contact section"],
