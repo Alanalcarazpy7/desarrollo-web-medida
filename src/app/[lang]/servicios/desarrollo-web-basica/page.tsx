@@ -156,7 +156,7 @@ export default async function DesarrolloWebBasicaPage({ params }: Props) {
         ventajasTitle: isEs ? "Ventajas Comerciales" : "Commercial Advantages",
         faqsTitle: isEs ? "Preguntas Frecuentes" : "Frequently Asked Questions",
         ctaBtn: isEs ? "Solicitar mi web básica por WhatsApp" : "Request my basic website on WhatsApp",
-        price: isEs ? "Desde Gs. 750.000 pago único" : "Starting from Gs. 750,000 (one-time payment)",
+        price: isEs ? "Gs. 850.000 pago único (Regular Gs. 950.000)" : "Gs. 850,000 one-time payment (Regular Gs. 950,000)",
         metaBadge: isEs ? "Servicio Comercial" : "Commercial Service",
         metaSub: isEs ? "Presencia Online" : "Online Presence",
         advisorRole: isEs ? "Asesor Tecnológico SolvaTech" : "Technology Advisor SolvaTech",

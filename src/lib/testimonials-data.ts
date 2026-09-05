@@ -84,7 +84,7 @@ export const testimonialsData: Testimonial[] = [
         projectName: "Landing page de venta",
         projectType: "Landing page de venta",
         projectUrl: "https://www.academiagps.com/",
-        status: "development",
+        status: "published",
         logo: "/projects/academia-gps-logo.svg",
         screenshot: "/videos/academia-gps-poster.jpg",
         initials: "GPS",

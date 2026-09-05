@@ -114,9 +114,9 @@ export default async function RootLayout({
       "MX"
     ],
     "sameAs": [
-      "https://www.linkedin.com/in/alanalcaraz",
-      "https://github.com/alanalcarazpy7",
-      "https://www.instagram.com/alandev_py/"
+      "https://www.instagram.com/alandev_py/",
+      "https://www.facebook.com/people/Alandev/61590114310700/",
+      "https://github.com/alanalcarazpy7"
     ],
     "contactPoint": {
       "@type": "ContactPoint",

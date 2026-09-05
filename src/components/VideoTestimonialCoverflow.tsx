@@ -10,30 +10,61 @@ const theme = {
     accentGlow: "rgba(0, 217, 255, 0.5)",
 };
 
-// Motor 3D adaptado de un coverflow de referencia (Originkit), sacando toda la
-// plomería específica de Framer (props expuestas como controles de editor,
-// useIsStaticRenderer, COMPONENT_DEFAULTS) y dejando solo la matemática del
-// efecto: la card activa queda de frente, las vecinas se inclinan hacia atrás
-// en perspectiva. Reskin completo con la identidad de SolvaTech.
+// Coverflow 3D: la card activa de frente, las vecinas inclinadas en
+// perspectiva. Reskin con identidad SolvaTech.
 const PERSPECTIVE = 1700;
 const SCALE_STEP = 0.16;
 const MAX_VISIBLE = 2;
 const DEPTH = 260;
 const CARD_WIDTH = 300;
-const CARD_HEIGHT = 460;
+const CARD_HEIGHT = 470;
 const GAP_PX = 250;
 const TILT = 8;
 const SIDE_TILT = 6;
 const TRANSITION_MS = 600;
-const AUTOPLAY_MS = 5000;
+const AUTOPLAY_MS = 6000;
 
-function CoverflowCard({ item, t }: { item: Testimonial; t: (k: string) => string }) {
-    const [isPlaying, setIsPlaying] = useState(false);
-    const isPublished = item.status === "published";
-
+function PlayIcon() {
     return (
-        <div className="relative w-full h-full flex flex-col">
-            {item.videoUrl && isPlaying ? (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="#04121a" aria-hidden="true">
+            <path d="M8 5v14l11-7z" />
+        </svg>
+    );
+}
+
+function CloseIcon() {
+    return (
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.4" aria-hidden="true">
+            <path d="M6 6l12 12M18 6L6 18" strokeLinecap="round" />
+        </svg>
+    );
+}
+
+function CoverflowCard({
+    item,
+    t,
+    isActive,
+    isPlaying,
+    onPlay,
+    onStop,
+}: {
+    item: Testimonial;
+    t: (k: string) => string;
+    isActive: boolean;
+    isPlaying: boolean;
+    onPlay: () => void;
+    onStop: () => void;
+}) {
+    const isPublished = item.status === "published";
+    const hasVideo = Boolean(item.videoUrl);
+    // Solo se usa imagen de fondo nítida cuando es un poster real de un video
+    // vertical. Las capturas de escritorio (wide) recortadas en una card
+    // angosta se ven rotas: para esas va un degradé limpio + logo.
+    const usePoster = hasVideo && Boolean(item.screenshot);
+
+    if (isPlaying && hasVideo) {
+        return (
+            <div className="relative w-full h-full overflow-hidden" style={{ borderRadius: "20px", background: "#000" }}>
                 <video
                     src={item.videoUrl}
                     poster={item.screenshot}
@@ -41,118 +72,180 @@ function CoverflowCard({ item, t }: { item: Testimonial; t: (k: string) => strin
                     autoPlay
                     playsInline
                     preload="metadata"
-                    className="absolute inset-0 w-full h-full object-cover"
+                    className="absolute inset-0 w-full h-full"
+                    style={{ objectFit: "contain", background: "#000" }}
+                />
+                <button
+                    type="button"
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        onStop();
+                    }}
+                    className="absolute z-20 flex items-center justify-center rounded-full transition-transform duration-200 hover:scale-110"
+                    style={{
+                        top: "10px",
+                        right: "10px",
+                        width: "34px",
+                        height: "34px",
+                        background: "rgba(5,6,10,0.72)",
+                        border: "1px solid rgba(255,255,255,0.25)",
+                        backdropFilter: "blur(6px)",
+                    }}
+                    aria-label={t("testimonials.closeVideo")}
+                >
+                    <CloseIcon />
+                </button>
+            </div>
+        );
+    }
+
+    return (
+        <div className="relative w-full h-full overflow-hidden" style={{ borderRadius: "20px", background: "#0a0d14" }}>
+            {/* Fondo */}
+            {usePoster ? (
+                <Image
+                    src={item.screenshot as string}
+                    alt={item.businessName}
+                    fill
+                    sizes="320px"
+                    style={{ objectFit: "cover", objectPosition: "center 18%" }}
+                    priority={isActive}
                 />
             ) : (
-                <>
-                    <div
-                        className="absolute inset-0"
-                        style={{
-                            background: item.screenshot
-                                ? undefined
-                                : "linear-gradient(160deg, #0a0a0f, #12121a)",
-                        }}
-                    >
-                        {item.screenshot && (
-                            // El screenshot es una captura ancha de escritorio; al recortarla
-                            // "cover" dentro de una card angosta y vertical, el texto queda
-                            // cortado a mitad de palabra y se ve roto. Por eso va desenfocada:
-                            // aporta color/textura de fondo sin pretender ser texto legible.
-                            <Image
-                                src={item.screenshot}
-                                alt={`${item.businessName}`}
-                                fill
-                                sizes="300px"
-                                style={{ objectFit: "cover", objectPosition: "center 20%", opacity: 0.4, filter: "blur(6px) saturate(1.1)", transform: "scale(1.15)" }}
-                            />
-                        )}
-                        <div
-                            className="absolute inset-0"
-                            style={{ background: "linear-gradient(180deg, rgba(5,5,10,0.35) 0%, rgba(5,5,10,0.75) 75%, rgba(5,5,10,0.92) 100%)" }}
-                        />
-                    </div>
-
-                    <div className="relative flex-1 flex flex-col items-center justify-center gap-5 px-6 text-center">
-                        {item.logo ? (
-                            <div
-                                className="flex items-center justify-center rounded-2xl"
-                                style={{ width: "88px", height: "88px", background: "#ffffff", padding: "14px", boxShadow: "0 8px 24px rgba(0,0,0,0.4)" }}
-                            >
-                                <Image src={item.logo} alt={item.businessName} width={68} height={68} style={{ objectFit: "contain", width: "100%", height: "100%" }} />
-                            </div>
-                        ) : (
-                            <div
-                                className="flex items-center justify-center rounded-2xl font-black text-2xl"
-                                style={{ width: "88px", height: "88px", color: "#000", background: `linear-gradient(135deg, ${theme.accent}, ${theme.accentDark})` }}
-                            >
-                                {item.initials}
-                            </div>
-                        )}
-
-                        {item.videoUrl ? (
-                            <button
-                                type="button"
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    setIsPlaying(true);
-                                }}
-                                className="flex items-center justify-center rounded-full transition-transform duration-300 hover:scale-110"
-                                style={{ width: "60px", height: "60px", background: theme.accent, boxShadow: `0 0 30px ${theme.accentGlow}` }}
-                                aria-label={t("testimonials.playVideo")}
-                            >
-                                <svg width="22" height="22" viewBox="0 0 24 24" fill="#000"><path d="M8 5v14l11-7z" /></svg>
-                            </button>
-                        ) : (
-                            <span
-                                className="text-xs font-bold uppercase tracking-wider px-4 py-2 rounded-full"
-                                style={{ color: theme.accent, border: `1px solid ${theme.accent}45`, background: `${theme.accent}0d` }}
-                            >
-                                {t("testimonials.videoUpcoming")}
-                            </span>
-                        )}
-                    </div>
-                </>
+                <div
+                    className="absolute inset-0"
+                    style={{ background: "radial-gradient(120% 80% at 50% 0%, #14212c, #0a0d14 70%)" }}
+                />
             )}
 
-            <div className="relative pointer-events-none flex flex-col gap-2 p-5">
-                <div className="min-w-0">
-                    {/* Nombres largos (ej. "Academia GPS / La Trilogía TOL") pasan a
-                        2 líneas en vez de cortarse a mitad de palabra en 1 sola. */}
-                    <div
-                        className="text-white font-bold leading-tight"
+            {/* Scrims para legibilidad (arriba y abajo) */}
+            <div
+                className="absolute inset-0"
+                style={{
+                    background:
+                        "linear-gradient(180deg, rgba(4,6,10,0.62) 0%, rgba(4,6,10,0) 24%, rgba(4,6,10,0) 40%, rgba(4,6,10,0.55) 66%, rgba(4,6,10,0.92) 100%)",
+                }}
+            />
+
+            {/* Logo del negocio arriba a la izquierda */}
+            {item.logo ? (
+                <div
+                    className="absolute flex items-center justify-center rounded-xl"
+                    style={{
+                        top: "12px",
+                        left: "12px",
+                        width: "46px",
+                        height: "46px",
+                        background: "#fff",
+                        padding: "8px",
+                        boxShadow: "0 6px 18px rgba(0,0,0,0.45)",
+                    }}
+                >
+                    <Image
+                        src={item.logo}
+                        alt={item.businessName}
+                        width={34}
+                        height={34}
+                        style={{ objectFit: "contain", width: "100%", height: "100%" }}
+                    />
+                </div>
+            ) : (
+                <div
+                    className="absolute flex items-center justify-center rounded-xl font-black"
+                    style={{
+                        top: "12px",
+                        left: "12px",
+                        width: "46px",
+                        height: "46px",
+                        fontSize: "15px",
+                        color: "#04121a",
+                        background: `linear-gradient(135deg, ${theme.accent}, ${theme.accentDark})`,
+                    }}
+                >
+                    {item.initials}
+                </div>
+            )}
+
+            {/* Centro: play (si hay video y es la card activa) o "próximamente" */}
+            <div className="absolute inset-0 flex items-center justify-center px-6">
+                {hasVideo ? (
+                    isActive ? (
+                        <button
+                            type="button"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                onPlay();
+                            }}
+                            className="flex items-center justify-center rounded-full transition-transform duration-300 hover:scale-110"
+                            style={{
+                                width: "64px",
+                                height: "64px",
+                                paddingLeft: "4px",
+                                background: theme.accent,
+                                boxShadow: `0 0 34px ${theme.accentGlow}, 0 10px 30px rgba(0,0,0,0.5)`,
+                            }}
+                            aria-label={t("testimonials.playVideo")}
+                        >
+                            <PlayIcon />
+                        </button>
+                    ) : (
+                        <div
+                            className="flex items-center justify-center rounded-full"
+                            style={{
+                                width: "54px",
+                                height: "54px",
+                                paddingLeft: "3px",
+                                background: "rgba(0,217,255,0.82)",
+                                boxShadow: `0 0 22px ${theme.accentGlow}`,
+                            }}
+                            aria-hidden="true"
+                        >
+                            <PlayIcon />
+                        </div>
+                    )
+                ) : (
+                    <span
+                        className="text-[11px] font-bold uppercase tracking-wider px-4 py-2 rounded-full"
                         style={{
-                            fontSize: "15px",
-                            textShadow: "0 2px 8px rgba(0,0,0,0.6)",
-                            display: "-webkit-box",
-                            WebkitLineClamp: 2,
-                            WebkitBoxOrient: "vertical",
-                            overflow: "hidden",
-                        }}
-                    >
-                        {item.clientName || item.businessName}
-                    </div>
-                    <div
-                        className="leading-snug mt-1.5"
-                        style={{
-                            fontSize: "12px",
-                            fontWeight: 600,
                             color: theme.accent,
-                            display: "-webkit-box",
-                            WebkitLineClamp: 1,
-                            WebkitBoxOrient: "vertical",
-                            overflow: "hidden",
+                            border: `1px solid ${theme.accent}55`,
+                            background: "rgba(5,6,10,0.55)",
+                            backdropFilter: "blur(4px)",
                         }}
                     >
-                        {item.clientName ? item.businessName : item.projectType}
-                    </div>
+                        {t("testimonials.videoUpcoming")}
+                    </span>
+                )}
+            </div>
+
+            {/* Info abajo, anclada sobre el scrim (nunca se recorta) */}
+            <div className="absolute left-0 right-0 bottom-0 flex flex-col" style={{ padding: "16px", gap: "6px" }}>
+                <div
+                    className="text-white font-bold"
+                    style={{ fontSize: "15px", lineHeight: 1.25, textShadow: "0 2px 10px rgba(0,0,0,0.8)" }}
+                >
+                    {item.clientName || item.businessName}
+                </div>
+                <div
+                    style={{
+                        fontSize: "12px",
+                        fontWeight: 600,
+                        color: theme.accent,
+                        lineHeight: 1.3,
+                        textShadow: "0 1px 6px rgba(0,0,0,0.75)",
+                    }}
+                >
+                    {item.clientName ? item.businessName : item.projectType}
                 </div>
                 <span
-                    className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full self-start"
-                    style={
-                        isPublished
-                            ? { color: "#00ffcc", border: "1px solid rgba(0,255,204,0.4)", background: "rgba(0,255,204,0.08)" }
-                            : { color: theme.accent, border: `1px solid ${theme.accent}45`, background: `${theme.accent}12` }
-                    }
+                    className="text-[10px] font-bold uppercase tracking-wider rounded-full self-start"
+                    style={{
+                        marginTop: "2px",
+                        padding: "3px 10px",
+                        ...(isPublished
+                            ? { color: "#00ffcc", border: "1px solid rgba(0,255,204,0.45)", background: "rgba(0,255,204,0.1)" }
+                            : { color: theme.accent, border: `1px solid ${theme.accent}55`, background: `${theme.accent}14` }),
+                    }}
                 >
                     {isPublished ? t("caseStudies.statusPublished") : t("caseStudies.statusDevelopment")}
                 </span>
@@ -165,6 +258,8 @@ export default function VideoTestimonialCoverflow({ t }: { t: (k: string) => str
     const items = testimonialsData;
     const n = items.length;
     const [active, setActive] = useState(0);
+    const [playingId, setPlayingId] = useState<string | null>(null);
+    const [paused, setPaused] = useState(false);
     const lockRef = useRef(false);
 
     const lock = useCallback(() => {
@@ -177,6 +272,7 @@ export default function VideoTestimonialCoverflow({ t }: { t: (k: string) => str
     const step = useCallback(
         (dir: number) => {
             if (lockRef.current || n < 2) return;
+            setPlayingId(null);
             lock();
             setActive((a) => ((a + dir) % n + n) % n);
         },
@@ -185,21 +281,22 @@ export default function VideoTestimonialCoverflow({ t }: { t: (k: string) => str
 
     const handleCardClick = useCallback(
         (i: number) => {
-            if (lockRef.current) return;
+            if (lockRef.current || i === active) return;
+            setPlayingId(null);
             lock();
-            setActive((a) => (i === a ? a : i));
+            setActive(i);
         },
-        [lock]
+        [active, lock]
     );
 
-    // Autoplay suave: rota sola cada AUTOPLAY_MS, se pausa mientras el mouse
-    // está sobre el carrusel para no interrumpir a alguien mirando un video.
-    const [paused, setPaused] = useState(false);
+    // Autoplay: rota sola cada AUTOPLAY_MS. Se detiene mientras el mouse está
+    // encima Y también mientras se reproduce cualquier video, sin importar
+    // dónde esté el mouse (antes seguía girando y se llevaba el video puesto).
     useEffect(() => {
-        if (paused || n < 2) return;
+        if (paused || playingId !== null || n < 2) return;
         const id = window.setInterval(() => step(1), AUTOPLAY_MS);
         return () => window.clearInterval(id);
-    }, [paused, n, step]);
+    }, [paused, playingId, n, step]);
 
     const onKeyDown = useCallback(
         (e: React.KeyboardEvent) => {
@@ -227,6 +324,8 @@ export default function VideoTestimonialCoverflow({ t }: { t: (k: string) => str
         padding: "40px 0",
     };
 
+    const anyPlaying = playingId !== null;
+
     return (
         <div
             style={rootStyle}
@@ -246,6 +345,7 @@ export default function VideoTestimonialCoverflow({ t }: { t: (k: string) => str
                     const ax = Math.abs(rel);
                     const visible = ax <= MAX_VISIBLE;
                     const isActive = rel === 0;
+                    const dimmed = anyPlaying && !isActive;
                     const sc = Math.max(0.4, 1 - ax * SCALE_STEP);
                     const tx = rel * GAP_PX;
                     const tz = -ax * DEPTH;
@@ -264,8 +364,8 @@ export default function VideoTestimonialCoverflow({ t }: { t: (k: string) => str
                         transformOrigin: "center center",
                         transform: `translate(-50%, -50%) translateX(${tx}px) translateZ(${tz}px) rotateY(${ry}deg) rotateZ(${rz}deg) scale(${sc})`,
                         transition: `transform ${TRANSITION_MS}ms cubic-bezier(0.22, 1, 0.36, 1), opacity ${TRANSITION_MS}ms ease, box-shadow 0.4s ease, border-color 0.4s ease`,
-                        opacity: visible ? 1 : 0,
-                        cursor: isActive ? "default" : "pointer",
+                        opacity: visible ? (dimmed ? 0.1 : 1) : 0,
+                        cursor: isActive && !anyPlaying ? "default" : "pointer",
                         pointerEvents: visible ? "auto" : "none",
                         backgroundColor: "#0a0a0f",
                         border: `1px solid ${isActive ? theme.accent + "60" : "rgba(255,255,255,0.1)"}`,
@@ -282,7 +382,14 @@ export default function VideoTestimonialCoverflow({ t }: { t: (k: string) => str
                             aria-label={item.businessName}
                             aria-hidden={!visible}
                         >
-                            <CoverflowCard item={item} t={t} />
+                            <CoverflowCard
+                                item={item}
+                                t={t}
+                                isActive={isActive}
+                                isPlaying={playingId === item.id}
+                                onPlay={() => setPlayingId(item.id)}
+                                onStop={() => setPlayingId(null)}
+                            />
                         </div>
                     );
                 })}

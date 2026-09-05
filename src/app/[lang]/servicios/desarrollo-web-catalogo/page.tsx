@@ -120,6 +120,10 @@ export default async function DesarrolloWebCatalogoPage({ params }: Props) {
 
     const faqs = isEs ? [
         {
+            q: "¿Por qué el precio es \"desde Gs. 750.000\"?",
+            a: "Gs. 750.000 es el precio inicial y sube según la cantidad de productos que haya que cargar y organizar en el catálogo al arranque. El precio regular de referencia es Gs. 850.000. Una vez entregado, podés seguir sumando productos y categorías desde el panel sin costo de desarrollo."
+        },
+        {
             q: "¿Cómo se reciben los pedidos del catálogo?",
             a: "Cuando el cliente termina de seleccionar los productos en el catálogo, hace clic en 'Enviar pedido'. Esto abre su WhatsApp con un mensaje prellenado que contiene el listado de productos, cantidades, precios, método de pago y la dirección de envío ya organizada."
         },
@@ -132,6 +136,10 @@ export default async function DesarrolloWebCatalogoPage({ params }: Props) {
             a: "Sí, es excelente como Menú Online o Menú Digital QR. Los clientes en las mesas o desde sus casas pueden escanear el código, armar su pedido y enviártelo al instante."
         }
     ] : [
+        {
+            q: "Why is the price \"from Gs. 750,000\"?",
+            a: "Gs. 750,000 is the starting price and it goes up based on how many products need to be loaded and organized in the catalog at launch. The reference regular price is Gs. 850,000. Once delivered, you can keep adding products and categories from the panel with no development cost."
+        },
         {
             q: "How are catalog orders received?",
             a: "When the customer finishes selecting the products in the catalog, they click on 'Send order'. This opens their WhatsApp with a prefilled message containing the list of products, quantities, prices, payment method, and shipping address already organized."
@@ -156,7 +164,7 @@ export default async function DesarrolloWebCatalogoPage({ params }: Props) {
         ventajasTitle: isEs ? "Ventajas Comerciales" : "Commercial Advantages",
         faqsTitle: isEs ? "Preguntas Frecuentes" : "Frequently Asked Questions",
         ctaBtn: isEs ? "Quiero mi catálogo digital" : "Request my digital catalog",
-        price: isEs ? "Desde Gs. 650.000 en promoción (Regular Gs. 750.000)" : "Starting at Gs. 650,000 on promo (Regular Gs. 750,000)",
+        price: isEs ? "Desde Gs. 750.000 (Regular Gs. 850.000)" : "From Gs. 750,000 (Regular Gs. 850,000)",
         metaBadge: isEs ? "Servicio Comercial" : "Commercial Service",
         metaSub: isEs ? "Catálogo Digital" : "Digital Catalog",
         advisorRole: isEs ? "Asesor Tecnológico SolvaTech" : "Technology Advisor SolvaTech",

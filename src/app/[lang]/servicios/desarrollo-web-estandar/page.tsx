@@ -71,23 +71,25 @@ export default async function DesarrolloWebEstandarPage({ params }: Props) {
     };
 
     const benefits = isEs ? [
-        "Estructura completa de hasta 5 secciones independientes",
-        "Diseño profesional alineado a los colores de tu marca",
-        "Sección específica para detallar cada servicio",
-        "Sección corporativa 'Nosotros' o 'Quiénes somos'",
-        "Formulario de contacto profesional con envío directo",
-        "Mapa interactivo de Google Maps integrado",
-        "Optimización de carga rápida (Core Web Vitals)",
-        "Estructura optimizada para indexar en Google (SEO local)"
+        "Diseño a medida de tu marca, no una plantilla base",
+        "6 a 10 secciones o páginas: una por cada servicio o rubro",
+        "Sección de novedades o blog para publicar y sumar contenido",
+        "Galería de fotos ampliada y 'Nosotros' / 'Quiénes somos'",
+        "Textos y SEO trabajados página por página (títulos y descripciones)",
+        "Google Analytics y Search Console configurados para medir visitas",
+        "Formulario de contacto profesional y mapa de Google Maps",
+        "Optimización de carga rápida (Core Web Vitals) y 3 rondas de cambios",
+        "Hosting y configuración del dominio incluidos el primer año"
     ] : [
-        "Complete structure of up to 5 independent sections",
-        "Professional design aligned with your brand colors",
-        "Specific section to detail each service",
-        "Corporate 'About Us' or 'Who We Are' section",
-        "Professional contact form with direct submission",
-        "Integrated Google Maps interactive map",
-        "Fast loading optimization (Core Web Vitals)",
-        "Optimized structure for indexing on Google (local SEO)"
+        "Custom design for your brand, not a base template",
+        "6 to 10 sections or pages: one per service or line of business",
+        "News or blog section to publish and keep adding content",
+        "Expanded photo gallery and an 'About Us' section",
+        "Copy and SEO worked page by page (titles and descriptions)",
+        "Google Analytics and Search Console set up to measure traffic",
+        "Professional contact form and Google Maps location",
+        "Fast loading optimization (Core Web Vitals) and 3 rounds of changes",
+        "Hosting and domain setup included for the first year"
     ];
 
     const chooseReasons = isEs ? [
@@ -120,6 +122,10 @@ export default async function DesarrolloWebEstandarPage({ params }: Props) {
 
     const faqs = isEs ? [
         {
+            q: "¿En qué se diferencia de la Web Básica?",
+            a: "La Web Básica es una sola página (hasta 4 secciones) con un diseño de base adaptado a tu marca: sirve para que te encuentren y te escriban. La Web Estándar es un sitio de varias páginas con diseño a medida, una página por servicio, blog o novedades, galería ampliada, SEO trabajado página por página y Analytics configurado. Es el salto de 'tener presencia' a 'contar bien lo que hacés y medir resultados'."
+        },
+        {
             q: "¿Qué secciones contiene la Web Estándar?",
             a: "Habitualmente incluye: Inicio (Banner de impacto), Nosotros (Misión/Visión), Servicios (Listado detallado), Proyectos o Galería de trabajos, Formulario de contacto y Mapa de ubicación física."
         },
@@ -132,6 +138,10 @@ export default async function DesarrolloWebEstandarPage({ params }: Props) {
             a: "Sí, se incluye el hosting optimizado y la configuración del dominio profesional por el primer año. A partir del segundo año se realiza una renovación anual estándar."
         }
     ] : [
+        {
+            q: "How is it different from the Basic Web?",
+            a: "The Basic Web is a single page (up to 4 sections) with a base design adapted to your brand: it gets you found and messaged. The Standard Web is a multi-page site with custom design, one page per service, a blog or news section, an expanded gallery, per-page SEO and Analytics set up. It is the jump from 'having a presence' to 'explaining what you do well and measuring results'."
+        },
         {
             q: "What sections does the Standard Web contain?",
             a: "It typically includes: Home (impact banner), About Us (mission/vision), Services (detailed listing), Projects or Gallery, Contact Form, and physical location Map."

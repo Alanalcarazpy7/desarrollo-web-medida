@@ -79,7 +79,7 @@ export default async function PromoLanzamientoPage({ params }: Props) {
         "Optimización básica de velocidad para conexiones móviles locales",
         "Enlaces directos a tus perfiles de redes sociales (Instagram, Facebook)",
         "Configuración inicial de hosting y dominio (se adquiere por separado o incluido)",
-        "Entrega rápida garantizada en un plazo máximo de 3 a 5 días hábiles"
+        "Entrega en 4 a 7 días hábiles desde que nos pasás la información"
     ] : [
         "Modern design 100% adaptable to mobile phones and tablets",
         "Floating direct button for customers to contact you via WhatsApp",
@@ -88,7 +88,7 @@ export default async function PromoLanzamientoPage({ params }: Props) {
         "Basic speed optimization for local mobile connections",
         "Direct links to your social media profiles (Instagram, Facebook)",
         "Initial domain and hosting setup (purchased separately or included)",
-        "Guaranteed fast delivery within a maximum of 3 to 5 business days"
+        "Delivery in 4 to 7 business days once you send us the information"
     ];
 
     const chooseReasons = isEs ? [
@@ -98,7 +98,7 @@ export default async function PromoLanzamientoPage({ params }: Props) {
         },
         {
             title: "Entrega Ultra Rápida",
-            desc: "Tu negocio estará en línea en tiempo récord. Entregamos el sitio listo y funcionando en un plazo de 3 a 5 días hábiles."
+            desc: "Tu negocio estará en línea rápido. Entregamos la página lista y funcionando en 4 a 7 días hábiles."
         },
         {
             title: "Enfoque Comercial",
@@ -111,7 +111,7 @@ export default async function PromoLanzamientoPage({ params }: Props) {
         },
         {
             title: "Ultra Fast Delivery",
-            desc: "Your business will be online in record time. We deliver the site up and running within a maximum of 3 to 5 business days."
+            desc: "Your business will be online fast. We deliver the page up and running in 4 to 7 business days."
         },
         {
             title: "Commercial Focus",
