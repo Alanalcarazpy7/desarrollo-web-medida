@@ -17,6 +17,14 @@ interface ProjectLightboxProps {
 export default function ProjectLightbox({ project, isOpen, onClose, lang, t }: ProjectLightboxProps) {
     const [showAdminView, setShowAdminView] = useState(false);
     const [isZoomed, setIsZoomed] = useState(false);
+    const onCloseRef = useRef(onClose);
+
+    // El callback puede cambiar de referencia cada vez que el padre se
+    // renderiza (por ejemplo durante un scroll). Mantenerlo en un ref evita
+    // desmontar/remontar el efecto de bloqueo del body en cada render.
+    useEffect(() => {
+        onCloseRef.current = onClose;
+    }, [onClose]);
 
     // Reset view state when a new project is loaded
     useEffect(() => {
@@ -28,19 +36,22 @@ export default function ProjectLightbox({ project, isOpen, onClose, lang, t }: P
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
             if (e.key === "Escape") {
-                onClose();
+                onCloseRef.current();
             }
         };
-        if (isOpen) {
-            window.addEventListener("keydown", handleKeyDown);
-            // Disable background scrolling
-            document.body.style.overflow = "hidden";
-        }
+        if (!isOpen) return;
+
+        window.addEventListener("keydown", handleKeyDown);
+        // Preservar el valor real evita alternar hidden/unset y respeta otros
+        // componentes que pudieran tener bloqueado el scroll.
+        const previousOverflow = document.body.style.overflow;
+        document.body.style.overflow = "hidden";
+
         return () => {
             window.removeEventListener("keydown", handleKeyDown);
-            document.body.style.overflow = "unset";
+            document.body.style.overflow = previousOverflow;
         };
-    }, [isOpen, onClose]);
+    }, [isOpen]);
 
     if (!project) return null;
 

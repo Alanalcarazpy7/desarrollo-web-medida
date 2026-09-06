@@ -122,6 +122,21 @@ export default function SpectacularNavbar() {
     const pathname = usePathname();
     const router = useRouter();
     const isHome = pathname === "/" || pathname === `/${language}`;
+
+    // El navegador/Next puede intentar restaurar el hash por su cuenta al
+    // mismo tiempo que hacemos el scroll controlado. En móviles esa doble
+    // corrección es la que produce el ciclo de ida y vuelta en secciones
+    // largas como precios. Dejamos la restauración bajo control de este
+    // componente durante toda la vida del navbar.
+    useEffect(() => {
+        if ("scrollRestoration" in window.history) {
+            const previous = window.history.scrollRestoration;
+            window.history.scrollRestoration = "manual";
+            return () => {
+                window.history.scrollRestoration = previous;
+            };
+        }
+    }, []);
     
     const getNavHref = (hash: string) => `/${language}${hash}`;
 
@@ -145,8 +160,11 @@ export default function SpectacularNavbar() {
                 const target = document.getElementById(hash);
                 if (!target) return;
                 const top = target.getBoundingClientRect().top + window.scrollY - 90;
-                window.scrollTo({ top, behavior: "smooth" });
                 window.history.replaceState(null, "", `#${hash}`);
+                // Un solo scroll animado, después de actualizar el hash. Al
+                // no usar navegación de Next ni scroll nativo por hash, no
+                // queda un segundo actor corrigiendo la misma posición.
+                window.scrollTo({ top, behavior: "smooth" });
             });
             return;
         }
