@@ -54,39 +54,21 @@ export default function ServiciosPageContent({ lang }: ServiciosPageContentProps
 
     const mainServices: ServiceItem[] = useMemo(() => [
         {
-            id: "promo_lanzamiento",
-            title: isEs ? "Promo Lanzamiento" : "Launch Promo",
-            subtitle: isEs ? "Ideal para empezar online" : "Ideal to start online",
-            price: isEs ? "Gs. 850.000" : "Gs. 850,000",
-            priceSub: isEs ? "Precio regular Gs. 950.000" : "Regular price Gs. 950,000",
-            benefits: isEs 
-                ? ["Diseño responsive", "Botón directo a WhatsApp", "Sección de contacto"]
-                : ["Responsive design", "Direct WhatsApp button", "Contact section"],
-            whatsappKey: "promo",
-            link: `/${lang}/servicios/desarrollo-web-lanzamiento`,
-            icon: "🚀",
-            image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80",
-            category: "Desarrollo Web",
-            categoryEn: "Web Development",
-            delivery: isEs ? "Entrega en 4-7 días" : "4-7 days delivery",
-            type: isEs ? "PAGO ÚNICO" : "ONE-TIME"
-        },
-        {
             id: "web_basica",
             title: isEs ? "Web Básica" : "Basic Website",
-            subtitle: isEs ? "Para presencia online directa" : "For quick online presence",
+            subtitle: isEs ? "Tu primera web, con precio de lanzamiento" : "Your first website, at launch price",
             price: isEs ? "Gs. 850.000" : "Gs. 850,000",
-            priceSub: isEs ? "Precio regular Gs. 950.000" : "Regular price Gs. 950,000",
-            benefits: isEs 
-                ? ["Diseño profesional", "Adaptado a celulares", "Contacto y ubicación"]
-                : ["Professional design", "Mobile friendly", "Contact and location"],
+            priceSub: isEs ? "Precio lanzamiento · regular Gs. 950.000" : "Launch price · regular Gs. 950,000",
+            benefits: isEs
+                ? ["Diseño profesional adaptado a tu marca", "Hasta 4 secciones, lista para el celular", "Botón de WhatsApp, contacto y ubicación", "6 meses de hosting incluidos"]
+                : ["Professional design adapted to your brand", "Up to 4 sections, ready for mobile", "WhatsApp button, contact and location", "6 months of hosting included"],
             whatsappKey: "basica",
             link: `/${lang}/servicios/desarrollo-web-basica`,
             icon: "📱",
             image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80",
             category: "Desarrollo Web",
             categoryEn: "Web Development",
-            delivery: isEs ? "Entrega en 5-7 días" : "5-7 days delivery",
+            delivery: isEs ? "Entrega en 4-7 días" : "4-7 days delivery",
             type: isEs ? "PAGO ÚNICO" : "ONE-TIME"
         },
         {
@@ -114,8 +96,8 @@ export default function ServiciosPageContent({ lang }: ServiciosPageContentProps
             price: isEs ? "Gs. 1.250.000" : "Gs. 1,250,000",
             priceSub: isEs ? "Pago único" : "One-time payment",
             benefits: isEs
-                ? ["Diseño a medida, no una plantilla base", "6 a 10 páginas: una por servicio, más blog y galería", "SEO por página + Analytics y Search Console configurados"]
-                : ["Custom design, not a base template", "6 to 10 pages: one per service, plus blog and gallery", "Per-page SEO + Analytics and Search Console set up"],
+                ? ["Diseño a medida, no una plantilla base", "6 a 10 páginas: una por servicio, más blog y galería", "Cada página con su título claro para Google + 6 meses de hosting"]
+                : ["Custom design, not a base template", "6 to 10 pages: one per service, plus blog and gallery", "Each page with a clear title for Google + 6 months of hosting"],
             whatsappKey: "estandar",
             link: `/${lang}/servicios/desarrollo-web-estandar`,
             icon: "💻",
@@ -132,8 +114,8 @@ export default function ServiciosPageContent({ lang }: ServiciosPageContentProps
             price: isEs ? "Desde Gs. 3.550.000" : "From Gs. 3,550,000",
             priceSub: isEs ? "Pago único o desde ese monto" : "One-time or starting from",
             benefits: isEs
-                ? ["Todo lo de la Web Estándar, más diseño único desde cero", "10 a 15 páginas + animaciones y microinteracciones", "Velocidad Core Web Vitals, integraciones y soporte prioritario"]
-                : ["Everything in Standard, plus unique design from scratch", "10 to 15 pages + animations and microinteractions", "Core Web Vitals speed, integrations and priority support"],
+                ? ["Todo lo de la Web Estándar, más diseño único desde cero", "10 a 15 páginas + animaciones y efectos al navegar", "Abre al instante, integraciones (reservas, chat, pagos) y opción 2 idiomas"]
+                : ["Everything in Standard, plus unique design from scratch", "10 to 15 pages + animations and effects while browsing", "Opens instantly, integrations (bookings, chat, payments) and optional 2 languages"],
             whatsappKey: "pro",
             link: `/${lang}/servicios/desarrollo-web-pro`,
             icon: "💎",

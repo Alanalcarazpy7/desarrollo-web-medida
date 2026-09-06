@@ -345,7 +345,6 @@ export default function VideoTestimonialCoverflow({ t }: { t: (k: string) => str
                     const ax = Math.abs(rel);
                     const visible = ax <= MAX_VISIBLE;
                     const isActive = rel === 0;
-                    const dimmed = anyPlaying && !isActive;
                     const sc = Math.max(0.4, 1 - ax * SCALE_STEP);
                     const tx = rel * GAP_PX;
                     const tz = -ax * DEPTH;
@@ -364,7 +363,10 @@ export default function VideoTestimonialCoverflow({ t }: { t: (k: string) => str
                         transformOrigin: "center center",
                         transform: `translate(-50%, -50%) translateX(${tx}px) translateZ(${tz}px) rotateY(${ry}deg) rotateZ(${rz}deg) scale(${sc})`,
                         transition: `transform ${TRANSITION_MS}ms cubic-bezier(0.22, 1, 0.36, 1), opacity ${TRANSITION_MS}ms ease, box-shadow 0.4s ease, border-color 0.4s ease`,
-                        opacity: visible ? (dimmed ? 0.1 : 1) : 0,
+                        // Al reproducir un video, las demás tarjetas siguen
+                        // visibles igual; lo único que cambia es que el
+                        // carrusel deja de girar solo (ver el useEffect).
+                        opacity: visible ? 1 : 0,
                         cursor: isActive && !anyPlaying ? "default" : "pointer",
                         pointerEvents: visible ? "auto" : "none",
                         backgroundColor: "#0a0a0f",

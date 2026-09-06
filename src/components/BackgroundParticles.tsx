@@ -82,14 +82,38 @@ export default function BackgroundParticles() {
             }
         }
 
-        const resize = () => {
+        // OJO mobile: NO se usa window.innerHeight ni 100vh. En el celular la
+        // barra de direcciones aparece/desaparece con el scroll y cambia
+        // innerHeight todo el tiempo; si el canvas se redimensiona y encima
+        // se re-inicializan las 120 partículas en cada uno de esos eventos,
+        // se suma jitter y reflows justo cuando el scroll ya está inestable.
+        // Se fija a un alto estable y solo se reajusta el ANCHO en un resize
+        // real (rotar el teléfono, cambiar de ventana), con debounce y sin
+        // recrear las partículas.
+        let resizeTimer: number | undefined;
+
+        const applySize = () => {
             if (!canvas) return;
             canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            init();
+            canvas.height = Math.max(window.innerHeight, document.documentElement.clientHeight || 0, 700);
+        };
+
+        const onResize = () => {
+            window.clearTimeout(resizeTimer);
+            resizeTimer = window.setTimeout(() => {
+                const prevW = canvas.width;
+                applySize();
+                // reposiciona las partículas que quedaron fuera, sin recrearlas
+                if (canvas.width !== prevW) {
+                    particles.forEach((p) => {
+                        if (p.x > canvas.width) p.x = Math.random() * canvas.width;
+                    });
+                }
+            }, 200);
         };
 
         const init = () => {
+            applySize();
             particles = [];
             for (let i = 0; i < particleCount; i++) {
                 particles.push(new Particle());
@@ -106,12 +130,13 @@ export default function BackgroundParticles() {
             animationFrameId = requestAnimationFrame(animate);
         };
 
-        window.addEventListener("resize", resize);
-        resize();
+        window.addEventListener("resize", onResize);
+        init();
         animate();
 
         return () => {
-            window.removeEventListener("resize", resize);
+            window.removeEventListener("resize", onResize);
+            window.clearTimeout(resizeTimer);
             cancelAnimationFrame(animationFrameId);
         };
     }, []);
@@ -121,8 +146,10 @@ export default function BackgroundParticles() {
             ref={canvasRef}
             className="fixed inset-0 pointer-events-none z-0"
             style={{
-                width: "100vw",
-                height: "100vh",
+                // 100% (no 100vh): el contenedor fixed ya cubre el viewport y
+                // así no salta cuando la barra del navegador mobile aparece.
+                width: "100%",
+                height: "100%",
                 background: "transparent",
                 opacity: 0.8
             }}

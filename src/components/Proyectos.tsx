@@ -109,7 +109,7 @@ function ProjectCard({
                     rotateY,
                     transformStyle: "preserve-3d",
                 }}
-                className="relative block w-full h-full rounded-[24px] bg-[#0a0a0a] group flex flex-col cursor-pointer"
+                className="proj-card relative block w-full h-full rounded-[24px] bg-[#0a0a0a] group flex flex-col cursor-pointer"
                 initial="rest"
                 whileHover="hover"
                 onClick={handleCardClick}
@@ -701,8 +701,18 @@ export default function Proyectos() {
                     </motion.div>
                 </div>
 
-                {/* Cuadrícula 3D de proyectos */}
-                <div className="section-tablet-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center md:justify-items-stretch perspective-2000 pb-24 items-stretch">
+                {/* Pista de deslizamiento (solo mobile) */}
+                <p className="mob-hint">
+                    {language === 'es' ? 'Deslizá para ver más' : 'Swipe to see more'}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden="true">
+                        <path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                </p>
+
+                {/* Cuadrícula 3D de proyectos. En mobile pasa a dos filas que se
+                    deslizan hacia la derecha (ver .mob-scroller-2rows) para no
+                    obligar a un scroll vertical enorme. */}
+                <div className="section-tablet-grid mob-scroller-2rows grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center md:justify-items-stretch perspective-2000 pb-24 items-stretch">
                     <AnimatePresence mode="popLayout">
                         {proyectosFiltrados.map((proyecto, index) => (
                             <ProjectCard

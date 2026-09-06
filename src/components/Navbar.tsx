@@ -9,10 +9,23 @@ import Link from "next/link";
 import Image from "next/image";
 
 
+// La animación de entrada del navbar solo debe correr la PRIMERA vez que se
+// monta en la sesión. Al navegar a un ancla de la misma página (ej. /es#precios)
+// Next re-renderiza el árbol de la ruta y el navbar volvía a montarse: se
+// disparaba otra vez el `initial={{ y: -100, opacity: 0 }}` y la barra (con el
+// botón hamburguesa adentro) desaparecía y volvía a bajar. Eso era el "bug" de
+// que el menú se va y vuelve al tocar un enlace.
+let navbarHasAnimatedIn = false;
+
 export default function SpectacularNavbar() {
     const [scrolled, setScrolled] = useState(false);
     const [activeSection, setActiveSection] = useState("inicio");
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [animateIn] = useState(() => {
+        if (navbarHasAnimatedIn) return false;
+        navbarHasAnimatedIn = true;
+        return true;
+    });
     const { scrollYProgress } = useScroll();
 
     const theme = {
@@ -46,45 +59,63 @@ export default function SpectacularNavbar() {
         return () => xl.removeEventListener("change", closeIfDesktop);
     }, []);
 
+    // ScrollSpy. Antes esto corría COMPLETO en cada evento de scroll: leía el
+    // rect de 7 secciones (fuerza reflow) y llamaba a setState en cada frame,
+    // re-renderizando todo el navbar de framer-motion. En mobile eso solo era
+    // caro; durante una navegación a un ancla se volvía un infierno. Ahora se
+    // agrupa con requestAnimationFrame y solo se hace setState cuando el valor
+    // cambia de verdad.
     useEffect(() => {
-        const handleScroll = () => {
-            const scrollY = window.scrollY;
-            setScrolled(scrollY > 50);
+        const SECTIONS = ["inicio", "servicios", "proceso", "proyectos", "precios", "blog", "contacto"];
+        let ticking = false;
+        let lastSection = "";
+        let lastScrolled: boolean | null = null;
 
-            // Center-Line ScrollSpy Logic:
-            // The section active is the one whose center is closest to the screen center.
-            const sections = ["inicio", "servicios", "proceso", "proyectos", "precios", "blog", "contacto"];
+        const measure = () => {
+            ticking = false;
+            const scrollY = window.scrollY;
+
+            const isScrolled = scrollY > 50;
+            if (isScrolled !== lastScrolled) {
+                lastScrolled = isScrolled;
+                setScrolled(isScrolled);
+            }
+
             const viewCenter = scrollY + window.innerHeight / 2;
             let currentSection = "";
             let minDistance = Infinity;
 
-            sections.forEach((id) => {
+            for (const id of SECTIONS) {
                 const element = document.getElementById(id);
-                if (element) {
-                    const rect = element.getBoundingClientRect();
-                    const sectionTop = rect.top + scrollY;
-                    const sectionCenter = sectionTop + rect.height / 2;
-                    const distance = Math.abs(viewCenter - sectionCenter);
-
-                    // Consider active if center is closest and it's somewhat visible
-                    if (distance < minDistance) {
-                        minDistance = distance;
-                        currentSection = id;
-                    }
+                if (!element) continue;
+                const rect = element.getBoundingClientRect();
+                const sectionCenter = rect.top + scrollY + rect.height / 2;
+                const distance = Math.abs(viewCenter - sectionCenter);
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    currentSection = id;
                 }
-            });
+            }
 
-            // Special case logic for very top and very bottom
             if (scrollY < 100) currentSection = "inicio";
-            if ((window.innerHeight + scrollY) >= document.body.offsetHeight - 50) currentSection = "contacto";
+            if (window.innerHeight + scrollY >= document.body.offsetHeight - 50) currentSection = "contacto";
 
-            if (currentSection) setActiveSection(currentSection);
+            if (currentSection && currentSection !== lastSection) {
+                lastSection = currentSection;
+                setActiveSection(currentSection);
+            }
         };
 
-        window.addEventListener("scroll", handleScroll, { passive: true });
-        handleScroll();
+        const onScroll = () => {
+            if (ticking) return;
+            ticking = true;
+            requestAnimationFrame(measure);
+        };
 
-        return () => window.removeEventListener("scroll", handleScroll);
+        window.addEventListener("scroll", onScroll, { passive: true });
+        measure();
+
+        return () => window.removeEventListener("scroll", onScroll);
     }, []);
 
     const { language, t } = useLanguage();
@@ -93,6 +124,34 @@ export default function SpectacularNavbar() {
     const isHome = pathname === "/" || pathname === `/${language}`;
     
     const getNavHref = (hash: string) => `/${language}${hash}`;
+
+    /**
+     * Navegación de los ítems del menú.
+     *
+     * Si el destino es un ancla de la página en la que ya estamos, NO se hace
+     * router.push(): eso provocaba una navegación de Next que remontaba el
+     * árbol (navbar, botón de WhatsApp, etc.) y hacía que todo desapareciera y
+     * volviera a animar. En su lugar se hace scroll suave al elemento y se
+     * actualiza el hash con replaceState, sin re-render.
+     */
+    const goTo = (destination: string) => {
+        const [path, hash] = destination.split("#");
+        const samePage = Boolean(hash) && path.replace(/\/$/, "") === pathname.replace(/\/$/, "");
+
+        if (samePage) {
+            // Se hace en el próximo frame para que el drawer mobile ya haya
+            // empezado a cerrarse y no interfiera con el scroll.
+            requestAnimationFrame(() => {
+                const target = document.getElementById(hash);
+                if (!target) return;
+                const top = target.getBoundingClientRect().top + window.scrollY - 90;
+                window.scrollTo({ top, behavior: "smooth" });
+                window.history.replaceState(null, "", `#${hash}`);
+            });
+            return;
+        }
+        router.push(destination);
+    };
 
     const navItems = [
         { label: t('navbar.home'), href: getNavHref("#inicio") },
@@ -119,9 +178,9 @@ export default function SpectacularNavbar() {
             {/* Partículas del navbar removidas (redundantes con BackgroundParticles) */}
 
             <motion.nav
-                initial={{ y: -100, opacity: 0 }}
+                initial={animateIn ? { y: -100, opacity: 0 } : false}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: animateIn ? 0.8 : 0, ease: [0.22, 1, 0.36, 1] }}
                 className={`fixed top-0 left-0 right-0 z-50 flex justify-center transition-all duration-700 ${scrolled ? "py-4" : "py-6"}`}
             >
                 {/* Fondo del navbar optimizado (contain: paint) */}
@@ -237,11 +296,11 @@ export default function SpectacularNavbar() {
                                 return (
                                     <motion.div
                                         key={item.label}
-                                        onClick={() => router.push(destination)}
+                                        onClick={() => goTo(destination)}
                                         className="relative group px-6 py-3 rounded-2xl cursor-pointer"
-                                        initial={{ opacity: 0, y: -30 }}
+                                        initial={animateIn ? { opacity: 0, y: -30 } : false}
                                         animate={{ opacity: 1, y: 0 }}
-                                        transition={{ delay: i * 0.1, duration: 0.6, type: "spring" }}
+                                        transition={animateIn ? { delay: i * 0.1, duration: 0.6, type: "spring" } : { duration: 0 }}
                                         whileHover={{ scale: 1.05, y: -2 }}
                                         whileTap={{ scale: 0.95 }}
                                     >
@@ -510,7 +569,7 @@ export default function SpectacularNavbar() {
                                     return (
                                         <motion.div
                                             key={item.label}
-                                            onClick={() => { router.push(destination); setMobileMenuOpen(false); }}
+                                            onClick={() => { setMobileMenuOpen(false); goTo(destination); }}
                                             initial={{ opacity: 0, x: 20 }}
                                             animate={{ opacity: 1, x: 0 }}
                                             transition={{ delay: i * 0.1 }}

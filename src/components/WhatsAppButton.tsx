@@ -7,9 +7,20 @@ import { trackEvent } from "@/lib/analytics";
 import { useLanguage } from "@/context/LanguageContext";
 import { getWhatsAppLink, whatsappMessages } from "@/lib/whatsapp";
 
+// Igual que el navbar: la animación de entrada (con delay de 1s) solo debe
+// correr la primera vez. Al tocar un enlace de ancla, Next remontaba este
+// componente y el botón se escondía y reaparecía un segundo después, una y
+// otra vez.
+let fabHasAnimatedIn = false;
+
 export default function WhatsAppButton() {
     const { language } = useLanguage();
     const [isHovered, setIsHovered] = useState(false);
+    const [animateIn] = useState(() => {
+        if (fabHasAnimatedIn) return false;
+        fabHasAnimatedIn = true;
+        return true;
+    });
 
     const theme = {
         whatsapp: "#25D366",
@@ -22,15 +33,17 @@ export default function WhatsAppButton() {
         <motion.div
             data-fab
             className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-[100]"
-            initial={{ scale: 0, opacity: 0, y: 50 }}
+            initial={animateIn ? { scale: 0, opacity: 0, y: 50 } : false}
             animate={{ scale: 1, opacity: 1, y: 0 }}
-            transition={{ delay: 1, duration: 0.8, type: "spring", bounce: 0.4 }}
+            transition={animateIn ? { delay: 1, duration: 0.8, type: "spring", bounce: 0.4 } : { duration: 0 }}
         >
             <div className="relative group">
-                {/* Efecto de onda dinámico - Fondo pulsante */}
+                {/* Onda pulsante detrás del botón (el "ripple" de WhatsApp).
+                    Es intencional: el scale que cambia todo el tiempo es esta
+                    animación, no un bug. */}
                 <motion.div
-                    className="absolute inset-0 rounded-full"
-                    style={{ background: theme.whatsapp }}
+                    className="absolute inset-0 rounded-full pointer-events-none"
+                    style={{ background: theme.whatsapp, willChange: "transform, opacity" }}
                     animate={{
                         scale: [1, 1.5, 1],
                         opacity: [0.3, 0, 0.3],

@@ -4,9 +4,43 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import dynamic from 'next/dynamic';
+import { useMemo } from 'react';
 import { BlogPost, blogPosts } from '@/lib/blog-data';
 import { useLanguage } from '@/context/LanguageContext';
 import Navbar from '@/components/Navbar';
+
+/**
+ * Toma el HTML del artículo, le pone un id a cada <h2> y devuelve además la
+ * lista de secciones para armar el índice. Así el índice sale solo en todos
+ * los artículos, viejos y nuevos, sin tocar el contenido a mano.
+ */
+function buildArticle(raw: string) {
+    const toc: { id: string; text: string }[] = [];
+    const used = new Set<string>();
+
+    const html = raw.replace(/<h2([^>]*)>([\s\S]*?)<\/h2>/gi, (match, attrs: string, inner: string) => {
+        if (/\sid=/.test(attrs)) return match;
+        const text = inner.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+        if (!text) return match;
+
+        let id = text
+            .toLowerCase()
+            .normalize('NFD')
+            .replace(/[̀-ͯ]/g, '')
+            .replace(/[^a-z0-9\s-]/g, '')
+            .trim()
+            .replace(/\s+/g, '-')
+            .slice(0, 60);
+        if (!id) id = `seccion-${toc.length + 1}`;
+        while (used.has(id)) id = `${id}-${toc.length + 1}`;
+        used.add(id);
+
+        toc.push({ id, text });
+        return `<h2${attrs} id="${id}">${inner}</h2>`;
+    });
+
+    return { html, toc };
+}
 
 const SnowEffect = dynamic(() => import('@/components/SnowEffect'), { 
     ssr: false,
@@ -44,6 +78,7 @@ export default function BlogPostContent({ post }: Props) {
     const displayTitle = language === 'es' ? post.title : post.titleEn;
     const displayCategory = language === 'es' ? post.category : post.categoryEn;
     const displayContent = language === 'es' ? post.content : (post.contentEn || post.content);
+    const { html: articleHtml, toc } = useMemo(() => buildArticle(displayContent), [displayContent]);
 
     // Find related posts
     const relatedPosts = blogPosts.filter(p => p.slug !== post.slug).slice(0, 3);
@@ -404,18 +439,38 @@ export default function BlogPostContent({ post }: Props) {
                     <div style={{ position: 'absolute', top: 0, left: 0, width: '100px', height: '100px', background: `linear-gradient(135deg, ${theme.accent}20, transparent)`, borderTopLeftRadius: '32px' }} />
                     <div style={{ position: 'absolute', bottom: 0, right: 0, width: '150px', height: '150px', background: `linear-gradient(-45deg, ${theme.accentDark}15, transparent)`, borderBottomRightRadius: '32px' }} />
                     
-                    {/* Content */}
-                    <div
-                        style={{
-                            color: '#d4d4d4',
-                            fontSize: '18px',
-                            lineHeight: 1.9,
-                            position: 'relative',
-                            zIndex: 1,
-                            fontFamily: 'system-ui, -apple-system, sans-serif'
-                        }}
-                        dangerouslySetInnerHTML={{ __html: displayContent }}
-                    />
+                    {/* Artículo + índice al costado (en PC el índice queda fijo
+                        a la derecha; en mobile va arriba, plegable). */}
+                    <div className={`blog-layout${toc.length >= 3 ? ' has-toc' : ''}`}>
+                        {toc.length >= 3 && (
+                            <aside className="blog-toc-wrap">
+                                <nav className="blog-toc" aria-label={language === 'es' ? 'Índice del artículo' : 'Article index'}>
+                                    <details open>
+                                        <summary>
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden="true">
+                                                <path d="M4 6h16M4 12h16M4 18h10" />
+                                            </svg>
+                                            {language === 'es' ? 'En este artículo' : 'In this article'}
+                                            <span className="chev" aria-hidden />
+                                        </summary>
+                                        <ol>
+                                            {toc.map((item) => (
+                                                <li key={item.id}>
+                                                    <a href={`#${item.id}`}>{item.text}</a>
+                                                </li>
+                                            ))}
+                                        </ol>
+                                    </details>
+                                </nav>
+                            </aside>
+                        )}
+
+                        {/* Content */}
+                        <div
+                            className="blog-article"
+                            dangerouslySetInnerHTML={{ __html: articleHtml }}
+                        />
+                    </div>
                 </motion.div>
 
                 {/* CTA Section más decorada */}

@@ -71,23 +71,23 @@ export default async function PosicionamientoGooglePage({ params }: Props) {
     };
 
     const benefits = isEs ? [
-        "Optimización profesional de tu perfil de Google Business Profile (Maps)",
-        "Estudio exhaustivo de palabras clave locales con mayor volumen de búsqueda",
-        "Auditoría técnica inicial de tu página web (títulos, H1, velocidad)",
-        "Configuración e indexación en Google Search Console y Sitemap",
-        "Optimización de textos internos de la web (copywriting enfocado en SEO)",
-        "Estrategia de geolocalización y carga de imágenes geo-etiquetadas",
-        "Asesoría para conseguir y responder reseñas de alta valoración",
-        "Reporte mensual de rendimiento (clics, visitas, llamadas recibidas)"
+        "Puesta a punto de tu Perfil de Empresa de Google (el que sale en Maps)",
+        "Búsqueda de las palabras que tus clientes realmente escriben en Google",
+        "Revisión de tu página web: títulos, textos y velocidad",
+        "Conexión con las herramientas de Google para seguir tu posición",
+        "Reescritura de los textos de la web para que Google entienda de qué trata",
+        "Trabajo de ubicación: que aparezcas en las búsquedas de tu zona",
+        "Ayuda para conseguir más reseñas y responderlas bien",
+        "Reporte mensual: cuántos te encontraron, te visitaron y te llamaron"
     ] : [
-        "Professional optimization of your Google Business Profile (Maps)",
-        "Exhaustive study of local keywords with the highest search volume",
-        "Initial technical audit of your website (titles, H1, speed)",
-        "Setup and indexing in Google Search Console and Sitemap",
-        "Website copywriting optimization focused on SEO keywords",
-        "Geolocation strategy and upload of geo-tagged images",
-        "Guidance for collecting and responding to high-rating reviews",
-        "Monthly performance report (clicks, visits, calls received)"
+        "Tune-up of your Google Business Profile (the one on Maps)",
+        "Finding the words your clients actually type into Google",
+        "Review of your website: titles, copy and speed",
+        "Connection with Google's tools to track your position",
+        "Rewriting the website copy so Google understands what it is about",
+        "Location work: showing up in searches in your area",
+        "Help getting more reviews and replying to them well",
+        "Monthly report: how many found you, visited you and called you"
     ];
 
     const chooseReasons = isEs ? [

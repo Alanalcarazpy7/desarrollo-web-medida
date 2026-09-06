@@ -74,24 +74,24 @@ export default async function DesarrolloWebProPage({ params }: Props) {
         "Todo lo de la Web Estándar, y además:",
         "Diseño 100% único, creado desde cero para tu empresa (nada de bases)",
         "10 a 15 páginas: por servicio, por sucursal o por línea de negocio",
-        "Animaciones y microinteracciones para una experiencia premium",
-        "Optimización avanzada de velocidad (Core Web Vitals) y datos estructurados",
-        "Formularios avanzados y cotizadores personalizados",
-        "Integraciones: reservas, chat, CRM o pasarelas de pago locales",
-        "Opción multi-idioma y blog autogestionable",
-        "Acompañamiento SEO inicial y soporte prioritario",
-        "Hosting corporativo de alto rendimiento y SSL incluidos el primer año"
+        "Animaciones y efectos al navegar, para una experiencia premium",
+        "Optimizada para abrir al instante, incluso con internet lento",
+        "Formularios avanzados y cotizadores a medida",
+        "Integraciones: reservas, chat, sistema de clientes o pagos",
+        "Opción de tener la web en dos idiomas y blog para publicar vos mismo",
+        "Atención directa y prioritaria durante todo el proyecto",
+        "6 meses de hosting incluidos (el alojamiento de tu web)"
     ] : [
         "Everything in the Standard Web, plus:",
         "100% unique design, built from scratch for your company (no base templates)",
         "10 to 15 pages: by service, by branch or by line of business",
-        "Animations and microinteractions for a premium experience",
-        "Advanced speed optimization (Core Web Vitals) and structured data",
+        "Animations and effects while browsing, for a premium experience",
+        "Optimized to open instantly, even on slow internet",
         "Advanced forms and custom quote engines",
-        "Integrations: bookings, chat, CRM or local payment gateways",
-        "Optional multi-language and a self-managed blog",
-        "Initial SEO support and priority support",
-        "High-performance corporate hosting and SSL included for the first year"
+        "Integrations: bookings, chat, client system or payments",
+        "Optional two-language site and a blog you can update yourself",
+        "Direct, priority attention throughout the whole project",
+        "6 months of hosting included (your website's server space)"
     ];
 
     const chooseReasons = isEs ? [
@@ -100,7 +100,7 @@ export default async function DesarrolloWebProPage({ params }: Props) {
             desc: "Evitamos las plantillas prefabricadas. Diseñamos una interfaz única que transmite el liderazgo, la seriedad y la solidez que tu empresa tiene en el mercado de Paraguay."
         },
         {
-            title: "Optimizado para Campañas (SEM/Ads)",
+            title: "Preparada para tus anuncios",
             desc: "Estructuramos Landing Pages internas de alta conversión para que tus campaigns en Google Ads, LinkedIn Ads o Meta Ads conviertan visitas en clientes cualificados."
         },
         {
@@ -113,7 +113,7 @@ export default async function DesarrolloWebProPage({ params }: Props) {
             desc: "We avoid pre-made templates. We design a unique interface that conveys the leadership, seriousness, and solidity that your company holds in the Paraguayan market."
         },
         {
-            title: "Optimized for Campaigns (SEM/Ads)",
+            title: "Ready for your ads",
             desc: "We structure high-converting internal landing pages so that your campaigns on Google Ads, LinkedIn Ads, or Meta Ads turn visits into qualified customers."
         },
         {
@@ -125,7 +125,7 @@ export default async function DesarrolloWebProPage({ params }: Props) {
     const faqs = isEs ? [
         {
             q: "¿En qué se diferencia de la Web Estándar?",
-            a: "La Web Estándar ya trae diseño a medida, varias páginas, blog y SEO por página. La Web Pro sube la vara: diseño único creado desde cero, 10 a 15 páginas, animaciones y microinteracciones, velocidad de nivel Core Web Vitals, integraciones (reservas, chat, CRM, pagos), opción multi-idioma, acompañamiento SEO inicial y soporte prioritario. Es para empresas donde la web tiene que competir y vender, no solo estar."
+            a: "La Web Estándar ya trae diseño a medida, varias páginas y blog. La Web Pro sube la vara: diseño único creado desde cero, 10 a 15 páginas, animaciones y efectos al navegar, carga más rápida todavía, integraciones (reservas, chat, sistema de clientes, pagos), opción de dos idiomas y atención prioritaria durante todo el proyecto. Es para empresas donde la web tiene que competir y vender, no solo estar."
         },
         {
             q: "¿Para qué tipo de empresas se recomienda el plan Web Pro?",
@@ -142,7 +142,7 @@ export default async function DesarrolloWebProPage({ params }: Props) {
     ] : [
         {
             q: "How is it different from the Standard Web?",
-            a: "The Standard Web already includes custom design, multiple pages, a blog and per-page SEO. Web Pro raises the bar: a unique design built from scratch, 10 to 15 pages, animations and microinteractions, Core Web Vitals speed, integrations (bookings, chat, CRM, payments), optional multi-language, initial SEO support and priority support. It is for companies where the website has to compete and sell, not just exist."
+            a: "The Standard Web already includes custom design, multiple pages and a blog. Web Pro raises the bar: a unique design built from scratch, 10 to 15 pages, animations and effects while browsing, even faster loading, integrations (bookings, chat, client system, payments), an optional two-language site and priority attention throughout the project. It is for companies where the website has to compete and sell, not just exist."
         },
         {
             q: "What type of companies is the Web Pro plan recommended for?",
@@ -162,8 +162,8 @@ export default async function DesarrolloWebProPage({ params }: Props) {
         h1: isEs ? "Desarrollo Web Pro y Corporativo" : "Pro & Corporate Web Development",
         whyTitle: isEs ? "Presencia Corporativa Premium" : "Premium Corporate Presence",
         whyDesc: isEs
-            ? "Una empresa líder necesita una web a la altura de su operación. La Web Pro es un sitio grande, con diseño único, hecho para cargar al instante en el celular, aparecer mejor en Google Paraguay y guiar a cada tipo de cliente a la sección que le sirve. Sumás integraciones (reservas, chat, CRM), acompañamiento SEO y soporte prioritario para que la web trabaje todos los días para tu negocio."
-            : "A leading company needs a website that matches its operation. Web Pro is a large site with a unique design, built to load instantly on mobile, show up better on Google Paraguay, and guide each type of client to the section that helps them. You add integrations (bookings, chat, CRM), SEO support and priority support so the website works for your business every day.",
+            ? "Una empresa líder necesita una web a la altura de su operación. La Web Pro es un sitio grande, con diseño único, hecho para abrir al instante en el celular y guiar a cada tipo de cliente a la sección que le sirve. Sumás integraciones (reservas, chat, sistema de clientes o pagos) y atención prioritaria durante todo el proyecto, para que la web trabaje todos los días para tu negocio."
+            : "A leading company needs a website that matches its operation. Web Pro is a large site with a unique design, built to open instantly on mobile and guide each type of client to the section that helps them. You add integrations (bookings, chat, client system or payments) and priority attention throughout the project, so the website works for your business every day.",
         featuresTitle: isEs ? "¿Qué incluye este plan?" : "What is included in this plan?",
         ventajasTitle: isEs ? "Ventajas Corporativas" : "Corporate Advantages",
         faqsTitle: isEs ? "Preguntas Frecuentes" : "Frequently Asked Questions",

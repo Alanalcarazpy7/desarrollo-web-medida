@@ -18,6 +18,408 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
     {
+        slug: "cuanto-cuesta-pagina-web-paraguay",
+        title: "¿Cuánto cuesta una página web en Paraguay? Precios reales 2026",
+        titleEn: "How much does a website cost in Paraguay? Real 2026 prices",
+        excerpt: "Rangos concretos según el tipo de proyecto, qué se paga aparte y cómo saber cuánto te conviene invertir según la etapa de tu negocio.",
+        excerptEn: "Concrete ranges by project type, what is paid separately, and how to know how much to invest based on your business stage.",
+        date: "2026-09-05",
+        author: "Alan Alcaraz",
+        category: "Guías Técnicas",
+        categoryEn: "Technical Guides",
+        image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=2426&auto=format&fit=crop",
+        readTime: "9 min",
+        keywords: ["cuanto cuesta una pagina web en paraguay", "precio pagina web paraguay", "cuanto cobrar por una pagina web", "diseño web paraguay precios", "desarrollo web paraguay"],
+        keywordsEn: ["website cost paraguay", "web design price paraguay", "how much website paraguay"],
+        content: `
+            <p>Es la primera pregunta que hace todo el mundo y la que casi nadie responde de frente: <strong>¿cuánto cuesta hacer una página web en Paraguay?</strong> La mayoría de las agencias te contesta "depende" y te manda un formulario. Acá va la respuesta con números.</p>
+
+            <p>Los rangos que siguen son los precios reales con los que trabajamos en SolvaTech en 2026. Sirven como referencia del mercado local, aunque cada estudio maneje su propia escala.</p>
+
+            <h2>La respuesta corta</h2>
+
+            <ul>
+                <li><strong>Landing page (una sola página):</strong> desde Gs. 850.000, pago único.</li>
+                <li><strong>Catálogo digital o menú online:</strong> desde Gs. 750.000, según la cantidad de productos.</li>
+                <li><strong>Web de varias secciones:</strong> desde Gs. 1.250.000.</li>
+                <li><strong>Web corporativa grande:</strong> desde Gs. 3.550.000.</li>
+                <li><strong>Sistema a medida:</strong> desde Gs. 5.900.000, según el alcance.</li>
+            </ul>
+
+            <p>Si alguien te ofrece una web "profesional" por Gs. 150.000, no está vendiendo lo mismo. Más abajo explicamos por qué.</p>
+
+            <h2>Qué es lo que realmente define el precio</h2>
+
+            <p>El precio de una web no sale de una tabla mágica. Se arma sumando cuatro cosas:</p>
+
+            <ul>
+                <li><strong>Cantidad de páginas y secciones.</strong> No es lo mismo una página que cuenta un servicio que un sitio con una página por cada línea de negocio.</li>
+                <li><strong>Contenido.</strong> Si ya tenés textos, logo y fotos, el proyecto avanza rápido. Si hay que redactar y ordenar todo desde cero, lleva más horas.</li>
+                <li><strong>Funciones.</strong> Un formulario de contacto es simple. Un carrito con stock, pagos y usuarios es otro nivel de trabajo.</li>
+                <li><strong>Integraciones.</strong> Conectar la web con medios de pago, reservas, facturación o un sistema que ya usás suma tiempo de desarrollo.</li>
+            </ul>
+
+            <figure>
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1600&auto=format&fit=crop" alt="Persona revisando métricas de un sitio web en una notebook" loading="lazy" />
+                <figcaption>El precio no sale de una tabla: se arma según cuántas páginas, cuánto contenido y qué funciones necesita tu negocio.</figcaption>
+            </figure>
+
+            <h2>Landing page: desde Gs. 850.000</h2>
+
+            <p>Una sola página, larga, pensada para una cosa: que la persona entienda qué ofrecés y te escriba por WhatsApp. Es la opción más común para empezar y la que mejor funciona si vas a hacer publicidad en redes.</p>
+
+            <p>Sirve para peluquerías, gimnasios, profesionales independientes, cursos, servicios puntuales y cualquier negocio que hoy vive de Instagram y necesita algo más serio para mostrar.</p>
+
+            <h2>Catálogo digital: desde Gs. 750.000</h2>
+
+            <p>Tus productos con fotos, precios en guaraníes, categorías y botón de pedido por WhatsApp. El precio arranca en Gs. 750.000 y sube según cuántos productos haya que cargar y organizar al inicio. Después podés seguir sumando productos vos mismo sin costo de desarrollo.</p>
+
+            <p>La gran ventaja frente a las apps de delivery: <strong>no pagás comisión por venta</strong>. Todo el margen queda en tu negocio.</p>
+
+            <h2>Web de varias secciones: desde Gs. 1.250.000</h2>
+
+            <p>Acá el diseño es a medida, no una base adaptada, y cada servicio tiene su propia página. Se suma una sección de novedades o blog y una galería más grande. Es el salto de "tener presencia" a "contar bien todo lo que hacés".</p>
+
+            <p>Le sirve a estudios contables, consultorios, firmas profesionales y empresas con varias líneas de servicio que necesitan explicarse en detalle.</p>
+
+            <h2>Tiendas online y sistemas a medida</h2>
+
+            <p>Una tienda con carrito, control de stock y cobros online, o un sistema para gestionar reservas, pedidos o clientes, se cotiza según lo que necesite tu operación. Los rangos arrancan en Gs. 3.550.000 para webs corporativas grandes y en Gs. 5.900.000 para sistemas.</p>
+
+            <h2>Lo que se paga aparte (y casi nadie te avisa)</h2>
+
+            <p>Dos costos que no entran en el precio del diseño:</p>
+
+            <ul>
+                <li><strong>El dominio.</strong> Tu dirección en internet, del tipo tunegocio.com.py. Se paga una vez al año.</li>
+                <li><strong>El hosting.</strong> El alojamiento donde vive tu web. En nuestro caso van 6 meses incluidos en todos los planes; después pasa a tener un costo mensual.</li>
+            </ul>
+
+            <p>Pedí siempre que te aclaren estos dos puntos antes de firmar. Es la fuente número uno de malentendidos.</p>
+
+            <h2>Cuidado con los precios sospechosamente bajos</h2>
+
+            <p>Una web muy barata casi siempre significa una de estas tres cosas:</p>
+
+            <ul>
+                <li>Es una plantilla comprada, cambiada de color y con tus textos encima. La vas a ver igual en otros diez negocios.</li>
+                <li>Queda alojada en un subdominio gratuito, sin dominio propio. Tu dirección va a ser algo como tunegocio.plataforma.com.</li>
+                <li>No hay nadie atrás cuando algo se rompe. Y algo siempre se rompe.</li>
+            </ul>
+
+            <p>No decimos que lo barato esté mal. Decimos que compares lo mismo contra lo mismo.</p>
+
+            <h2>¿Cuánto deberías invertir vos?</h2>
+
+            <p>Una forma simple de decidir: pensá cuánto te deja <strong>un solo cliente nuevo</strong>. Si un cliente promedio te deja Gs. 300.000 de ganancia, una landing de Gs. 850.000 se paga con tres clientes. Si te deja Gs. 3.000.000, el cálculo es todavía más fácil.</p>
+
+            <p>Si recién arrancás y todavía no tenés clientes constantes, empezá por lo más chico y crecé después. Una landing bien hecha se puede ampliar a un sitio completo sin tirar nada abajo.</p>
+
+            <h2>Antes de pedir presupuesto, tené esto a mano</h2>
+
+            <ul>
+                <li>Qué vendés y a quién.</li>
+                <li>Logo y fotos, aunque sean del celular.</li>
+                <li>Si ya tenés dominio o hay que registrarlo.</li>
+                <li>Qué querés que haga la persona cuando entre: escribirte, comprar, reservar.</li>
+            </ul>
+
+            <p>Con eso cualquier estudio serio te puede pasar un número cerrado en 24 o 48 horas, sin reuniones eternas.</p>
+
+            <p>Si querés que te pasemos el precio para tu caso puntual, <a href="/es/servicios/desarrollo-web-paraguay">mirá cómo trabajamos</a> o escribinos directo por WhatsApp. Te respondemos con alcance, precio y fecha de entrega.</p>
+        `,
+        contentEn: `
+            <p>It is the first question everyone asks and the one almost nobody answers straight: <strong>how much does a website cost in Paraguay?</strong> Most agencies say "it depends" and send you a form. Here are the numbers.</p>
+
+            <h2>The short answer</h2>
+
+            <ul>
+                <li><strong>Landing page (single page):</strong> from Gs. 850,000, one-time payment.</li>
+                <li><strong>Digital catalog or online menu:</strong> from Gs. 750,000, based on product count.</li>
+                <li><strong>Multi-section website:</strong> from Gs. 1,250,000.</li>
+                <li><strong>Large corporate website:</strong> from Gs. 3,550,000.</li>
+                <li><strong>Custom system:</strong> from Gs. 5,900,000, based on scope.</li>
+            </ul>
+
+            <h2>What actually defines the price</h2>
+
+            <ul>
+                <li><strong>Number of pages and sections.</strong> One page explaining a service is not the same as a page per line of business.</li>
+                <li><strong>Content.</strong> If you already have copy, logo and photos, the project moves fast. Writing everything from scratch takes more hours.</li>
+                <li><strong>Features.</strong> A contact form is simple. A cart with stock, payments and users is another level of work.</li>
+                <li><strong>Integrations.</strong> Connecting payments, bookings, invoicing or an existing system adds development time.</li>
+            </ul>
+
+            <h2>What is paid separately</h2>
+
+            <ul>
+                <li><strong>The domain.</strong> Your address on the internet, like yourbusiness.com.py. Paid once a year.</li>
+                <li><strong>Hosting.</strong> Where your website lives. In our case 6 months are included in every plan; after that it becomes a monthly cost.</li>
+            </ul>
+
+            <h2>Watch out for suspiciously cheap prices</h2>
+
+            <p>A very cheap website usually means a bought template with your text on top, a free subdomain instead of your own address, or nobody available when something breaks. Compare like for like.</p>
+
+            <h2>How much should you invest?</h2>
+
+            <p>Think about how much profit <strong>one new client</strong> leaves you. If an average client leaves Gs. 300,000 in profit, a Gs. 850,000 landing pays for itself with three clients.</p>
+
+            <p>If you are just starting, begin small and grow later. A well-built landing page can expand into a full site without throwing anything away.</p>
+        `
+    },
+    {
+        slug: "registrar-dominio-com-py-paraguay",
+        title: "Cómo registrar un dominio .com.py en Paraguay: guía paso a paso",
+        titleEn: "How to register a .com.py domain in Paraguay: step-by-step guide",
+        excerpt: "Qué es NIC-PY, qué necesitás para registrar tu dominio paraguayo, cuánto cuesta y los errores que se pagan caro después.",
+        excerptEn: "What NIC-PY is, what you need to register your Paraguayan domain, what it costs and the mistakes that cost you later.",
+        date: "2026-09-03",
+        author: "Alan Alcaraz",
+        category: "Guías Técnicas",
+        categoryEn: "Technical Guides",
+        image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2532&auto=format&fit=crop",
+        readTime: "7 min",
+        keywords: ["registrar dominio com.py", "dominio paraguay", "nic py", "como comprar un dominio en paraguay", "dominio .com.py precio"],
+        keywordsEn: ["register com.py domain", "paraguay domain", "nic py", "buy domain paraguay"],
+        content: `
+            <p>El dominio es tu dirección en internet: eso que la gente escribe para llegar a tu negocio. En Paraguay, la terminación local es <strong>.com.py</strong>, y muchos negocios la eligen porque deja claro de entrada que sos de acá.</p>
+
+            <p>Esta guía explica, sin vueltas técnicas, cómo se registra, qué necesitás y qué conviene tener en cuenta.</p>
+
+            <h2>¿.com.py, .py o .com?</h2>
+
+            <ul>
+                <li><strong>.com.py</strong> es la opción más usada por empresas y comercios paraguayos. Transmite cercanía local.</li>
+                <li><strong>.py</strong> a secas es más corto y prestigioso, pero tiene requisitos más estrictos y suele costar bastante más.</li>
+                <li><strong>.com</strong> es internacional. Sirve si apuntás afuera o si el .com.py que querés ya está tomado.</li>
+            </ul>
+
+            <p>Si tu negocio vende en Paraguay, el .com.py es una apuesta segura. Y si te alcanza el presupuesto, registrar también el .com evita que otro use tu nombre más adelante.</p>
+
+            <h2>Quién administra los dominios paraguayos</h2>
+
+            <p>Los dominios terminados en .py los administra <strong>NIC-PY</strong>, que depende de la Universidad Nacional de Asunción. Es la entidad oficial: todo registro de un .com.py pasa por ahí, sea que lo hagas vos directo o a través de alguien que te lo gestione.</p>
+
+            <h2>Antes de registrar: elegí bien el nombre</h2>
+
+            <p>Tres reglas que ahorran dolores de cabeza:</p>
+
+            <ul>
+                <li><strong>Corto y fácil de dictar por teléfono.</strong> Si tenés que deletrearlo dos veces, elegí otro.</li>
+                <li><strong>Sin guiones ni números.</strong> La gente los olvida y los escribe mal.</li>
+                <li><strong>Que sea el nombre de tu negocio.</strong> No metas palabras clave raras tipo "mejor-peluqueria-asuncion". Google ya no premia eso y a tus clientes les confunde.</li>
+            </ul>
+
+            <h2>Paso a paso</h2>
+
+            <ol>
+                <li><strong>Verificá que esté libre.</strong> Se consulta en el sitio de NIC-PY. Tené dos o tres alternativas por las dudas.</li>
+                <li><strong>Preparás los datos del titular.</strong> Nombre o razón social, documento o RUC, dirección, teléfono y un correo al que tengas acceso siempre.</li>
+                <li><strong>Completás la solicitud</strong> con los datos del titular y los contactos administrativo y técnico.</li>
+                <li><strong>Pagás el registro.</strong> Se abona por año.</li>
+                <li><strong>Apuntás el dominio a tu hosting.</strong> Este es el paso técnico: se configuran los servidores de nombres (DNS) para que tu dirección muestre tu web. Normalmente lo hace quien te desarrolla el sitio.</li>
+            </ol>
+
+            <figure>
+                <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1600&auto=format&fit=crop" alt="Servidores donde se aloja un sitio web" loading="lazy" />
+                <figcaption>El dominio es la dirección; el hosting es el lugar donde vive tu web. Son dos cosas distintas y se pagan por separado.</figcaption>
+            </figure>
+
+            <h2>Cuánto cuesta y cada cuánto se renueva</h2>
+
+            <p>El registro de un .com.py se paga por año y hay que renovarlo. El monto lo fija NIC-PY y puede cambiar, así que conviene confirmarlo al momento de registrar. Sumado al hosting, el costo anual de mantener una web chica en Paraguay ronda cifras muy accesibles, bastante por debajo de lo que la mayoría imagina.</p>
+
+            <h2>El punto más importante: que quede a tu nombre</h2>
+
+            <p>Este es el error que más caro se paga. Si quien te hace la web registra el dominio a nombre de él o de su empresa, <strong>el dominio no es tuyo</strong>. El día que quieras cambiar de proveedor, te podés quedar sin tu dirección, sin tus correos y sin el posicionamiento que construiste.</p>
+
+            <p>Exigí siempre dos cosas:</p>
+
+            <ul>
+                <li>Que el titular del dominio seas vos o tu empresa.</li>
+                <li>Que te entreguen los accesos al panel de administración.</li>
+            </ul>
+
+            <h2>Otros errores comunes</h2>
+
+            <ul>
+                <li><strong>Poner un correo que después nadie revisa.</strong> Los avisos de renovación llegan ahí. Si el dominio vence, tu web y tus correos se caen.</li>
+                <li><strong>Dejar la renovación para último momento.</strong> Un dominio vencido se puede liberar y cualquiera lo toma.</li>
+                <li><strong>Registrar un nombre parecido al de otra marca.</strong> Puede terminar en un reclamo.</li>
+            </ul>
+
+            <h2>Y después del dominio, ¿qué?</h2>
+
+            <p>El dominio solo es la dirección. Para que alguien vea algo al entrar necesitás dos cosas más: el <strong>hosting</strong> (donde vive la web) y la <strong>web</strong> en sí.</p>
+
+            <p>En nuestros proyectos nos encargamos de todo el circuito: registramos el dominio a tu nombre, configuramos el hosting y dejamos el sitio funcionando. Podés ver <a href="/es/servicios/dominio-configuracion-web">cómo funciona el servicio de dominio y configuración</a> o escribirnos por WhatsApp y lo resolvemos.</p>
+        `,
+        contentEn: `
+            <p>A domain is your address on the internet. In Paraguay the local extension is <strong>.com.py</strong>, and many businesses choose it because it makes clear you are local.</p>
+
+            <h2>.com.py, .py or .com?</h2>
+
+            <ul>
+                <li><strong>.com.py</strong> is the most used option by Paraguayan companies and shops.</li>
+                <li><strong>.py</strong> alone is shorter and more prestigious, but has stricter requirements and costs more.</li>
+                <li><strong>.com</strong> is international. Useful if you target abroad or the .com.py you want is taken.</li>
+            </ul>
+
+            <h2>Who manages Paraguayan domains</h2>
+
+            <p>Domains ending in .py are managed by <strong>NIC-PY</strong>, which depends on the National University of Asunción. Every .com.py registration goes through them.</p>
+
+            <h2>Step by step</h2>
+
+            <ol>
+                <li><strong>Check availability</strong> on the NIC-PY site. Have two or three alternatives ready.</li>
+                <li><strong>Prepare the owner details:</strong> name or company name, ID or tax number, address, phone and an email you always have access to.</li>
+                <li><strong>Complete the request</strong> with owner, administrative and technical contacts.</li>
+                <li><strong>Pay the registration.</strong> It is billed per year.</li>
+                <li><strong>Point the domain to your hosting.</strong> The technical step: configuring name servers (DNS). Usually done by whoever builds your site.</li>
+            </ol>
+
+            <h2>The most important point: it must be in your name</h2>
+
+            <p>This is the mistake that costs the most. If whoever builds your website registers the domain under their own name, <strong>the domain is not yours</strong>. The day you change providers you could lose your address, your email and the ranking you built.</p>
+
+            <p>Always require that you or your company are the domain owner, and that they hand you the admin access.</p>
+
+            <h2>Other common mistakes</h2>
+
+            <ul>
+                <li>Using an email nobody checks. Renewal notices arrive there.</li>
+                <li>Leaving renewal to the last minute. An expired domain can be released and taken by anyone.</li>
+                <li>Registering a name too similar to another brand.</li>
+            </ul>
+        `
+    },
+    {
+        slug: "medios-de-pago-online-paraguay",
+        title: "Cómo cobrar por internet en Paraguay: medios de pago para tu web",
+        titleEn: "How to get paid online in Paraguay: payment methods for your website",
+        excerpt: "Pagopar, Bancard, billeteras y transferencias. Cuál te conviene según tu negocio y qué necesitás para empezar a cobrar online.",
+        excerptEn: "Pagopar, Bancard, wallets and transfers. Which one fits your business and what you need to start charging online.",
+        date: "2026-09-01",
+        author: "Alan Alcaraz",
+        category: "E-commerce",
+        categoryEn: "E-commerce",
+        image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=2425&auto=format&fit=crop",
+        readTime: "8 min",
+        keywords: ["medios de pago online paraguay", "pagopar", "bancard", "cobrar por internet paraguay", "pasarela de pago paraguay", "tienda online paraguay"],
+        keywordsEn: ["online payments paraguay", "pagopar", "bancard", "payment gateway paraguay"],
+        content: `
+            <p>Tenés la web lista, la gente entra, le gusta lo que ve. Y ahí aparece la pregunta: <strong>¿cómo le cobro?</strong> En Paraguay hay varias opciones y no todas le sirven a todos los negocios.</p>
+
+            <p>Esta guía repasa las alternativas reales del mercado local y cuál conviene según lo que vendas.</p>
+
+            <h2>Primero: ¿de verdad necesitás cobrar online?</h2>
+
+            <p>Empecemos por lo incómodo. Si vendés servicios, productos a pedido o trabajás con pocos clientes por mes, <strong>probablemente no necesites una pasarela de pago todavía</strong>.</p>
+
+            <p>Un catálogo con botón de WhatsApp, donde el cliente arma el pedido y vos coordinás el pago por transferencia, funciona muy bien en Paraguay y no te cobra comisión por venta. Muchos negocios facturan años así antes de necesitar algo más.</p>
+
+            <p>Cobrar online conviene cuando: vendés muchos productos chicos, recibís pedidos fuera de horario, vendés cursos o servicios digitales, o querés cobrarle a gente que no está en el país.</p>
+
+            <h2>Las opciones del mercado paraguayo</h2>
+
+            <h3>Transferencia bancaria y SIPAP</h3>
+
+            <p>La más usada y la más simple: mostrás tus datos bancarios, el cliente transfiere y te manda el comprobante por WhatsApp. Cero comisión, cero integración técnica.</p>
+
+            <p><strong>Contra:</strong> es manual. Alguien tiene que verificar cada pago. A partir de cierto volumen se vuelve inmanejable.</p>
+
+            <h3>Billeteras electrónicas</h3>
+
+            <p>Tigo Money, Billetera Personal y similares tienen muchísima penetración en Paraguay, sobre todo fuera de Asunción y en públicos que no usan tarjeta. Para tickets chicos son muy prácticas.</p>
+
+            <p><strong>Contra:</strong> igual que la transferencia, suele resolverse de forma manual salvo que integres una plataforma que las agrupe.</p>
+
+            <h3>Pagopar</h3>
+
+            <p>Es la pasarela local más conocida. Agrupa varios medios en un solo checkout: tarjetas, billeteras, pagos en bocas de cobranza y transferencias. Está pensada para el mercado paraguayo y es la opción más común cuando querés automatizar el cobro en una tienda online.</p>
+
+            <p><strong>A favor:</strong> el cliente elige cómo pagar y vos recibís la confirmación automática. <strong>Contra:</strong> cobra comisión por transacción.</p>
+
+            <h3>Bancard</h3>
+
+            <p>Es la procesadora de tarjetas más grande del país. Se usa cuando querés aceptar tarjetas de crédito y débito directamente. Suele implicar un trámite más formal con tu banco.</p>
+
+            <p><strong>A favor:</strong> pagos con tarjeta, cuotas. <strong>Contra:</strong> el alta es más burocrática y conviene tener cierto volumen para que valga la pena.</p>
+
+            <h3>Plataformas internacionales</h3>
+
+            <p>Si vendés servicios o productos digitales a clientes de afuera, plataformas como PayPal o Stripe pueden entrar en juego. Para vender puertas adentro en Paraguay, casi siempre conviene una solución local.</p>
+
+            <figure>
+                <img src="https://images.unsplash.com/photo-1523474253046-8cd2748b5fd2?q=80&w=1600&auto=format&fit=crop" alt="Comercio local preparando pedidos para vender online" loading="lazy" />
+                <figcaption>Muchos negocios facturan años con catálogo y transferencia antes de necesitar una pasarela de pago.</figcaption>
+            </figure>
+
+            <h2>Cuál te conviene según tu negocio</h2>
+
+            <ul>
+                <li><strong>Servicios y trabajos a pedido:</strong> catálogo o web con WhatsApp y transferencia. Sin comisiones.</li>
+                <li><strong>Tienda con muchos productos:</strong> pasarela local tipo Pagopar, para no verificar pagos a mano.</li>
+                <li><strong>Cursos o productos digitales:</strong> pasarela con confirmación automática, así la entrega es inmediata.</li>
+                <li><strong>Ticket alto y clientes empresa:</strong> transferencia con factura. Es lo que esperan.</li>
+                <li><strong>Clientes en el exterior:</strong> sumá una plataforma internacional a lo que ya tengas.</li>
+            </ul>
+
+            <h2>Qué necesitás para habilitar cobros online</h2>
+
+            <ul>
+                <li>Estar formalizado: RUC activo y cuenta bancaria a nombre del negocio.</li>
+                <li>Una web o tienda donde integrar el checkout.</li>
+                <li>Definir cómo vas a facturar cada venta.</li>
+                <li>Reglas claras de envío, cambios y devoluciones, publicadas en la web.</li>
+            </ul>
+
+            <p>Ese último punto se subestima mucho: la mitad de las consultas que frenan una compra son sobre el envío y la devolución, no sobre el producto.</p>
+
+            <h2>Un consejo antes de complicarte</h2>
+
+            <p>Arrancá simple. Poné el catálogo con pedido por WhatsApp y transferencia, medí cuántos pedidos te entran por mes y recién ahí sumá una pasarela. Integrar pagos cuando todavía no hay volumen es pagar comisiones y complejidad por adelantado.</p>
+
+            <p>Si querés que armemos tu catálogo o tu tienda con el medio de cobro que mejor te sirva, <a href="/es/servicios/desarrollo-web-catalogo">mirá cómo funciona el catálogo digital</a> o escribinos y lo vemos juntos.</p>
+        `,
+        contentEn: `
+            <p>Your website is ready, people visit and like what they see. Then the question appears: <strong>how do I charge them?</strong> In Paraguay there are several options and not all fit every business.</p>
+
+            <h2>First: do you really need online payments?</h2>
+
+            <p>If you sell services, made-to-order products or work with few clients per month, <strong>you probably do not need a payment gateway yet</strong>. A catalog with a WhatsApp button, where the client builds the order and you coordinate a bank transfer, works very well in Paraguay and charges no per-sale commission.</p>
+
+            <h2>The options in the Paraguayan market</h2>
+
+            <h3>Bank transfer and SIPAP</h3>
+            <p>The most used and simplest: you show your bank details, the client transfers and sends the receipt via WhatsApp. Zero commission, zero technical integration. Downside: it is manual.</p>
+
+            <h3>Electronic wallets</h3>
+            <p>Tigo Money, Billetera Personal and similar have huge penetration in Paraguay, especially outside Asunción. Very practical for small tickets.</p>
+
+            <h3>Pagopar</h3>
+            <p>The best-known local gateway. It groups cards, wallets, payment points and transfers into one checkout, designed for the Paraguayan market. Automatic confirmation, but it charges a per-transaction commission.</p>
+
+            <h3>Bancard</h3>
+            <p>The largest card processor in the country. Used when you want to accept credit and debit cards directly. The setup is more formal and works better with some volume.</p>
+
+            <h2>Which one fits your business</h2>
+
+            <ul>
+                <li><strong>Services and made-to-order work:</strong> catalog or website with WhatsApp and transfer. No commissions.</li>
+                <li><strong>Store with many products:</strong> a local gateway, so you do not verify payments by hand.</li>
+                <li><strong>Courses or digital products:</strong> a gateway with automatic confirmation for instant delivery.</li>
+                <li><strong>High ticket, business clients:</strong> transfer with an invoice. That is what they expect.</li>
+            </ul>
+
+            <h2>One piece of advice before overcomplicating</h2>
+
+            <p>Start simple. Put up the catalog with WhatsApp orders and transfers, measure how many orders come in per month, and only then add a gateway. Integrating payments before you have volume means paying commissions and complexity up front.</p>
+        `
+    },
+    {
         slug: "importancia-web-profesional-2026",
         title: "¿Por qué tu negocio necesita una Página Web Profesional en 2026?",
         titleEn: "Why Your Business Needs a Professional Website in 2026?",

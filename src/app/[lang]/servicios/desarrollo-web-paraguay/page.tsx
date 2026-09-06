@@ -127,10 +127,10 @@ const CONTENT = {
         ],
         list: [
           "Registro de tu dominio .com o .com.py ante NIC-PY, o transferencia si ya tenés uno.",
-          "Hosting configurado y monitoreado. Según el plan, los primeros meses van incluidos.",
-          "Certificado SSL y HTTPS: el candado de seguridad que esperan tus clientes.",
+          "Hosting configurado y monitoreado. Todos los planes incluyen 6 meses sin costo.",
+          "Certificado de seguridad (el candado que esperan tus clientes) y conexión segura.",
           "Correo con tu dominio, del tipo info@tunegocio.com.py, en lugar de una casilla de Gmail.",
-          "Alta en Google Search Console y Google Analytics para medir cuánta gente te visita.",
+          "Damos de alta tu web en Google para que empiece a aparecer cuando te buscan.",
           "Optimización de velocidad e imágenes para que cargue rápido incluso con datos móviles.",
         ],
       },
@@ -182,7 +182,7 @@ const CONTENT = {
       {
         h2: "Que te encuentren en Google",
         paras: [
-          "Construimos cada web con una base técnica pensada para SEO: títulos y metadescripciones bien armados, datos estructurados, sitemap, URLs limpias y buena velocidad de carga.",
+          "Cada web se arma bien para Google desde el código: títulos claros en cada página, direcciones ordenadas, carga rápida y todo lo que ayuda a que te muestren.",
           'Desde el primer día aparecés cuando te buscan por el nombre de tu negocio. Posicionar para búsquedas más competidas, como "desarrollo web en Paraguay", lleva meses y trabajo continuo: Perfil de Empresa de Google, reseñas de clientes, contenido útil y enlaces desde otros sitios.',
           "Te explicamos el plan y, si querés, lo llevamos adelante mes a mes.",
         ],
@@ -272,10 +272,10 @@ const CONTENT = {
         ],
         list: [
           "Registration of your .com or .com.py domain with NIC-PY, or transfer if you already have one.",
-          "Hosting set up and monitored. Depending on the plan, the first months are included.",
-          "SSL certificate and HTTPS: the security padlock your clients expect.",
+          "Hosting set up and monitored. Every plan includes 6 months at no cost.",
+          "Security certificate (the padlock your clients expect) and a secure connection.",
           "Email on your own domain, like info@yourbusiness.com.py, instead of a Gmail address.",
-          "Setup in Google Search Console and Google Analytics to measure your traffic.",
+          "We submit your site to Google so it starts showing up when people search for you.",
           "Speed and image optimization so it loads fast even on mobile data.",
         ],
       },
@@ -327,7 +327,7 @@ const CONTENT = {
       {
         h2: "Getting found on Google",
         paras: [
-          "We build every site on a technical base made for SEO: well-crafted titles and meta descriptions, structured data, sitemap, clean URLs and good loading speed.",
+          "Every site is built well for Google from the code up: clear titles on each page, tidy addresses, fast loading and everything that helps you get shown.",
           'From day one you appear when people search for your business name. Ranking for more competitive searches like "web development in Paraguay" takes months and ongoing work: Google Business Profile, client reviews, useful content and links from other sites.',
           "We explain the plan and, if you want, we run it month by month.",
         ],

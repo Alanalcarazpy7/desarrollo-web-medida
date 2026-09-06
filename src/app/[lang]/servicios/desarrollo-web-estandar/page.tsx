@@ -73,23 +73,23 @@ export default async function DesarrolloWebEstandarPage({ params }: Props) {
     const benefits = isEs ? [
         "Diseño a medida de tu marca, no una plantilla base",
         "6 a 10 secciones o páginas: una por cada servicio o rubro",
-        "Sección de novedades o blog para publicar y sumar contenido",
-        "Galería de fotos ampliada y 'Nosotros' / 'Quiénes somos'",
-        "Textos y SEO trabajados página por página (títulos y descripciones)",
-        "Google Analytics y Search Console configurados para medir visitas",
+        "Sección de novedades o blog para publicar vos mismo y sumar contenido",
+        "Galería de fotos ampliada y sección 'Nosotros' / 'Quiénes somos'",
+        "Cada página con su título y textos claros para que Google la entienda",
+        "Carga rápida: la web abre al toque en el celular",
         "Formulario de contacto profesional y mapa de Google Maps",
-        "Optimización de carga rápida (Core Web Vitals) y 3 rondas de cambios",
-        "Hosting y configuración del dominio incluidos el primer año"
+        "3 rondas de cambios antes de publicar",
+        "6 meses de hosting incluidos (el alojamiento de tu web)"
     ] : [
         "Custom design for your brand, not a base template",
         "6 to 10 sections or pages: one per service or line of business",
-        "News or blog section to publish and keep adding content",
+        "News or blog section you can update yourself to keep adding content",
         "Expanded photo gallery and an 'About Us' section",
-        "Copy and SEO worked page by page (titles and descriptions)",
-        "Google Analytics and Search Console set up to measure traffic",
+        "Each page with a clear title and copy so Google understands it",
+        "Fast loading: the site opens instantly on mobile",
         "Professional contact form and Google Maps location",
-        "Fast loading optimization (Core Web Vitals) and 3 rounds of changes",
-        "Hosting and domain setup included for the first year"
+        "3 rounds of changes before launch",
+        "6 months of hosting included (your website's server space)"
     ];
 
     const chooseReasons = isEs ? [
@@ -123,36 +123,36 @@ export default async function DesarrolloWebEstandarPage({ params }: Props) {
     const faqs = isEs ? [
         {
             q: "¿En qué se diferencia de la Web Básica?",
-            a: "La Web Básica es una sola página (hasta 4 secciones) con un diseño de base adaptado a tu marca: sirve para que te encuentren y te escriban. La Web Estándar es un sitio de varias páginas con diseño a medida, una página por servicio, blog o novedades, galería ampliada, SEO trabajado página por página y Analytics configurado. Es el salto de 'tener presencia' a 'contar bien lo que hacés y medir resultados'."
+            a: "La Web Básica es una sola página (hasta 4 secciones) con un diseño de base adaptado a tu marca: sirve para que te encuentren y te escriban. La Web Estándar es un sitio de varias páginas con diseño a medida, una página por cada servicio, sección de novedades o blog y galería ampliada. Es el salto de 'tener presencia' a 'contar bien todo lo que hacés'."
         },
         {
             q: "¿Qué secciones contiene la Web Estándar?",
             a: "Habitualmente incluye: Inicio (Banner de impacto), Nosotros (Misión/Visión), Servicios (Listado detallado), Proyectos o Galería de trabajos, Formulario de contacto y Mapa de ubicación física."
         },
         {
-            q: "¿Mejorará mi posicionamiento en Google?",
-            a: "Sí. Este plan incluye optimizaciones SEO técnicas nativas (títulos h1, h2, meta tags, sitemap y carga veloz) lo que facilita enormemente que los buscadores reconozcan tu web y comiences a ranquear a nivel local."
+            q: "¿Con este plan voy a aparecer primero en Google?",
+            a: "La web se entrega bien armada para Google: cada página con su título claro, textos ordenados y carga rápida. Con eso empezás a aparecer cuando te buscan por el nombre de tu negocio. Posicionar para búsquedas más competidas es un trabajo aparte y continuo (Perfil de Empresa, reseñas, contenido); es un servicio mensual que se contrata por separado."
         },
         {
-            q: "¿El dominio y hosting están incluidos?",
-            a: "Sí, se incluye el hosting optimizado y la configuración del dominio profesional por el primer año. A partir del segundo año se realiza una renovación anual estándar."
+            q: "¿El dominio y el hosting están incluidos?",
+            a: "Se incluyen 6 meses de hosting sin costo (el alojamiento de tu web). La idea es que primero tengas la web funcionando y consigas clientes; recién después el hosting pasa a tener un costo mensual. El dominio se paga aparte, una vez al año."
         }
     ] : [
         {
             q: "How is it different from the Basic Web?",
-            a: "The Basic Web is a single page (up to 4 sections) with a base design adapted to your brand: it gets you found and messaged. The Standard Web is a multi-page site with custom design, one page per service, a blog or news section, an expanded gallery, per-page SEO and Analytics set up. It is the jump from 'having a presence' to 'explaining what you do well and measuring results'."
+            a: "The Basic Web is a single page (up to 4 sections) with a base design adapted to your brand: it gets you found and messaged. The Standard Web is a multi-page site with custom design, one page per service, a blog or news section and an expanded gallery. It is the jump from 'having a presence' to 'explaining everything you do well'."
         },
         {
             q: "What sections does the Standard Web contain?",
             a: "It typically includes: Home (impact banner), About Us (mission/vision), Services (detailed listing), Projects or Gallery, Contact Form, and physical location Map."
         },
         {
-            q: "Will it improve my Google search ranking?",
-            a: "Yes. This plan includes native technical SEO optimizations (h1, h2 tags, meta tags, sitemap, and fast load) which greatly makes it easier for search engines to recognize your website and start ranking locally."
+            q: "With this plan will I appear first on Google?",
+            a: "The site is delivered well built for Google: each page with a clear title, tidy copy and fast loading. That gets you showing up when people search for your business name. Ranking for more competitive searches is separate, ongoing work (Business Profile, reviews, content); it is a monthly service hired separately."
         },
         {
             q: "Are the domain and hosting included?",
-            a: "Yes, optimized hosting and professional domain setup are included for the first year. Starting from the second year, a standard annual renewal is billed."
+            a: "6 months of hosting are included at no cost (your website's server space). The idea is that you first get the site running and win clients; only after that does hosting become a monthly cost. The domain is paid separately, once a year."
         }
     ];
 

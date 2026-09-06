@@ -5,7 +5,7 @@ export const dictionary = {
       services: "Servicios",
       process: "Proceso",
       projects: "Proyectos",
-      pricing: "Precios",
+      pricing: "Planes",
       blog: "Blog",
       contact: "Contacto",
       cta: "HABLEMOS",
@@ -152,14 +152,14 @@ export const dictionary = {
       }
     },
     pricing: {
-      badge: "Inversión Inteligente",
-      titleStart: "Planes para llevar tu",
-      titleHighlight: "Negocio a Internet",
-      subtitle: "Precios pensados para negocios locales, emprendedores y empresas que quieren empezar o mejorar su presencia digital.",
+      badge: "Soluciones para tu negocio",
+      titleStart: "Elegí la solución que",
+      titleHighlight: "necesita tu negocio",
+      subtitle: "Cada plan resuelve una etapa distinta: desde tu primera web hasta un sistema a medida. Todos incluyen 6 meses de hosting y el precio cerrado antes de empezar.",
       tag: "Más elegido",
       cta: "Contratar ahora",
       footer: "* Los precios pueden variar según el alcance, cantidad de secciones, funciones y contenido necesario.",
-      cardNote: "* El hosting está incluido por el primer año en los planes principales. El dominio puede incluirse según disponibilidad y extensión. Luego del primer año, hosting y dominio requieren renovación anual.",
+      cardNote: "* Todos los planes incluyen 6 meses de hosting sin costo (el alojamiento de tu web). Después, el hosting tiene un costo mensual. El dominio se paga aparte, una vez al año.",
       paymentTitle: "Forma de pago",
       paymentText: "Trabajamos con 50% para iniciar el proyecto y 50% al finalizar, antes de la entrega o publicación final.",
       paymentSubtext: "En proyectos más grandes, también podemos dividir el desarrollo por etapas.",
@@ -219,14 +219,14 @@ export const dictionary = {
           description: "Para negocios que ya tienen clientes y quieren contar más",
           priceGs: "Gs. 1.250.000",
           priceUsd: "Pago único",
-          specialDesc: "La diferencia con la Web Básica: acá el diseño es a medida (no una base), cada servicio tiene su propia página y sumás blog, galería y SEO por página.",
+          specialDesc: "La diferencia con la Web Básica: acá el diseño es a medida (no una base) y cada servicio tiene su propia página, con blog y galería para sumar contenido.",
           features: [
             "Diseño a medida de tu marca (no una plantilla base)",
             "6 a 10 secciones o páginas, una por cada servicio o rubro",
             "Sección de novedades o blog, y galería de fotos ampliada",
-            "Textos y SEO trabajados página por página (títulos y descripciones)",
-            "Google Analytics y Search Console configurados para medir visitas",
-            "3 rondas de cambios antes de publicar"
+            "Cada página con su título claro para que Google la entienda",
+            "3 rondas de cambios antes de publicar",
+            "6 meses de hosting incluidos"
           ],
           btnText: "Consultar web",
           whatsappKey: "estandar",
@@ -240,14 +240,14 @@ export const dictionary = {
           description: "Para empresas que compiten fuerte y necesitan que la web venda",
           priceGs: "Desde Gs. 3.550.000",
           priceUsd: "Pago único o desde ese monto",
-          specialDesc: "Todo lo de la Web Estándar, más: diseño único desde cero, más páginas, animaciones, velocidad de nivel Core Web Vitals, integraciones y soporte prioritario.",
+          specialDesc: "Todo lo de la Web Estándar, más: diseño único desde cero, más páginas, animaciones al navegar, carga más rápida e integraciones (reservas, chat, sistema de clientes).",
           features: [
             "Diseño 100% único, creado desde cero para tu empresa",
             "10 a 15 páginas: por servicio, por sucursal o por línea de negocio",
-            "Animaciones y microinteracciones para una experiencia premium",
-            "Optimización avanzada de velocidad (Core Web Vitals) y datos estructurados",
-            "Integraciones: reservas, formularios avanzados, chat o CRM",
-            "Acompañamiento SEO inicial y soporte prioritario"
+            "Animaciones y efectos al navegar, para una experiencia premium",
+            "Optimizada para abrir al instante, incluso con internet lento",
+            "Integraciones: reservas, chat, sistema de clientes o pagos",
+            "Opción de web en dos idiomas y 6 meses de hosting incluidos"
           ],
           btnText: "Solicitar propuesta",
           whatsappKey: "pro",
@@ -364,7 +364,7 @@ export const dictionary = {
         },
         {
           q: "¿El hosting y dominio están incluidos?",
-          a: "Sí, en los planes principales incluimos el primer año de hosting. El dominio también puede incluirse según disponibilidad y tipo de extensión. Luego del primer año, hosting y dominio requieren renovación anual."
+          a: "Sí. Todos los planes incluyen 6 meses de hosting (el alojamiento de tu web) sin costo. La idea es que primero tengas tu web funcionando y consigas clientes; recién después el hosting pasa a tener un costo mensual. El dominio se paga aparte, una vez al año."
         },
         {
           q: "¿Tengo que tener logo, fotos y textos?",
@@ -405,7 +405,7 @@ export const dictionary = {
       services: "Services",
       process: "Process",
       projects: "Projects",
-      pricing: "Pricing",
+      pricing: "Plans",
       blog: "Blog",
       contact: "Contact",
       cta: "LET'S TALK",
@@ -552,14 +552,14 @@ export const dictionary = {
       }
     },
     pricing: {
-      badge: "Smart Investment",
-      titleStart: "Plans to take your",
-      titleHighlight: "Business Online",
-      subtitle: "Pricing designed for local businesses, entrepreneurs and companies that want to start or improve their digital presence.",
+      badge: "Solutions for your business",
+      titleStart: "Pick the solution your",
+      titleHighlight: "business needs",
+      subtitle: "Each plan solves a different stage: from your first website to a custom system. All include 6 months of hosting and a closed price before we start.",
       tag: "Most Chosen",
       cta: "Hire now",
       footer: "* Prices may vary depending on scope, number of sections, features, and required content.",
-      cardNote: "* Hosting is included for the first year on main plans. The domain can be included based on availability and extension. After the first year, hosting and domain require annual renewal.",
+      cardNote: "* Every plan includes 6 months of hosting at no cost (your website's server space). After that, hosting has a monthly cost. The domain is paid separately, once a year.",
       paymentTitle: "Payment method",
       paymentText: "We work with 50% upfront to start the project and 50% upon completion, before final delivery or launch.",
       paymentSubtext: "For larger projects, development can also be divided into stages.",
@@ -619,14 +619,14 @@ export const dictionary = {
           description: "For businesses that already have clients and want to tell more",
           priceGs: "Gs. 1.250.000",
           priceUsd: "One-time payment",
-          specialDesc: "The difference from the Basic Web: here the design is custom (not a base), each service gets its own page, and you add a blog, gallery and per-page SEO.",
+          specialDesc: "The difference from the Basic Web: here the design is custom (not a base) and each service gets its own page, with a blog and gallery to keep adding content.",
           features: [
             "Custom design for your brand (not a base template)",
             "6 to 10 sections or pages, one per service or line of business",
             "News or blog section, and an expanded photo gallery",
-            "Copy and SEO worked page by page (titles and descriptions)",
-            "Google Analytics and Search Console set up to measure traffic",
-            "3 rounds of changes before launch"
+            "Each page with a clear title so Google understands it",
+            "3 rounds of changes before launch",
+            "6 months of hosting included"
           ],
           btnText: "Inquire web",
           whatsappKey: "estandar",
@@ -640,14 +640,14 @@ export const dictionary = {
           description: "For companies that compete hard and need the website to sell",
           priceGs: "From Gs. 3.550.000",
           priceUsd: "One-time or starting price",
-          specialDesc: "Everything in the Standard Web, plus: unique design from scratch, more pages, animations, Core Web Vitals speed, integrations and priority support.",
+          specialDesc: "Everything in the Standard Web, plus: unique design from scratch, more pages, animations while browsing, faster loading and integrations (bookings, chat, client system).",
           features: [
             "100% unique design, built from scratch for your company",
             "10 to 15 pages: by service, by branch or by line of business",
-            "Animations and microinteractions for a premium experience",
-            "Advanced speed optimization (Core Web Vitals) and structured data",
-            "Integrations: bookings, advanced forms, chat or CRM",
-            "Initial SEO support and priority support"
+            "Animations and effects while browsing, for a premium experience",
+            "Optimized to open instantly, even on slow internet",
+            "Integrations: bookings, chat, client system or payments",
+            "Optional two-language site and 6 months of hosting included"
           ],
           btnText: "Request proposal",
           whatsappKey: "pro",
@@ -764,7 +764,7 @@ export const dictionary = {
         },
         {
           q: "Are hosting and domain included?",
-          a: "Yes, in the main plans we include the first year of hosting. The domain can also be included depending on availability and extension type. After the first year, hosting and domain require annual renewal."
+          a: "Yes. Every plan includes 6 months of hosting (your website's server space) at no cost. The idea is that you first get your site running and win clients; only after that does hosting become a monthly cost. The domain is paid separately, once a year."
         },
         {
           q: "Do I need to have a logo, photos and text?",

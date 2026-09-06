@@ -78,7 +78,7 @@ export default async function DesarrolloWebCatalogoPage({ params }: Props) {
         "Sistema de carrito de pedidos integrado",
         "Botón final para enviar el pedido ordenado a tu WhatsApp",
         "Panel simple para editar precios y stock",
-        "Hosting optimizado para imágenes incluido por 1 año"
+        "6 meses de hosting incluidos, optimizado para imágenes"
     ] : [
         "Interactive layout organized by categories",
         "Sharp photos of products, dishes, or services",
@@ -87,7 +87,7 @@ export default async function DesarrolloWebCatalogoPage({ params }: Props) {
         "Integrated ordering shopping cart system",
         "Checkout button to send the structured order to your WhatsApp",
         "Simple dashboard to edit prices and stock",
-        "Optimized hosting for images included for 1 year"
+        "6 months of hosting included, optimized for images"
     ];
 
     const chooseReasons = isEs ? [

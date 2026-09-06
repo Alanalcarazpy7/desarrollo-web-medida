@@ -19,7 +19,17 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  /* OJO: `scroll-behavior: smooth` NO va acá.
+     Con el App Router de Next, al navegar a un ancla (/es#precios) el router
+     intenta dejar el elemento en posición y reintenta hasta lograrlo. Si el
+     scroll es animado por CSS, la posición nunca coincide "ya", así que el
+     router vuelve a scrollear: se arma un bucle en el que la página sube y
+     baja sola y todo lo que depende del scroll (navbar, botón de WhatsApp,
+     secciones con whileInView) parpadea sin parar. En mobile es peor porque
+     las secciones son larguísimas y las imágenes al cargar mueven el punto
+     de destino.
+     El scroll suave se hace a mano con scrollIntoView({behavior:'smooth'})
+     desde el navbar, que es donde lo controlamos nosotros. */
   overflow-x: hidden;
 }
 
@@ -594,6 +604,175 @@ body {
 
 
 
+
+/* ===== Carruseles horizontales en mobile ===================================
+   En el celular, apilar 5 planes o 9 proyectos uno debajo del otro obliga a
+   un scroll larguísimo. En vez de eso se deslizan hacia la derecha: los
+   planes en una fila y los proyectos en dos, con snap. En desktop todo
+   vuelve a la grilla normal.
+   ------------------------------------------------------------------------ */
+.plans-grid{display:flex;flex-wrap:wrap;justify-content:center;align-items:stretch;gap:24px;max-width:920px;margin:0 auto}
+
+.mob-hint{display:none;align-items:center;justify-content:center;gap:7px;margin-top:2px;margin-bottom:8px;
+  font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.45)}
+.mob-hint svg{width:15px;height:15px;color:#00d9ff;animation:mob-nudge 1.4s ease-in-out infinite}
+@keyframes mob-nudge{0%,100%{transform:translateX(0)}50%{transform:translateX(5px)}}
+
+@media (max-width:767px){
+  .mob-hint{display:flex}
+
+  /* una fila (planes) */
+  .mob-scroller{
+    display:flex!important;flex-wrap:nowrap!important;align-items:stretch;
+    /* justify-content:center es veneno en un scroller horizontal: centra el
+       contenido y lo que desborda hacia la IZQUIERDA queda inalcanzable, no
+       se puede deslizar hasta ahí. Tiene que arrancar en flex-start. */
+    justify-content:flex-start!important;
+    overflow-x:auto;overflow-y:visible;scroll-snap-type:x mandatory;
+    gap:14px!important;max-width:none!important;
+    padding:4px 20px 14px;margin-inline:-20px;scroll-padding-left:20px;
+    scrollbar-width:none;-ms-overflow-style:none;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+  .mob-scroller::-webkit-scrollbar{display:none}
+  .mob-scroller > *{flex:0 0 80%!important;max-width:80%!important;scroll-snap-align:start}
+
+  /* dos filas (proyectos del home) */
+  .mob-scroller-2rows{
+    display:grid!important;grid-template-columns:none!important;
+    grid-auto-flow:column;grid-template-rows:repeat(2,auto);grid-auto-columns:74%;
+    justify-items:stretch!important;align-items:stretch;
+    overflow-x:auto;scroll-snap-type:x mandatory;
+    gap:14px!important;padding:4px 20px 14px!important;margin-inline:-20px;scroll-padding-left:20px;
+    scrollbar-width:none;-ms-overflow-style:none;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+  .mob-scroller-2rows::-webkit-scrollbar{display:none}
+  .mob-scroller-2rows > *{scroll-snap-align:start;width:100%!important;max-width:none!important}
+}
+
+@media (max-width:767px){
+  /* --- Planes: card compacta y la destacada primero en el carrusel --- */
+  .plan-card.is-highlight{order:-1}
+  .plan-card{max-width:none!important}
+  /* Se compacta con tipografía y aire, NO escondiendo características:
+     recortar la lista dejaba al cliente sin saber qué estaba comprando. */
+  .plan-card .plan-special{display:none}
+  .plan-card .plan-note{display:none}
+  .plan-card .plan-features{gap:7px!important;margin-bottom:14px!important}
+
+  /* --- Proyectos: cards más chicas para que entren DOS filas --- */
+  .mob-scroller-2rows{grid-auto-columns:63%!important}
+  .proj-card .aspect-\[16\/10\]{aspect-ratio:16/9}
+  .proj-card .gap-5{gap:.6rem!important}
+  .proj-card .p-6,.proj-card .p-5{padding:.85rem!important}
+  .proj-card .line-clamp-3{-webkit-line-clamp:2}
+  .proj-card .pt-5{padding-top:.65rem!important}
+  .proj-card .mb-3{margin-bottom:.35rem!important}
+  /* de las etiquetas de "qué se hizo" alcanza con dos en mobile */
+  .proj-card .flex-wrap > *:nth-child(n+3){display:none}
+
+  /* En un carrusel horizontal, animar la entrada al entrar en viewport hace
+     que al deslizar parezca que no hay más proyectos hasta que aparecen.
+     En mobile las cards se muestran siempre. El !important gana sobre los
+     estilos inline que aplica framer-motion. */
+  .mob-scroller-2rows > *,
+  .mob-scroller-2rows > * > *{
+    opacity:1!important;
+    transform:none!important}
+}
+
+/* ===== Artículos del blog =================================================
+   El contenido entra como HTML crudo (dangerouslySetInnerHTML) y antes salía
+   como un bloque de texto corrido, sin jerarquía. Acá se le da estructura
+   editorial: títulos que se distinguen, listas con viñetas propias, citas,
+   imágenes y separación real entre ideas.
+   ------------------------------------------------------------------------ */
+.blog-article{color:#c8cfd8;font-size:17.5px;line-height:1.85}
+.blog-article > *:first-child{margin-top:0}
+
+.blog-article p{margin:0 0 1.35em;max-width:68ch}
+.blog-article strong{color:#fff;font-weight:700}
+.blog-article a{color:#00d9ff;text-decoration:none;border-bottom:1px solid rgba(0,217,255,.35);
+  transition:border-color .2s,color .2s}
+.blog-article a:hover{color:#7fe9ff;border-bottom-color:#7fe9ff}
+
+/* h2: el separador visual fuerte del artículo */
+.blog-article h2{position:relative;scroll-margin-top:110px;
+  margin:2.6em 0 .9em;padding-top:1.5em;padding-left:18px;
+  font-size:clamp(1.4rem,3.4vw,1.85rem);font-weight:900;line-height:1.25;letter-spacing:-.02em;color:#fff;
+  border-top:1px solid rgba(255,255,255,.09)}
+.blog-article h2::before{content:"";position:absolute;left:0;top:1.55em;width:4px;height:1.1em;border-radius:3px;
+  background:linear-gradient(180deg,#00d9ff,#0099cc);box-shadow:0 0 14px rgba(0,217,255,.5)}
+.blog-article h2:first-child{margin-top:0;padding-top:0;border-top:0}
+.blog-article h2:first-child::before{top:.12em}
+
+.blog-article h3{scroll-margin-top:110px;margin:2em 0 .6em;
+  font-size:clamp(1.1rem,2.6vw,1.28rem);font-weight:800;line-height:1.35;color:#00d9ff}
+
+/* listas con viñeta propia */
+.blog-article ul,.blog-article ol{margin:0 0 1.5em;padding:0;list-style:none;max-width:68ch;
+  display:flex;flex-direction:column;gap:.7em}
+.blog-article ul > li{position:relative;padding-left:30px}
+.blog-article ul > li::before{content:"";position:absolute;left:8px;top:.62em;width:7px;height:7px;border-radius:50%;
+  background:#00d9ff;box-shadow:0 0 10px rgba(0,217,255,.6)}
+.blog-article ol{counter-reset:bl}
+.blog-article ol > li{position:relative;padding-left:38px;counter-increment:bl}
+.blog-article ol > li::before{content:counter(bl);position:absolute;left:0;top:.05em;
+  width:24px;height:24px;border-radius:8px;display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:900;color:#04121a;background:linear-gradient(135deg,#00d9ff,#0099cc)}
+.blog-article li{color:#c8cfd8}
+
+/* cita destacada */
+.blog-article blockquote{position:relative;margin:2em 0;padding:22px 24px 22px 28px;border-radius:16px;
+  background:linear-gradient(160deg,rgba(0,217,255,.08),rgba(255,255,255,.02));
+  border:1px solid rgba(0,217,255,.22);border-left:4px solid #00d9ff;
+  font-size:1.06em;line-height:1.65;color:#e8eef4;font-style:normal;font-weight:600}
+.blog-article blockquote p{margin:0;max-width:none}
+
+/* imágenes dentro del artículo */
+.blog-article figure{margin:2.2em 0}
+.blog-article img{display:block;width:100%;height:auto;border-radius:18px;
+  border:1px solid rgba(255,255,255,.1);box-shadow:0 24px 60px rgba(0,0,0,.55)}
+.blog-article figcaption{margin-top:11px;text-align:center;font-size:.82rem;color:#8b95a3;line-height:1.5}
+
+.blog-article hr{border:0;height:1px;margin:2.4em 0;
+  background:linear-gradient(90deg,transparent,rgba(0,217,255,.35),transparent)}
+
+/* Layout: artículo + índice al costado */
+.blog-layout{position:relative;z-index:1}
+.blog-toc-wrap{margin:0 0 34px}
+
+/* Índice de contenidos */
+.blog-toc{padding:18px 20px;border-radius:18px;
+  background:linear-gradient(160deg,#0e1119,#0b0f17);border:1px solid rgba(0,217,255,.2)}
+.blog-toc details{margin:0}
+.blog-toc summary{display:flex;align-items:center;gap:9px;cursor:pointer;list-style:none;
+  font-size:.7rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#00d9ff}
+.blog-toc summary::-webkit-details-marker{display:none}
+.blog-toc summary .chev{margin-left:auto;width:8px;height:8px;border-right:2px solid currentColor;
+  border-bottom:2px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .25s}
+.blog-toc details[open] summary .chev{transform:rotate(-135deg) translateY(-2px)}
+.blog-toc ol{margin:14px 0 0;padding:0;list-style:none;counter-reset:toc;display:grid;gap:9px}
+.blog-toc li{counter-increment:toc}
+.blog-toc a{display:flex;gap:10px;align-items:baseline;text-decoration:none;color:#c8cfd8;
+  font-size:.9rem;line-height:1.45;transition:color .2s,transform .2s}
+.blog-toc a::before{content:counter(toc,decimal-leading-zero);flex-shrink:0;
+  font-size:.7rem;font-weight:800;color:#00d9ff;opacity:.75}
+.blog-toc a:hover{color:#fff;transform:translateX(3px)}
+
+/* En PC el índice va a la derecha y queda fijo mientras se lee */
+@media (min-width:1024px){
+  .blog-layout.has-toc{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:52px;align-items:start}
+  .blog-toc-wrap{order:2;margin:0;position:sticky;top:110px;max-height:calc(100vh - 150px);overflow-y:auto;
+    scrollbar-width:thin}
+  .blog-layout.has-toc .blog-article{order:1;min-width:0}
+  .blog-toc summary{cursor:default}
+  .blog-toc summary .chev{display:none}
+}
+
+@media (max-width:640px){
+  .blog-article{font-size:16.5px;line-height:1.8}
+  .blog-article h2{margin-top:2.1em;padding-top:1.2em}
+}
+
+@media (prefers-reduced-motion:reduce){.mob-hint svg{animation:none}}
 
 /* ===== Landing de campanas /pagina-web =====================================
    Tema oscuro unico. Un acento: cyan #00d9ff. Radios: tarjetas 18px,

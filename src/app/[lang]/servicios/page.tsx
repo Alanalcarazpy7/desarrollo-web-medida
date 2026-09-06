@@ -49,7 +49,6 @@ export default async function ServiciosGeneralPage({ params }: Props) {
 
     const services: [string, string][] = [
         ["Desarrollo Web en Paraguay", "/servicios/desarrollo-web-paraguay"],
-        [isEs ? "Landing / Promo Lanzamiento" : "Landing / Launch Promo", "/servicios/desarrollo-web-lanzamiento"],
         [isEs ? "Web Básica" : "Basic Website", "/servicios/desarrollo-web-basica"],
         [isEs ? "Catálogo digital / Menú" : "Digital Catalog / Menu", "/servicios/desarrollo-web-catalogo"],
         [isEs ? "Web Estándar" : "Standard Website", "/servicios/desarrollo-web-estandar"],

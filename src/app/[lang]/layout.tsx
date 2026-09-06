@@ -4,6 +4,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
 import { LanguageProvider } from "@/context/LanguageContext";
 import Script from "next/script";
+import SmoothAnchors from "@/components/SmoothAnchors";
 import "../globals.css";
 
 const inter = Inter({
@@ -158,6 +159,7 @@ export default async function RootLayout({
             type="application/ld+json"
             dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
           />
+          <SmoothAnchors />
           {children}
           <WhatsAppButton />
           <SpeedInsights />

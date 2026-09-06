@@ -78,7 +78,7 @@ export default async function DesarrolloWebBasicaPage({ params }: Props) {
         "Ubicación en Google Maps integrada",
         "Botón flotante directo a tu WhatsApp",
         "Enlaces a todas tus redes sociales",
-        "Hosting de alta velocidad incluido por 1 año"
+        "6 meses de hosting incluidos (el alojamiento de tu web)"
     ] : [
         "Modern and 100% responsive design (mobile & PC)",
         "Main section presenting your business",
@@ -87,7 +87,7 @@ export default async function DesarrolloWebBasicaPage({ params }: Props) {
         "Integrated Google Maps location",
         "Floating WhatsApp button",
         "Links to all your social networks",
-        "High-speed hosting included for 1 year"
+        "6 months of hosting included (your website's server space)"
     ];
 
     const chooseReasons = isEs ? [
@@ -125,7 +125,7 @@ export default async function DesarrolloWebBasicaPage({ params }: Props) {
         },
         {
             q: "¿Tengo que pagar mantenimiento mensual?",
-            a: "No. El pago es único por el diseño y la programación. El hosting está bonificado por el primer año. Luego, solo abonas la renovación anual de tu hosting y dominio."
+            a: "No. El pago es único por el diseño y la programación. Se incluyen 6 meses de hosting sin costo (el alojamiento de tu web) para que primero la tengas funcionando y consigas clientes. Después, el hosting pasa a tener un costo mensual y el dominio se paga aparte, una vez al año."
         },
         {
             q: "¿Puedo agregarle funciones en el futuro?",
@@ -138,7 +138,7 @@ export default async function DesarrolloWebBasicaPage({ params }: Props) {
         },
         {
             q: "Do I have to pay monthly maintenance?",
-            a: "No. The payment is one-time for design and coding. High-speed hosting is free for the first year. Afterwards, you only pay the annual renewal of your hosting and domain."
+            a: "No. The payment is one-time for design and coding. 6 months of hosting are included at no cost (your website's server space) so you first get it running and win clients. After that, hosting has a monthly cost and the domain is paid separately, once a year."
         },
         {
             q: "Can I add features in the future?",
@@ -156,7 +156,7 @@ export default async function DesarrolloWebBasicaPage({ params }: Props) {
         ventajasTitle: isEs ? "Ventajas Comerciales" : "Commercial Advantages",
         faqsTitle: isEs ? "Preguntas Frecuentes" : "Frequently Asked Questions",
         ctaBtn: isEs ? "Solicitar mi web básica por WhatsApp" : "Request my basic website on WhatsApp",
-        price: isEs ? "Gs. 850.000 pago único (Regular Gs. 950.000)" : "Gs. 850,000 one-time payment (Regular Gs. 950,000)",
+        price: isEs ? "Precio lanzamiento: Gs. 850.000 · pago único (regular Gs. 950.000)" : "Launch price: Gs. 850,000 · one-time payment (regular Gs. 950,000)",
         metaBadge: isEs ? "Servicio Comercial" : "Commercial Service",
         metaSub: isEs ? "Presencia Online" : "Online Presence",
         advisorRole: isEs ? "Asesor Tecnológico SolvaTech" : "Technology Advisor SolvaTech",

@@ -305,6 +305,7 @@ export default function Precios() {
                 transition={{ duration: 0.6, delay: index * 0.12, ease: [0.22, 1, 0.36, 1] }}
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
+                className={`plan-card${plan.highlight ? " is-highlight" : ""}`}
                 style={{
                     position: "relative",
                     width: "100%",
@@ -462,13 +463,13 @@ export default function Precios() {
 
                     {/* Special description for custom plan */}
                     {plan.specialDesc && (
-                        <p style={{ color: "#888", fontSize: "11px", margin: "-8px 0 16px 0", lineHeight: 1.4, textAlign: "center" }}>
+                        <p className="plan-special" style={{ color: "#888", fontSize: "11px", margin: "-8px 0 16px 0", lineHeight: 1.4, textAlign: "center" }}>
                             {plan.specialDesc}
                         </p>
                     )}
 
                     {/* Features */}
-                    <div style={{ display: "flex", flexDirection: "column", gap: "10px", marginBottom: "20px" }}>
+                    <div className="plan-features" style={{ display: "flex", flexDirection: "column", gap: "10px", marginBottom: "20px" }}>
                         {plan.features.map((feature, idx) => (
                             <motion.div
                                 key={idx}
@@ -552,6 +553,7 @@ export default function Precios() {
 
                     {/* Note */}
                     <motion.p
+                        className="plan-note"
                         animate={{ color: isHovered ? `${theme.accent}90` : "rgba(255,255,255,0.4)" }}
                         style={{ textAlign: "center", fontSize: "9px", marginTop: "12px", transition: "color 0.3s", lineHeight: 1.3 }}
                     >
@@ -622,8 +624,16 @@ export default function Precios() {
                     <p style={{ color: "#777", fontSize: "1.05rem", maxWidth: "700px", margin: "0 auto" }}>{t('pricing.subtitle')}</p>
                 </motion.div>
 
-                {/* Cards Grid - Responsive Wrap */}
-                <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", alignItems: "stretch", gap: "24px" }}>
+                {/* Pista de deslizamiento (solo mobile, ver .mob-hint en globals.css) */}
+                <p className="mob-hint">
+                    {language === 'es' ? 'Deslizá para ver todos' : 'Swipe to see all'}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden="true">
+                        <path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                </p>
+
+                {/* Planes: grilla centrada en desktop (3 + 2), carrusel en mobile */}
+                <div className="plans-grid mob-scroller">
                     {plans && plans.map((plan, index) => (
                         <PricingCard key={plan.id || index} plan={plan} index={index} />
                     ))}
@@ -634,12 +644,15 @@ export default function Precios() {
                     <h3 style={{ fontSize: "1.75rem", fontWeight: 800, color: "#fff", marginBottom: "32px" }}>
                         {language === 'es' ? "Servicios Adicionales" : "Additional Services"}
                     </h3>
-                    <div style={{
-                        display: "grid",
-                        gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-                        gap: "24px",
-                        justifyContent: "center"
-                    }}>
+                    <div
+                        className="mob-scroller"
+                        style={{
+                            display: "grid",
+                            gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+                            gap: "24px",
+                            justifyContent: "center"
+                        }}
+                    >
                         {additionalServices.map((service, index) => (
                             <AdditionalServiceCard key={service.id} service={service} index={index} language={language} />
                         ))}
