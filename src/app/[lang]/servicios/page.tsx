@@ -12,8 +12,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const isEs = lang === 'es';
 
     const title = isEs
-      ? "Servicios Digitales | Páginas Web, Catálogos y Sistemas | SolvaTech"
-      : "Digital Services | Web Development & Custom Software | SolvaTech";
+      ? "Servicios Digitales | Páginas Web, Catálogos y Sistemas"
+      : "Digital Services | Web Development & Custom Software";
 
     const description = isEs
       ? "Diseñamos páginas web, catálogos digitales y sistemas para negocios en Paraguay. Soluciones profesionales con botón a WhatsApp, diseño responsive y presencia online."
@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             }
         },
         openGraph: {
-            title,
+            title: `${title} | SolvaTech`,
             description,
             url: `${baseUrl}/${lang}${path}`,
             locale: isEs ? "es_PY" : "en_US",

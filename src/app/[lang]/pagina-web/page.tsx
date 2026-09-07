@@ -8,8 +8,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const isEn = lang === "en";
 
   const title = isEn
-    ? "Landing page for your business | SolvaTech"
-    : "Landing page para tu negocio | SolvaTech";
+    ? "Landing page for your business"
+    : "Landing page para tu negocio";
   const description = isEn
     ? "A clear, fast landing page that sends people to your WhatsApp. Launch price Gs. 850,000, live in 4 to 7 days. See real work and request a proposal."
     : "Landing page moderna, lista para el celular y con WhatsApp. Precio lanzamiento Gs. 850.000, online en 4 a 7 días. Mirá trabajos reales y pedí tu propuesta.";
@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     robots: isEn ? { index: false, follow: true } : { index: true, follow: true },
     openGraph: {
-      title,
+      title: `${title} | SolvaTech`,
       description,
       url: "https://solvatech.com.py/es/pagina-web",
       siteName: "SolvaTech",

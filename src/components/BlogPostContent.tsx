@@ -4,7 +4,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import dynamic from 'next/dynamic';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { BlogPost, blogPosts } from '@/lib/blog-data';
 import { useLanguage } from '@/context/LanguageContext';
 import Navbar from '@/components/Navbar';
@@ -53,6 +54,111 @@ type Props = {
     post: BlogPost;
 };
 
+/**
+ * Panel lateral del articulo. En PC va fijo a la derecha; en mobile el CSS lo
+ * baja debajo del contenido. Trae buscador (manda a /blog?q=), lista de temas
+ * (links a /blog?cat=) y articulos relacionados, para que el lector tenga mas
+ * contenido a mano sin llegar al pie de pagina.
+ */
+function BlogSidebar({ post, language }: { post: BlogPost; language: string }) {
+    const router = useRouter();
+    const [q, setQ] = useState('');
+    const isEs = language === 'es';
+
+    const topics = useMemo(() => {
+        const set = new Set<string>();
+        blogPosts.forEach((p) => set.add(isEs ? p.category : p.categoryEn));
+        return Array.from(set);
+    }, [isEs]);
+
+    const related = useMemo(() => {
+        const others = blogPosts.filter((p) => p.slug !== post.slug);
+        const sameCat = others.filter((p) => p.category === post.category);
+        const rest = others.filter((p) => p.category !== post.category);
+        return [...sameCat, ...rest].slice(0, 4);
+    }, [post.slug, post.category]);
+
+    const submit = (e: React.FormEvent) => {
+        e.preventDefault();
+        const term = q.trim();
+        router.push(term ? `/${language}/blog?q=${encodeURIComponent(term)}` : `/${language}/blog`);
+    };
+
+    return (
+        <aside className="blog-side">
+            <div className="blog-side-card">
+                <p className="blog-side-h">{isEs ? 'Buscar en el blog' : 'Search the blog'}</p>
+                <form className="blog-search" onSubmit={submit} role="search">
+                    <input
+                        type="search"
+                        value={q}
+                        onChange={(e) => setQ(e.target.value)}
+                        placeholder={isEs ? 'Escribi un tema...' : 'Type a topic...'}
+                        aria-label={isEs ? 'Buscar articulos' : 'Search articles'}
+                    />
+                    <button type="submit" aria-label={isEs ? 'Buscar' : 'Search'}>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
+                            <circle cx="11" cy="11" r="7" />
+                            <path d="m21 21-4.3-4.3" />
+                        </svg>
+                    </button>
+                </form>
+            </div>
+
+            <div className="blog-side-card">
+                <p className="blog-side-h">{isEs ? 'Temas' : 'Topics'}</p>
+                <div className="blog-topics">
+                    {topics.map((tp) => (
+                        <Link key={tp} href={`/${language}/blog?cat=${encodeURIComponent(tp)}`} className="blog-topic">
+                            #{tp}
+                        </Link>
+                    ))}
+                </div>
+            </div>
+
+            <div className="blog-side-card">
+                <p className="blog-side-h">{isEs ? 'Te puede interesar' : 'You may also like'}</p>
+                <div className="blog-rel">
+                    {related.map((r) => {
+                        const rt = isEs ? r.title : r.titleEn;
+                        const rc = isEs ? r.category : r.categoryEn;
+                        return (
+                            <Link key={r.slug} href={`/${language}/blog/${r.slug}`} className="blog-rel-item">
+                                <span className="blog-rel-thumb">
+                                    <Image src={r.image} alt={rt} fill sizes="64px" style={{ objectFit: 'cover' }} />
+                                </span>
+                                <span className="blog-rel-txt">
+                                    <span className="blog-rel-cat">{rc}</span>
+                                    <span className="blog-rel-title">{rt}</span>
+                                    <span className="blog-rel-meta">{r.date} &middot; {r.readTime}</span>
+                                </span>
+                            </Link>
+                        );
+                    })}
+                </div>
+                <Link href={`/${language}/blog`} className="blog-side-all">
+                    {isEs ? 'Ver todos los articulos' : 'See all articles'}
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M5 12h14M13 6l6 6-6 6" />
+                    </svg>
+                </Link>
+            </div>
+
+            <div className="blog-side-card blog-side-cta">
+                <p className="blog-side-cta-t">{isEs ? '¿Tu negocio necesita una web?' : 'Does your business need a website?'}</p>
+                <p className="blog-side-cta-d">
+                    {isEs
+                        ? 'Te pasamos alcance, precio y fecha de entrega sin vueltas.'
+                        : 'We send you scope, price and delivery date, no runaround.'}
+                </p>
+                <Link href={`/${language}/#contacto`} className="blog-side-cta-btn">
+                    {isEs ? 'Pedir presupuesto' : 'Get a quote'}
+                </Link>
+            </div>
+        </aside>
+    );
+}
+
 export default function BlogPostContent({ post }: Props) {
     const { language } = useLanguage();
 
@@ -80,9 +186,6 @@ export default function BlogPostContent({ post }: Props) {
     const displayContent = language === 'es' ? post.content : (post.contentEn || post.content);
     const { html: articleHtml, toc } = useMemo(() => buildArticle(displayContent), [displayContent]);
 
-    // Find related posts
-    const relatedPosts = blogPosts.filter(p => p.slug !== post.slug).slice(0, 3);
-
     return (
         <article style={{
             minHeight: '100vh',
@@ -107,12 +210,12 @@ export default function BlogPostContent({ post }: Props) {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.8 }}
-                style={{ 
-                    position: 'relative', 
-                    paddingTop: '140px',
-                    paddingBottom: '80px',
+                style={{
+                    position: 'relative',
+                    paddingTop: '116px',
+                    paddingBottom: '52px',
                     overflow: 'hidden',
-                    minHeight: '65vh',
+                    minHeight: '52vh',
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'center'
@@ -159,8 +262,8 @@ export default function BlogPostContent({ post }: Props) {
                 <div style={{ position: 'absolute', top: '20%', left: '5%', width: '300px', height: '300px', borderRadius: '50%', background: `radial-gradient(circle, ${theme.accent}15, transparent 70%)`, filter: 'blur(60px)', zIndex: 1 }} />
                 <div style={{ position: 'absolute', bottom: '20%', right: '10%', width: '400px', height: '400px', borderRadius: '50%', background: `radial-gradient(circle, ${theme.accentDark}12, transparent 70%)`, filter: 'blur(80px)', zIndex: 1 }} />
 
-                <div style={{ 
-                    maxWidth: '1100px', 
+                <div style={{
+                    maxWidth: '1340px',
                     marginLeft: 'auto',
                     marginRight: 'auto',
                     paddingLeft: 'clamp(20px, 5vw, 32px)',
@@ -306,7 +409,7 @@ export default function BlogPostContent({ post }: Props) {
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.4, duration: 0.7 }}
-                        style={{ position: 'relative', marginBottom: '48px' }}
+                        style={{ position: 'relative', marginBottom: '30px' }}
                     >
                         {/* Decorative line */}
                         <div style={{
@@ -320,9 +423,9 @@ export default function BlogPostContent({ post }: Props) {
                         }} />
                         
                         <h1 style={{
-                            fontSize: 'clamp(2rem, 6vw, 4.5rem)',
+                            fontSize: 'clamp(1.8rem, 3.6vw, 2.85rem)',
                             fontWeight: 900,
-                            lineHeight: 1.1,
+                            lineHeight: 1.15,
                             textShadow: `0 4px 24px rgba(0, 0, 0, 0.8), 0 0 60px ${theme.accent}30`,
                             background: `linear-gradient(135deg, #fff, ${theme.accent}80)`,
                             WebkitBackgroundClip: 'text',
@@ -408,26 +511,21 @@ export default function BlogPostContent({ post }: Props) {
                 </div>
             </motion.div>
 
-            {/* Article Content con diseño mejorado */}
-            <div style={{ 
-                maxWidth: '1100px', 
-                marginLeft: 'auto',
-                marginRight: 'auto',
-                paddingLeft: 'clamp(20px, 5vw, 32px)',
-                paddingRight: 'clamp(20px, 5vw, 32px)',
-                paddingBottom: '100px',
-                position: 'relative',
-                zIndex: 20,
-                marginTop: '-60px'
-            }}>
-                <motion.div 
+            {/* Cuerpo: articulo + panel lateral. En PC es una grilla de dos
+                columnas (contenido + sidebar fijo); en mobile el CSS apila y
+                el panel lateral cae debajo del articulo. El indice va inline
+                arriba del contenido, plegable. */}
+            <div className="blog-wrap" style={{ marginTop: '-60px', position: 'relative', zIndex: 20 }}>
+                <div className="blog-grid">
+                    <div className="blog-main">
+                <motion.div
                     initial={{ opacity: 0, y: 50 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.6, duration: 0.8 }}
                     style={{
                         backgroundColor: 'rgba(10, 10, 10, 0.95)',
                         borderRadius: '32px',
-                        padding: 'clamp(40px, 7vw, 80px)',
+                        padding: 'clamp(28px, 4.5vw, 56px)',
                         border: `2px solid ${theme.accent}20`,
                         boxShadow: `0 32px 96px rgba(0, 0, 0, 0.8), 0 0 80px ${theme.accent}15`,
                         backdropFilter: 'blur(20px)',
@@ -438,39 +536,33 @@ export default function BlogPostContent({ post }: Props) {
                     {/* Decorative corner accents */}
                     <div style={{ position: 'absolute', top: 0, left: 0, width: '100px', height: '100px', background: `linear-gradient(135deg, ${theme.accent}20, transparent)`, borderTopLeftRadius: '32px' }} />
                     <div style={{ position: 'absolute', bottom: 0, right: 0, width: '150px', height: '150px', background: `linear-gradient(-45deg, ${theme.accentDark}15, transparent)`, borderBottomRightRadius: '32px' }} />
-                    
-                    {/* Artículo + índice al costado (en PC el índice queda fijo
-                        a la derecha; en mobile va arriba, plegable). */}
-                    <div className={`blog-layout${toc.length >= 3 ? ' has-toc' : ''}`}>
-                        {toc.length >= 3 && (
-                            <aside className="blog-toc-wrap">
-                                <nav className="blog-toc" aria-label={language === 'es' ? 'Índice del artículo' : 'Article index'}>
-                                    <details open>
-                                        <summary>
-                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden="true">
-                                                <path d="M4 6h16M4 12h16M4 18h10" />
-                                            </svg>
-                                            {language === 'es' ? 'En este artículo' : 'In this article'}
-                                            <span className="chev" aria-hidden />
-                                        </summary>
-                                        <ol>
-                                            {toc.map((item) => (
-                                                <li key={item.id}>
-                                                    <a href={`#${item.id}`}>{item.text}</a>
-                                                </li>
-                                            ))}
-                                        </ol>
-                                    </details>
-                                </nav>
-                            </aside>
-                        )}
 
-                        {/* Content */}
-                        <div
-                            className="blog-article"
-                            dangerouslySetInnerHTML={{ __html: articleHtml }}
-                        />
-                    </div>
+                    {toc.length >= 3 && (
+                        <nav className="blog-toc blog-toc-inline" aria-label={language === 'es' ? 'Contenido del artículo' : 'Article contents'}>
+                            <details open>
+                                <summary>
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden="true">
+                                        <path d="M4 6h16M4 12h16M4 18h10" />
+                                    </svg>
+                                    {language === 'es' ? 'Contenido' : 'Contents'}
+                                    <span className="chev" aria-hidden />
+                                </summary>
+                                <ol>
+                                    {toc.map((item) => (
+                                        <li key={item.id}>
+                                            <a href={`#${item.id}`}>{item.text}</a>
+                                        </li>
+                                    ))}
+                                </ol>
+                            </details>
+                        </nav>
+                    )}
+
+                    {/* Content */}
+                    <div
+                        className="blog-article"
+                        dangerouslySetInnerHTML={{ __html: articleHtml }}
+                    />
                 </motion.div>
 
                 {/* CTA Section más decorada */}
@@ -610,206 +702,14 @@ export default function BlogPostContent({ post }: Props) {
                         </div>
                     </div>
                 </motion.div>
+                    </div>
+                    {/* /blog-main */}
 
-                {/* Related Posts con diseño mejorado */}
-                {relatedPosts.length > 0 && (
-                    <motion.div 
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.9 }}
-                        style={{ marginTop: '120px' }}
-                    >
-                        <div style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '32px',
-                            marginBottom: '64px',
-                            position: 'relative'
-                        }}>
-                            <motion.div 
-                                initial={{ width: 0 }}
-                                whileInView={{ width: '100%' }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 1, delay: 0.2 }}
-                                style={{ height: '2px', background: `linear-gradient(90deg, transparent, ${theme.accent}60, transparent)`, flex: 1 }} 
-                            />
-                            
-                            <h3 style={{
-                                fontSize: 'clamp(1.75rem, 5vw, 2.5rem)',
-                                fontWeight: 900,
-                                color: '#fff',
-                                whiteSpace: 'nowrap',
-                                textShadow: `0 0 40px ${theme.accent}40`,
-                                position: 'relative'
-                            }}>
-                                <span style={{
-                                    background: `linear-gradient(135deg, #fff, ${theme.accent})`,
-                                    WebkitBackgroundClip: 'text',
-                                    WebkitTextFillColor: 'transparent',
-                                    backgroundClip: 'text'
-                                }}>
-                                    {t.seguirLeyendo}
-                                </span>
-                            </h3>
-                            
-                            <motion.div 
-                                initial={{ width: 0 }}
-                                whileInView={{ width: '100%' }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 1, delay: 0.2 }}
-                                style={{ height: '2px', background: `linear-gradient(90deg, transparent, ${theme.accent}60, transparent)`, flex: 1 }} 
-                            />
-                        </div>
-                        
-                        <div style={{
-                            display: 'grid',
-                            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
-                            gap: 'clamp(28px, 5vw, 40px)'
-                        }}>
-                            {relatedPosts.map((related, index) => {
-                                const relatedTitle = language === 'es' ? related.title : related.titleEn;
-                                const relatedCategory = language === 'es' ? related.category : related.categoryEn;
-                                
-                                return (
-                                    <Link 
-                                        key={related.slug} 
-                                        href={`/${language}/blog/${related.slug}`}
-                                        style={{ textDecoration: 'none', display: 'block' }}
-                                    >
-                                        <motion.div
-                                            initial={{ opacity: 0, y: 40 }}
-                                            whileInView={{ opacity: 1, y: 0 }}
-                                            viewport={{ once: true }}
-                                            transition={{ delay: index * 0.15, duration: 0.7 }}
-                                            whileHover={{ y: -12 }}
-                                            style={{
-                                                borderRadius: '24px',
-                                                overflow: 'hidden',
-                                                backgroundColor: 'rgba(10, 10, 10, 0.8)',
-                                                border: `2px solid ${theme.accent}20`,
-                                                boxShadow: '0 12px 32px rgba(0, 0, 0, 0.6)',
-                                                transition: 'all 0.5s',
-                                                cursor: 'pointer',
-                                                backdropFilter: 'blur(10px)',
-                                                position: 'relative'
-                                            }}
-                                            onMouseEnter={(e) => {
-                                                e.currentTarget.style.borderColor = `${theme.accent}50`;
-                                                e.currentTarget.style.boxShadow = `0 20px 60px ${theme.accent}30`;
-                                            }}
-                                            onMouseLeave={(e) => {
-                                                e.currentTarget.style.borderColor = `${theme.accent}20`;
-                                                e.currentTarget.style.boxShadow = '0 12px 32px rgba(0, 0, 0, 0.6)';
-                                            }}
-                                        >
-                                            {/* Corner decoration */}
-                                            <div style={{
-                                                position: 'absolute',
-                                                top: 0,
-                                                right: 0,
-                                                width: '100px',
-                                                height: '100px',
-                                                background: `radial-gradient(circle at top right, ${theme.accent}15, transparent 70%)`,
-                                                pointerEvents: 'none',
-                                                zIndex: 1
-                                            }} />
-                                            
-                                            <div style={{ 
-                                                height: '200px', 
-                                                position: 'relative', 
-                                                width: '100%', 
-                                                overflow: 'hidden'
-                                            }}>
-                                                <Image 
-                                                    src={related.image} 
-                                                    alt={relatedTitle}
-                                                    fill
-                                                    style={{ 
-                                                        objectFit: 'cover',
-                                                        opacity: 0.8,
-                                                        transition: 'all 0.7s'
-                                                    }}
-                                                    onMouseEnter={(e) => {
-                                                        e.currentTarget.style.transform = 'scale(1.12)';
-                                                        e.currentTarget.style.opacity = '1';
-                                                    }}
-                                                    onMouseLeave={(e) => {
-                                                        e.currentTarget.style.transform = 'scale(1)';
-                                                        e.currentTarget.style.opacity = '0.8';
-                                                    }}
-                                                />
-                                                <div style={{
-                                                    position: 'absolute',
-                                                    inset: 0,
-                                                    background: 'linear-gradient(to top, rgba(10, 10, 10, 1) 0%, rgba(10, 10, 10, 0.8) 50%, transparent 100%)'
-                                                }} />
-                                                
-                                                <div style={{
-                                                    position: 'absolute',
-                                                    top: '20px',
-                                                    left: '20px',
-                                                    zIndex: 2
-                                                }}>
-                                                    <span style={{
-                                                        fontSize: '10px',
-                                                        fontWeight: 800,
-                                                        textTransform: 'uppercase',
-                                                        letterSpacing: '0.12em',
-                                                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                                                        backdropFilter: 'blur(12px)',
-                                                        padding: '8px 16px',
-                                                        borderRadius: '10px',
-                                                        color: theme.accent,
-                                                        border: `1px solid ${theme.accent}50`,
-                                                        boxShadow: `0 4px 16px ${theme.accent}30`
-                                                    }}>
-                                                        {relatedCategory}
-                                                    </span>
-                                                </div>
-                                            </div>
+                    <BlogSidebar post={post} language={language} />
+                </div>
+                {/* /blog-grid */}
 
-                                            <div style={{ padding: '28px' }}>
-                                                <p style={{
-                                                    fontSize: '12px',
-                                                    color: '#777',
-                                                    marginBottom: '16px',
-                                                    display: 'flex',
-                                                    alignItems: 'center',
-                                                    gap: '10px'
-                                                }}>
-                                                    <svg style={{ width: '14px', height: '14px', color: theme.accent }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                                    </svg>
-                                                    {related.date} 
-                                                    <span style={{ 
-                                                        width: '4px', 
-                                                        height: '4px', 
-                                                        backgroundColor: theme.accent, 
-                                                        borderRadius: '50%'
-                                                    }} />
-                                                    {related.readTime}
-                                                </p>
-                                                
-                                                <h4 style={{
-                                                    fontSize: '18px',
-                                                    fontWeight: 700,
-                                                    color: '#fff',
-                                                    lineHeight: 1.4,
-                                                    marginBottom: '12px'
-                                                }}>
-                                                    {relatedTitle}
-                                                </h4>
-                                            </div>
-                                        </motion.div>
-                                    </Link>
-                                );
-                            })}
-                        </div>
-                    </motion.div>
-                )}
-                
-                <div style={{ paddingBottom: '60px' }}>
+                <div style={{ paddingTop: '90px', paddingBottom: '60px' }}>
                     <Footer />
                 </div>
             </div>

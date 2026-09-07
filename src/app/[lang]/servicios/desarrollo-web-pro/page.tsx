@@ -23,16 +23,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const baseUrl = "https://solvatech.com.py";
     const path = "/servicios/desarrollo-web-pro";
     
-    const title = isEs 
-      ? "Diseño Web Profesional y Corporativo en Paraguay | SolvaTech"
-      : "Professional & Corporate Web Design in Paraguay | SolvaTech";
+    // Intención de PLAN. Se saca "Diseño Web ... en Paraguay" del title porque
+    // "diseño web paraguay" es un término de cabecera que trabaja la página
+    // general /servicios/desarrollo-web-paraguay.
+    const title = isEs
+      ? "Plan Web Pro: Sitio Corporativo a Medida"
+      : "Pro Web Plan: Custom Corporate Website";
     const description = isEs
-      ? "Desarrollo de páginas web profesionales y corporativas para empresas en Paraguay. Sitios rápidos, adaptados a celulares y optimizados para Google (SEO)."
-      : "Development of professional and corporate websites for businesses in Paraguay. Fast, mobile-responsive, and search engine optimized (SEO).";
+      ? "El plan más completo: diseño propio, una página por línea de negocio y todo pensado para que la empresa se vea como la más seria de su rubro."
+      : "The most complete plan: custom design, a page per business line and everything built so your company looks like the most serious in its field.";
+    const keywords = isEs
+      ? ["web corporativa paraguay", "sitio web a medida paraguay", "pagina web profesional empresa", "web pro paraguay", "diseño web corporativo"]
+      : ["corporate website paraguay", "custom website plan", "professional business website"];
 
     return {
         title,
         description,
+        keywords,
         alternates: {
             canonical: `${baseUrl}/${lang}${path}`,
             languages: {
@@ -43,7 +50,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             }
         },
         openGraph: {
-            title,
+            title: `${title} | SolvaTech`,
             description,
             url: `${baseUrl}/${lang}${path}`,
             locale: isEs ? "es_PY" : "en_US",
@@ -159,7 +166,9 @@ export default async function DesarrolloWebProPage({ params }: Props) {
     ];
 
     const dict = {
-        h1: isEs ? "Desarrollo Web Pro y Corporativo" : "Pro & Corporate Web Development",
+        // H1 de plan: no repite "Desarrollo Web", que es el H1 de la página
+        // general /servicios/desarrollo-web-paraguay.
+        h1: isEs ? "Web Pro para tu empresa" : "Pro website for your company",
         whyTitle: isEs ? "Presencia Corporativa Premium" : "Premium Corporate Presence",
         whyDesc: isEs
             ? "Una empresa líder necesita una web a la altura de su operación. La Web Pro es un sitio grande, con diseño único, hecho para abrir al instante en el celular y guiar a cada tipo de cliente a la sección que le sirve. Sumás integraciones (reservas, chat, sistema de clientes o pagos) y atención prioritaria durante todo el proyecto, para que la web trabaje todos los días para tu negocio."
@@ -228,6 +237,19 @@ export default async function DesarrolloWebProPage({ params }: Props) {
                         {dict.breadcrumbsService}
                     </span>
                 </div>
+                {/* Enlace a la página general. Deja explícita la jerarquía
+                    (plan -> servicio general) y le pasa fuerza al hub, que es
+                    la página que trabaja "desarrollo web en Paraguay". */}
+                <p style={{ fontSize: '14px', color: '#9aa4b0', margin: '4px 0 0' }}>
+                    {isEs ? '¿Todavía estás comparando? Mirá la guía de ' : 'Still comparing? See the guide to '}
+                    <Link
+                        href={`/${lang}/servicios/desarrollo-web-paraguay`}
+                        style={{ color: theme.accent, textDecoration: 'none', borderBottom: `1px solid ${theme.accent}55` }}
+                    >
+                        {isEs ? 'desarrollo web en Paraguay' : 'web development in Paraguay'}
+                    </Link>
+                    .
+                </p>
 
                 {/* Meta Badge */}
                 <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '20px' }}>

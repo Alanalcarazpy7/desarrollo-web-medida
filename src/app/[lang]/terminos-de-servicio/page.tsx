@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const baseUrl = "https://solvatech.com.py";
     const path = "/terminos-de-servicio";
 
-    const title = isEs ? "Términos de Servicio | SolvaTech" : "Terms of Service | SolvaTech";
+    const title = isEs ? "Términos de Servicio" : "Terms of Service";
     const description = isEs
         ? "Condiciones de uso y contratación de los servicios de desarrollo web de SolvaTech."
         : "Terms of use and engagement for SolvaTech's web development services.";

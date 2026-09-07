@@ -2,8 +2,8 @@
 
 import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Image from "next/image";
 import { Project } from "@/lib/projects-data";
+import type { Translate } from "@/context/LanguageContext";
 import { getWhatsAppLink } from "@/lib/whatsapp";
 
 interface ProjectLightboxProps {
@@ -11,12 +11,12 @@ interface ProjectLightboxProps {
     isOpen: boolean;
     onClose: () => void;
     lang: "es" | "en";
-    t: (key: string) => any;
+    t: Translate;
 }
 
 export default function ProjectLightbox({ project, isOpen, onClose, lang, t }: ProjectLightboxProps) {
     const [showAdminView, setShowAdminView] = useState(false);
-    const [isZoomed, setIsZoomed] = useState(false);
+    const [shownProject, setShownProject] = useState(project);
     const onCloseRef = useRef(onClose);
 
     // El callback puede cambiar de referencia cada vez que el padre se
@@ -26,11 +26,13 @@ export default function ProjectLightbox({ project, isOpen, onClose, lang, t }: P
         onCloseRef.current = onClose;
     }, [onClose]);
 
-    // Reset view state when a new project is loaded
-    useEffect(() => {
+    // Al abrir otro proyecto se vuelve a la vista principal. Se ajusta durante
+    // el render (patrón recomendado por React para "resetear estado cuando
+    // cambia una prop") en lugar de un efecto, que dispararía un render extra.
+    if (project !== shownProject) {
+        setShownProject(project);
         setShowAdminView(false);
-        setIsZoomed(false);
-    }, [project]);
+    }
 
     // Handle ESC key press
     useEffect(() => {

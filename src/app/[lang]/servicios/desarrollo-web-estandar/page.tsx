@@ -23,16 +23,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const baseUrl = "https://solvatech.com.py";
     const path = "/servicios/desarrollo-web-estandar";
     
-    const title = isEs 
-      ? "Desarrollo de Páginas Web Estándar en Paraguay | SolvaTech"
-      : "Standard Web Design & Business Pages in Paraguay | SolvaTech";
+    // Intención de PLAN. El title ya NO arranca con "Desarrollo de Páginas Web
+    // ... en Paraguay", que competía de frente con la página general
+    // /servicios/desarrollo-web-paraguay por el mismo término de cabecera.
+    const title = isEs
+      ? "Plan Web Estándar: Sitio Completo con Todas tus Secciones"
+      : "Standard Web Plan: Full Site with All Your Sections";
     const description = isEs
-      ? "Diseño de páginas web estándar y profesionales para empresas en Paraguay. Con secciones completas de servicios, nosotros, mapa y WhatsApp."
-      : "Standard and professional web design for companies in Paraguay. Features complete sections for services, about us, map, and WhatsApp.";
+      ? "El salto de una página a un sitio completo: servicios, nosotros, galería, mapa y contacto. Para negocios que necesitan explicar bien todo lo que hacen."
+      : "The jump from one page to a full site: services, about, gallery, map and contact. For businesses that need to explain everything they do.";
+    const keywords = isEs
+      ? ["web estandar paraguay", "sitio web con varias secciones", "pagina web para empresa paraguay", "web institucional paraguay", "plan web estandar"]
+      : ["standard website plan", "multi section website", "company website paraguay"];
 
     return {
         title,
         description,
+        keywords,
         alternates: {
             canonical: `${baseUrl}/${lang}${path}`,
             languages: {
@@ -43,7 +50,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             }
         },
         openGraph: {
-            title,
+            title: `${title} | SolvaTech`,
             description,
             url: `${baseUrl}/${lang}${path}`,
             locale: isEs ? "es_PY" : "en_US",
@@ -226,6 +233,19 @@ export default async function DesarrolloWebEstandarPage({ params }: Props) {
                         {dict.breadcrumbsService}
                     </span>
                 </div>
+                {/* Enlace a la página general. Deja explícita la jerarquía
+                    (plan -> servicio general) y le pasa fuerza al hub, que es
+                    la página que trabaja "desarrollo web en Paraguay". */}
+                <p style={{ fontSize: '14px', color: '#9aa4b0', margin: '4px 0 0' }}>
+                    {isEs ? '¿Todavía estás comparando? Mirá la guía de ' : 'Still comparing? See the guide to '}
+                    <Link
+                        href={`/${lang}/servicios/desarrollo-web-paraguay`}
+                        style={{ color: theme.accent, textDecoration: 'none', borderBottom: `1px solid ${theme.accent}55` }}
+                    >
+                        {isEs ? 'desarrollo web en Paraguay' : 'web development in Paraguay'}
+                    </Link>
+                    .
+                </p>
 
                 {/* Meta Badge */}
                 <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '20px' }}>

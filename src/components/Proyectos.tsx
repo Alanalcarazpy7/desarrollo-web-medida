@@ -8,7 +8,20 @@ import { useLanguage } from "@/context/LanguageContext";
 import { trackEvent } from "@/lib/analytics";
 import { getWhatsAppLink } from "@/lib/whatsapp";
 import { Project, projectsData } from "@/lib/projects-data";
+import type { Translate } from "@/context/LanguageContext";
 import ProjectLightbox from "./ProjectLightbox";
+
+/** Paleta que la sección le pasa a cada tarjeta. */
+type ProjectTheme = {
+    bg: string;
+    bgCard: string;
+    bgCardHover: string;
+    accent: string;
+    accentDark: string;
+    accentGlow: string;
+    text: string;
+    textMuted: string;
+};
 
 // Componente de tarjeta de proyecto
 function ProjectCard({
@@ -21,9 +34,9 @@ function ProjectCard({
 }: {
     project: Project;
     index: number;
-    theme: any;
+    theme: ProjectTheme;
     language: string;
-    t: any;
+    t: Translate;
     onOpenLightbox: (project: Project) => void;
 }) {
     const x = useMotionValue(0);

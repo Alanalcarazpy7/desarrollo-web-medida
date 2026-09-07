@@ -23,8 +23,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const isEs = lang === 'es';
 
     const title = isEs
-      ? "Sistemas a medida para negocios en Paraguay | SolvaTech"
-      : "Custom Systems & Custom Software in Paraguay | SolvaTech";
+      ? "Sistemas a medida para negocios en Paraguay"
+      : "Custom Systems & Custom Software in Paraguay";
 
     const description = isEs
       ? "Diseño y desarrollo de sistemas a medida en Paraguay. Carritos de compra, paneles administrativos y software empresarial personalizado."
@@ -48,7 +48,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             }
         },
         openGraph: {
-            title,
+            title: `${title} | SolvaTech`,
             description,
             url: `${baseUrl}/${lang}${path}`,
             locale: isEs ? "es_PY" : "en_US",

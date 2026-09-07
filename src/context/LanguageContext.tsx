@@ -1,13 +1,24 @@
 "use client";
 
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext } from "react";
 import { dictionary, Language } from "@/lib/dictionary";
 import { useParams, useRouter, usePathname } from "next/navigation";
+
+/**
+ * `t` resuelve una clave con puntos ("pricing.plans.0.name") contra el
+ * diccionario, que es heterogéneo: la mayoría de las claves devuelven texto,
+ * pero algunas devuelven arrays u objetos (planes, FAQ, opciones de
+ * formulario). Tiparlo como union obligaría a castear en cada `{t("...")}`
+ * dentro del JSX; los pocos lugares que esperan array ya castean a mano.
+ * Por eso acá el `any` es deliberado y está acotado a esta firma.
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type Translate = (key: string) => any;
 
 interface LanguageContextType {
     language: Language;
     setLanguage: (lang: Language) => void;
-    t: (key: string) => any;
+    t: Translate;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
@@ -42,18 +53,18 @@ export const LanguageProvider = ({ children, initialLang }: { children: React.Re
         router.push(newPath);
     };
 
-     const t = (key: string) => {
+    const t: Translate = (key: string) => {
         const keys = key.split('.');
-        let value: any = dictionary[language];
-        
+        let value: unknown = dictionary[language];
+
         for (const k of keys) {
             if (value && typeof value === 'object' && k in value) {
-                value = value[k as keyof typeof value];
+                value = (value as Record<string, unknown>)[k];
             } else {
                 return key; // Return key if not found
             }
         }
-        
+
         return value !== undefined ? value : key;
     };
 

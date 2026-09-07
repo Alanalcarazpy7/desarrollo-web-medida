@@ -23,16 +23,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const baseUrl = "https://solvatech.com.py";
     const path = "/servicios/desarrollo-web-basica";
     
-    const title = isEs 
-      ? "Páginas Web Básicas y Económicas en Paraguay | SolvaTech"
-      : "Basic & Affordable Web Design in Paraguay | SolvaTech";
+    // Intención de PLAN, no de búsqueda general: el término de cabecera
+    // ("desarrollo web paraguay") lo trabaja /servicios/desarrollo-web-paraguay.
+    // Acá se apunta a quien ya está comparando opciones y presupuesto.
+    const title = isEs
+      ? "Plan Web Básica: Página Web Económica para tu Negocio"
+      : "Basic Web Plan: Affordable Website for Your Business";
     const description = isEs
-      ? "Diseño de páginas web básicas y económicas para negocios en Paraguay. Con botón de WhatsApp, responsive y adaptada a celulares."
-      : "Affordable and basic web design for businesses in Paraguay. With WhatsApp button, responsive, and mobile-friendly.";
+      ? "El plan de entrada: una página para mostrar tu negocio y recibir consultas por WhatsApp. Pago único, entrega en 4 a 7 días y 6 meses de hosting incluidos."
+      : "The entry plan: one page to show your business and receive WhatsApp enquiries. One-time payment, 4 to 7 day delivery and 6 months of hosting included.";
+    const keywords = isEs
+      ? ["pagina web economica paraguay", "cuanto cuesta una pagina web", "web basica paraguay", "pagina web barata para negocio", "landing page economica paraguay"]
+      : ["affordable website paraguay", "basic website plan", "cheap website for business"];
 
     return {
         title,
         description,
+        keywords,
         alternates: {
             canonical: `${baseUrl}/${lang}${path}`,
             languages: {
@@ -43,7 +50,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             }
         },
         openGraph: {
-            title,
+            title: `${title} | SolvaTech`,
             description,
             url: `${baseUrl}/${lang}${path}`,
             locale: isEs ? "es_PY" : "en_US",
@@ -216,6 +223,20 @@ export default async function DesarrolloWebBasicaPage({ params }: Props) {
                         {dict.breadcrumbsService}
                     </span>
                 </div>
+
+                {/* Enlace a la página general. Deja explícita la jerarquía
+                    (plan -> servicio general) y le pasa fuerza al hub, que es
+                    la página que trabaja "desarrollo web en Paraguay". */}
+                <p style={{ fontSize: '14px', color: '#9aa4b0', margin: '4px 0 0' }}>
+                    {isEs ? '¿Todavía estás comparando? Mirá la guía de ' : 'Still comparing? See the guide to '}
+                    <Link
+                        href={`/${lang}/servicios/desarrollo-web-paraguay`}
+                        style={{ color: theme.accent, textDecoration: 'none', borderBottom: `1px solid ${theme.accent}55` }}
+                    >
+                        {isEs ? 'desarrollo web en Paraguay' : 'web development in Paraguay'}
+                    </Link>
+                    .
+                </p>
 
                 {/* Meta Badge */}
                 <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '20px' }}>

@@ -4,14 +4,16 @@ import { ReactNode } from "react";
 
 interface ServiceCardProps {
     children: ReactNode;
-    accent: string;
+    /** Lo pasan las secciones que reusan esta card; el color de acento se
+     *  aplica hoy desde el contenido, no desde el contenedor. */
+    accent?: string;
     border: string;
     cardBg: string;
     className?: string;
     style?: React.CSSProperties;
 }
 
-export default function ServiceCard({ children, accent, border, cardBg, className = "", style = {} }: ServiceCardProps) {
+export default function ServiceCard({ children, border, cardBg, className = "", style = {} }: ServiceCardProps) {
     return (
         <article 
             className={className}

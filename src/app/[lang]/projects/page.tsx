@@ -13,7 +13,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     }
     
     const baseUrl = "https://solvatech.com.py";
-    const title = "Completed Projects | SolvaTech Paraguay";
+    // Sin " | SolvaTech": la plantilla del layout ya lo agrega al final.
+    const title = "Completed projects for businesses in Paraguay";
     const description = "Explore websites, digital catalogs, e-commerce platforms and private systems developed by SolvaTech for businesses in Paraguay.";
 
     return {

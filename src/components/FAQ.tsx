@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 
 export default function FAQ() {
@@ -18,7 +18,7 @@ export default function FAQ() {
         textSide: "rgba(255, 255, 255, 0.6)"
     };
 
-    const faqItems = t('faq.items') as any as Array<{ q: string; a: string }>;
+    const faqItems = t('faq.items') as Array<{ q: string; a: string }>;
 
     return (
         <section id="faq" style={{ position: "relative", padding: "100px 24px", overflow: "hidden", backgroundColor: theme.bg }}>

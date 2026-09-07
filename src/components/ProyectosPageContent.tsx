@@ -9,12 +9,25 @@ import { useLanguage } from "@/context/LanguageContext";
 import { trackEvent } from "@/lib/analytics";
 import { getWhatsAppLink } from "@/lib/whatsapp";
 import { Project, projectsData } from "@/lib/projects-data";
+import type { Translate } from "@/context/LanguageContext";
 import ProjectLightbox from "./ProjectLightbox";
 import BackgroundParticles from "@/components/BackgroundParticles";
 import ScrollProgress from "@/components/ScrollProgress";
 
 const Navbar = dynamic(() => import("@/components/Navbar"), { ssr: true });
 const Footer = dynamic(() => import("@/components/Footer"), { ssr: true });
+
+/** Paleta que la página le pasa a cada tarjeta. */
+type ProjectTheme = {
+    bg: string;
+    bgCard: string;
+    bgCardHover: string;
+    accent: string;
+    accentDark: string;
+    accentGlow: string;
+    text: string;
+    textMuted: string;
+};
 
 // Tarjeta de Proyecto idéntica a la home para consistencia visual
 function ProjectPageCard({
@@ -27,9 +40,9 @@ function ProjectPageCard({
 }: {
     project: Project;
     index: number;
-    theme: any;
+    theme: ProjectTheme;
     language: string;
-    t: any;
+    t: Translate;
     onOpenLightbox: (project: Project) => void;
 }) {
     const x = useMotionValue(0);

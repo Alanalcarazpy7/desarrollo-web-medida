@@ -2,6 +2,71 @@
 
 import { useEffect, useRef } from "react";
 
+const PARTICLE_COUNT = 120; // Balance entre densidad y TBT
+const ACCENT = "#00d9ff"; // Color original del sistema
+
+/**
+ * Una partícula del fondo. Vive a nivel de módulo (no dentro del efecto) para
+ * que el compilador de React pueda optimizar el componente: las declaraciones
+ * de clase en línea hacen que se saltee la compilación.
+ */
+class Particle {
+    x: number;
+    y: number;
+    size: number;
+    speedY: number;
+    speedX: number;
+    opacity: number;
+    pulse: number;
+    pulseSpeed: number;
+
+    constructor(width: number, height: number) {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.size = Math.random() * 3 + 1.5; // Copos más grandes para visibilidad
+        this.speedY = Math.random() * 0.8 + 0.2; // Caída hacia ABAJO
+        this.speedX = (Math.random() - 0.5) * 0.3;
+        this.opacity = Math.random() * 0.6 + 0.4;
+        this.pulse = Math.random() * Math.PI;
+        this.pulseSpeed = Math.random() * 0.02 + 0.01;
+    }
+
+    update(width: number, height: number) {
+        this.y += this.speedY;
+        this.x += this.speedX;
+        this.pulse += this.pulseSpeed;
+
+        if (this.y > height + 20) {
+            this.y = -20;
+            this.x = Math.random() * width;
+        }
+        if (this.x < -20) this.x = width + 20;
+        if (this.x > width + 20) this.x = -20;
+    }
+
+    draw(ctx: CanvasRenderingContext2D) {
+        const currentOpacity = this.opacity * (0.8 + Math.sin(this.pulse) * 0.2);
+
+        ctx.save();
+
+        // Simula un brillo suave con un círculo mayor de baja opacidad (mucho más rápido que shadowBlur)
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size * 2, 0, Math.PI * 2);
+        ctx.fillStyle = ACCENT;
+        ctx.globalAlpha = currentOpacity * 0.15;
+        ctx.fill();
+
+        // Dibuja el núcleo de la partícula
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = ACCENT;
+        ctx.globalAlpha = currentOpacity;
+        ctx.fill();
+
+        ctx.restore();
+    }
+}
+
 export default function BackgroundParticles() {
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -18,69 +83,6 @@ export default function BackgroundParticles() {
 
         let animationFrameId: number;
         let particles: Particle[] = [];
-        const particleCount = 120; // Balance entre densidad y TBT
-        const theme = {
-            accent: "#00d9ff", // Color original del sistema
-            glow: "rgba(0, 217, 255, 0.5)",
-        };
-
-        class Particle {
-            x: number;
-            y: number;
-            size: number;
-            speedY: number;
-            speedX: number;
-            opacity: number;
-            pulse: number;
-            pulseSpeed: number;
-
-            constructor() {
-                this.x = Math.random() * canvas!.width;
-                this.y = Math.random() * canvas!.height;
-                this.size = Math.random() * 3 + 1.5; // Copos más grandes para visibilidad
-                this.speedY = Math.random() * 0.8 + 0.2; // Caída hacia ABAJO
-                this.speedX = (Math.random() - 0.5) * 0.3;
-                this.opacity = Math.random() * 0.6 + 0.4;
-                this.pulse = Math.random() * Math.PI;
-                this.pulseSpeed = Math.random() * 0.02 + 0.01;
-            }
-
-            update() {
-                this.y += this.speedY;
-                this.x += this.speedX;
-                this.pulse += this.pulseSpeed;
-
-                if (this.y > canvas!.height + 20) {
-                    this.y = -20;
-                    this.x = Math.random() * canvas!.width;
-                }
-                if (this.x < -20) this.x = canvas!.width + 20;
-                if (this.x > canvas!.width + 20) this.x = -20;
-            }
-
-            draw() {
-                if (!ctx) return;
-                const currentOpacity = this.opacity * (0.8 + Math.sin(this.pulse) * 0.2);
-
-                ctx.save();
-                
-                // Simula un brillo suave con un círculo mayor de baja opacidad (mucho más rápido que shadowBlur)
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size * 2, 0, Math.PI * 2);
-                ctx.fillStyle = theme.accent;
-                ctx.globalAlpha = currentOpacity * 0.15;
-                ctx.fill();
-
-                // Dibuja el núcleo de la partícula
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = theme.accent;
-                ctx.globalAlpha = currentOpacity;
-                ctx.fill();
-                
-                ctx.restore();
-            }
-        }
 
         // OJO mobile: NO se usa window.innerHeight ni 100vh. En el celular la
         // barra de direcciones aparece/desaparece con el scroll y cambia
@@ -93,7 +95,6 @@ export default function BackgroundParticles() {
         let resizeTimer: number | undefined;
 
         const applySize = () => {
-            if (!canvas) return;
             canvas.width = window.innerWidth;
             canvas.height = Math.max(window.innerHeight, document.documentElement.clientHeight || 0, 700);
         };
@@ -115,17 +116,16 @@ export default function BackgroundParticles() {
         const init = () => {
             applySize();
             particles = [];
-            for (let i = 0; i < particleCount; i++) {
-                particles.push(new Particle());
+            for (let i = 0; i < PARTICLE_COUNT; i++) {
+                particles.push(new Particle(canvas.width, canvas.height));
             }
         };
 
         const animate = () => {
-            if (!ctx || !canvas) return;
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             particles.forEach((p) => {
-                p.update();
-                p.draw();
+                p.update(canvas.width, canvas.height);
+                p.draw(ctx);
             });
             animationFrameId = requestAnimationFrame(animate);
         };

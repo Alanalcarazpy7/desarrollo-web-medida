@@ -41,6 +41,59 @@ body {
   position: relative;
 }
 
+/* ============= ACCESIBILIDAD BASE =============
+   Buena parte del sitio usa estilos inline y efectos de :hover. Estas reglas
+   garantizan el piso mínimo para quien navega con teclado o pidió menos
+   movimiento, sin tener que tocar componente por componente. */
+
+/* Foco visible en TODO lo interactivo. Varios componentes hacen
+   `outline:none` en :focus para que no aparezca al hacer clic con el mouse;
+   :focus-visible solo se dispara con teclado, así que no molesta al mouse
+   y garantiza que se vea dónde estás parado. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid #00d9ff;
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Saltear al contenido: lo primero que recibe foco con Tab. */
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: -60px;
+  z-index: 9999;
+  padding: 11px 18px;
+  border-radius: 0 0 10px 10px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #04121a;
+  background: #00d9ff;
+  text-decoration: none;
+  transition: top 0.2s;
+}
+.skip-link:focus {
+  top: 0;
+}
+
+/* Quien pidió menos movimiento no debería recibir animaciones largas ni
+   scroll animado en ninguna parte del sitio. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 /* ============= PREMIUM GRADIENTS ============= */
 .gradient-text {
   background: linear-gradient(135deg, #00d9ff 0%, #0099cc 50%, #06b6d4 100%);
@@ -687,7 +740,7 @@ body {
 .blog-article{color:#c8cfd8;font-size:17.5px;line-height:1.85}
 .blog-article > *:first-child{margin-top:0}
 
-.blog-article p{margin:0 0 1.35em;max-width:68ch}
+.blog-article p{margin:0 0 1.35em;max-width:74ch}
 .blog-article strong{color:#fff;font-weight:700}
 .blog-article a{color:#00d9ff;text-decoration:none;border-bottom:1px solid rgba(0,217,255,.35);
   transition:border-color .2s,color .2s}
@@ -707,7 +760,7 @@ body {
   font-size:clamp(1.1rem,2.6vw,1.28rem);font-weight:800;line-height:1.35;color:#00d9ff}
 
 /* listas con viñeta propia */
-.blog-article ul,.blog-article ol{margin:0 0 1.5em;padding:0;list-style:none;max-width:68ch;
+.blog-article ul,.blog-article ol{margin:0 0 1.5em;padding:0;list-style:none;max-width:74ch;
   display:flex;flex-direction:column;gap:.7em}
 .blog-article ul > li{position:relative;padding-left:30px}
 .blog-article ul > li::before{content:"";position:absolute;left:8px;top:.62em;width:7px;height:7px;border-radius:50%;
@@ -735,21 +788,26 @@ body {
 .blog-article hr{border:0;height:1px;margin:2.4em 0;
   background:linear-gradient(90deg,transparent,rgba(0,217,255,.35),transparent)}
 
-/* Layout: artículo + índice al costado */
-.blog-layout{position:relative;z-index:1}
-.blog-toc-wrap{margin:0 0 34px}
+/* Layout del artículo: contenido + panel lateral -------------------------
+   El índice ("Contenido") va inline arriba del texto, plegable. El panel
+   lateral (buscador, temas, relacionados) va fijo a la derecha en PC y
+   baja debajo del artículo en mobile. */
+.blog-wrap{max-width:1340px;margin:0 auto;padding:0 clamp(20px,5vw,32px) 100px}
+.blog-grid{display:flex;flex-direction:column;gap:40px}
+.blog-main{min-width:0}
 
-/* Índice de contenidos */
-.blog-toc{padding:18px 20px;border-radius:18px;
+/* Índice de contenidos (inline, estilo desplegable) */
+.blog-toc-inline{margin:0 0 30px}
+.blog-toc{padding:16px 18px;border-radius:16px;
   background:linear-gradient(160deg,#0e1119,#0b0f17);border:1px solid rgba(0,217,255,.2)}
 .blog-toc details{margin:0}
 .blog-toc summary{display:flex;align-items:center;gap:9px;cursor:pointer;list-style:none;
-  font-size:.7rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#00d9ff}
+  font-size:.72rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#00d9ff}
 .blog-toc summary::-webkit-details-marker{display:none}
 .blog-toc summary .chev{margin-left:auto;width:8px;height:8px;border-right:2px solid currentColor;
   border-bottom:2px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .25s}
 .blog-toc details[open] summary .chev{transform:rotate(-135deg) translateY(-2px)}
-.blog-toc ol{margin:14px 0 0;padding:0;list-style:none;counter-reset:toc;display:grid;gap:9px}
+.blog-toc ol{margin:14px 0 2px;padding:0;list-style:none;counter-reset:toc;display:grid;gap:9px}
 .blog-toc li{counter-increment:toc}
 .blog-toc a{display:flex;gap:10px;align-items:baseline;text-decoration:none;color:#c8cfd8;
   font-size:.9rem;line-height:1.45;transition:color .2s,transform .2s}
@@ -757,19 +815,66 @@ body {
   font-size:.7rem;font-weight:800;color:#00d9ff;opacity:.75}
 .blog-toc a:hover{color:#fff;transform:translateX(3px)}
 
-/* En PC el índice va a la derecha y queda fijo mientras se lee */
+/* Panel lateral */
+.blog-side{display:flex;flex-direction:column;gap:16px}
+.blog-side-card{padding:18px;border-radius:18px;
+  background:linear-gradient(160deg,rgba(14,17,25,.92),rgba(11,15,23,.92));
+  border:1px solid rgba(255,255,255,.08)}
+.blog-side-h{margin:0 0 12px;font-size:.7rem;font-weight:800;letter-spacing:.16em;
+  text-transform:uppercase;color:#00d9ff}
+
+.blog-search{display:flex;gap:8px}
+.blog-search input{flex:1;min-width:0;padding:11px 14px;border-radius:11px;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);
+  color:#fff;font-size:14px;outline:none;transition:border-color .2s,background .2s}
+.blog-search input::placeholder{color:#6b7480}
+.blog-search input:focus{border-color:rgba(0,217,255,.5);background:rgba(255,255,255,.08)}
+.blog-search button{flex-shrink:0;width:42px;border-radius:11px;border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;color:#04121a;
+  background:linear-gradient(135deg,#00d9ff,#0099cc);transition:transform .15s}
+.blog-search button:hover{transform:translateY(-1px)}
+
+.blog-topics{display:flex;flex-wrap:wrap;gap:8px}
+.blog-topic{padding:7px 13px;border-radius:999px;font-size:12.5px;font-weight:600;
+  text-decoration:none;color:#c8cfd8;background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.1);transition:color .2s,border-color .2s,background .2s}
+.blog-topic:hover{color:#00d9ff;border-color:rgba(0,217,255,.45);background:rgba(0,217,255,.1)}
+
+.blog-rel{display:flex;flex-direction:column;gap:14px}
+.blog-rel-item{display:grid;grid-template-columns:58px 1fr;gap:12px;text-decoration:none;
+  align-items:center;padding:6px;margin:-6px;border-radius:12px;transition:background .2s}
+.blog-rel-item:hover{background:rgba(255,255,255,.04)}
+.blog-rel-thumb{position:relative;width:58px;height:58px;border-radius:11px;overflow:hidden;
+  flex-shrink:0;border:1px solid rgba(255,255,255,.1)}
+.blog-rel-txt{display:flex;flex-direction:column;gap:3px;min-width:0}
+.blog-rel-cat{font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#00d9ff}
+.blog-rel-title{font-size:13.5px;font-weight:600;color:#e8eef4;line-height:1.35;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.blog-rel-meta{font-size:.68rem;color:#7b8593}
+.blog-side-all{display:inline-flex;align-items:center;gap:6px;margin-top:14px;
+  font-size:12.5px;font-weight:700;color:#00d9ff;text-decoration:none;transition:gap .2s}
+.blog-side-all:hover{gap:9px}
+
+.blog-side-cta{background:linear-gradient(160deg,rgba(0,217,255,.12),rgba(0,153,204,.06));
+  border-color:rgba(0,217,255,.28)}
+.blog-side-cta-t{margin:0 0 8px;font-size:15px;font-weight:800;color:#fff;line-height:1.35}
+.blog-side-cta-d{margin:0 0 14px;font-size:12.5px;color:#aeb7c2;line-height:1.55}
+.blog-side-cta-btn{display:block;text-align:center;padding:11px 16px;border-radius:11px;
+  font-size:13.5px;font-weight:800;text-decoration:none;color:#04121a;
+  background:linear-gradient(135deg,#00d9ff,#0099cc);transition:filter .2s}
+.blog-side-cta-btn:hover{filter:brightness(1.08)}
+
+/* En PC: dos columnas, el panel lateral fijo mientras se lee (sin scroll
+   propio: acompaña la página y se queda pegado arriba). */
 @media (min-width:1024px){
-  .blog-layout.has-toc{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:52px;align-items:start}
-  .blog-toc-wrap{order:2;margin:0;position:sticky;top:110px;max-height:calc(100vh - 150px);overflow-y:auto;
-    scrollbar-width:thin}
-  .blog-layout.has-toc .blog-article{order:1;min-width:0}
-  .blog-toc summary{cursor:default}
-  .blog-toc summary .chev{display:none}
+  .blog-grid{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:48px;align-items:start}
+  .blog-side{position:sticky;top:100px}
 }
 
 @media (max-width:640px){
   .blog-article{font-size:16.5px;line-height:1.8}
   .blog-article h2{margin-top:2.1em;padding-top:1.2em}
+  .blog-side-card{padding:16px}
 }
 
 @media (prefers-reduced-motion:reduce){.mob-hint svg{animation:none}}
@@ -929,6 +1034,95 @@ body {
 .lp-marquee-track .chip{display:flex;align-items:center;justify-content:center;flex-shrink:0;height:52px;width:140px;
   padding:10px 16px;border-radius:12px;background:#fff}
 .lp-marquee-track .chip img{max-width:100%;max-height:100%;object-fit:contain}
+
+/* Testimonio en video: prueba social en UNA fila. El video es 9:16 (vertical
+   real, 720x1280) y va a la izquierda; a la derecha el texto que convierte,
+   con los CTAs al lado del video para que se pueda escribir apenas termina.
+   La card del video reusa el lenguaje del carrusel de testimonios del sitio:
+   poster + scrim + logo del cliente + play cyan + datos abajo. */
+.lp-testimonial{position:relative;padding:clamp(58px,7.5vw,100px) 0;background:#080b10;
+  border-top:1px solid rgba(0,217,255,.12);border-bottom:1px solid rgba(255,255,255,.06);overflow:hidden}
+.lp-testimonial::before{content:"";position:absolute;left:50%;top:-60px;width:min(760px,94%);height:420px;
+  transform:translateX(-50%);pointer-events:none;
+  background:radial-gradient(ellipse at center,rgba(0,217,255,.13),transparent 70%)}
+.lp-vt-grid{position:relative;display:grid;grid-template-columns:300px minmax(0,1fr);
+  gap:clamp(26px,4.5vw,54px);align-items:center}
+
+/* --- card del video (vertical) --- */
+.lp-vt-card{position:relative;aspect-ratio:9/16;border-radius:22px;overflow:hidden;background:#04070c;
+  border:1px solid rgba(0,217,255,.3);box-shadow:0 26px 70px rgba(0,0,0,.6),0 0 46px rgba(0,217,255,.09);
+  transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s}
+.lp-vt-card:hover{transform:translateY(-5px);box-shadow:0 34px 88px rgba(0,0,0,.66),0 0 78px rgba(0,217,255,.18)}
+.lp-vt-poster{position:absolute;inset:0;width:100%;height:100%;padding:0;border:0;background:none;
+  cursor:pointer;display:block;color:inherit;font:inherit;text-align:left}
+.lp-vt-scrim{position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(4,6,10,.6) 0%,rgba(4,6,10,0) 26%,rgba(4,6,10,0) 42%,rgba(4,6,10,.6) 68%,rgba(4,6,10,.94) 100%)}
+.lp-vt-logo{position:absolute;top:12px;left:12px;width:44px;height:44px;border-radius:12px;background:#fff;
+  padding:7px;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,.45)}
+.lp-vt-logo img{width:100%;height:100%;object-fit:contain}
+.lp-vt-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:62px;height:62px;
+  border-radius:50%;display:flex;align-items:center;justify-content:center;padding-left:4px;
+  color:#04121a;background:var(--accent);box-shadow:0 0 34px rgba(0,217,255,.5),0 10px 30px rgba(0,0,0,.5);
+  transition:transform .3s cubic-bezier(.16,1,.3,1)}
+.lp-vt-play svg{width:26px;height:26px}
+.lp-vt-poster:hover .lp-vt-play{transform:translate(-50%,-50%) scale(1.1)}
+.lp-vt-info{position:absolute;left:0;right:0;bottom:0;display:flex;flex-direction:column;gap:4px;padding:16px}
+.lp-vt-info b{font-size:.95rem;font-weight:700;color:#fff;line-height:1.25;text-shadow:0 2px 10px rgba(0,0,0,.8)}
+.lp-vt-info i{font-size:.75rem;font-weight:600;font-style:normal;color:var(--accent);line-height:1.3;
+  text-shadow:0 1px 6px rgba(0,0,0,.75)}
+.lp-vt-video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000;display:block}
+.lp-vt-close{position:absolute;top:10px;right:10px;z-index:3;width:34px;height:34px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;color:#fff;
+  background:rgba(5,6,10,.72);border:1px solid rgba(255,255,255,.25);backdrop-filter:blur(6px);
+  transition:transform .2s}
+.lp-vt-close:hover{transform:scale(1.1)}
+.lp-vt-close svg{width:15px;height:15px}
+
+/* --- encabezado (siempre arriba, también en mobile) --- */
+.lp-vt-head{margin:0 0 clamp(24px,3.5vw,36px);max-width:34ch}
+.lp-vt-head .lp-eyebrow{display:inline-flex;align-items:center;gap:7px;margin:0 0 13px}
+.lp-vt-head .lp-eyebrow svg{width:14px;height:14px}
+.lp-vt-head .lp-h2{margin:0}
+.lp-vt-head .lp-h2 span{color:var(--accent);text-wrap:balance}
+
+/* --- columna de texto: solo la cita de la clienta y los CTA --- */
+.lp-vt-col-copy{display:flex;flex-direction:column}
+.lp-vt-quote{position:relative;margin:0 0 20px;padding:0 0 0 22px;max-width:46ch;
+  font-size:1.02rem;line-height:1.6;font-style:normal;color:var(--ink);
+  border-left:2px solid rgba(0,217,255,.45)}
+.lp-vt-mark{position:absolute;left:8px;top:-14px;font-size:2.4rem;line-height:1;color:var(--accent);opacity:.5}
+.lp-vt-author{display:flex;align-items:center;flex-wrap:wrap;gap:11px;margin:0 0 24px}
+.lp-vt-author img{width:42px;height:42px;flex-shrink:0;object-fit:contain;border-radius:11px;
+  padding:5px;background:#06151a;border:1px solid rgba(0,217,255,.25)}
+.lp-vt-author strong{display:block;font-size:.9rem;color:#fff;line-height:1.2}
+.lp-vt-author small{display:block;font-size:.72rem;color:var(--muted);margin-top:2px}
+.lp-vt-stars{font-size:.85rem;letter-spacing:.08em;color:#ffc94d}
+
+.lp-vt-actions{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 12px}
+.lp-vt-wa{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 20px;
+  border-radius:999px;font-size:.88rem;font-weight:800;text-decoration:none;color:var(--wa);
+  background:rgba(37,211,102,.1);border:1px solid rgba(37,211,102,.38);
+  transition:background .25s,border-color .25s,transform .25s}
+.lp-vt-wa:hover{background:rgba(37,211,102,.18);border-color:var(--wa);transform:translateY(-2px)}
+.lp-vt-wa svg{width:17px;height:17px}
+.lp-vt-note{font-size:.78rem;color:var(--muted)}
+
+/* Mobile: título (ya va arriba en el DOM), después el video, después la cita */
+@media (max-width:820px){
+  .lp-vt-head{margin-bottom:22px;max-width:none}
+  .lp-vt-grid{grid-template-columns:1fr;gap:26px;justify-items:center}
+  .lp-vt-col-video{width:100%;max-width:270px}
+  .lp-vt-col-copy{align-items:center;text-align:center}
+  .lp-vt-quote{padding:0;border-left:0;max-width:52ch;text-align:center}
+  .lp-vt-mark{display:none}
+  .lp-vt-author{justify-content:center}
+  .lp-vt-actions{justify-content:center;width:100%}
+}
+@media (max-width:520px){
+  .lp-vt-col-video{max-width:240px}
+  .lp-vt-actions{flex-direction:column}
+  .lp-vt-actions .lp-btn,.lp-vt-wa{width:100%}
+}
 @keyframes lp-scroll{to{transform:translateX(-50%)}}
 
 /* trabajos: grilla uniforme dentro del ancho */
@@ -1048,8 +1242,30 @@ body {
 .lp-f input:focus,.lp-f select:focus,.lp-f textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,217,255,.16)}
 .lp-f-row{display:flex;flex-direction:column;gap:16px}
 .lp-form-note{font-size:.76rem;color:var(--muted);text-align:center;line-height:1.5}
-.lp-form-ok{background:rgba(37,211,102,.1);border:1px solid rgba(37,211,102,.4);color:#bff2d3;border-radius:12px;
+.lp-form-ok{display:flex;align-items:center;justify-content:center;gap:8px;
+  background:rgba(37,211,102,.1);border:1px solid rgba(37,211,102,.4);color:#bff2d3;border-radius:12px;
   padding:13px 15px;font-size:.85rem;text-align:center;font-weight:600}
+.lp-form-ok svg{width:16px;height:16px;flex-shrink:0}
+
+/* Errores de validación: el campo se marca y el motivo va debajo, para que se
+   entienda QUÉ falta y no solo que "algo" está mal. */
+.lp-f-err{display:flex;align-items:flex-start;gap:6px;font-size:.78rem;line-height:1.45;
+  color:#ffb4b4;font-weight:600}
+.lp-f-err::before{content:"!";flex-shrink:0;width:15px;height:15px;margin-top:1px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-size:.66rem;font-weight:900;
+  color:#2a0b0b;background:#ff8080}
+.lp-f input[aria-invalid="true"],
+.lp-f select[aria-invalid="true"],
+.lp-f textarea[aria-invalid="true"]{border-color:rgba(255,128,128,.75);background:rgba(255,80,80,.05)}
+.lp-f input[aria-invalid="true"]:focus,
+.lp-f select[aria-invalid="true"]:focus,
+.lp-f textarea[aria-invalid="true"]:focus{border-color:#ff8080;box-shadow:0 0 0 3px rgba(255,128,128,.18)}
+.lp-form-err{background:rgba(255,90,90,.1);border:1px solid rgba(255,128,128,.42);color:#ffc9c9;
+  border-radius:12px;padding:13px 15px;font-size:.83rem;text-align:center;font-weight:600;line-height:1.5}
+.lp-form-err a{color:#fff;text-decoration:underline}
+
+/* Botón en estado de carga / deshabilitado */
+.lp-btn[disabled]{opacity:.62;cursor:progress;pointer-events:none}
 
 /* footer */
 .lp-footer{background:linear-gradient(180deg,var(--bg-panel),#080c15);border-top:3px solid transparent;

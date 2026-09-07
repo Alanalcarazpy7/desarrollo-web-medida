@@ -62,6 +62,72 @@ const IconServer = () => (
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
+/* ---------------------------------------------------------------------------
+   Formulario: validación y borrador
+   ------------------------------------------------------------------------ */
+
+/** Campos del formulario que se guardan como borrador. */
+const FORM_FIELDS = [
+  "name",
+  "business",
+  "phone",
+  "email",
+  "need",
+  "budget",
+  "timeline",
+  "details",
+] as const;
+type FormField = (typeof FORM_FIELDS)[number];
+
+const DRAFT_KEY = "solvatech:landing-lead";
+const DETAILS_MIN = 15;
+
+/**
+ * Celulares paraguayos. Se compara solo con los dígitos, así da igual que la
+ * persona escriba 0981 123 456, (0981) 123-456 o +595 981 123 456.
+ * Acepta: 9XXXXXXXX (9), 09XXXXXXXX (10) y 5959XXXXXXXX (12, con o sin 0).
+ */
+function isParaguayanPhone(raw: string) {
+  const digits = raw.replace(/\D/g, "");
+  return /^(595)?0?9\d{8}$/.test(digits);
+}
+
+function isEmail(raw: string) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(raw.trim());
+}
+
+/** Devuelve un mensaje por cada campo que falta o está mal. */
+function validateLead(values: Record<FormField, string>) {
+  const errors: Partial<Record<FormField, string>> = {};
+
+  if (!values.name.trim()) errors.name = "Poné tu nombre así sé cómo llamarte.";
+  if (!values.business.trim()) errors.business = "Contame de qué es tu negocio o rubro.";
+
+  if (!values.phone.trim()) {
+    errors.phone = "Necesito un celular para poder responderte.";
+  } else if (!isParaguayanPhone(values.phone)) {
+    errors.phone = "Ese número no parece un celular paraguayo. Ej: 0981 123 456.";
+  }
+
+  // El email es opcional, pero si lo completa tiene que ser válido.
+  if (values.email.trim() && !isEmail(values.email)) {
+    errors.email = "Revisá el correo, parece que le falta algo.";
+  }
+
+  if (!values.need) errors.need = "Elegí qué querés resolver.";
+  if (!values.budget) errors.budget = "Elegí un rango, aunque sea aproximado.";
+  if (!values.timeline) errors.timeline = "Contame para cuándo lo necesitás.";
+
+  const details = values.details.trim();
+  if (!details) {
+    errors.details = "Contame en una o dos líneas qué necesitás.";
+  } else if (details.length < DETAILS_MIN) {
+    errors.details = `Un poco más de detalle me ayuda a cotizarte bien (mínimo ${DETAILS_MIN} caracteres).`;
+  }
+
+  return errors;
+}
+
 const work = [
   {
     name: "Academia GPS",
@@ -179,8 +245,18 @@ function Reveal({
 
 export default function LandingPage() {
   const reduce = useReducedMotion();
-  const [sent, setSent] = useState(false);
   const [showSticky, setShowSticky] = useState(false);
+  // El testimonio arranca con el poster + botón de play (como el carrusel de
+  // testimonios del sitio); recién al tocar se monta el <video>.
+  const [vtPlaying, setVtPlaying] = useState(false);
+
+  // Estado del formulario. `status` cubre carga, éxito y error; `errors` marca
+  // exactamente qué campo falta.
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [errors, setErrors] = useState<Partial<Record<FormField, string>>>({});
+  const formRef = useRef<HTMLFormElement>(null);
+  const waLinkRef = useRef<string>("");
+  const sent = status === "sent";
   const sentinelRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
 
@@ -260,25 +336,103 @@ export default function LandingPage() {
     };
   }, []);
 
+  // Lee todos los campos del form como texto plano.
+  function readForm(el: HTMLFormElement) {
+    const data = new FormData(el);
+    const values = {} as Record<FormField, string>;
+    FORM_FIELDS.forEach((k) => {
+      const v = data.get(k);
+      values[k] = typeof v === "string" ? v : "";
+    });
+    return values;
+  }
+
+  /** Guarda lo escrito por si la persona recarga o vuelve atrás. */
+  function saveDraft() {
+    const el = formRef.current;
+    if (!el) return;
+    try {
+      sessionStorage.setItem(DRAFT_KEY, JSON.stringify(readForm(el)));
+    } catch {
+      // Modo incógnito o storage lleno: el borrador es un extra, no rompe nada.
+    }
+  }
+
+  // Restaura el borrador escribiendo directo en el DOM. El formulario queda no
+  // controlado a propósito: así no hay desajuste de hidratación (el servidor
+  // renderiza vacío) ni un setState dentro del efecto.
+  useEffect(() => {
+    const el = formRef.current;
+    if (!el) return;
+    try {
+      const raw = sessionStorage.getItem(DRAFT_KEY);
+      if (!raw) return;
+      const draft = JSON.parse(raw) as Partial<Record<FormField, string>>;
+      FORM_FIELDS.forEach((k) => {
+        const value = draft[k];
+        if (typeof value !== "string" || !value) return;
+        const field = el.elements.namedItem(k);
+        if (field instanceof HTMLInputElement || field instanceof HTMLTextAreaElement || field instanceof HTMLSelectElement) {
+          field.value = value;
+        }
+      });
+    } catch {
+      // Borrador corrupto: se ignora y se arranca en limpio.
+    }
+  }, []);
+
   function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const f = new FormData(e.currentTarget);
+    // Anti doble envío: si ya se está mandando, no se hace nada.
+    if (status === "sending") return;
+
+    const el = e.currentTarget;
+    const values = readForm(el);
+    const found = validateLead(values);
+    setErrors(found);
+
+    const firstBad = FORM_FIELDS.find((k) => found[k]);
+    if (firstBad) {
+      const field = el.elements.namedItem(firstBad);
+      if (field instanceof HTMLElement) field.focus();
+      setStatus("idle");
+      return;
+    }
+
+    setStatus("sending");
+
     const message = `Hola, vi la página de SolvaTech y quiero una página web para mi negocio.
 
-Nombre: ${f.get("name")}
-Negocio: ${f.get("business")}
-Qué necesito: ${f.get("need")}
-Presupuesto: ${f.get("budget")}
-Para cuándo: ${f.get("timeline")}
-Detalle: ${f.get("details") || "Sin detalle"}`;
-    trackEvent("landing_qualified_lead", {
-      source: "ads",
-      need: String(f.get("need")),
-      budget: String(f.get("budget")),
-      timeline: String(f.get("timeline")),
-    });
-    window.open(getWhatsAppLink(message), "_blank", "noopener,noreferrer");
-    setSent(true);
+Nombre: ${values.name}
+Negocio: ${values.business}
+Celular: ${values.phone}${values.email ? `\nCorreo: ${values.email}` : ""}
+Qué necesito: ${values.need}
+Presupuesto: ${values.budget}
+Para cuándo: ${values.timeline}
+Detalle: ${values.details}`;
+
+    const link = getWhatsAppLink(message);
+    waLinkRef.current = link;
+
+    try {
+      trackEvent("landing_qualified_lead", {
+        source: "ads",
+        need: values.need,
+        budget: values.budget,
+        timeline: values.timeline,
+      });
+      const win = window.open(link, "_blank", "noopener,noreferrer");
+      // Si el navegador bloqueó la pestaña, se avisa y se ofrece el enlace.
+      if (!win) throw new Error("popup-blocked");
+      try {
+        sessionStorage.removeItem(DRAFT_KEY);
+      } catch {
+        // sin storage no hay nada que limpiar
+      }
+      setStatus("sent");
+    } catch {
+      setStatus("error");
+    }
   }
 
   const heroStagger = {
@@ -428,6 +582,131 @@ Detalle: ${f.get("details") || "Sin detalle"}`;
                 </span>
               ))}
           </div>
+        </div>
+      </section>
+
+      {/* TESTIMONIO REAL */}
+      <section className="lp-testimonial" id="testimonio">
+        {/* El título va SIEMPRE arriba (también en mobile, donde antes el video
+            aparecía primero y el título quedaba colgado abajo). */}
+        <div className="lp-wrap">
+          <Reveal className="lp-vt-head">
+            <span className="lp-eyebrow">
+              <IconWa /> Cliente real
+            </span>
+            <h2 className="lp-h2">
+              No te lo cuento yo. <span>Te lo cuenta una clienta.</span>
+            </h2>
+          </Reveal>
+        </div>
+
+        <div className="lp-wrap lp-vt-grid">
+          {/* Izquierda: el video vertical (9:16) */}
+          <Reveal className="lp-vt-col-video">
+            <div className="lp-vt-card">
+              {vtPlaying ? (
+                <>
+                  <video
+                    className="lp-vt-video"
+                    src="/videos/academia-gps.mp4"
+                    poster="/videos/academia-gps-poster.jpg"
+                    controls
+                    autoPlay
+                    playsInline
+                    preload="metadata"
+                  />
+                  <button
+                    type="button"
+                    className="lp-vt-close"
+                    onClick={() => setVtPlaying(false)}
+                    aria-label="Cerrar video"
+                  >
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden="true">
+                      <path d="M6 6l12 12M18 6L6 18" strokeLinecap="round" />
+                    </svg>
+                  </button>
+                </>
+              ) : (
+                <button
+                  type="button"
+                  className="lp-vt-poster"
+                  onClick={() => {
+                    setVtPlaying(true);
+                    trackEvent("landing_testimonial_play", { project: "Academia GPS" });
+                  }}
+                  aria-label="Reproducir el testimonio en video de Academia GPS"
+                >
+                  <Image
+                    src="/videos/academia-gps-poster.jpg"
+                    alt=""
+                    fill
+                    sizes="(min-width:900px) 340px, 80vw"
+                    style={{ objectFit: "cover" }}
+                  />
+                  <span className="lp-vt-scrim" aria-hidden />
+                  <span className="lp-vt-logo" aria-hidden>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src="/projects/academia-gps-logo.svg" alt="" />
+                  </span>
+                  <span className="lp-vt-play" aria-hidden>
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                  </span>
+                  <span className="lp-vt-info" aria-hidden>
+                    <b>Academia GPS</b>
+                    <i>La Trilogía TOL · Educación online</i>
+                  </span>
+                </button>
+              )}
+            </div>
+          </Reveal>
+
+          {/* Derecha: lo que dijo la clienta, y nada más */}
+          <Reveal className="lp-vt-col-copy" delay={0.08}>
+            <blockquote className="lp-vt-quote">
+              <span className="lp-vt-mark" aria-hidden>
+                &ldquo;
+              </span>
+              Excelente trabajo en el desarrollo de la página promocional. El diseño es limpio,
+              ordenado y facilita una navegación ágil para los interesados. Una propuesta estética
+              impecable que representa muy bien el nivel de nuestros cursos.
+            </blockquote>
+
+            <div className="lp-vt-author">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/projects/academia-gps-logo.svg" alt="Logo de Academia GPS" />
+              <span>
+                <strong>Academia GPS</strong>
+                <small>La Trilogía TOL · Educación online</small>
+              </span>
+              <span className="lp-vt-stars" role="img" aria-label="5 de 5 estrellas">
+                ★★★★★
+              </span>
+            </div>
+
+            <div className="lp-vt-actions">
+              <a
+                className="lp-btn"
+                href="#formulario"
+                onClick={() => trackEvent("landing_cta_click", { source: "testimonial" })}
+              >
+                Quiero una página así <IconArrow />
+              </a>
+              <a
+                className="lp-vt-wa"
+                href={getWhatsAppLink(
+                  "Hola, vi el testimonio de Academia GPS y quiero una página así para mi negocio."
+                )}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackEvent("landing_cta_click", { source: "testimonial_wa" })}
+              >
+                <IconWa /> Escribime por WhatsApp
+              </a>
+            </div>
+            <span className="lp-vt-note">Te respondo yo mismo, normalmente el mismo día.</span>
+          </Reveal>
         </div>
       </section>
 
@@ -630,12 +909,31 @@ Detalle: ${f.get("details") || "Sin detalle"}`;
             </Reveal>
 
             <Reveal delay={0.06}>
-              <form className="lp-form" onSubmit={submit}>
+              <form
+                className="lp-form"
+                onSubmit={submit}
+                onInput={saveDraft}
+                onChange={saveDraft}
+                noValidate
+                ref={formRef}
+              >
                 <div className="lp-f">
                   <label htmlFor="lp-name">
                     Tu nombre <i>*</i>
                   </label>
-                  <input id="lp-name" name="name" required placeholder="Ej. María González" />
+                  <input
+                    id="lp-name"
+                    name="name"
+                    autoComplete="name"
+                    placeholder="Ej. María González"
+                    aria-invalid={Boolean(errors.name)}
+                    aria-describedby={errors.name ? "err-name" : undefined}
+                  />
+                  {errors.name && (
+                    <p className="lp-f-err" id="err-name">
+                      {errors.name}
+                    </p>
+                  )}
                 </div>
                 <div className="lp-f">
                   <label htmlFor="lp-business">
@@ -644,15 +942,70 @@ Detalle: ${f.get("details") || "Sin detalle"}`;
                   <input
                     id="lp-business"
                     name="business"
-                    required
+                    autoComplete="organization"
                     placeholder="Ej. peluquería, gimnasio, estudio contable"
+                    aria-invalid={Boolean(errors.business)}
+                    aria-describedby={errors.business ? "err-business" : undefined}
                   />
+                  {errors.business && (
+                    <p className="lp-f-err" id="err-business">
+                      {errors.business}
+                    </p>
+                  )}
+                </div>
+                <div className="lp-f-row">
+                  <div className="lp-f">
+                    <label htmlFor="lp-phone">
+                      Tu celular <i>*</i>
+                    </label>
+                    <input
+                      id="lp-phone"
+                      name="phone"
+                      type="tel"
+                      inputMode="tel"
+                      autoComplete="tel"
+                      placeholder="Ej. 0981 123 456"
+                      aria-invalid={Boolean(errors.phone)}
+                      aria-describedby={errors.phone ? "err-phone" : undefined}
+                    />
+                    {errors.phone && (
+                      <p className="lp-f-err" id="err-phone">
+                        {errors.phone}
+                      </p>
+                    )}
+                  </div>
+                  <div className="lp-f">
+                    <label htmlFor="lp-email">
+                      Tu correo <em>(opcional)</em>
+                    </label>
+                    <input
+                      id="lp-email"
+                      name="email"
+                      type="email"
+                      inputMode="email"
+                      autoComplete="email"
+                      placeholder="Ej. maria@tunegocio.com"
+                      aria-invalid={Boolean(errors.email)}
+                      aria-describedby={errors.email ? "err-email" : undefined}
+                    />
+                    {errors.email && (
+                      <p className="lp-f-err" id="err-email">
+                        {errors.email}
+                      </p>
+                    )}
+                  </div>
                 </div>
                 <div className="lp-f">
                   <label htmlFor="lp-need">
                     ¿Qué querés resolver? <i>*</i>
                   </label>
-                  <select id="lp-need" name="need" required defaultValue="">
+                  <select
+                    id="lp-need"
+                    name="need"
+                    defaultValue=""
+                    aria-invalid={Boolean(errors.need)}
+                    aria-describedby={errors.need ? "err-need" : undefined}
+                  >
                     <option value="" disabled>
                       Elegí una opción
                     </option>
@@ -663,13 +1016,24 @@ Detalle: ${f.get("details") || "Sin detalle"}`;
                     <option>Un sistema para mi negocio: reservas, stock, clientes o pedidos</option>
                     <option>No sé qué me conviene, quiero que me asesores</option>
                   </select>
+                  {errors.need && (
+                    <p className="lp-f-err" id="err-need">
+                      {errors.need}
+                    </p>
+                  )}
                 </div>
                 <div className="lp-f-row">
                   <div className="lp-f">
                     <label htmlFor="lp-budget">
                       ¿Cuánto pensás invertir? <i>*</i>
                     </label>
-                    <select id="lp-budget" name="budget" required defaultValue="">
+                    <select
+                      id="lp-budget"
+                      name="budget"
+                      defaultValue=""
+                      aria-invalid={Boolean(errors.budget)}
+                      aria-describedby={errors.budget ? "err-budget" : undefined}
+                    >
                       <option value="" disabled>
                         Elegí un rango
                       </option>
@@ -679,12 +1043,23 @@ Detalle: ${f.get("details") || "Sin detalle"}`;
                       <option>Más de Gs. 5.000.000</option>
                       <option>Todavía no lo tengo definido</option>
                     </select>
+                    {errors.budget && (
+                      <p className="lp-f-err" id="err-budget">
+                        {errors.budget}
+                      </p>
+                    )}
                   </div>
                   <div className="lp-f">
                     <label htmlFor="lp-timeline">
                       ¿Para cuándo? <i>*</i>
                     </label>
-                    <select id="lp-timeline" name="timeline" required defaultValue="">
+                    <select
+                      id="lp-timeline"
+                      name="timeline"
+                      defaultValue=""
+                      aria-invalid={Boolean(errors.timeline)}
+                      aria-describedby={errors.timeline ? "err-timeline" : undefined}
+                    >
                       <option value="" disabled>
                         Elegí una opción
                       </option>
@@ -693,26 +1068,62 @@ Detalle: ${f.get("details") || "Sin detalle"}`;
                       <option>En 1 a 3 meses</option>
                       <option>Solo estoy averiguando</option>
                     </select>
+                    {errors.timeline && (
+                      <p className="lp-f-err" id="err-timeline">
+                        {errors.timeline}
+                      </p>
+                    )}
                   </div>
                 </div>
                 <div className="lp-f">
                   <label htmlFor="lp-details">
-                    Algo más que quieras contarme <em>(opcional)</em>
+                    Contame qué necesitás <i>*</i>
                   </label>
                   <textarea
                     id="lp-details"
                     name="details"
-                    placeholder="Qué vendés o qué servicio ofrecés, y qué te gustaría lograr."
+                    placeholder="Qué vendés o qué servicio ofrecés, y qué te gustaría lograr con la página."
+                    aria-invalid={Boolean(errors.details)}
+                    aria-describedby={errors.details ? "err-details" : undefined}
                   />
+                  {errors.details && (
+                    <p className="lp-f-err" id="err-details">
+                      {errors.details}
+                    </p>
+                  )}
                 </div>
-                <button type="submit" className="lp-btn block">
-                  {sent ? "Reenviar por WhatsApp" : "Enviar y hablar por WhatsApp"} <IconWa />
+                <button type="submit" className="lp-btn block" disabled={status === "sending"}>
+                  {status === "sending"
+                    ? "Abriendo WhatsApp..."
+                    : sent
+                      ? "Reenviar por WhatsApp"
+                      : "Enviar y hablar por WhatsApp"}{" "}
+                  <IconWa />
                 </button>
+
                 {sent && (
-                  <p className="lp-form-ok">
-                    Listo. Se abrió WhatsApp con tus datos. Si no se abrió, tocá el botón otra vez.
+                  <p className="lp-form-ok" role="status">
+                    <IconCheck /> Listo. Se abrió WhatsApp con tus datos. Si no se abrió, tocá el
+                    botón otra vez.
                   </p>
                 )}
+
+                {status === "error" && (
+                  <p className="lp-form-err" role="alert">
+                    No se pudo abrir WhatsApp (puede ser el bloqueador de ventanas del navegador).{" "}
+                    <a href={waLinkRef.current || getWhatsAppLink("Hola, quiero una página web para mi negocio.")} target="_blank" rel="noopener noreferrer">
+                      Abrí el chat desde acá
+                    </a>
+                    .
+                  </p>
+                )}
+
+                {Object.keys(errors).length > 0 && status !== "sent" && (
+                  <p className="lp-form-err" role="alert">
+                    Revisá los campos marcados y volvé a enviar.
+                  </p>
+                )}
+
                 <p className="lp-form-note">
                   Se abre WhatsApp con tus datos ya cargados. Sin llamadas automáticas ni spam.
                 </p>

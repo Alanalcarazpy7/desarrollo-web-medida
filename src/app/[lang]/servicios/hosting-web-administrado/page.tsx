@@ -25,8 +25,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const path = "/servicios/hosting-web-administrado";
 
     const title = isEs
-      ? "Hosting Web Administrado en Paraguay | SolvaTech"
-      : "Managed Web Hosting in Paraguay | SolvaTech";
+      ? "Hosting Web Administrado en Paraguay"
+      : "Managed Web Hosting in Paraguay";
     const description = isEs
       ? "Hosting web administrado, rápido y seguro en Paraguay. Servidor SSD NVMe, SSL gratis, backups semanales y soporte técnico local. Vos no te preocupás del servidor."
       : "Fast, secure managed web hosting in Paraguay. SSD NVMe server, free SSL, weekly backups, and local technical support. You don't have to worry about the server.";
@@ -44,7 +44,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             }
         },
         openGraph: {
-            title,
+            title: `${title} | SolvaTech`,
             description,
             url: `${baseUrl}/${lang}${path}`,
             locale: isEs ? "es_PY" : "en_US",

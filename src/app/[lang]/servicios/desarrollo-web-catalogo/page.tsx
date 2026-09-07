@@ -24,8 +24,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const path = "/servicios/desarrollo-web-catalogo";
     
     const title = isEs 
-      ? "Catálogo Digital y Menú Online en Paraguay | SolvaTech"
-      : "Digital Catalog & Online Menu in Paraguay | SolvaTech";
+      ? "Catálogo Digital y Menú Online en Paraguay"
+      : "Digital Catalog & Online Menu in Paraguay";
     const description = isEs
       ? "Desarrollo de catálogos digitales interactivos y menús online con conexión directa a pedidos por WhatsApp en Paraguay. Ideal para tiendas y comidas."
       : "Interactive digital catalogs and online menus with direct WhatsApp ordering in Paraguay. Ideal for stores and restaurants.";
@@ -43,7 +43,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             }
         },
         openGraph: {
-            title,
+            title: `${title} | SolvaTech`,
             description,
             url: `${baseUrl}/${lang}${path}`,
             locale: isEs ? "es_PY" : "en_US",

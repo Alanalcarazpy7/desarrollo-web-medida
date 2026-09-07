@@ -24,8 +24,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const path = "/servicios/posicionamiento-google";
     
     const title = isEs 
-      ? "Posicionamiento SEO en Google y Maps en Paraguay | SolvaTech"
-      : "Google SEO & Google Maps Ranking in Paraguay | SolvaTech";
+      ? "Posicionamiento SEO en Google y Maps en Paraguay"
+      : "Google SEO & Google Maps Ranking in Paraguay";
     const description = isEs
       ? "Servicio de posicionamiento orgánico (SEO local) en Google y Google Maps para negocios en Paraguay. Aparecé primero en las búsquedas y atraé clientes."
       : "Search engine optimization (local SEO) on Google and Google Maps for businesses in Paraguay. Get ranked first in searches and attract clients.";
@@ -43,7 +43,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             }
         },
         openGraph: {
-            title,
+            title: `${title} | SolvaTech`,
             description,
             url: `${baseUrl}/${lang}${path}`,
             locale: isEs ? "es_PY" : "en_US",

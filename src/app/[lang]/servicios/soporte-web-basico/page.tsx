@@ -25,8 +25,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const path = "/servicios/soporte-web-basico";
     
     const title = isEs 
-      ? "Soporte Web Básico y Mantenimiento en Paraguay | SolvaTech"
-      : "Basic Web Support & Maintenance in Paraguay | SolvaTech";
+      ? "Soporte Web Básico y Mantenimiento en Paraguay"
+      : "Basic Web Support & Maintenance in Paraguay";
     const description = isEs
       ? "Servicio de soporte web básico y actualizaciones de contenido mensual para páginas web en Paraguay. Cambios rápidos, ajustes de diseño y seguridad básica."
       : "Basic web support service and monthly content updates for websites in Paraguay. Fast revisions, design tweaks, and basic security.";
@@ -44,7 +44,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             }
         },
         openGraph: {
-            title,
+            title: `${title} | SolvaTech`,
             description,
             url: `${baseUrl}/${lang}${path}`,
             locale: isEs ? "es_PY" : "en_US",

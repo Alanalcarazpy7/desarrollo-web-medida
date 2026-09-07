@@ -25,8 +25,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const path = "/servicios/dominio-configuracion-web";
 
     const title = isEs
-      ? "Registro de Dominio y Configuración Web en Paraguay | SolvaTech"
-      : "Domain Registration & Web Setup in Paraguay | SolvaTech";
+      ? "Registro de Dominio y Configuración Web en Paraguay"
+      : "Domain Registration & Web Setup in Paraguay";
     const description = isEs
       ? "Registro de dominios profesionales (incluyendo .com.py), configuración de DNS y correos corporativos. Dejamos tu web lista y funcionando desde el día uno."
       : "Professional domain registration (including .com.py), DNS setup, and corporate email. We leave your website ready and working from day one.";
@@ -44,7 +44,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             }
         },
         openGraph: {
-            title,
+            title: `${title} | SolvaTech`,
             description,
             url: `${baseUrl}/${lang}${path}`,
             locale: isEs ? "es_PY" : "en_US",

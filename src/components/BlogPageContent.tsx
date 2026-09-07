@@ -16,10 +16,22 @@ const SnowEffect = dynamic(() => import("@/components/SnowEffect"), {
 
 const Footer = dynamic(() => import("@/components/Footer"), { ssr: true });
 
-export default function BlogPageContent() {
+/**
+ * Los artículos enlazan a /blog?q=... y /blog?cat=... desde su panel lateral.
+ * Esos valores llegan ya resueltos desde el server component (page.tsx), así
+ * el listado se renderiza filtrado de entrada: sin efecto de sincronización,
+ * sin parpadeo y con el HTML correcto para el buscador.
+ */
+export default function BlogPageContent({
+    initialQuery = "",
+    initialCategory = "all",
+}: {
+    initialQuery?: string;
+    initialCategory?: string;
+}) {
     const { language } = useLanguage();
-    const [searchTerm, setSearchTerm] = useState("");
-    const [selectedCategory, setSelectedCategory] = useState("all");
+    const [searchTerm, setSearchTerm] = useState(initialQuery);
+    const [selectedCategory, setSelectedCategory] = useState(initialCategory);
 
     const theme = {
         accent: "#00d9ff",
@@ -46,7 +58,10 @@ export default function BlogPageContent() {
                 excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
                 category.toLowerCase().includes(searchTerm.toLowerCase());
             
-            const matchesCategory = selectedCategory === "all" || category === selectedCategory;
+            const matchesCategory = selectedCategory === "all" ||
+                category === selectedCategory ||
+                post.category === selectedCategory ||
+                post.categoryEn === selectedCategory;
             
             return matchesSearch && matchesCategory;
         });

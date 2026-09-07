@@ -2,7 +2,6 @@ import Navbar from "@/components/Navbar";
 import BackgroundParticles from "@/components/BackgroundParticles";
 import ScrollProgress from "@/components/ScrollProgress";
 import HomeClient from "@/components/HomeClient";
-import dynamic from "next/dynamic";
 
 import { Metadata } from "next";
 
@@ -16,16 +15,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const isEs = lang === 'es';
 
-  const title = isEs 
-    ? "Desarrollo Web en Paraguay | Páginas Web y Sistemas a Medida | SolvaTech"
-    : "Custom Web Development & Software Agency | SolvaTech";
-  
+  // OJO SEO: el término de cabecera "Desarrollo Web en Paraguay" lo trabaja
+  // /servicios/desarrollo-web-paraguay, que es la página principal para la
+  // búsqueda general. Antes la home usaba EXACTAMENTE el mismo title y las dos
+  // competían por la misma query. Acá el title arranca por la marca y agrupa
+  // la oferta; la home sigue siendo relevante para Paraguay sin canibalizar.
+  const title = isEs
+    ? "SolvaTech | Páginas Web, Tiendas Online y Sistemas a Medida en Paraguay"
+    : "Custom Web Development & Software Agency";
+
   const description = isEs
-    ? "Agencia de desarrollo web en Paraguay (Asunción, Areguá y todo el país). Creamos páginas web, landing pages y software a medida. ¡Aumentá tus ventas hoy!"
+    ? "Estudio paraguayo de páginas web, landing pages, catálogos y software a medida. Trabajás directo con quien desarrolla, sin intermediarios. Pedí tu presupuesto."
     : "Premium web development and custom software solutions. We build high-performance websites, landing pages, and web apps for global businesses.";
-    
+
   const keywords = isEs
-    ? ["desarrollo web en paraguay", "paginas web paraguay", "landing page paraguay", "desarrollo web aregua", "diseño web asuncion", "software a medida paraguay", "agencia de software paraguay"]
+    ? ["solvatech", "paginas web paraguay", "tienda online paraguay", "catalogo digital paraguay", "software a medida paraguay", "agencia de software paraguay"]
     : ["custom web development", "software agency", "high performance websites", "custom web apps", "landing page design", "nextjs developers"];
 
   return {
@@ -33,7 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description,
     keywords,
     openGraph: {
-      title,
+      title: `${title} | SolvaTech`,
       description,
       url: `${baseUrl}/${lang}`,
       siteName: "SolvaTech",

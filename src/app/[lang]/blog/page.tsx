@@ -3,6 +3,7 @@ import BlogPageContent from '@/components/BlogPageContent';
 
 type Props = {
     params: Promise<{ lang: string }>;
+    searchParams: Promise<{ q?: string; cat?: string }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -29,6 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
 }
 
-export default function BlogPage() {
-    return <BlogPageContent />;
+export default async function BlogPage({ searchParams }: Props) {
+    const { q, cat } = await searchParams;
+    return <BlogPageContent initialQuery={q ?? ''} initialCategory={cat ?? 'all'} />;
 }

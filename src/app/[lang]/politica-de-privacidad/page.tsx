@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const baseUrl = "https://solvatech.com.py";
     const path = "/politica-de-privacidad";
 
-    const title = isEs ? "Política de Privacidad | SolvaTech" : "Privacy Policy | SolvaTech";
+    const title = isEs ? "Política de Privacidad" : "Privacy Policy";
     const description = isEs
         ? "Cómo SolvaTech recopila, usa y protege tus datos personales, incluyendo el uso de cookies."
         : "How SolvaTech collects, uses, and protects your personal data, including our use of cookies.";
