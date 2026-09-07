@@ -395,9 +395,26 @@ export default function LandingPage() {
     if (firstBad) {
       const field = el.elements.namedItem(firstBad);
       if (field instanceof HTMLElement) field.focus();
+      // Sirve para ver en qué campo se traba la gente. Solo el NOMBRE del
+      // campo, nunca lo que escribió.
+      trackEvent("landing_form_invalid", { first_error: firstBad });
       setStatus("idle");
       return;
     }
+
+    // CONVERSIÓN: el formulario pasó la validación. Este es uno de los eventos
+    // a marcar como conversión en Analytics y Ads. Van solo datos categóricos
+    // (qué necesita, rango de presupuesto, plazo). Nombre, celular, correo y
+    // detalle NO se envían: viajan únicamente por WhatsApp.
+    trackEvent("landing_form_valid", {
+      need: values.need,
+      budget: values.budget,
+      timeline: values.timeline,
+      // Solo si dejó o no un contacto alternativo, no el dato en sí. Se evita
+      // la palabra "email" en la clave porque el filtro anti datos personales
+      // de trackEvent descarta cualquier propiedad que la contenga.
+      secondary_contact: values.email ? "yes" : "no",
+    });
 
     setStatus("sending");
 
@@ -424,6 +441,9 @@ Detalle: ${values.details}`;
       const win = window.open(link, "_blank", "noopener,noreferrer");
       // Si el navegador bloqueó la pestaña, se avisa y se ofrece el enlace.
       if (!win) throw new Error("popup-blocked");
+      // CONVERSIÓN: se abrió WhatsApp de verdad. Es el evento más cercano a
+      // "consulta enviada" y el que conviene optimizar en Ads.
+      trackEvent("landing_whatsapp_open", { source: "form" });
       try {
         sessionStorage.removeItem(DRAFT_KEY);
       } catch {
@@ -700,7 +720,10 @@ Detalle: ${values.details}`;
                 )}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => trackEvent("landing_cta_click", { source: "testimonial_wa" })}
+                onClick={() => {
+                  trackEvent("landing_cta_click", { source: "testimonial_wa" });
+                  trackEvent("landing_whatsapp_open", { source: "testimonial" });
+                }}
               >
                 <IconWa /> Escribime por WhatsApp
               </a>
@@ -1161,7 +1184,10 @@ Detalle: ${values.details}`;
               href={getWhatsAppLink("Hola, quiero consultar por una página web para mi negocio.")}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => trackEvent("landing_cta_click", { source: "footer" })}
+              onClick={() => {
+                trackEvent("landing_cta_click", { source: "footer" });
+                trackEvent("landing_whatsapp_open", { source: "footer" });
+              }}
             >
               <IconWa /> WhatsApp
             </a>

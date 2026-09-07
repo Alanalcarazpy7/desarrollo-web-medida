@@ -5,6 +5,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { LanguageProvider } from "@/context/LanguageContext";
 import Script from "next/script";
 import SmoothAnchors from "@/components/SmoothAnchors";
+import AttributionTracker from "@/components/AttributionTracker";
 import "../globals.css";
 
 const inter = Inter({
@@ -160,6 +161,7 @@ export default async function RootLayout({
             dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
           />
           <SmoothAnchors />
+          <AttributionTracker />
           {/* Primer elemento enfocable: deja saltar el navbar con el teclado. */}
           <a className="skip-link" href="#contenido">
             {lang === "en" ? "Skip to content" : "Saltar al contenido"}

@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import { Project, projectsData } from "@/lib/projects-data";
+import { getProjectCase } from "@/lib/project-cases";
 import { testimonialsData } from "@/lib/testimonials-data";
 import { getWhatsAppLink } from "@/lib/whatsapp";
 import RelatedArticles from "@/components/RelatedArticles";
@@ -85,6 +86,7 @@ export default function ProjectCaseContent({
     const isEs = lang === "es";
     const tr = project.translations[lang] ?? project.translations.es;
     const listPath = isEs ? `/${lang}/proyectos` : `/${lang}/projects`;
+    const kase = getProjectCase(project.slug);
 
     // Solo se muestra el testimonio si el cliente lo autorizó de verdad.
     const testimonialId = TESTIMONIAL_BY_SLUG[project.slug];
@@ -195,10 +197,44 @@ export default function ProjectCaseContent({
                     )}
                 </div>
 
+                {/* El punto de partida */}
+                {kase && (
+                    <section className="pc-block">
+                        <span className="pc-step">{isEs ? "01 · El punto de partida" : "01 · The starting point"}</span>
+                        <h2>{isEs ? "Qué necesitaba el negocio" : "What the business needed"}</h2>
+                        <p className="pc-text">{kase.situation[lang]}</p>
+                    </section>
+                )}
+
+                {/* Cómo se resolvió */}
+                {kase && (
+                    <section className="pc-block">
+                        <span className="pc-step">{isEs ? "02 · La solución" : "02 · The solution"}</span>
+                        <h2>{isEs ? "Cómo se resolvió" : "How it was solved"}</h2>
+                        <ol className="pc-steps">
+                            {kase.approach[lang].map((line, i) => (
+                                <li key={line}>
+                                    <span className="pc-steps-n">{String(i + 1).padStart(2, "0")}</span>
+                                    <span>{line}</span>
+                                </li>
+                            ))}
+                        </ol>
+                    </section>
+                )}
+
+                {/* Resultado: solo si el cliente confirmó un dato real */}
+                {kase?.result && (
+                    <section className="pc-block">
+                        <span className="pc-step">{isEs ? "03 · El resultado" : "03 · The result"}</span>
+                        <h2>{isEs ? "Qué cambió después" : "What changed afterwards"}</h2>
+                        <p className="pc-text">{kase.result[lang]}</p>
+                    </section>
+                )}
+
                 {/* Qué se hizo */}
                 {project.technologies.length > 0 && (
                     <section className="pc-block">
-                        <h2>{isEs ? "Qué se hizo" : "What was built"}</h2>
+                        <h2>{isEs ? "Qué incluye el proyecto" : "What the project includes"}</h2>
                         <ul className="pc-did">
                             {project.technologies.map((item) => (
                                 <li key={item}>
@@ -253,38 +289,61 @@ export default function ProjectCaseContent({
 
                 {/* Otros proyectos del mismo tipo */}
                 {others.length > 0 && (
-                    <section className="pc-block">
-                        <h2>{isEs ? "Otros proyectos parecidos" : "Other similar projects"}</h2>
+                    <section className="pc-block pc-more">
+                        <div className="pc-more-head">
+                            <div>
+                                <span className="pc-step">
+                                    {CATEGORY_LABEL[project.categoryKey][lang]}
+                                </span>
+                                <h2>{isEs ? "Otros proyectos parecidos" : "Other similar projects"}</h2>
+                                <p className="pc-more-sub">
+                                    {isEs
+                                        ? "Trabajos del mismo tipo, para que veas más ejemplos antes de decidir."
+                                        : "Projects of the same kind, so you can see more examples before deciding."}
+                                </p>
+                            </div>
+                            <Link href={listPath} className="pc-all pc-all-top">
+                                {isEs ? "Ver todos" : "See all"} <IconArrow />
+                            </Link>
+                        </div>
+
                         <div className="pc-others">
-                            {others.map((other) => {
+                            {others.map((other, i) => {
                                 const otherTr = other.translations[lang] ?? other.translations.es;
                                 const href = isEs
                                     ? `/${lang}/proyectos/${other.slug}`
                                     : `/${lang}/projects/${other.slug}`;
                                 return (
-                                    <Link key={other.slug} href={href} className="pc-other">
+                                    <Link
+                                        key={other.slug}
+                                        href={href}
+                                        className="pc-other"
+                                        style={{ animationDelay: `${i * 90}ms` }}
+                                    >
                                         <span className="pc-other-thumb">
                                             <Image
                                                 src={other.image}
                                                 alt=""
                                                 fill
                                                 sizes="(min-width:900px) 320px, 100vw"
-                                                style={{ objectFit: "cover" }}
+                                                style={{ objectFit: "cover", objectPosition: "top" }}
                                             />
-                                        </span>
-                                        <span className="pc-other-body">
+                                            <span className="pc-other-veil" aria-hidden />
                                             <span className="pc-other-cat">
                                                 {CATEGORY_LABEL[other.categoryKey][lang]}
                                             </span>
+                                        </span>
+                                        <span className="pc-other-body">
                                             <span className="pc-other-title">{otherTr.title}</span>
+                                            <span className="pc-other-desc">{otherTr.description}</span>
+                                            <span className="pc-other-go">
+                                                {isEs ? "Ver el caso" : "View the case"} <IconArrow />
+                                            </span>
                                         </span>
                                     </Link>
                                 );
                             })}
                         </div>
-                        <Link href={listPath} className="pc-all">
-                            {isEs ? "Ver todos los proyectos" : "See all projects"} <IconArrow />
-                        </Link>
                     </section>
                 )}
             </div>

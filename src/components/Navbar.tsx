@@ -17,6 +17,14 @@ import Image from "next/image";
 // que el menú se va y vuelve al tocar un enlace.
 let navbarHasAnimatedIn = false;
 
+/**
+ * Alto que ocupa el navbar fijo. Lo usan las DOS cosas que tienen que estar de
+ * acuerdo: dónde se deja el scroll al ir a un ancla (goTo) y a partir de qué
+ * línea el scrollspy considera que ya entraste a una sección. Si se separan,
+ * el menú marca una sección distinta a la que estás viendo.
+ */
+const HEADER_OFFSET = 90;
+
 export default function SpectacularNavbar() {
     const [scrolled, setScrolled] = useState(false);
     const [activeSection, setActiveSection] = useState("inicio");
@@ -94,21 +102,37 @@ export default function SpectacularNavbar() {
             // el navbar creyera estar en una sección del home que no está viendo.
             if (!isHome) return;
 
-            const viewCenter = scrollY + window.innerHeight / 2;
+            // Se marca la sección en la que la lectura YA entró: la última cuyo
+            // borde superior pasó por debajo del navbar.
+            //
+            // Antes se elegía la sección con el centro más cercano al centro de
+            // la pantalla, y eso fallaba con las secciones altas: al tocar
+            // "Proyectos" quedabas justo en el arranque de #proyectos, pero como
+            // esa sección es larga su centro estaba muy abajo, así que ganaba el
+            // centro de #proceso y el navbar pintaba "Proceso". Había que seguir
+            // bajando para que recién ahí cambiara.
+            //
+            // La línea de corte es la misma que usa goTo() para posicionar
+            // (HEADER_OFFSET), así que al navegar a un ancla la sección de
+            // destino queda activa de inmediato.
+            const line = scrollY + HEADER_OFFSET + 8;
             let currentSection = "";
-            let minDistance = Infinity;
 
-            for (const id of SECTIONS) {
-                const element = document.getElementById(id);
-                if (!element) continue;
-                const rect = element.getBoundingClientRect();
-                const sectionCenter = rect.top + scrollY + rect.height / 2;
-                const distance = Math.abs(viewCenter - sectionCenter);
-                if (distance < minDistance) {
-                    minDistance = distance;
-                    currentSection = id;
-                }
+            // Se ordenan por posición real en el documento por si el orden del
+            // array y el del DOM alguna vez dejan de coincidir.
+            const positioned = SECTIONS
+                .map((id) => {
+                    const element = document.getElementById(id);
+                    if (!element) return null;
+                    return { id, top: element.getBoundingClientRect().top + scrollY };
+                })
+                .filter((s): s is { id: string; top: number } => s !== null)
+                .sort((a, b) => a.top - b.top);
+
+            for (const section of positioned) {
+                if (section.top <= line) currentSection = section.id;
             }
+            if (!currentSection && positioned.length > 0) currentSection = positioned[0].id;
 
             if (scrollY < 100) currentSection = "inicio";
             if (window.innerHeight + scrollY >= document.body.offsetHeight - 50) currentSection = "contacto";
@@ -167,7 +191,7 @@ export default function SpectacularNavbar() {
             requestAnimationFrame(() => {
                 const target = document.getElementById(hash);
                 if (!target) return;
-                const top = target.getBoundingClientRect().top + window.scrollY - 90;
+                const top = target.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET;
                 window.history.replaceState(null, "", `#${hash}`);
                 // Un solo scroll animado, después de actualizar el hash. Al
                 // no usar navegación de Next ni scroll nativo por hash, no
