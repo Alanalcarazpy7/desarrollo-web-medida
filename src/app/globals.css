@@ -41,6 +41,94 @@ body {
   position: relative;
 }
 
+/* ===== Ficha de proyecto (/proyectos/[slug]) =============================
+   Una página por trabajo: sirve para que cada proyecto tenga su propia URL
+   indexable y para que quien llega desde Google vea el caso completo. */
+.pc{min-height:100vh;background:#000;color:#fff}
+.pc-wrap{max-width:1100px;margin:0 auto;padding:clamp(96px,12vw,132px) clamp(20px,5vw,32px) 0}
+
+.pc-crumbs{display:flex;align-items:center;flex-wrap:wrap;gap:9px;margin:0 0 26px;
+  font-size:.82rem;color:#7b8593}
+.pc-crumbs a{color:#95a0ad;text-decoration:none;transition:color .2s}
+.pc-crumbs a:hover{color:#00d9ff}
+.pc-crumbs-now{color:#00d9ff;font-weight:600}
+
+.pc-head{margin:0 0 clamp(30px,4vw,44px)}
+.pc-badge{display:inline-block;margin:0 0 14px;padding:7px 15px;border-radius:999px;
+  font-size:.66rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#00d9ff;
+  background:rgba(0,217,255,.1);border:1px solid rgba(0,217,255,.35)}
+.pc-h1{margin:0 0 14px;font-size:clamp(1.9rem,4.6vw,3rem);font-weight:900;
+  line-height:1.14;letter-spacing:-.025em;color:#fff}
+.pc-lead{margin:0 0 26px;max-width:66ch;font-size:clamp(1rem,2vw,1.1rem);
+  line-height:1.65;color:#a9b3bf}
+
+.pc-actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+.pc-btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  padding:14px 26px;border-radius:999px;font-size:.92rem;font-weight:800;
+  text-decoration:none;color:#04121a;background:linear-gradient(135deg,#00d9ff,#0099cc);
+  box-shadow:0 10px 34px rgba(0,217,255,.28);transition:transform .25s,box-shadow .25s}
+.pc-btn:hover{transform:translateY(-2px);box-shadow:0 16px 46px rgba(0,217,255,.38)}
+.pc-btn svg{width:17px;height:17px}
+.pc-btn-ghost{display:inline-flex;align-items:center;justify-content:center;
+  padding:14px 26px;border-radius:999px;font-size:.92rem;font-weight:800;
+  text-decoration:none;color:#00d9ff;background:transparent;border:2px solid rgba(0,217,255,.5);
+  transition:background .25s,border-color .25s}
+.pc-btn-ghost:hover{background:rgba(0,217,255,.12);border-color:#00d9ff}
+.pc-btn-wa{display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  padding:14px 24px;border-radius:999px;font-size:.9rem;font-weight:800;text-decoration:none;
+  color:#25d366;background:rgba(37,211,102,.1);border:1px solid rgba(37,211,102,.4);
+  transition:background .25s,transform .25s}
+.pc-btn-wa:hover{background:rgba(37,211,102,.18);transform:translateY(-2px)}
+.pc-btn-wa svg{width:17px;height:17px}
+.pc-private{font-size:.82rem;color:#7b8593;font-style:italic}
+
+.pc-shots{display:flex;flex-direction:column;gap:20px;margin:0 0 clamp(36px,5vw,52px)}
+.pc-shot{margin:0;border-radius:20px;overflow:hidden;background:#0a0d14;
+  border:1px solid rgba(255,255,255,.09);box-shadow:0 26px 70px rgba(0,0,0,.6)}
+.pc-shot figcaption{padding:11px 16px;font-size:.72rem;letter-spacing:.12em;
+  text-transform:uppercase;color:#7b8593;border-top:1px solid rgba(255,255,255,.06)}
+
+.pc-block{margin:0 0 clamp(36px,5vw,52px)}
+.pc-block h2{margin:0 0 18px;font-size:clamp(1.3rem,3vw,1.7rem);font-weight:900;
+  line-height:1.24;letter-spacing:-.02em;color:#fff}
+.pc-did{display:grid;grid-template-columns:1fr;gap:11px;margin:0;padding:0;list-style:none}
+.pc-did li{display:flex;align-items:center;gap:10px;padding:13px 16px;border-radius:13px;
+  font-size:.92rem;font-weight:600;color:#c8cfd8;
+  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07)}
+.pc-did svg{width:16px;height:16px;flex-shrink:0;color:#00d9ff}
+
+.pc-quote{position:relative;margin:0;padding:22px 24px;border-radius:16px;
+  font-size:1.02rem;line-height:1.65;color:#e8eef4;
+  background:linear-gradient(160deg,rgba(0,217,255,.08),rgba(255,255,255,.02));
+  border:1px solid rgba(0,217,255,.22);border-left:4px solid #00d9ff}
+.pc-quote footer{margin-top:14px;font-size:.82rem;font-weight:700;color:#00d9ff}
+
+.pc-cta{margin:0 0 clamp(36px,5vw,52px);padding:clamp(28px,4vw,44px);border-radius:24px;
+  background:linear-gradient(160deg,rgba(0,217,255,.1),rgba(0,153,204,.04));
+  border:1px solid rgba(0,217,255,.26)}
+.pc-cta h2{margin:0 0 10px;font-size:clamp(1.35rem,3vw,1.8rem);font-weight:900;
+  line-height:1.24;color:#fff}
+.pc-cta p{margin:0 0 22px;max-width:60ch;font-size:.95rem;line-height:1.6;color:#a9b3bf}
+
+.pc-others{display:grid;grid-template-columns:1fr;gap:16px}
+.pc-other{display:flex;flex-direction:column;overflow:hidden;text-decoration:none;
+  border-radius:16px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);
+  transition:border-color .25s,transform .25s}
+.pc-other:hover{border-color:rgba(0,217,255,.4);transform:translateY(-4px)}
+.pc-other-thumb{position:relative;display:block;width:100%;aspect-ratio:16/10;
+  background:#0a0d14;overflow:hidden}
+.pc-other-body{display:flex;flex-direction:column;gap:5px;padding:15px}
+.pc-other-cat{font-size:.62rem;font-weight:800;letter-spacing:.12em;
+  text-transform:uppercase;color:#00d9ff}
+.pc-other-title{font-size:.95rem;font-weight:700;line-height:1.35;color:#fff}
+.pc-all{display:inline-flex;align-items:center;gap:7px;margin-top:20px;
+  font-size:.86rem;font-weight:800;color:#00d9ff;text-decoration:none;transition:gap .2s}
+.pc-all:hover{gap:11px}
+.pc-all svg{width:15px;height:15px}
+
+@media (min-width:640px){.pc-did{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:820px){.pc-others{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
 /* ===== "Del blog" en las páginas de servicio ==============================
    Cierra el enlazado interno hacia el blog, que antes solo recibía enlaces
    desde el menú y el sitemap. */

@@ -413,6 +413,30 @@ function ProjectPageCard({
                                 {t('projects.ctaSimilar')}
                             </a>
                         </div>
+
+                        {/* Enlace real a la ficha del proyecto. Sin esto las
+                            páginas /proyectos/<slug> quedaban solo en el
+                            sitemap: nadie llegaba a ellas navegando. */}
+                        <Link
+                            href={language === "en" ? `/en/projects/${project.slug}` : `/es/proyectos/${project.slug}`}
+                            onClick={(e) => e.stopPropagation()}
+                            style={{
+                                display: "inline-flex",
+                                alignItems: "center",
+                                gap: "6px",
+                                marginTop: "14px",
+                                fontSize: "12px",
+                                fontWeight: 800,
+                                color: theme.accent,
+                                textDecoration: "none",
+                                letterSpacing: "0.02em"
+                            }}
+                        >
+                            {language === "en" ? "See the full case" : "Ver el caso completo"}
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                                <path d="M5 12h14M13 6l6 6-6 6" />
+                            </svg>
+                        </Link>
                     </div>
                 </div>
             </motion.div>

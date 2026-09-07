@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next'
 import { blogPosts } from '@/lib/blog-data'
+import { projectsData } from '@/lib/projects-data'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://solvatech.com.py'
@@ -112,6 +113,33 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ]
 
-  return [...routesMap, ...blogEntries, ...projectsEntries, ...landingEntries]
+  // Una ficha por proyecto. El español vive en /es/proyectos/<slug> y el
+  // inglés en /en/projects/<slug>, cada uno apuntando al otro con hreflang.
+  const projectCaseEntries: MetadataRoute.Sitemap = projectsData.flatMap((project) => {
+    const esUrl = `${baseUrl}/es/proyectos/${project.slug}`
+    const enUrl = `${baseUrl}/en/projects/${project.slug}`
+    const languages = {
+      es: esUrl,
+      'es-PY': esUrl,
+      en: enUrl,
+      'x-default': esUrl,
+    }
+
+    return [esUrl, enUrl].map((url) => ({
+      url,
+      lastModified: new Date('2026-09-07'),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+      alternates: { languages },
+    }))
+  })
+
+  return [
+    ...routesMap,
+    ...blogEntries,
+    ...projectsEntries,
+    ...projectCaseEntries,
+    ...landingEntries,
+  ]
 }
 
