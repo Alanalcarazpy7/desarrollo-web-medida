@@ -108,13 +108,34 @@ export default async function RootLayout({
     "url": "https://solvatech.com.py",
     "telephone": "+595994295092",
     "priceRange": "$$",
+    // OJO: no se declara "address" a propósito. SolvaTech no atiende en un
+    // local: se trabaja a distancia y, cuando hace falta, se va donde está el
+    // cliente. Poner una dirección que no recibe visitas sería inventar un
+    // dato que Google puede contrastar, y encima expone el domicilio.
+    //
+    // Lo correcto para este caso es declarar el ÁREA DE SERVICIO. Antes acá
+    // iban cinco países sueltos ("PY","US","AR","ES","MX"), todos al mismo
+    // nivel: eso diluye la señal local justo donde están los clientes reales.
+    // Ahora Paraguay va primero y con sus ciudades explícitas, que es lo que
+    // ayuda a aparecer en las búsquedas de la zona.
     "areaServed": [
-      "PY",
-      "US",
-      "AR",
-      "ES",
-      "MX"
+      { "@type": "Country", "name": "Paraguay" },
+      { "@type": "City", "name": "Asunción" },
+      { "@type": "AdministrativeArea", "name": "Departamento Central" },
+      { "@type": "City", "name": "Areguá" },
+      { "@type": "City", "name": "Luque" },
+      { "@type": "City", "name": "San Lorenzo" },
+      { "@type": "City", "name": "Fernando de la Mora" },
+      { "@type": "City", "name": "Capiatá" },
+      { "@type": "City", "name": "Ñemby" }
     ],
+    "founder": {
+      "@type": "Person",
+      "name": "Alan Alcaraz",
+      "jobTitle": lang === 'en' ? "Web developer" : "Desarrollador web",
+      "url": "https://solvatech.com.py"
+    },
+    "knowsLanguage": ["es", "en"],
     "sameAs": [
       "https://www.instagram.com/alandev_py/",
       "https://www.facebook.com/people/Alandev/61590114310700/",
