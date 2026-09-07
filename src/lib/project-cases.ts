@@ -7,13 +7,16 @@
  * ================== REGLAS DE CONTENIDO ==================
  *
  * 1. `kind` dice qué es cada proyecto y se muestra en la ficha:
- *      "client" -> se construyó para un cliente real
+ *      "client" -> se construyó para un cliente y está en uso
+ *      "pitch"  -> se construyó para un negocio real concreto, como propuesta.
+ *                  El negocio no avanzó (dejó de responder o nunca respondió),
+ *                  así que el trabajo quedó disponible como demo navegable
  *      "demo"   -> proyecto propio, hecho para mostrar cómo se resuelve ese
  *                  caso en ese rubro
- *    NO se presenta un proyecto propio como si lo hubiera encargado un
- *    cliente. Un prospecto que pregunta "¿y a quién se lo hiciste?" y descubre
- *    que no existe, se va y no vuelve. La etiqueta cuesta nada y el demo vende
- *    igual: lo que convence es que el problema esté bien resuelto.
+ *    NO se presenta como cliente algo que no lo es. Un prospecto que pregunta
+ *    "¿y a quién se lo hiciste?" y descubre que no hay nadie detrás, se va y no
+ *    vuelve. La etiqueta cuesta nada y el trabajo vende igual: lo que convence
+ *    es que el problema esté bien resuelto.
  *
  * 2. `situation` describe el PROBLEMA DEL NEGOCIO que el proyecto resuelve.
  *    Eso es cierto tanto en un trabajo para cliente como en un demo, y es lo
@@ -30,8 +33,8 @@
  */
 
 export interface ProjectCase {
-    /** Trabajo para un cliente real, o proyecto propio de muestra. */
-    kind: "client" | "demo";
+    /** En uso por un cliente, propuesta a un negocio real, o proyecto propio. */
+    kind: "client" | "pitch" | "demo";
     /** Qué problema del negocio resuelve. */
     situation: { es: string; en: string };
     /** Qué se construyó, en lenguaje llano. */
@@ -118,7 +121,7 @@ export const projectCases: Record<string, ProjectCase> = {
     /* ===================== PROYECTOS PROPIOS (DEMOS) ===================== */
 
     modashoppy: {
-        kind: "demo",
+        kind: "pitch",
         situation: {
             es: "Una tienda de ropa que vende por Instagram llega a un techo: las publicaciones se pierden, hay que contestar talles y precios uno por uno, y no queda registro de qué se vendió ni de cuánto stock queda. Este proyecto muestra cómo se ve una tienda online de indumentaria que resuelve las tres cosas a la vez.",
             en: "A clothing shop selling through Instagram hits a ceiling: posts get buried, sizes and prices are answered one by one, and there is no record of what sold or how much stock is left. This project shows how an online clothing store solves all three at once.",
@@ -286,7 +289,7 @@ export const projectCases: Record<string, ProjectCase> = {
     },
 
     vasospy: {
-        kind: "demo",
+        kind: "pitch",
         situation: {
             es: "Vender productos personalizados por WhatsApp significa mandar la misma foto veinte veces por día y explicar precios por cantidad una y otra vez. Este proyecto muestra un catálogo que hace ese trabajo solo: la persona mira todo, elige, y recién ahí escribe con el pedido ya armado.",
             en: "Selling personalised products over WhatsApp means sending the same photo twenty times a day and explaining bulk pricing over and over. This project shows a catalog that does that work for you: people browse, choose, and only then message with the order already put together.",
@@ -310,7 +313,7 @@ export const projectCases: Record<string, ProjectCase> = {
     },
 
     "bar-san-roque": {
-        kind: "demo",
+        kind: "pitch",
         situation: {
             es: "Un bar con historia tiene un activo que la competencia nueva no puede copiar: los años. Pero si esa historia no está contada en ningún lado, es como si no existiera. Este proyecto muestra cómo combinar la parte emocional con lo práctico: menú actualizado y reserva.",
             en: "A bar with history has an asset newer competitors cannot copy: the years. But if that story is not told anywhere, it may as well not exist. This project shows how to combine the emotional side with the practical: an up-to-date menu and booking.",
@@ -334,7 +337,7 @@ export const projectCases: Record<string, ProjectCase> = {
     },
 
     "barberia-master-barber": {
-        kind: "demo",
+        kind: "pitch",
         situation: {
             es: "En una barbería el cuello de botella no es que falte gente interesada: es la coordinación. Mensajes a la medianoche que se contestan al otro día, turnos anotados en un cuaderno y clientes que no vienen y no avisan. Este proyecto muestra una web que toma los turnos sola.",
             en: "In a barbershop the bottleneck is not a lack of interested people: it is coordination. Midnight messages answered the next day, appointments in a notebook, and no-shows. This project shows a site that takes bookings on its own.",

@@ -213,11 +213,21 @@ function MarqueeRow({ t, reverse, durationSeconds, track }: { t: (k: string) => 
     );
 }
 
-// Fuente de datos combinada: casos reales primero, y al final los de prueba
-// (sampleTestimonialsData) para tener suficientes cards y probar el diseño
-// a dos filas. El coverflow de video NO usa este combinado: solo muestra
-// los casos reales.
-const allTextTestimonials: Testimonial[] = [...testimonialsData, ...sampleTestimonialsData];
+// Fuente de datos.
+//
+// OJO: sampleTestimonialsData son testimonios INVENTADOS (personas y negocios
+// que no existen), cargados solo para maquetar la sección a dos filas mientras
+// hubiera pocos casos reales. Publicarlos a visitantes reales es presentar
+// clientes falsos, así que en producción NO se muestran: ahí van únicamente
+// los testimonios reales y aprobados. En desarrollo se siguen viendo para
+// poder revisar el diseño con la grilla llena.
+//
+// El marquee repite las cards hasta llenar la pista, así que con pocos
+// testimonios reales el carrusel sigue girando bien.
+const allTextTestimonials: Testimonial[] =
+    process.env.NODE_ENV === "production"
+        ? testimonialsData
+        : [...testimonialsData, ...sampleTestimonialsData];
 
 export default function TestimonialsMarquee({ t }: { t: (k: string) => string }) {
     if (allTextTestimonials.length === 0) return null;

@@ -58,8 +58,10 @@ body {
 .pc-badge{display:inline-block;padding:7px 15px;border-radius:999px;
   font-size:.66rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#00d9ff;
   background:rgba(0,217,255,.1);border:1px solid rgba(0,217,255,.35)}
-/* Trabajo para cliente vs proyecto propio: se distingue a simple vista. */
+/* Origen del proyecto, distinguible a simple vista: en uso por un cliente,
+   hecho para un negocio real que no avanzó, o proyecto propio. */
 .pc-badge-client{color:#7be0c4;background:rgba(40,200,150,.1);border-color:rgba(40,200,150,.34)}
+.pc-badge-pitch{color:#ffcf7a;background:rgba(255,190,90,.1);border-color:rgba(255,190,90,.32)}
 .pc-badge-demo{color:#b9a4ff;background:rgba(150,120,255,.1);border-color:rgba(150,120,255,.32)}
 .pc-h1{margin:0 0 14px;font-size:clamp(1.9rem,4.6vw,3rem);font-weight:900;
   line-height:1.14;letter-spacing:-.025em;color:#fff}

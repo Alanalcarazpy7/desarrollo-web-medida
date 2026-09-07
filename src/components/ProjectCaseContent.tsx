@@ -132,9 +132,13 @@ export default function ProjectCaseContent({
                                     ? isEs
                                         ? "Proyecto para cliente"
                                         : "Client project"
-                                    : isEs
-                                      ? "Proyecto propio · demo"
-                                      : "Own project · demo"}
+                                    : kase.kind === "pitch"
+                                      ? isEs
+                                          ? "Hecho para un negocio real · demo"
+                                          : "Built for a real business · demo"
+                                      : isEs
+                                        ? "Proyecto propio · demo"
+                                        : "Own project · demo"}
                             </span>
                         )}
                     </div>
