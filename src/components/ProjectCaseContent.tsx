@@ -122,7 +122,22 @@ export default function ProjectCaseContent({
 
                 {/* Encabezado */}
                 <header className="pc-head">
-                    <span className="pc-badge">{CATEGORY_LABEL[project.categoryKey][lang]}</span>
+                    <div className="pc-badges">
+                        <span className="pc-badge">{CATEGORY_LABEL[project.categoryKey][lang]}</span>
+                        {/* Se dice de frente si el trabajo fue para un cliente o
+                            si es un proyecto propio de muestra. */}
+                        {kase && (
+                            <span className={`pc-badge pc-badge-${kase.kind}`}>
+                                {kase.kind === "client"
+                                    ? isEs
+                                        ? "Proyecto para cliente"
+                                        : "Client project"
+                                    : isEs
+                                      ? "Proyecto propio · demo"
+                                      : "Own project · demo"}
+                            </span>
+                        )}
+                    </div>
                     <h1 className="pc-h1">{tr.title}</h1>
                     <p className="pc-lead">{tr.description}</p>
 
