@@ -108,7 +108,11 @@ function CoverflowCard({
                     alt={item.businessName}
                     fill
                     sizes="320px"
-                    style={{ objectFit: "cover", objectPosition: "center 18%" }}
+                    // Centrado: la card (300x470) es apenas más ancha que el
+                    // poster 9:16, así que centrar muestra prácticamente el
+                    // mismo encuadre que en la landing /pagina-web. Antes iba
+                    // en "center 18%" y recortaba de más por abajo.
+                    style={{ objectFit: "cover", objectPosition: "center" }}
                     priority={isActive}
                 />
             ) : (

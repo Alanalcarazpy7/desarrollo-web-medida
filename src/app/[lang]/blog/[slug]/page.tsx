@@ -70,6 +70,11 @@ export default async function BlogPostPage({ params }: Props) {
     const description = lang === 'en' ? post.excerptEn || post.excerpt : post.excerpt;
     const baseUrl = 'https://solvatech.com.py';
 
+    const isEs = lang !== 'en';
+    const content = isEs ? post.content : post.contentEn || post.content;
+    // Palabras reales del artículo (sin las etiquetas HTML).
+    const wordCount = content.replace(/<[^>]+>/g, ' ').trim().split(/\s+/).length;
+
     const jsonLd = {
         '@context': 'https://schema.org',
         '@type': 'BlogPosting',
@@ -79,6 +84,7 @@ export default async function BlogPostPage({ params }: Props) {
         author: {
             '@type': 'Person',
             name: post.author,
+            url: baseUrl,
         },
         publisher: {
             '@type': 'Organization',
@@ -90,10 +96,33 @@ export default async function BlogPostPage({ params }: Props) {
         },
         datePublished: post.date,
         dateModified: post.date,
+        // Estos campos son los que hacen que cada artículo se lea como una
+        // pieza distinta y no como más de lo mismo: sección, palabras clave
+        // propias, idioma y extensión.
+        articleSection: isEs ? post.category : post.categoryEn,
+        keywords: (isEs ? post.keywords : post.keywordsEn).join(', '),
+        inLanguage: isEs ? 'es-PY' : 'en',
+        wordCount,
+        timeRequired: `PT${parseInt(post.readTime, 10) || 5}M`,
+        isPartOf: {
+            '@type': 'Blog',
+            '@id': `${baseUrl}/${lang}/blog`,
+            name: isEs ? 'Blog de SolvaTech' : 'SolvaTech Blog',
+        },
         mainEntityOfPage: {
             '@type': 'WebPage',
             '@id': `${baseUrl}/${lang}/blog/${post.slug}`
         }
+    };
+
+    const breadcrumbLd = {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+            { '@type': 'ListItem', position: 1, name: isEs ? 'Inicio' : 'Home', item: `${baseUrl}/${lang}` },
+            { '@type': 'ListItem', position: 2, name: 'Blog', item: `${baseUrl}/${lang}/blog` },
+            { '@type': 'ListItem', position: 3, name: title },
+        ],
     };
 
     return (
@@ -101,6 +130,10 @@ export default async function BlogPostPage({ params }: Props) {
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
             />
             <BlogPostContent post={post} />
         </>

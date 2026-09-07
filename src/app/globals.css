@@ -788,6 +788,19 @@ summary:focus-visible,
 .blog-article hr{border:0;height:1px;margin:2.4em 0;
   background:linear-gradient(90deg,transparent,rgba(0,217,255,.35),transparent)}
 
+/* Tablas comparativas. Van dentro de su propio scroll horizontal para que en
+   mobile nunca empujen el ancho de la página. */
+.blog-article table{display:block;width:100%;overflow-x:auto;margin:2em 0;
+  border-collapse:collapse;font-size:.92em;-webkit-overflow-scrolling:touch}
+.blog-article table tr{border-bottom:1px solid rgba(255,255,255,.08)}
+.blog-article table tr:first-child{border-bottom:1px solid rgba(0,217,255,.35)}
+.blog-article table tr:last-child{border-bottom:0}
+.blog-article table th{padding:12px 14px;text-align:left;white-space:nowrap;
+  font-size:.78rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#00d9ff}
+.blog-article table td{padding:12px 14px;text-align:left;vertical-align:top;color:#c8cfd8;line-height:1.5}
+.blog-article table td:first-child{color:#e8eef4}
+.blog-article table tr:nth-child(even) td{background:rgba(255,255,255,.022)}
+
 /* Layout del artículo: contenido + panel lateral -------------------------
    El índice ("Contenido") va inline arriba del texto, plegable. El panel
    lateral (buscador, temas, relacionados) va fijo a la derecha en PC y

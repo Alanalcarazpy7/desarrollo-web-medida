@@ -18,6 +18,428 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
     {
+        slug: "pagina-web-para-peluquerias-barberias-paraguay",
+        title: "Página web para peluquerías y barberías en Paraguay: qué necesita de verdad",
+        titleEn: "Websites for hair salons and barbershops in Paraguay: what you actually need",
+        excerpt: "Comparación honesta entre Instagram, agenda en papel y web propia. Qué secciones sirven, cuáles sobran y cuánto cuesta arrancar.",
+        excerptEn: "An honest comparison between Instagram, a paper diary and your own website. Which sections work, which are filler, and what it costs.",
+        date: "2026-09-07",
+        author: "Alan Alcaraz",
+        category: "Guías por Rubro",
+        categoryEn: "Industry Guides",
+        image: "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?q=80&w=2400&auto=format&fit=crop",
+        readTime: "8 min",
+        keywords: ["pagina web para peluqueria", "web para barberia paraguay", "sistema de reservas peluqueria", "agenda online peluqueria paraguay", "marketing para peluquerias"],
+        keywordsEn: ["hair salon website paraguay", "barbershop website", "salon booking system paraguay"],
+        content: `
+            <p>Las peluquerías y barberías son de los negocios que mejor funcionan en Instagram: el trabajo se ve, se comparte y se recomienda solo. Por eso muchos dueños se preguntan, con razón, <strong>para qué querrían una página web</strong>.</p>
+
+            <p>La respuesta corta: no la necesitás para mostrar cortes. La necesitás para <strong>dejar de perder turnos</strong>.</p>
+
+            <h2>El problema real no es la visibilidad</h2>
+
+            <p>En una peluquería que anda bien, el cuello de botella casi nunca es que falte gente interesada. El cuello de botella es la coordinación:</p>
+
+            <ul>
+                <li>Mensajes que llegan a las 11 de la noche y se contestan al otro día, cuando la persona ya reservó en otro lado.</li>
+                <li>Alguien atendiendo el teléfono con las manos llenas de tintura.</li>
+                <li>Turnos anotados en un cuaderno que solo entiende quien lo escribió.</li>
+                <li>Clientes que no vienen y no avisan, porque cancelar da vergüenza.</li>
+            </ul>
+
+            <p>Nada de eso lo arregla una página bonita. Lo arregla una página que <strong>toma reservas sola</strong>.</p>
+
+            <h2>Instagram, cuaderno o web: comparación honesta</h2>
+
+            <table>
+                <tr>
+                    <th>&nbsp;</th>
+                    <th>Solo Instagram</th>
+                    <th>Cuaderno / WhatsApp</th>
+                    <th>Web con reservas</th>
+                </tr>
+                <tr>
+                    <td><strong>Mostrar trabajos</strong></td>
+                    <td>Excelente</td>
+                    <td>No aplica</td>
+                    <td>Bueno</td>
+                </tr>
+                <tr>
+                    <td><strong>Reservar fuera de horario</strong></td>
+                    <td>No</td>
+                    <td>No</td>
+                    <td>Sí, 24 horas</td>
+                </tr>
+                <tr>
+                    <td><strong>Aparecer en Google</strong></td>
+                    <td>Casi nunca</td>
+                    <td>No</td>
+                    <td>Sí</td>
+                </tr>
+                <tr>
+                    <td><strong>Precios siempre visibles</strong></td>
+                    <td>Se pierden entre posts</td>
+                    <td>Hay que preguntar</td>
+                    <td>Sí</td>
+                </tr>
+                <tr>
+                    <td><strong>Te pertenece</strong></td>
+                    <td>No</td>
+                    <td>Sí</td>
+                    <td>Sí</td>
+                </tr>
+            </table>
+
+            <p>Fijate que no dice "dejá Instagram". Instagram sigue siendo tu mejor vidriera. La web es donde esa vidriera se convierte en turno agendado.</p>
+
+            <figure>
+                <img src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?q=80&w=1600&auto=format&fit=crop" alt="Interior de una barbería con sillón y espejo" loading="lazy" />
+                <figcaption>Instagram trae gente. La web se encarga de que esa gente termine con un turno reservado.</figcaption>
+            </figure>
+
+            <h2>Las cuatro secciones que sí sirven</h2>
+
+            <h3>1. Lista de servicios con precios</h3>
+            <p>Es la información número uno que busca alguien nuevo. Publicar los precios no espanta clientes: filtra a los que no iban a venir igual y te ahorra veinte mensajes de "¿cuánto sale?".</p>
+
+            <h3>2. Reserva de turno</h3>
+            <p>Aunque sea un formulario que elige servicio, día y horario y te llega por WhatsApp. No hace falta un sistema complejo para resolver el 80% del problema.</p>
+
+            <h3>3. Galería real</h3>
+            <p>Ocho a doce fotos de trabajos propios, sacadas con buena luz. No hace falta un fotógrafo: la ventana del local al mediodía alcanza.</p>
+
+            <h3>4. Cómo llegar</h3>
+            <p>Mapa, referencia hablada ("a media cuadra de...") y si hay dónde estacionar. En Asunción y alrededores el estacionamiento decide más reservas de las que uno cree.</p>
+
+            <h2>Lo que casi siempre sobra</h2>
+
+            <ul>
+                <li><strong>Historia de la empresa.</strong> Nadie elige peluquería por su misión y visión.</li>
+                <li><strong>Blog de tendencias.</strong> Solo si de verdad vas a escribirlo. Un blog abandonado se nota.</li>
+                <li><strong>Carrito de compras</strong> para productos que vendés de a dos por mes. Con WhatsApp alcanza.</li>
+                <li><strong>Animaciones por todos lados.</strong> La gente entra desde el celular con datos móviles.</li>
+            </ul>
+
+            <h2>Aparecer cuando alguien busca "peluquería cerca"</h2>
+
+            <p>Acá hay una pieza que mucha gente se saltea: el <strong>Perfil de Empresa de Google</strong> (lo que aparece en el mapa). Es gratis, y para un negocio con local físico suele traer más gente que la web misma.</p>
+
+            <p>La combinación que funciona es simple: perfil de Google completo y con reseñas, más una web propia que confirme que el negocio es serio. Uno refuerza al otro. Si te interesa esa parte, la explicamos en detalle en la <a href="/es/blog/guia-seo-local-paraguay">guía de SEO local</a>.</p>
+
+            <h2>Cuánto cuesta y qué esperar</h2>
+
+            <p>Para una peluquería o barbería, una landing con servicios, precios, galería, reserva y mapa arranca en <strong>Gs. 850.000</strong>, pago único. Sacá la cuenta con tu propio ticket: si un corte promedio deja Gs. 50.000, la página se paga con 17 turnos. Un mes normal.</p>
+
+            <p>El plazo real de entrega es de 4 a 7 días hábiles, contados desde que mandás fotos, lista de precios y horarios.</p>
+
+            <h2>Antes de empezar, juntá esto</h2>
+
+            <ul>
+                <li>Lista de servicios con precio y duración aproximada.</li>
+                <li>Horarios reales, incluido el día de descanso.</li>
+                <li>De 8 a 12 fotos de trabajos tuyos.</li>
+                <li>Dirección exacta y punto de referencia.</li>
+                <li>El número de WhatsApp donde querés recibir los turnos.</li>
+            </ul>
+
+            <p>Con eso ya se puede armar todo. Si querés que veamos tu caso, mirá el <a href="/es/servicios/desarrollo-web-basica">plan Web Básica</a> o escribinos por WhatsApp y te decimos qué te conviene.</p>
+        `,
+        contentEn: `
+            <p>Hair salons and barbershops thrive on Instagram: the work is visual, shareable and it recommends itself. So many owners reasonably ask <strong>why they would need a website at all</strong>.</p>
+
+            <p>The short answer: you do not need it to show haircuts. You need it to <strong>stop losing bookings</strong>.</p>
+
+            <h2>The real problem is not visibility</h2>
+
+            <ul>
+                <li>Messages arriving at 11pm and answered the next day, when the person already booked elsewhere.</li>
+                <li>Someone answering the phone with their hands full of hair dye.</li>
+                <li>Appointments in a notebook only one person can read.</li>
+                <li>No-shows, because cancelling feels awkward.</li>
+            </ul>
+
+            <h2>The four sections that actually work</h2>
+
+            <h3>1. Service list with prices</h3>
+            <p>The number one thing a new client looks for. Publishing prices does not scare people away: it filters out those who were never coming and saves you twenty "how much is it?" messages.</p>
+
+            <h3>2. Appointment booking</h3>
+            <p>Even a simple form that picks service, day and time and reaches you on WhatsApp. You do not need a complex system to solve 80% of the problem.</p>
+
+            <h3>3. A real gallery</h3>
+            <p>Eight to twelve photos of your own work, shot in good light. No photographer needed.</p>
+
+            <h3>4. How to get there</h3>
+            <p>A map, a spoken reference and whether there is parking. Parking decides more bookings than people think.</p>
+
+            <h2>What is usually filler</h2>
+
+            <ul>
+                <li>Company history. Nobody picks a salon for its mission statement.</li>
+                <li>A trends blog, unless you will really write it.</li>
+                <li>A shopping cart for products you sell twice a month.</li>
+                <li>Animations everywhere. People arrive on mobile data.</li>
+            </ul>
+
+            <h2>What it costs</h2>
+
+            <p>A landing page with services, prices, gallery, booking and map starts at <strong>Gs. 850,000</strong>, one-time. If an average haircut leaves Gs. 50,000 in profit, the page pays for itself with 17 appointments. Delivery takes 4 to 7 business days.</p>
+        `
+    },
+    {
+        slug: "menu-digital-qr-restaurantes-paraguay",
+        title: "Menú digital con QR para restaurantes en Paraguay: guía paso a paso",
+        titleEn: "QR digital menus for restaurants in Paraguay: a step-by-step guide",
+        excerpt: "Cómo montar un menú que carga rápido, se actualiza sin reimprimir y toma pedidos por WhatsApp sin pagar comisión por venta.",
+        excerptEn: "How to set up a menu that loads fast, updates without reprinting and takes WhatsApp orders with no per-sale commission.",
+        date: "2026-09-06",
+        author: "Alan Alcaraz",
+        category: "Guías por Rubro",
+        categoryEn: "Industry Guides",
+        image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=2400&auto=format&fit=crop",
+        readTime: "9 min",
+        keywords: ["menu digital qr paraguay", "carta digital restaurante", "menu qr para restaurante", "pedidos por whatsapp restaurante", "catalogo digital paraguay"],
+        keywordsEn: ["qr menu paraguay", "digital menu restaurant", "whatsapp ordering restaurant"],
+        content: `
+            <p>El menú con QR dejó de ser una cosa de pandemia y se quedó por un motivo práctico: <strong>cambiar un precio deja de costar una reimpresión</strong>. En un país donde los precios se mueven, eso solo ya justifica el cambio.</p>
+
+            <p>Pero hay menús con QR buenos y hay otros que hacen que el cliente se rinda y pida la carta de papel. Esta guía es para hacer el primero.</p>
+
+            <h2>El error que arruina la mitad de los menús con QR</h2>
+
+            <blockquote>
+                Si tu QR abre un PDF, tu menú digital está roto. Punto.
+            </blockquote>
+
+            <p>Un PDF en el celular obliga a la persona a hacer zoom, moverse en dos direcciones y esperar a que descargue entero. Con el wifi del local saturado un sábado a la noche, eso es medio minuto mirando una pantalla en blanco.</p>
+
+            <p>Un menú digital bien hecho es una <strong>página web</strong>: se lee de arriba a abajo, el texto se adapta a la pantalla y carga en menos de dos segundos.</p>
+
+            <h2>Cómo armarlo, paso a paso</h2>
+
+            <ol>
+                <li><strong>Ordená el menú antes de tocar nada digital.</strong> Categorías claras: entradas, principales, guarniciones, bebidas, postres. Si una categoría tiene un solo plato, fusionala con otra.</li>
+                <li><strong>Escribí las descripciones cortas.</strong> Una línea por plato, diciendo qué trae. "Milanesa napolitana" no necesita párrafo; un plato con nombre de fantasía sí.</li>
+                <li><strong>Definí qué lleva foto.</strong> No todos. Fotos solo en los platos que querés vender más y en los que se ven bien. Una foto mediocre vende menos que ninguna.</li>
+                <li><strong>Poné los precios en guaraníes, sin decimales.</strong> Y actualizables por vos, sin llamar a nadie.</li>
+                <li><strong>Agregá el botón de pedido por WhatsApp.</strong> Que arme solo el mensaje con lo que la persona eligió.</li>
+                <li><strong>Generá el QR apuntando a tu dominio propio.</strong> Nunca a un enlace de un servicio gratuito que puede caducar.</li>
+                <li><strong>Imprimí el QR en material resistente</strong> y ponelo donde se vea sentado: en la mesa, no en la pared del fondo.</li>
+            </ol>
+
+            <figure>
+                <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=1600&auto=format&fit=crop" alt="Mesa de restaurante servida" loading="lazy" />
+                <figcaption>El QR tiene que estar donde la persona ya está sentada, y abrir en menos de dos segundos.</figcaption>
+            </figure>
+
+            <h2>Delivery propio contra las apps</h2>
+
+            <p>Acá está la parte que más plata mueve. Las apps de delivery cobran comisión por cada venta. El número varía, pero en el rango habitual del mercado, sobre un pedido de Gs. 100.000 la comisión se lleva una tajada que sale íntegra de tu margen.</p>
+
+            <p>Hacé este cálculo con tus propios números:</p>
+
+            <ul>
+                <li>Pedidos por mes a través de la app.</li>
+                <li>Ticket promedio.</li>
+                <li>Porcentaje de comisión que te cobran.</li>
+            </ul>
+
+            <p>Multiplicá los tres. Ese resultado es lo que pagás por mes. Comparalo con el costo único de tener tu propio menú con pedidos por WhatsApp, donde <strong>la comisión es cero</strong>.</p>
+
+            <p>La conclusión sensata no es cortar con las apps: es dejar de depender solo de ellas. Las apps te traen clientes nuevos; tu menú propio es donde conviene que vuelvan los que ya te conocen.</p>
+
+            <h2>Qué tiene que aguantar tu menú un sábado a la noche</h2>
+
+            <ul>
+                <li><strong>Carga con datos móviles, no con wifi.</strong> Probalo con los datos del celular, no con el wifi del local.</li>
+                <li><strong>Fotos livianas.</strong> Una foto de 4 MB sacada del celular tarda una eternidad. Tienen que estar comprimidas.</li>
+                <li><strong>Texto legible sin zoom.</strong> Si hay que agrandar para leer un precio, está mal.</li>
+                <li><strong>Marcar lo que no hay.</strong> Poder desactivar un plato agotado en treinta segundos, desde el celular.</li>
+            </ul>
+
+            <h2>Y de paso, aparecés en Google</h2>
+
+            <p>Un menú en PDF es invisible para Google. Un menú hecho como página web se indexa: cuando alguien busca tu plato estrella o el nombre de tu restaurante, aparecés vos, con precios actualizados.</p>
+
+            <p>Si además tenés el Perfil de Empresa de Google al día, el combo es difícil de superar para un local de barrio.</p>
+
+            <h2>Cuánto sale</h2>
+
+            <p>Un catálogo o menú digital arranca en <strong>Gs. 750.000</strong>, y el precio inicial depende de cuántos productos haya que cargar y ordenar la primera vez. Después seguís sumando o sacando platos vos mismo, sin costo de desarrollo.</p>
+
+            <p>Si querés ver cómo queda, mirá el <a href="/es/servicios/desarrollo-web-catalogo">catálogo digital</a>, o revisá primero <a href="/es/blog/medios-de-pago-online-paraguay">cómo cobrar por internet en Paraguay</a> si estás pensando en aceptar pagos online.</p>
+        `,
+        contentEn: `
+            <p>QR menus stopped being a pandemic thing and stayed for a practical reason: <strong>changing a price no longer costs a reprint</strong>. In a country where prices move, that alone justifies it.</p>
+
+            <h2>The mistake that ruins half of QR menus</h2>
+
+            <blockquote>
+                If your QR opens a PDF, your digital menu is broken. Full stop.
+            </blockquote>
+
+            <p>A PDF on a phone forces zooming, scrolling in two directions and waiting for a full download. On a saturated Saturday-night wifi, that is thirty seconds staring at a blank screen. A proper digital menu is a <strong>web page</strong>: it reads top to bottom and loads in under two seconds.</p>
+
+            <h2>Step by step</h2>
+
+            <ol>
+                <li><strong>Organise the menu before touching anything digital.</strong> Clear categories. If a category has one dish, merge it.</li>
+                <li><strong>Write short descriptions.</strong> One line per dish.</li>
+                <li><strong>Decide what gets a photo.</strong> Not everything. Only the dishes you want to sell more of and that photograph well.</li>
+                <li><strong>Prices in guaraníes</strong>, editable by you.</li>
+                <li><strong>Add the WhatsApp order button</strong> that builds the message from the selection.</li>
+                <li><strong>Generate the QR pointing at your own domain</strong>, never a free link that can expire.</li>
+                <li><strong>Print it on durable material</strong> and put it where a seated person can see it.</li>
+            </ol>
+
+            <h2>Your own delivery vs the apps</h2>
+
+            <p>Delivery apps charge a commission on every sale, straight out of your margin. Multiply your monthly app orders by your average ticket by the commission rate: that is what you pay per month. Compare it to the one-time cost of your own menu with WhatsApp orders, where <strong>the commission is zero</strong>.</p>
+
+            <p>The sensible conclusion is not to quit the apps, but to stop depending only on them.</p>
+
+            <h2>What it must survive on a Saturday night</h2>
+
+            <ul>
+                <li>Loading on mobile data, not the venue wifi.</li>
+                <li>Light photos. A 4 MB phone photo takes forever.</li>
+                <li>Text readable without zooming.</li>
+                <li>Marking a dish as sold out in thirty seconds, from your phone.</li>
+            </ul>
+
+            <h2>What it costs</h2>
+
+            <p>A digital catalog or menu starts at <strong>Gs. 750,000</strong>, with the starting price depending on how many products need loading and organising the first time. After that you add or remove dishes yourself.</p>
+        `
+    },
+    {
+        slug: "pagina-web-para-gimnasios-paraguay",
+        title: "Página web para gimnasios en Paraguay: cómo captar socios sin depender de Instagram",
+        titleEn: "Websites for gyms in Paraguay: getting members without depending on Instagram",
+        excerpt: "Qué mira alguien antes de anotarse, por qué se cae la inscripción en el último paso y cómo la web puede sostener el mes de enero.",
+        excerptEn: "What people check before signing up, why sign-ups drop at the last step, and how a website can carry January.",
+        date: "2026-09-06",
+        author: "Alan Alcaraz",
+        category: "Guías por Rubro",
+        categoryEn: "Industry Guides",
+        image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2400&auto=format&fit=crop",
+        readTime: "8 min",
+        keywords: ["pagina web para gimnasio", "web para gimnasio paraguay", "captar socios gimnasio", "marketing para gimnasios paraguay", "planes de gimnasio online"],
+        keywordsEn: ["gym website paraguay", "fitness website", "gym membership signups"],
+        content: `
+            <p>Un gimnasio vive de dos números: cuántos socios entran y cuántos se quedan. La mayoría del esfuerzo de marketing se va en el primero, y ahí es donde una web hace una diferencia concreta.</p>
+
+            <p>Este artículo no va de diseño. Va de por qué alguien que ya te encontró termina no anotándose.</p>
+
+            <h2>Qué mira realmente alguien antes de anotarse</h2>
+
+            <p>Cuando una persona decide empezar a entrenar, el recorrido es casi siempre el mismo. Busca gimnasios cerca, abre dos o tres, y en cada uno busca exactamente cuatro cosas, en este orden:</p>
+
+            <ul>
+                <li><strong>Cuánto sale.</strong> Si no lo encuentra en un minuto, se va al siguiente.</li>
+                <li><strong>Qué horarios hay.</strong> Sobre todo si entrena temprano o después del trabajo.</li>
+                <li><strong>Cómo se ve el lugar.</strong> Fotos reales del salón, no imágenes de banco.</li>
+                <li><strong>Si hay que firmar algo largo.</strong> El miedo al contrato de permanencia es real.</li>
+            </ul>
+
+            <p>Si tu Instagram tiene todo eso, pero repartido entre publicaciones de hace cuatro meses, la persona no lo va a buscar. Va a ir al gimnasio que lo tiene ordenado en una sola pantalla.</p>
+
+            <h2>El punto donde se cae la inscripción</h2>
+
+            <p>Hay un momento muy específico en el que se pierde a la mayoría: la persona ya se convenció, escribe "hola, quería consultar por los planes"... y espera.</p>
+
+            <p>Si esa respuesta tarda tres horas, la decisión se enfría. Empezar a entrenar es una decisión emocional y tiene una ventana corta.</p>
+
+            <p>Lo que resuelve esto no es contestar más rápido (no siempre se puede), sino <strong>que la persona no necesite preguntar</strong>. Planes, precios y horarios publicados hacen que el primer mensaje ya no sea "¿cuánto sale?" sino "quiero anotarme en el plan mensual". Ese mensaje es otra conversación.</p>
+
+            <figure>
+                <img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?q=80&w=1600&auto=format&fit=crop" alt="Sala de un gimnasio con equipamiento" loading="lazy" />
+                <figcaption>Fotos reales del salón. Las imágenes de banco de gimnasios perfectos generan desconfianza, no deseo.</figcaption>
+            </figure>
+
+            <h2>Cómo mostrar los planes</h2>
+
+            <h3>Publicá los precios</h3>
+            <p>La objeción clásica es "si publico, la competencia me copia". La competencia ya sabe cuánto cobrás. Quien no lo sabe es tu futuro socio, y por eso no te escribe.</p>
+
+            <h3>Tres planes, no siete</h3>
+            <p>Demasiadas opciones paralizan. Un plan de entrada, uno mensual completo y uno anual con descuento cubren casi todos los casos.</p>
+
+            <h3>Decí qué incluye cada uno en criollo</h3>
+            <p>"Acceso a sala de musculación y clases grupales" se entiende. "Membresía Premium Plus" no dice nada.</p>
+
+            <h3>Mostrá la permanencia por adelantado</h3>
+            <p>Si no hay contrato de permanencia, decilo grande. Es un diferencial enorme y casi nadie lo comunica.</p>
+
+            <h2>Enero existe y hay que prepararlo</h2>
+
+            <p>El primer mes del año concentra una parte desproporcionada de las inscripciones del año. Un gimnasio que llega a enero con la web lista, los planes publicados y la promo cargada arranca con ventaja sobre el que ese mes recién está viendo qué hacer.</p>
+
+            <p>La preparación conviene hacerla en noviembre, no el 2 de enero.</p>
+
+            <h2>Aparecer en "gimnasio cerca de mí"</h2>
+
+            <p>Para un gimnasio, la búsqueda por cercanía es la más valiosa que existe: quien la hace está a un paso de anotarse. Eso se trabaja con el Perfil de Empresa de Google (mapa, fotos, horarios, reseñas) más una web propia que lo respalde.</p>
+
+            <p>El detalle que más mueve la aguja son las reseñas. Pedirlas de forma sistemática a los socios contentos vale más que cualquier campaña paga. Lo desarrollamos en la <a href="/es/blog/guia-seo-local-paraguay">guía de SEO local</a>.</p>
+
+            <h2>Lo que no hace falta</h2>
+
+            <ul>
+                <li><strong>App propia.</strong> Casi ningún gimnasio chico o mediano la necesita, y nadie instala una app para entrenar tres veces por semana.</li>
+                <li><strong>Cobro online desde el día uno.</strong> Si cobrás en el mostrador y funciona, no lo rompas todavía.</li>
+                <li><strong>Blog de rutinas.</strong> Compite contra millones de páginas y no te trae socios del barrio.</li>
+            </ul>
+
+            <h2>Por dónde empezar</h2>
+
+            <p>Para la mayoría de los gimnasios alcanza con una página que muestre planes, horarios, fotos reales, ubicación y un botón de WhatsApp que arme el mensaje ya con el plan elegido. Eso arranca en <strong>Gs. 850.000</strong>, pago único, con entrega de 4 a 7 días hábiles.</p>
+
+            <p>Con un plan mensual de Gs. 200.000, la web se paga con menos de cinco socios nuevos. Si te sirve, mirá el <a href="/es/servicios/desarrollo-web-basica">plan Web Básica</a> o escribinos y lo vemos con tus números.</p>
+        `,
+        contentEn: `
+            <p>A gym lives on two numbers: how many members join and how many stay. Most marketing effort goes into the first, and that is where a website makes a concrete difference.</p>
+
+            <h2>What people actually check before joining</h2>
+
+            <ul>
+                <li><strong>The price.</strong> If they cannot find it in a minute, they move on.</li>
+                <li><strong>The schedule.</strong> Especially for early or after-work training.</li>
+                <li><strong>What the place looks like.</strong> Real photos of the floor, not stock images.</li>
+                <li><strong>Whether they must sign a long contract.</strong> The fear of lock-in is real.</li>
+            </ul>
+
+            <h2>Where sign-ups fall apart</h2>
+
+            <p>There is a very specific moment where most people are lost: they are already convinced, they message "hi, I wanted to ask about your plans"... and wait. If that answer takes three hours, the decision cools down.</p>
+
+            <p>The fix is not replying faster (you cannot always). It is <strong>removing the need to ask</strong>. With plans, prices and schedules published, the first message stops being "how much is it?" and becomes "I want the monthly plan". That is a different conversation.</p>
+
+            <h2>How to present the plans</h2>
+
+            <h3>Publish the prices</h3>
+            <p>"My competitors will copy me" — they already know your prices. The person who does not know is your future member, and that is why they are not writing.</p>
+
+            <h3>Three plans, not seven</h3>
+            <p>Too many options paralyse. An entry plan, a full monthly plan and a discounted annual one cover almost every case.</p>
+
+            <h3>Say what each includes in plain words</h3>
+            <p>"Access to the weight room and group classes" is clear. "Premium Plus Membership" says nothing.</p>
+
+            <h2>What you do not need</h2>
+
+            <ul>
+                <li>Your own app. Nobody installs an app to train three times a week.</li>
+                <li>Online payments from day one, if the counter works.</li>
+                <li>A workout blog. It competes with millions of pages and brings no local members.</li>
+            </ul>
+
+            <h2>Where to start</h2>
+
+            <p>For most gyms, a page with plans, schedules, real photos, location and a WhatsApp button that pre-fills the chosen plan is enough. That starts at <strong>Gs. 850,000</strong>, one-time, delivered in 4 to 7 business days.</p>
+        `
+    },
+    {
         slug: "cuanto-cuesta-pagina-web-paraguay",
         title: "¿Cuánto cuesta una página web en Paraguay? Precios reales 2026",
         titleEn: "How much does a website cost in Paraguay? Real 2026 prices",
@@ -2179,4 +2601,103 @@ export const blogPosts: BlogPost[] = [
 
 export function getPostBySlug(slug: string): BlogPost | undefined {
     return blogPosts.find(post => post.slug === slug);
+}
+
+/* =========================================================================
+   Artículos relacionados
+   Antes el panel lateral mostraba siempre los mismos 4 (los primeros del
+   array). Acá se puntúa cada candidato contra el artículo que se está
+   leyendo, así lo que se ofrece tiene que ver con el tema y cambia de un
+   artículo a otro.
+   ====================================================================== */
+
+const STOP_WORDS = new Set([
+    // es
+    'para', 'como', 'pero', 'porque', 'cuando', 'donde', 'sobre', 'todo', 'toda',
+    'este', 'esta', 'esto', 'esos', 'esas', 'unos', 'unas', 'entre', 'desde',
+    'hasta', 'tiene', 'tienen', 'hacer', 'puede', 'pueden', 'mas', 'muy', 'sin',
+    'con', 'por', 'los', 'las', 'del', 'que', 'una', 'uno', 'tu', 'tus', 'te',
+    'ser', 'son', 'era', 'fue', 'hay', 'ya', 'lo', 'le', 'se', 'su', 'sus',
+    'negocio', 'negocios', 'paraguay',
+    // en
+    'the', 'and', 'for', 'with', 'your', 'you', 'this', 'that', 'from', 'have',
+    'has', 'are', 'was', 'were', 'will', 'can', 'business', 'website',
+]);
+
+function tokenize(text: string): string[] {
+    return text
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[̀-ͯ]/g, '')
+        .replace(/[^a-z0-9\s]/g, ' ')
+        .split(/\s+/)
+        .filter((w) => w.length > 3 && !STOP_WORDS.has(w));
+}
+
+/** Palabras que representan el tema de un artículo (keywords + título + resumen). */
+function topicTokens(post: BlogPost): Set<string> {
+    const raw = [
+        ...post.keywords,
+        ...post.keywordsEn,
+        post.title,
+        post.titleEn,
+        post.excerpt,
+        post.excerptEn,
+    ].join(' ');
+    return new Set(tokenize(raw));
+}
+
+/** Frases clave completas, que valen más que una palabra suelta. */
+function keywordPhrases(post: BlogPost): Set<string> {
+    return new Set(
+        [...post.keywords, ...post.keywordsEn].map((k) =>
+            k.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').trim()
+        )
+    );
+}
+
+/**
+ * Devuelve los artículos más afines al que se está leyendo.
+ * Puntaje: frase clave compartida (6) > misma categoría (4) > palabra de tema
+ * compartida (1, hasta 8) y un pequeño plus por ser reciente para desempatar.
+ */
+export function getRelatedPosts(post: BlogPost, limit = 4): BlogPost[] {
+    const myTopics = topicTokens(post);
+    const myPhrases = keywordPhrases(post);
+    const now = Date.now();
+
+    const scored = blogPosts
+        .filter((p) => p.slug !== post.slug)
+        .map((candidate) => {
+            let score = 0;
+
+            // Frases clave en común: la señal más fuerte de "mismo tema".
+            const phrases = keywordPhrases(candidate);
+            myPhrases.forEach((phrase) => {
+                if (phrases.has(phrase)) score += 6;
+            });
+
+            if (candidate.category === post.category) score += 4;
+
+            // Palabras de tema en común, con tope para que un artículo largo
+            // no gane solo por tener más texto.
+            const topics = topicTokens(candidate);
+            let shared = 0;
+            myTopics.forEach((t) => {
+                if (topics.has(t)) shared += 1;
+            });
+            score += Math.min(shared, 8);
+
+            // Desempate suave por frescura (máximo ~1 punto).
+            const ageDays = Math.max(0, (now - new Date(candidate.date).getTime()) / 86400000);
+            score += Math.max(0, 1 - ageDays / 900);
+
+            return { candidate, score };
+        })
+        .sort((a, b) => {
+            if (b.score !== a.score) return b.score - a.score;
+            return new Date(b.candidate.date).getTime() - new Date(a.candidate.date).getTime();
+        });
+
+    return scored.slice(0, limit).map((s) => s.candidate);
 }

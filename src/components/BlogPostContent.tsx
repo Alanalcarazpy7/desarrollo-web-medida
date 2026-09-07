@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import dynamic from 'next/dynamic';
 import { useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { BlogPost, blogPosts } from '@/lib/blog-data';
+import { BlogPost, blogPosts, getRelatedPosts } from '@/lib/blog-data';
 import { useLanguage } from '@/context/LanguageContext';
 import Navbar from '@/components/Navbar';
 
@@ -71,12 +71,9 @@ function BlogSidebar({ post, language }: { post: BlogPost; language: string }) {
         return Array.from(set);
     }, [isEs]);
 
-    const related = useMemo(() => {
-        const others = blogPosts.filter((p) => p.slug !== post.slug);
-        const sameCat = others.filter((p) => p.category === post.category);
-        const rest = others.filter((p) => p.category !== post.category);
-        return [...sameCat, ...rest].slice(0, 4);
-    }, [post.slug, post.category]);
+    // Relacionados por afinidad de tema con el artículo actual, no los
+    // primeros del array (antes salían siempre los mismos 4).
+    const related = useMemo(() => getRelatedPosts(post, 4), [post]);
 
     const submit = (e: React.FormEvent) => {
         e.preventDefault();

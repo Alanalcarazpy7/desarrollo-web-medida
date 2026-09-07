@@ -5,7 +5,9 @@ import type { NextRequest } from 'next/server';
 const locales = ['es', 'en'];
 const defaultLocale = 'es';
 
-export function middleware(request: NextRequest) {
+// Next 16 renombró la convención `middleware` a `proxy`: mismo comportamiento,
+// mismo matcher; solo cambian el nombre del archivo y el de la función.
+export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Check if there is any supported locale in the pathname
