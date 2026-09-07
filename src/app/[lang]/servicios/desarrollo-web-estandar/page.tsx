@@ -9,6 +9,7 @@ const BackgroundParticles = dynamic(() => import("@/components/BackgroundParticl
 import ServiceCard from "@/components/ServiceCard";
 import CTAButton from "@/components/CTAButton";
 import ServiceJsonLd from "@/components/ServiceJsonLd";
+import RelatedArticles from "@/components/RelatedArticles";
 import { buildServiceJsonLd } from "@/lib/service-schema";
 import { whatsappMessages } from "@/lib/whatsapp";
 
@@ -431,6 +432,15 @@ export default async function DesarrolloWebEstandarPage({ params }: Props) {
                     transform: translateY(-6px);
                 }
             `}} />
+
+            <RelatedArticles
+                lang={lang}
+                slugs={[
+                    "landing-page-vs-sitio-web",
+                    "cuanto-cuesta-pagina-web-paraguay",
+                    "importancia-web-profesional-2026",
+                ]}
+            />
 
             <Footer />
         </main>

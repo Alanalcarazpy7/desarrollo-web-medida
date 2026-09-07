@@ -28,6 +28,13 @@ export default function SpectacularNavbar() {
     });
     const { scrollYProgress } = useScroll();
 
+    // Se leen antes que los efectos porque el scrollspy necesita saber si
+    // estamos en el home (las secciones con ancla solo existen ahí).
+    const { language, t } = useLanguage();
+    const pathname = usePathname();
+    const router = useRouter();
+    const isHome = pathname === "/" || pathname === `/${language}`;
+
     const theme = {
         bg: "#000000",
         bgNav: "#050505",
@@ -81,6 +88,12 @@ export default function SpectacularNavbar() {
                 setScrolled(isScrolled);
             }
 
+            // Las secciones con ancla (#proceso, #precios...) solo existen en el
+            // home. Fuera del home hay páginas con ids que se llaman igual (por
+            // ejemplo la de proyectos tiene un #proyectos), y medirlas hacía que
+            // el navbar creyera estar en una sección del home que no está viendo.
+            if (!isHome) return;
+
             const viewCenter = scrollY + window.innerHeight / 2;
             let currentSection = "";
             let minDistance = Infinity;
@@ -116,12 +129,7 @@ export default function SpectacularNavbar() {
         measure();
 
         return () => window.removeEventListener("scroll", onScroll);
-    }, []);
-
-    const { language, t } = useLanguage();
-    const pathname = usePathname();
-    const router = useRouter();
-    const isHome = pathname === "/" || pathname === `/${language}`;
+    }, [isHome]);
 
     // El navegador/Next puede intentar restaurar el hash por su cuenta al
     // mismo tiempo que hacemos el scroll controlado. En móviles esa doble
@@ -171,15 +179,62 @@ export default function SpectacularNavbar() {
         router.push(destination);
     };
 
-    const navItems = [
-        { label: t('navbar.home'), href: getNavHref("#inicio") },
-        { label: t('navbar.services'), href: `/${language}/servicios` },
-        { label: t('navbar.process'), href: getNavHref("#proceso") },
-        { label: t('navbar.projects'), href: getNavHref("#proyectos") },
-        { label: t('navbar.pricing'), href: getNavHref("#precios") },
-        { label: t('navbar.blog'), href: `/${language}/blog` },
-        { label: t('navbar.contact'), href: getNavHref("#contacto") },
+    /**
+     * El menú mezcla dos cosas distintas:
+     *  - anclas del home (#proceso, #precios...), que solo existen en /es
+     *  - rutas propias (/es/servicios, /es/blog)
+     *
+     * Antes el "activo" se calculaba con `item.href.substring(1)`, que sobre
+     * "/es#proyectos" devolvía "es#proyectos" y no coincidía nunca con el id de
+     * la sección: en la práctica no se marcaba ninguna sección del home, y las
+     * rutas se resolvían comparando la etiqueta con el texto "Blog".
+     *
+     * Ahora cada ítem declara qué es y qué rutas le corresponden, así el estado
+     * activo funciona igual navegando por el menú que desplazándose a mano.
+     */
+    const navItems: {
+        label: string;
+        href: string;
+        /** Id de la sección del home, si el ítem apunta a un ancla. */
+        sectionId?: string;
+        /** Rutas propias que también deben marcar este ítem. */
+        routes?: string[];
+    }[] = [
+        { label: t('navbar.home'), href: getNavHref("#inicio"), sectionId: "inicio" },
+        {
+            label: t('navbar.services'),
+            href: `/${language}/servicios`,
+            routes: [`/${language}/servicios`],
+        },
+        { label: t('navbar.process'), href: getNavHref("#proceso"), sectionId: "proceso" },
+        {
+            label: t('navbar.projects'),
+            href: getNavHref("#proyectos"),
+            sectionId: "proyectos",
+            // La sección vive en el home, pero también hay página propia.
+            routes: [`/${language}/proyectos`, `/${language}/projects`],
+        },
+        { label: t('navbar.pricing'), href: getNavHref("#precios"), sectionId: "precios" },
+        {
+            label: t('navbar.blog'),
+            href: `/${language}/blog`,
+            routes: [`/${language}/blog`],
+        },
+        { label: t('navbar.contact'), href: getNavHref("#contacto"), sectionId: "contacto" },
     ];
+
+    // Una ruta propia siempre gana sobre el scroll: si estás en /es/servicios o
+    // en un artículo del blog, ese es el ítem marcado, sin importar la sección
+    // que quede en el centro de la pantalla.
+    const currentPath = pathname.replace(/\/$/, "");
+    const routeItem = navItems.find((item) =>
+        item.routes?.some((r) => currentPath === r || currentPath.startsWith(`${r}/`))
+    );
+    const activeLabel = routeItem
+        ? routeItem.label
+        : isHome
+            ? navItems.find((item) => item.sectionId === activeSection)?.label ?? null
+            : null;
 
     return (
         <>
@@ -309,7 +364,7 @@ export default function SpectacularNavbar() {
                         {/* NAVEGACIÓN DESKTOP - MODERNA Y COMPACTA (Fix Overlap) */}
                         <div className="hidden xl:flex items-center gap-2">
                             {navItems.map((item, i) => {
-                                const isActive = (activeSection === item.href.substring(1) && isHome) || (item.label === "Blog" && pathname.includes("/blog"));
+                                const isActive = item.label === activeLabel;
                                 const destination = item.href;
                                 return (
                                     <motion.div
@@ -582,7 +637,7 @@ export default function SpectacularNavbar() {
                             {/* Enlaces del menú más compactos */}
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', padding: '0 24px' }}>
                                 {navItems.map((item, i) => {
-                                    const isActive = (activeSection === item.href.substring(1) && isHome) || (item.label === "Blog" && pathname.includes("/blog"));
+                                    const isActive = item.label === activeLabel;
                                     const destination = item.href;
                                     return (
                                         <motion.div
@@ -604,22 +659,6 @@ export default function SpectacularNavbar() {
                                                 border: `1px solid ${isActive ? theme.accent + '30' : 'rgba(255,255,255,0.02)'}`,
                                                 transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                                                 cursor: 'pointer'
-                                            }}
-                                            onMouseEnter={(e) => {
-                                                if (!isActive) {
-                                                    e.currentTarget.style.borderColor = `${theme.accent}40`;
-                                                    e.currentTarget.style.boxShadow = `0 10px 40px rgba(0, 217, 255, 0.1)`;
-                                                    const span = e.currentTarget.querySelector('.nav-item-text') as HTMLElement;
-                                                    if (span) span.style.color = theme.accent;
-                                                }
-                                            }}
-                                            onMouseLeave={(e) => {
-                                                if (!isActive) {
-                                                    e.currentTarget.style.borderColor = 'rgba(255,255,255,0.02)';
-                                                    e.currentTarget.style.boxShadow = 'none';
-                                                    const span = e.currentTarget.querySelector('.nav-item-text') as HTMLElement;
-                                                    if (span) span.style.color = theme.text;
-                                                }
                                             }}
                                         >
                                             <span

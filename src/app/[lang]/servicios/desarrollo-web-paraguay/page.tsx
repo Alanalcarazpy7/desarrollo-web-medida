@@ -7,6 +7,7 @@ const Footer = dynamic(() => import("@/components/Footer"));
 const BackgroundParticles = dynamic(() => import("@/components/BackgroundParticles"));
 import ServiceCard from "@/components/ServiceCard";
 import CTAButton from "@/components/CTAButton";
+import RelatedArticles from "@/components/RelatedArticles";
 
 type Props = {
   params: Promise<{ lang: string }>;
@@ -663,6 +664,15 @@ export default async function DesarrolloWebParaguayPage({ params }: Props) {
           </div>
         </section>
       </article>
+
+      <RelatedArticles
+        lang={lang}
+        slugs={[
+          "cuanto-cuesta-pagina-web-paraguay",
+          "registrar-dominio-com-py-paraguay",
+          "landing-page-vs-sitio-web",
+        ]}
+      />
 
       <Footer />
     </main>

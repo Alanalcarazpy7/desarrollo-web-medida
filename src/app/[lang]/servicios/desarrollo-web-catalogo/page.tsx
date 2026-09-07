@@ -9,6 +9,7 @@ const BackgroundParticles = dynamic(() => import("@/components/BackgroundParticl
 import ServiceCard from "@/components/ServiceCard";
 import CTAButton from "@/components/CTAButton";
 import ServiceJsonLd from "@/components/ServiceJsonLd";
+import RelatedArticles from "@/components/RelatedArticles";
 import { buildServiceJsonLd } from "@/lib/service-schema";
 import { whatsappMessages } from "@/lib/whatsapp";
 
@@ -407,6 +408,15 @@ export default async function DesarrolloWebCatalogoPage({ params }: Props) {
                     transform: translateY(-4px);
                 }
             `}} />
+
+            <RelatedArticles
+                lang={lang}
+                slugs={[
+                    "menu-digital-qr-restaurantes-paraguay",
+                    "medios-de-pago-online-paraguay",
+                    "tendencias-ecommerce-2026",
+                ]}
+            />
 
             <Footer />
         </main>
