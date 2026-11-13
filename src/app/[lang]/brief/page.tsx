@@ -7,10 +7,16 @@ import { getWhatsAppLink } from '@/lib/whatsapp';
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await params;
+  const es = lang === 'es';
+  const title = es ? 'Contanos tu proyecto' : 'Tell us about your project';
+  const description = es ? 'Completá el formulario de SolvaTech para contarnos qué necesitás y preparar una propuesta. Aproximadamente 4–6 minutos, sin compromiso.' : 'Complete the SolvaTech project form so we can prepare a relevant proposal. About 4–6 minutes, with no obligation. The form is in Spanish.';
+  const url = `https://solvatech.com.py/${lang}/brief`;
   return {
-    title: lang === 'es' ? 'Contanos tu proyecto' : 'Tell us about your project',
-    description: lang === 'es' ? 'Prepará el alcance de tu web o sistema con el brief de SolvaTech.' : 'Prepare your website or software project brief with SolvaTech.',
-    alternates: { canonical: `https://solvatech.com.py/${lang}/brief` },
+    title,
+    description,
+    alternates: { canonical: url },
+    openGraph: { title: `${title} | SolvaTech`, description, url, siteName: 'SolvaTech', type: 'website', locale: es ? 'es_PY' : 'en_US', images: [{ url: 'https://solvatech.com.py/solvetech-logo.png', width: 1024, height: 1024, alt: 'SolvaTech' }] },
+    twitter: { card: 'summary', title: `${title} | SolvaTech`, description, images: ['https://solvatech.com.py/solvetech-logo.png'] },
     // Useful to share directly. It does not compete with commercial SEO pages.
     robots: { index: false, follow: true },
   };
