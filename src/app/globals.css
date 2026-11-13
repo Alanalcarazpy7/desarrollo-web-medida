@@ -1003,34 +1003,60 @@ summary:focus-visible,
 .blog-article .article-note p:last-child{margin-bottom:0}
 .article-note-warning{border-left-color:#e8bb73;background:#272419}
 .contact-whatsapp-retry{display:block;padding:14px;border:1px solid #77d5a7;border-radius:8px;color:#b6f6d5;text-align:center;text-decoration:underline;text-underline-offset:4px}
-.brief-page{min-height:100dvh;background:#091522;color:#e7f5fb;padding:24px;--brief-accent:#79e3f0}
-.brief-header,.brief-layout,.brief-footer{max-width:1160px;margin-inline:auto}
-.brief-header{display:flex;justify-content:space-between;gap:20px;align-items:center;padding-block:8px 28px;border-bottom:1px solid #294052}
-.brief-header>a{display:flex;align-items:center;gap:12px;font-size:22px;font-weight:700;text-decoration:none;color:inherit}
-.brief-header>span,.brief-eyebrow,.brief-panel-label{font:12px/1.5 ui-monospace,monospace;letter-spacing:.07em;color:var(--brief-accent)}
-.brief-layout{display:grid;grid-template-columns:1.1fr 1fr;gap:72px;padding-block:86px}
-.brief-page h1{font-size:clamp(2.6rem,4.4vw,4.4rem);line-height:1.05;letter-spacing:-.045em;margin:20px 0 26px;text-wrap:balance}
-.brief-lead{font-size:18px;line-height:1.7;color:#b2c5d3;max-width:52ch}
-.brief-steps{padding-left:25px;margin-block:32px;display:grid;gap:16px;color:#d1e0e9}
-.brief-steps li::marker{color:var(--brief-accent);font-family:ui-monospace,monospace}
-.brief-small{font-size:13px;line-height:1.7;color:#a6bdce}
-.brief-panel{align-self:start;padding:34px;background:#12283b;border:1px solid #31556b;border-radius:16px}
-.brief-panel h2{font-size:30px;letter-spacing:-.035em;line-height:1.2;margin-block:20px}
-.brief-panel>p{line-height:1.7;color:#b2c5d3}
-.brief-primary,.brief-secondary{display:block;padding:16px 20px;border-radius:8px;text-decoration:none;text-align:center;font-weight:650;margin-top:20px}
-.brief-primary{background:var(--brief-accent);color:#091522}
-.brief-secondary{border:1px solid #54758b;color:#dbeaf2}
-.brief-download{display:block;margin-block:20px;color:var(--brief-accent);text-underline-offset:4px}
-.brief-pending{padding:18px;margin-block:24px;background:#1c3549;border-radius:8px}
-.brief-pending p{margin:10px 0 0;font-size:14px;line-height:1.65;color:#b2c5d3}
-.brief-footer{border-top:1px solid #294052;padding-block:24px;display:flex;justify-content:space-between;gap:20px;font-size:13px;color:#a6bdce}
-.brief-page a:focus-visible{outline:2px solid var(--brief-accent);outline-offset:5px}
-.brief-footer a,.brief-small a{color:#dbeaf2;text-underline-offset:4px}
+/* Project intake: the form action comes before supporting information. */
+.brief-page{--brief-accent:#00d9ff;--brief-muted:#aebdca;min-height:100dvh;color:#f5fbff;background:radial-gradient(ellipse at 85% 12%,#102c3d 0,transparent 48%),#050b12;padding:0 32px}
+.brief-header,.brief-layout,.brief-after,.brief-help,.brief-footer{max-width:1040px;margin-inline:auto}
+.brief-header{display:flex;justify-content:space-between;gap:24px;align-items:center;min-height:104px;border-bottom:1px solid #243441}
+.brief-brand{display:flex;align-items:center;gap:11px;text-decoration:none;color:#f5fbff}
+.brief-brand img{border-radius:9px}
+.brief-brand>span{font-size:25px;font-weight:750;line-height:1.05;letter-spacing:-.045em}
+.brief-brand>span>span{color:var(--brief-accent);font-weight:450}
+.brief-brand small{display:block;margin-top:7px;font-size:9px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:#9badbc}
+.brief-header-label{font-size:12px;color:var(--brief-muted)}
+.brief-layout{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:64px;padding-block:64px 56px}
+.brief-eyebrow{display:flex;align-items:center;gap:10px;font:11px/1.5 ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--brief-accent);margin:0 0 19px}
+.brief-eyebrow::before{content:"";display:block;width:25px;height:1px;background:currentColor}
+.brief-page h1{font-size:clamp(2.7rem,4.8vw,4.2rem);font-weight:750;line-height:1.04;letter-spacing:-.055em;margin:0 0 23px;max-width:10ch}
+.brief-page h1 span{color:var(--brief-accent)}
+.brief-lead{font-size:17px;line-height:1.75;color:#c2cfda;max-width:43ch;margin:0}
+.brief-intro-signature{font-size:12px;color:#9badbc;line-height:1.7;margin:24px 0 0}
+.brief-intro-signature>span{display:block;color:#eef9fc;font-size:13px;font-weight:600}
+.brief-panel{position:relative;background:#eef9fc;color:#132c3d;padding:32px;border:1px solid #d9e8ee;border-radius:18px;box-shadow:0 24px 70px #0003}
+.brief-panel::before{content:"";position:absolute;inset:0 auto 0 0;width:4px;border-radius:18px 0 0 18px;background:var(--brief-accent)}
+.brief-document-heading{display:flex;align-items:center;gap:14px}
+.brief-document-heading>svg{flex-shrink:0;color:#26708a}
+.brief-panel h2{font-size:23px;font-weight:750;letter-spacing:-.035em;line-height:1.2;margin:0}
+.brief-form-meta{display:flex;flex-wrap:wrap;gap:8px 15px;align-items:center;margin:20px 0;color:#456173;font-size:12px;line-height:1.5}
+.brief-form-meta>span+span{padding-left:15px;border-left:1px solid #b3cbd6}
+.brief-primary{display:flex;align-items:center;justify-content:center;gap:14px;min-height:56px;width:100%;padding:16px 20px;border:1px solid #00c5e8;border-radius:9px;background:var(--brief-accent);color:#041b24;text-decoration:none;text-align:center;font-size:16px;font-weight:750;line-height:1.4;transition:background .15s,box-shadow .15s}
+.brief-primary:hover{background:#53e6ff;box-shadow:0 3px 15px #00a4c422}
+.brief-form-note{margin:13px 0 0;font-size:12px;line-height:1.65;color:#456173}
+.brief-form-reassurance{display:flex;align-items:flex-start;gap:9px;margin-top:23px;padding-top:19px;border-top:1px solid #c9dfe8}
+.brief-form-reassurance>svg{flex-shrink:0;margin-top:2px;color:#126b65}
+.brief-form-reassurance p{font-size:12px;line-height:1.7;color:#35566a;margin:0}
+.brief-pending{margin:22px 0;padding:15px;border-radius:8px;background:#d9eaf0;font-size:14px;line-height:1.6}
+.brief-pending p{margin-top:8px}
+.brief-after{padding-top:30px;border-top:1px solid #243441}
+.brief-after>h2{font-size:19px;font-weight:650;letter-spacing:-.025em;margin:0 0 23px}
+.brief-steps{list-style:none;counter-reset:brief-step;display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin:0;padding:0}
+.brief-steps>li{counter-increment:brief-step;position:relative;padding-left:35px}
+.brief-steps>li::before{content:counter(brief-step,decimal-leading-zero);position:absolute;left:0;top:1px;font:11px/1.7 ui-monospace,monospace;color:var(--brief-accent)}
+.brief-steps h3{font-size:14px;font-weight:600;margin:0 0 7px;line-height:1.5}
+.brief-steps p{font-size:13px;line-height:1.75;margin:0;color:var(--brief-muted)}
+.brief-help{display:flex;align-items:center;flex-wrap:wrap;gap:4px 12px;padding-block:36px;font-size:13px;line-height:1.7;color:var(--brief-muted)}
+.brief-help p{margin:0}
+.brief-help a{color:#b8f1ff;text-underline-offset:4px}
+.brief-footer{border-top:1px solid #243441;min-height:74px;padding-block:23px;display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:11px;color:#9badbc}
+.brief-footer a{color:#bdcdd8;text-underline-offset:4px}
+.brief-page a:focus-visible{outline:3px solid var(--brief-accent);outline-offset:5px;border-radius:4px}
+.brief-panel a:focus-visible{outline-color:#065878}
 .pc-service-next{max-width:1100px;margin:40px auto;padding:28px 24px;border-block:1px solid #294052}
 .pc-service-next h2{font-size:clamp(24px,3vw,34px);color:#e7f5fb;margin-bottom:12px}
 .pc-service-next p{color:#a6bdce;line-height:1.7;margin-bottom:18px}
 .pc-service-next a{display:inline-block;color:#79e3f0;margin:0 24px 12px 0;text-decoration:underline;text-underline-offset:5px}
-@media(max-width:800px){.brief-page{padding:20px}.brief-layout{grid-template-columns:1fr;gap:36px;padding-block:42px}.brief-panel{padding:24px}.brief-header>span{display:none}.brief-footer{flex-direction:column}.blog-article .article-table-scroll th,.blog-article .article-table-scroll td{padding:12px;font-size:.9em}}
+@media(max-width:800px){.brief-page{padding-inline:20px}.brief-header{min-height:83px}.brief-header-label{display:none}.brief-layout{grid-template-columns:1fr;gap:26px;padding-block:30px 34px}.brief-page h1{font-size:40px;max-width:14ch;margin-bottom:15px}.brief-eyebrow{margin-bottom:14px;font-size:10px}.brief-lead{font-size:15px;line-height:1.65;max-width:50ch}.brief-intro-signature{display:none}.brief-panel{padding:24px}.brief-panel h2{font-size:21px}.brief-form-meta{margin-block:17px}.brief-form-reassurance{margin-top:18px;padding-top:16px}.brief-steps{grid-template-columns:1fr;gap:20px}.brief-after{padding-top:25px}.brief-help{padding-block:28px}.brief-footer{align-items:flex-start;flex-direction:column;gap:8px}.blog-article .article-table-scroll th,.blog-article .article-table-scroll td{padding:12px;font-size:.9em}}
+@media(max-width:360px){.brief-page{padding-inline:16px}.brief-layout{padding-top:25px;gap:22px}.brief-page h1{font-size:36px}.brief-panel{padding:21px}.brief-panel h2{font-size:19px}.brief-document-heading{gap:10px}.brief-form-meta{font-size:11px;gap:8px 10px}.brief-form-meta>span+span{padding-left:10px}}
+@media(prefers-reduced-motion:reduce){.brief-primary{transition:none}}
 
 /* Layout del artículo: contenido + panel lateral -------------------------
    El índice ("Contenido") va inline arriba del texto, plegable. El panel

@@ -22,25 +22,48 @@ export default async function BriefPage({ params }: { params: Promise<{ lang: st
   const es = lang === 'es';
   const formUrl = getBriefFormUrl();
   return <main className="brief-page">
-    <header className="brief-header"><Link href={`/${lang}`}><Image src="/icon.png" alt="SolvaTech" width={52} height={52} /><span>SolvaTech</span></Link><span>{es ? 'Brief de proyecto' : 'Project brief'}</span></header>
+    <header className="brief-header">
+      <Link className="brief-brand" href={`/${lang}`} aria-label={es ? 'SolvaTech · Ir al inicio' : 'SolvaTech · Home'}>
+        <Image src="/icon.png" alt="" width={46} height={46} priority />
+        <span>Solva<span>Tech</span><small>{es ? 'Desarrollo web a medida' : 'Custom web development'}</small></span>
+      </Link>
+      <span className="brief-header-label">{es ? 'De tu idea a una propuesta' : 'From your idea to a proposal'}</span>
+    </header>
     <div className="brief-layout">
-      <section>
-        <p className="brief-eyebrow">{es ? 'Empecemos por tu negocio' : 'Start with your business'}</p>
-        <h1>{es ? 'Contame qué necesitás. Pensemos el alcance.' : 'Tell us what you need. Let’s define the scope.'}</h1>
-        <p className="brief-lead">{es ? 'Unas preguntas sobre tu negocio, las funciones y el plazo para preparar una propuesta con contexto.' : 'A few questions about your business, features and timing help us prepare a relevant proposal.'}</p>
-        <ol className="brief-steps"><li>{es ? 'Tu negocio y cómo contactarte' : 'Your business and contact details'}</li><li>{es ? 'Qué debería hacer tu web o sistema' : 'What your website or system should do'}</li><li>{es ? 'Materiales, presupuesto y plazo' : 'Content, budget and timing'}</li></ol>
-        <p className="brief-small">{es ? 'Aproximadamente 4–6 minutos · Sin compromiso de contratación' : 'About 4–6 minutes · No commitment to purchase'}</p>
+      <section className="brief-intro" aria-labelledby="brief-title">
+        <p className="brief-eyebrow">{es ? 'El próximo paso' : 'The next step'}</p>
+        <h1 id="brief-title">{es ? <>Contanos tu <span>proyecto.</span></> : <>Tell us about your <span>project.</span></>}</h1>
+        <p className="brief-lead">{es ? 'Unas preguntas sobre tu negocio y lo que necesitás. Con eso puedo preparar una propuesta pensada para vos.' : 'A few questions about your business and what you need help me prepare a proposal that fits.'}</p>
+        <p className="brief-intro-signature">{es ? 'Lo reviso personalmente.' : 'I review it personally.'}<span>Alan · SolvaTech</span></p>
       </section>
       <section className="brief-panel" aria-labelledby="brief-next">
-        <span className="brief-panel-label">{es ? 'De la idea a una propuesta' : 'From an idea to a proposal'}</span>
-        <h2 id="brief-next">{es ? 'Toda la información, en un solo lugar.' : 'The important details, together.'}</h2>
-        <p>{es ? 'Al enviar el formulario de Google, tus respuestas quedan guardadas y SolvaTech recibe un aviso para revisar tu proyecto.' : 'Submitting the Google Form saves your answers and notifies SolvaTech to review your project. The form is in Spanish.'}</p>
-        {formUrl ? <a className="brief-primary" href={formUrl} target="_blank" rel="noopener noreferrer">{es ? 'Completar mi brief en Google Forms ↗' : 'Complete my brief in Google Forms ↗'}</a>
-          : <div className="brief-pending" role="status"><strong>{es ? 'El formulario online todavía no está habilitado.' : 'The online form is not enabled yet.'}</strong><p>{es ? 'Podés adelantar tu idea por WhatsApp mientras se activa.' : 'You can describe your idea through WhatsApp while it is being activated.'}</p></div>}
-        <a className="brief-secondary" href={getWhatsAppLink(es ? 'Hola, quiero preparar un brief para mi proyecto. Mi negocio es: ' : 'Hi, I would like to prepare a brief for my project. My business is: ')} target="_blank" rel="noopener noreferrer">{es ? 'Consultar primero por WhatsApp' : 'Ask first on WhatsApp'}</a>
-        <p className="brief-small">{es ? 'No incluyas contraseñas ni documentos de clientes.' : 'Do not include passwords or customer documents.'} <Link href={`/${lang}/politica-de-privacidad`}>{es ? 'Privacidad' : 'Privacy'}</Link></p>
+        <div className="brief-document-heading">
+          <svg aria-hidden="true" width="26" height="30" viewBox="0 0 26 30" fill="none"><path d="M5 1h10l7 7v19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2Z" stroke="currentColor" strokeWidth="1.5" /><path d="M15 1v8h7M8 15h9M8 20h9" stroke="currentColor" strokeWidth="1.5" /></svg>
+          <h2 id="brief-next">{es ? 'Formulario del proyecto' : 'Project form'}</h2>
+        </div>
+        <div className="brief-form-meta"><span>{es ? '4–6 minutos aprox.' : 'About 4–6 minutes'}</span><span>{es ? 'Sin compromiso' : 'No obligation'}</span></div>
+        {formUrl ? <>
+          <a className="brief-primary" href={formUrl} aria-describedby="brief-form-note">
+            {es ? 'Abrir formulario' : 'Open the form'}
+            <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 12h15m-6-6 6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+          </a>
+          <p className="brief-form-note" id="brief-form-note">{es ? 'Se abre Google Forms en esta misma pestaña para que puedas completarlo.' : 'Opens Google Forms in this tab. The form is in Spanish.'}</p>
+        </> : <div className="brief-pending" role="status"><strong>{es ? 'El formulario todavía no está disponible.' : 'The form is not available yet.'}</strong><p>{es ? 'Podés contarme tu idea por WhatsApp.' : 'You can describe your idea on WhatsApp.'}</p></div>}
+        <div className="brief-form-reassurance">
+          <svg aria-hidden="true" width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4L19 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+          <p>{es ? 'Al enviarlo, tus respuestas quedan guardadas para revisar tu proyecto y seguir la conversación.' : 'Submitting saves your answers so I can review your project and continue our conversation.'}</p>
+        </div>
       </section>
     </div>
-    <footer className="brief-footer">SolvaTech · {es ? 'Desarrollo web y sistemas en Paraguay' : 'Web development and software in Paraguay'}<Link href={es ? '/es/proyectos' : '/en/projects'}>{es ? 'Ver nuestros trabajos' : 'See our work'}</Link></footer>
+    <section className="brief-after" aria-labelledby="brief-after-title">
+      <h2 id="brief-after-title">{es ? '¿Y después?' : 'What happens next?'}</h2>
+      <ol className="brief-steps">
+        <li><h3>{es ? 'Contás tu idea' : 'Describe your idea'}</h3><p>{es ? 'Tu negocio, lo que necesitás y el presupuesto que tenés previsto.' : 'Your business, what you need and your indicative budget.'}</p></li>
+        <li><h3>{es ? 'Reviso el proyecto' : 'I review the project'}</h3><p>{es ? 'Leo tus respuestas y evalúo qué solución tiene sentido para vos.' : 'I read your answers and assess which approach fits your needs.'}</p></li>
+        <li><h3>{es ? 'Seguimos conversando' : 'We continue the conversation'}</h3><p>{es ? 'Te contacto por el canal que elegiste para aclarar detalles y preparar la propuesta.' : 'I contact you through your preferred channel to clarify details and prepare a proposal.'}</p></li>
+      </ol>
+    </section>
+    <div className="brief-help"><p>{es ? '¿Tenés una duda antes de completar?' : 'Have a question before completing the form?'}</p><a href={getWhatsAppLink(es ? 'Hola, tengo una duda antes de completar el formulario de mi proyecto: ' : 'Hi, I have a question before completing the project form: ')}>{es ? 'Escribime por WhatsApp' : 'Ask me on WhatsApp'} ↗</a></div>
+    <footer className="brief-footer"><span>© SolvaTech · Paraguay</span><Link href={`/${lang}/politica-de-privacidad`}>{es ? 'Privacidad y uso de tus datos' : 'Privacy and use of your data'}</Link></footer>
   </main>;
 }
