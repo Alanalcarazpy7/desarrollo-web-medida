@@ -7,6 +7,7 @@ const Navbar = dynamic(() => import("@/components/Navbar"));
 const Footer = dynamic(() => import("@/components/Footer"));
 const BackgroundParticles = dynamic(() => import("@/components/BackgroundParticles"));
 import ServiceCard from "@/components/ServiceCard";
+import ServiceDetailContent from "@/components/ServiceDetailContent";
 import CTAButton from "@/components/CTAButton";
 import ServiceJsonLd from "@/components/ServiceJsonLd";
 import RelatedArticles from "@/components/RelatedArticles";
@@ -105,7 +106,7 @@ export default async function DesarrolloWebBasicaPage({ params }: Props) {
         },
         {
             title: "Optimización de Carga",
-            desc: "Desarrollada con código limpio para que cargue en menos de 2 segundos en celulares con conexiones de datos móviles estándar en Paraguay."
+            desc: "Optimizamos imágenes y recursos para facilitar la carga en celulares. El tiempo real depende del dispositivo, la conexión y el contenido publicado."
         },
         {
             title: "Sin Costos Ocultos",
@@ -118,7 +119,7 @@ export default async function DesarrolloWebBasicaPage({ params }: Props) {
         },
         {
             title: "Loading Speed Optimization",
-            desc: "Developed with clean code so that it loads in less than 2 seconds on mobile phones with standard mobile data connections in Paraguay."
+            desc: "We optimise images and resources for mobile loading. Actual speed depends on the device, connection and published content."
         },
         {
             title: "No Hidden Costs",
@@ -369,6 +370,8 @@ export default async function DesarrolloWebBasicaPage({ params }: Props) {
                         </ul>
                     </ServiceCard>
                 </div>
+
+                <ServiceDetailContent lang={lang} slug="desarrollo-web-basica" />
 
                 {/* Por qué elegirnos */}
                 <div style={{ marginTop: "40px" }}>

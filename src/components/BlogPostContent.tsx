@@ -4,44 +4,14 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import dynamic from 'next/dynamic';
-import { useMemo, useState } from 'react';
+import { useMemo, useState, type ReactNode } from 'react';
 import { useRouter } from 'next/navigation';
-import { BlogPost, blogPosts, getRelatedPosts } from '@/lib/blog-data';
+import { type BlogPostSummary, blogSummaries as blogPosts, getRelatedPosts } from '@/lib/blog-index';
+import type { ArticleSection } from '@/lib/blog-render';
 import { useLanguage } from '@/context/LanguageContext';
 import Navbar from '@/components/Navbar';
 
-/**
- * Toma el HTML del artículo, le pone un id a cada <h2> y devuelve además la
- * lista de secciones para armar el índice. Así el índice sale solo en todos
- * los artículos, viejos y nuevos, sin tocar el contenido a mano.
- */
-function buildArticle(raw: string) {
-    const toc: { id: string; text: string }[] = [];
-    const used = new Set<string>();
-
-    const html = raw.replace(/<h2([^>]*)>([\s\S]*?)<\/h2>/gi, (match, attrs: string, inner: string) => {
-        if (/\sid=/.test(attrs)) return match;
-        const text = inner.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
-        if (!text) return match;
-
-        let id = text
-            .toLowerCase()
-            .normalize('NFD')
-            .replace(/[̀-ͯ]/g, '')
-            .replace(/[^a-z0-9\s-]/g, '')
-            .trim()
-            .replace(/\s+/g, '-')
-            .slice(0, 60);
-        if (!id) id = `seccion-${toc.length + 1}`;
-        while (used.has(id)) id = `${id}-${toc.length + 1}`;
-        used.add(id);
-
-        toc.push({ id, text });
-        return `<h2${attrs} id="${id}">${inner}</h2>`;
-    });
-
-    return { html, toc };
-}
+// Article bodies and heading IDs are prepared by the server route.
 
 const SnowEffect = dynamic(() => import('@/components/SnowEffect'), { 
     ssr: false,
@@ -51,7 +21,9 @@ const SnowEffect = dynamic(() => import('@/components/SnowEffect'), {
 const Footer = dynamic(() => import("@/components/Footer"), { ssr: true });
 
 type Props = {
-    post: BlogPost;
+    post: BlogPostSummary;
+    toc: ArticleSection[];
+    children: ReactNode;
 };
 
 /**
@@ -60,7 +32,7 @@ type Props = {
  * (links a /blog?cat=) y articulos relacionados, para que el lector tenga mas
  * contenido a mano sin llegar al pie de pagina.
  */
-function BlogSidebar({ post, language }: { post: BlogPost; language: string }) {
+function BlogSidebar({ post, language }: { post: BlogPostSummary; language: string }) {
     const router = useRouter();
     const [q, setQ] = useState('');
     const isEs = language === 'es';
@@ -148,7 +120,7 @@ function BlogSidebar({ post, language }: { post: BlogPost; language: string }) {
                         ? 'Te pasamos alcance, precio y fecha de entrega sin vueltas.'
                         : 'We send you scope, price and delivery date, no runaround.'}
                 </p>
-                <Link href={`/${language}/#contacto`} className="blog-side-cta-btn">
+                <Link href={`/${language}/brief`} className="blog-side-cta-btn">
                     {isEs ? 'Pedir presupuesto' : 'Get a quote'}
                 </Link>
             </div>
@@ -156,7 +128,7 @@ function BlogSidebar({ post, language }: { post: BlogPost; language: string }) {
     );
 }
 
-export default function BlogPostContent({ post }: Props) {
+export default function BlogPostContent({ post, toc, children }: Props) {
     const { language } = useLanguage();
 
     const theme = {
@@ -172,16 +144,14 @@ export default function BlogPostContent({ post }: Props) {
         leadEditor: language === 'es' ? 'SolvaTech Editor Principal' : 'SolvaTech Lead Editor',
         lectura: language === 'es' ? 'lectura' : 'read',
         gusto: language === 'es' ? '¿Te gustó este artículo?' : 'Did you like this article?',
-        suscribete: language === 'es' ? 'Suscríbete a nuestro newsletter o contáctanos para implementar estas estrategias en tu negocio.' : 'Subscribe to our newsletter or contact us to implement these strategies in your business.',
-        contactar: language === 'es' ? 'Contactar Experto' : 'Contact Expert',
+        suscribete: language === 'es' ? 'Ordená tu idea, las funciones y el plazo en el brief de SolvaTech para preparar una propuesta con contexto.' : 'Describe your idea, features and timing in the SolvaTech brief so we can prepare a relevant proposal.',
+        contactar: language === 'es' ? 'Preparar mi brief' : 'Prepare my brief',
         verMas: language === 'es' ? 'Ver más artículos' : 'See more articles',
         seguirLeyendo: language === 'es' ? 'Seguir leyendo' : 'Keep reading'
     };
 
     const displayTitle = language === 'es' ? post.title : post.titleEn;
     const displayCategory = language === 'es' ? post.category : post.categoryEn;
-    const displayContent = language === 'es' ? post.content : (post.contentEn || post.content);
-    const { html: articleHtml, toc } = useMemo(() => buildArticle(displayContent), [displayContent]);
 
     return (
         <article style={{
@@ -377,6 +347,7 @@ export default function BlogPostContent({ post }: Props) {
                             </svg>
                             <span style={{ color: '#ccc', fontSize: '15px', fontWeight: 600 }}>
                                 {post.date}
+                                {post.updatedAt && <> · {language === 'es' ? 'Actualizado' : 'Updated'} {post.updatedAt}</>}
                             </span>
                         </div>
                         
@@ -556,10 +527,7 @@ export default function BlogPostContent({ post }: Props) {
                     )}
 
                     {/* Content */}
-                    <div
-                        className="blog-article"
-                        dangerouslySetInnerHTML={{ __html: articleHtml }}
-                    />
+                    {children}
                 </motion.div>
 
                 {/* CTA Section más decorada */}
@@ -643,7 +611,7 @@ export default function BlogPostContent({ post }: Props) {
                             gap: '20px',
                             flexWrap: 'wrap'
                         }}>
-                            <Link href={`/${language}/#contacto`} style={{ textDecoration: 'none' }}>
+                            <Link href={`/${language}/brief`} style={{ textDecoration: 'none' }}>
                                 <motion.button
                                     whileHover={{ scale: 1.05, y: -2 }}
                                     whileTap={{ scale: 0.98 }}

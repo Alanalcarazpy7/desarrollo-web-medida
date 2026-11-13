@@ -1,3 +1,5 @@
+import { getServiceFaqs } from './service-details';
+
 const BASE_URL = "https://solvatech.com.py";
 
 export type Faq = { q: string; a: string };
@@ -67,12 +69,14 @@ export function buildServiceJsonLd(input: ServiceJsonLdInput): ServiceJsonLdNode
     ],
   };
 
+  const faqs = [...(input.faqs || []), ...getServiceFaqs(input.path.split('/').pop() || '', locale)]
+    .filter((faq, index, all) => all.findIndex(item => item.q === faq.q) === index);
   const faqPage =
-    input.faqs && input.faqs.length > 0
+    faqs.length > 0
       ? {
           "@context": "https://schema.org",
           "@type": "FAQPage",
-          mainEntity: input.faqs.map((f) => ({
+          mainEntity: faqs.map((f) => ({
             "@type": "Question",
             name: f.q,
             acceptedAnswer: { "@type": "Answer", text: f.a },

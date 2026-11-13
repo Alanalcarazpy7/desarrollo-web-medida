@@ -105,6 +105,8 @@ export default function ProjectCaseContent({
         : `Hi, I saw the "${tr.title}" project on your site and I want something similar for my business.`;
 
     const isLive = project.accessType === "live" && Boolean(project.demoUrl);
+    const relatedService = project.categoryKey === 'systems' ? 'sistemas-informaticos-paraguay'
+        : project.categoryKey === 'ecommerce' ? 'desarrollo-web-catalogo' : 'desarrollo-web-paraguay';
 
     return (
         <main className="pc">
@@ -367,6 +369,12 @@ export default function ProjectCaseContent({
                 )}
             </div>
 
+            <section className="pc-service-next">
+                <h2>{isEs ? '¿Necesitás resolver algo parecido?' : 'Need to solve a similar problem?'}</h2>
+                <p>{isEs ? 'El próximo paso es definir el alcance y las funciones para tu negocio.' : 'The next step is defining the scope and features for your business.'}</p>
+                <Link href={`/${lang}/servicios/${relatedService}`}>{isEs ? 'Ver el servicio relacionado' : 'See the related service'} →</Link>
+                <Link href={`/${lang}/brief`}>{isEs ? 'Preparar mi brief' : 'Prepare my brief'} →</Link>
+            </section>
             <RelatedArticles lang={lang} slugs={ARTICLES_BY_CATEGORY[project.categoryKey]} />
 
             <Footer />

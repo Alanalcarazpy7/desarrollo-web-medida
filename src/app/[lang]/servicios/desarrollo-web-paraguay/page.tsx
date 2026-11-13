@@ -6,6 +6,8 @@ const Navbar = dynamic(() => import("@/components/Navbar"));
 const Footer = dynamic(() => import("@/components/Footer"));
 const BackgroundParticles = dynamic(() => import("@/components/BackgroundParticles"));
 import ServiceCard from "@/components/ServiceCard";
+import ServiceDetailContent from "@/components/ServiceDetailContent";
+import { getServiceFaqs } from "@/lib/service-details";
 import CTAButton from "@/components/CTAButton";
 import RelatedArticles from "@/components/RelatedArticles";
 
@@ -25,8 +27,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     : "Web Development in Paraguay | Websites & Custom Systems";
 
   const description = isEs
-    ? "Estudio de desarrollo web en Paraguay. Páginas web, landing pages, catálogos, tiendas online y sistemas a medida para negocios de Asunción, Central, Areguá y todo el país. Dominio, hosting y WhatsApp incluidos. Pedí tu presupuesto."
-    : "Web development studio in Paraguay. Websites, landing pages, catalogs, online stores and custom systems for businesses in Asunción and across the country. Domain, hosting and WhatsApp included. Request a quote.";
+    ? "Desarrollo web en Paraguay: páginas para negocios, catálogos, tiendas online y sistemas a medida. Compará alcances, trabajos y planes de SolvaTech."
+    : "Web development in Paraguay: business websites, catalogues, online stores and custom systems. Compare SolvaTech project scopes, work and plans.";
 
   const keywords = isEs
     ? [
@@ -93,7 +95,7 @@ const CONTENT = {
       "Páginas web, landing pages y sistemas a medida para negocios de Asunción, Central, Areguá y todo el país.",
     intro: [
       "SolvaTech es un estudio de desarrollo web en Paraguay. Trabajás directo con el desarrollador, sin intermediarios ni tercerización. Hacemos páginas y sistemas para peluquerías, gimnasios, estudios contables, comercios, profesionales independientes y empresas que quieren dejar de depender solo de Instagram.",
-      "Cada proyecto se entrega con dominio, hosting y WhatsApp configurados, listo para recibir consultas. Y está pensado para el mercado local: precios en guaraníes, pedidos por WhatsApp, dominios .com.py y medios de pago paraguayos.",
+      "Definimos dominio, hosting y contacto según el plan y los servicios que ya tenés. Trabajamos con precios en guaraníes y recorridos adaptados a tu operación: consultas por WhatsApp, dominios .com.py e integraciones con proveedores que puedan confirmar la habilitación de tu comercio.",
     ],
     typesTitle: "¿Qué tipo de proyecto necesitás?",
     types: [
@@ -127,11 +129,11 @@ const CONTENT = {
           "No tenés que entender de dominios, servidores ni certificados. De todo eso nos encargamos nosotros y te entregamos la web funcionando.",
         ],
         list: [
-          "Registro de tu dominio .com o .com.py ante NIC-PY, o transferencia si ya tenés uno.",
-          "Hosting configurado y monitoreado. Todos los planes incluyen 6 meses sin costo.",
+          "Registro o conexión de dominio según el alcance: .com.py mediante su registro local y .com mediante un registrador compatible.",
+          "Hosting configurado según el proyecto; los planes de desarrollo indicados incluyen 6 meses, con renovación posterior detallada en la propuesta.",
           "Certificado de seguridad (el candado que esperan tus clientes) y conexión segura.",
           "Correo con tu dominio, del tipo info@tunegocio.com.py, en lugar de una casilla de Gmail.",
-          "Damos de alta tu web en Google para que empiece a aparecer cuando te buscan.",
+          "Configuración de sitemap, títulos y enlaces para facilitar el rastreo; Google decide la indexación y las posiciones.",
           "Optimización de velocidad e imágenes para que cargue rápido incluso con datos móviles.",
         ],
       },
@@ -142,7 +144,7 @@ const CONTENT = {
         ],
         list: [
           "WhatsApp Business: botón flotante y enlaces que abren el chat con un mensaje ya escrito. Es donde se cierran la mayoría de las ventas locales.",
-          "Medios de pago locales: integración con Pagopar, Bancard, Tigo Money, Billetera Personal o transferencia bancaria, según el proyecto.",
+          "Cobros según el proyecto y alta del comercio: transferencia verificada o integración con un producto de Bancard habilitado. La situación del proveedor se confirma antes de desarrollar; no asumimos operativo upay/Pagopar.",
           "Precios en guaraníes y textos en el español que se habla acá.",
           "Ubicación con Google Maps, que además ayuda a que te encuentren en búsquedas cercanas.",
           "Preparada para conectarse con facturación electrónica cuando lo necesites.",
@@ -238,7 +240,7 @@ const CONTENT = {
       "Websites, landing pages and custom systems for businesses in Asunción, Central, Areguá and across the country.",
     intro: [
       "SolvaTech is a web development studio in Paraguay. You work directly with the developer, with no middlemen and no outsourcing. We build sites and systems for salons, gyms, accounting firms, shops, independent professionals and companies that want to stop depending only on Instagram.",
-      "Every project is delivered with domain, hosting and WhatsApp already set up, ready to receive enquiries. And it is built for the local market: prices in guaraníes, WhatsApp orders, .com.py domains and Paraguayan payment methods.",
+      "Domain, hosting and contact setup depend on the plan and your existing services. We work with prices in guaraníes and journeys adapted to your operation: WhatsApp enquiries, .com.py domains and integrations with providers able to confirm merchant approval.",
     ],
     typesTitle: "What kind of project do you need?",
     types: [
@@ -272,11 +274,11 @@ const CONTENT = {
           "You do not need to understand domains, servers or certificates. We take care of all of that and hand you a working website.",
         ],
         list: [
-          "Registration of your .com or .com.py domain with NIC-PY, or transfer if you already have one.",
-          "Hosting set up and monitored. Every plan includes 6 months at no cost.",
+          "Domain registration or connection within scope: .com.py through its local registry and .com through a compatible registrar.",
+          "Hosting configured for the project; the listed development plans include 6 months, with later renewal detailed in the proposal.",
           "Security certificate (the padlock your clients expect) and a secure connection.",
           "Email on your own domain, like info@yourbusiness.com.py, instead of a Gmail address.",
-          "We submit your site to Google so it starts showing up when people search for you.",
+          "Sitemap, titles and links configured to support crawling; Google decides indexing and rankings.",
           "Speed and image optimization so it loads fast even on mobile data.",
         ],
       },
@@ -287,7 +289,7 @@ const CONTENT = {
         ],
         list: [
           "WhatsApp Business: a floating button and links that open the chat with a pre-written message. That is where most local sales close.",
-          "Local payment methods: integration with Pagopar, Bancard, Tigo Money, Billetera Personal or bank transfer, depending on the project.",
+          "Payments depend on scope and merchant approval: verified transfers or an enabled Bancard product. We confirm provider availability before development rather than assuming upay/Pagopar is operational.",
           "Prices in guaraníes and copy in the Spanish spoken here.",
           "Location with Google Maps, which also helps you show up in nearby searches.",
           "Ready to connect with electronic invoicing when you need it.",
@@ -440,7 +442,7 @@ export default async function DesarrolloWebParaguayPage({ params }: Props) {
   const faqLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: c.faqs.map((f) => ({
+    mainEntity: [...c.faqs, ...getServiceFaqs('desarrollo-web-paraguay', lang)].map((f) => ({
       "@type": "Question",
       name: f.q,
       acceptedAnswer: { "@type": "Answer", text: f.a },
@@ -614,6 +616,7 @@ export default async function DesarrolloWebParaguayPage({ params }: Props) {
         ))}
 
         <section style={{ marginBottom: "48px" }}>
+          <ServiceDetailContent lang={lang} slug="desarrollo-web-paraguay" />
           <h2 style={h2Style}>{c.faqTitle}</h2>
           <div style={{ display: "grid", gap: "12px", marginTop: "8px" }}>
             {c.faqs.map((f) => (
@@ -668,6 +671,7 @@ export default async function DesarrolloWebParaguayPage({ params }: Props) {
       <RelatedArticles
         lang={lang}
         slugs={[
+          "presupuesto-diseno-web-paraguay-que-incluir",
           "cuanto-cuesta-pagina-web-paraguay",
           "registrar-dominio-com-py-paraguay",
           "landing-page-vs-sitio-web",

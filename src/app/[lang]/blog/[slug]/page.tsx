@@ -1,4 +1,6 @@
-import { getPostBySlug } from '@/lib/blog-data';
+import { getPostBySlug, blogPosts } from '@/lib/blog-data';
+import { renderBlogArticle } from '@/lib/blog-render';
+import { addArticleVisuals } from '@/lib/blog-visuals';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import BlogPostContent from '@/components/BlogPostContent';
@@ -7,8 +9,13 @@ type Props = {
     params: Promise<{ lang: string; slug: string }>;
 };
 
+export function generateStaticParams() {
+    return blogPosts.flatMap((post) => ['es', 'en'].map((lang) => ({ lang, slug: post.slug })));
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { lang, slug } = await params;
+    if (lang !== 'es' && lang !== 'en') notFound();
     const post = getPostBySlug(slug);
 
     if (!post) {
@@ -49,6 +56,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             ],
             type: 'article',
             publishedTime: post.date,
+            modifiedTime: post.updatedAt || post.date,
             authors: [post.author],
         },
         twitter: {
@@ -62,6 +70,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function BlogPostPage({ params }: Props) {
     const { lang, slug } = await params;
+    if (lang !== 'es' && lang !== 'en') notFound();
     const post = getPostBySlug(slug);
 
     if (!post) return notFound();
@@ -72,6 +81,12 @@ export default async function BlogPostPage({ params }: Props) {
 
     const isEs = lang !== 'en';
     const content = isEs ? post.content : post.contentEn || post.content;
+    const { html, toc } = renderBlogArticle(addArticleVisuals(content, post.slug, isEs ? 'es' : 'en'), isEs ? 'es' : 'en');
+    // Only small metadata crosses the client boundary. The article is a
+    // server-rendered slot, never a bilingual body inside a browser bundle.
+    const { content: _esBody, contentEn: _enBody, ...summary } = post;
+    void _esBody;
+    void _enBody;
     // Palabras reales del artículo (sin las etiquetas HTML).
     const wordCount = content.replace(/<[^>]+>/g, ' ').trim().split(/\s+/).length;
 
@@ -95,7 +110,7 @@ export default async function BlogPostPage({ params }: Props) {
             }
         },
         datePublished: post.date,
-        dateModified: post.date,
+        dateModified: post.updatedAt || post.date,
         // Estos campos son los que hacen que cada artículo se lea como una
         // pieza distinta y no como más de lo mismo: sección, palabras clave
         // propias, idioma y extensión.
@@ -135,7 +150,9 @@ export default async function BlogPostPage({ params }: Props) {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
             />
-            <BlogPostContent post={post} />
+            <BlogPostContent post={summary} toc={toc}>
+                <div className="blog-article" dangerouslySetInnerHTML={{ __html: html }} />
+            </BlogPostContent>
         </>
     );
 }

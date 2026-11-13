@@ -8,6 +8,7 @@ const Navbar = dynamic(() => import("@/components/Navbar"));
 const Footer = dynamic(() => import("@/components/Footer"));
 const BackgroundParticles = dynamic(() => import("@/components/BackgroundParticles"));
 import ServiceCard from "@/components/ServiceCard";
+import ServiceDetailContent from "@/components/ServiceDetailContent";
 import CTAButton from "@/components/CTAButton";
 import ServiceJsonLd from "@/components/ServiceJsonLd";
 import RelatedArticles from "@/components/RelatedArticles";
@@ -79,7 +80,7 @@ export default async function DominioConfiguracionWebPage({ params }: Props) {
         "Creación de correos corporativos profesionales (ej. info@tuempresa.com)",
         "Configuración inicial de tu web para que quede lista y funcionando",
         "Asesoramiento en la elección del nombre de dominio más adecuado para tu marca",
-        "Protección de privacidad WHOIS incluida",
+        "Privacidad de registro según extensión y condiciones del registrador",
         "Soporte técnico durante todo el proceso de activación"
     ] : [
         "Custom domain name registration (.com, .net, .com.py)",
@@ -88,7 +89,7 @@ export default async function DominioConfiguracionWebPage({ params }: Props) {
         "Creation of professional corporate emails (e.g. info@yourcompany.com)",
         "Initial setup of your website so it's ready and working",
         "Guidance choosing the domain name that best fits your brand",
-        "WHOIS privacy protection included",
+        "Registration privacy subject to extension and registrar terms",
         "Technical support throughout the entire activation process"
     ];
 
@@ -352,6 +353,8 @@ export default async function DominioConfiguracionWebPage({ params }: Props) {
                     </ServiceCard>
                 </div>
 
+                <ServiceDetailContent lang={lang} slug="dominio-configuracion-web" />
+
                 {/* Por qué elegirnos */}
                 <div style={{ marginTop: "40px" }}>
                     <h2 style={{ fontSize: "1.75rem", fontWeight: 800, textAlign: "center", marginBottom: "32px" }}>{dict.ventajasTitle}</h2>
@@ -409,6 +412,7 @@ export default async function DominioConfiguracionWebPage({ params }: Props) {
             <RelatedArticles
                 lang={lang}
                 slugs={[
+                    "dominio-hosting-correo-empresa-paraguay",
                     "registrar-dominio-com-py-paraguay",
                     "cuanto-cuesta-pagina-web-paraguay",
                     "medios-de-pago-online-paraguay",

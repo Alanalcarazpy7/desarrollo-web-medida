@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import type { ReactNode } from "react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -36,9 +38,10 @@ interface ServiceItem {
 
 interface ServiciosPageContentProps {
     lang: string;
+    children?: ReactNode;
 }
 
-export default function ServiciosPageContent({ lang }: ServiciosPageContentProps) {
+export default function ServiciosPageContent({ lang, children }: ServiciosPageContentProps) {
     const isEs = lang === 'es';
     const router = useRouter();
     const [searchTerm, setSearchTerm] = useState("");
@@ -114,8 +117,8 @@ export default function ServiciosPageContent({ lang }: ServiciosPageContentProps
             price: isEs ? "Desde Gs. 3.550.000" : "From Gs. 3,550,000",
             priceSub: isEs ? "Pago único o desde ese monto" : "One-time or starting from",
             benefits: isEs
-                ? ["Todo lo de la Web Estándar, más diseño único desde cero", "10 a 15 páginas + animaciones y efectos al navegar", "Abre al instante, integraciones (reservas, chat, pagos) y opción 2 idiomas"]
-                : ["Everything in Standard, plus unique design from scratch", "10 to 15 pages + animations and effects while browsing", "Opens instantly, integrations (bookings, chat, payments) and optional 2 languages"],
+                ? ["Todo lo de la Web Estándar, más diseño único desde cero", "10 a 15 páginas + animaciones y efectos al navegar", "Optimización móvil, integraciones según alcance y opción de 2 idiomas"]
+                : ["Everything in Standard, plus unique design from scratch", "10 to 15 pages + animations and effects while browsing", "Mobile optimisation, scoped integrations and an optional second language"],
             whatsappKey: "pro",
             link: `/${lang}/servicios/desarrollo-web-pro`,
             icon: "💎",
@@ -124,6 +127,24 @@ export default function ServiciosPageContent({ lang }: ServiciosPageContentProps
             categoryEn: "Web Development",
             delivery: isEs ? "Entrega en 10-15 días" : "10-15 days delivery",
             type: isEs ? "PAGO ÚNICO" : "ONE-TIME"
+        },
+        {
+            id: "tienda_online",
+            title: isEs ? "Tienda Online" : "Online Store",
+            subtitle: isEs ? "Del producto al pedido y el cobro" : "From product to order and payment",
+            price: isEs ? "Cotización por alcance" : "Quoted by scope",
+            priceSub: isEs ? "Productos, cobro y entrega definidos antes de construir" : "Products, payment and delivery defined before development",
+            benefits: isEs
+                ? ["Catálogo, variantes y carrito", "Estados del pedido y confirmación de cobro", "Entrega y administración según tu operación"]
+                : ["Catalogue, variants and cart", "Order statuses and payment verification", "Fulfilment and administration for your operation"],
+            whatsappKey: "sistema",
+            link: `/${lang}/servicios/desarrollo-tiendas-online-paraguay`,
+            icon: "🛒",
+            image: "/projects/VasosPy-termos.png",
+            category: "Desarrollo Web",
+            categoryEn: "Web Development",
+            delivery: isEs ? "Plazo según alcance" : "Timeline by scope",
+            type: isEs ? "PROYECTO A MEDIDA" : "CUSTOM PROJECT"
         },
         {
             id: "sistemas_medida",
@@ -468,7 +489,7 @@ export default function ServiciosPageContent({ lang }: ServiciosPageContentProps
 
                                         const handleCardClick = (e: React.MouseEvent) => {
                                             const target = e.target as HTMLElement;
-                                            if (target.closest('.whatsapp-pill-btn')) {
+                                            if (target.closest('a')) {
                                                 return;
                                             }
                                             trackEvent('click_service_detail', { source: 'services_list', service: service.title, lang });
@@ -643,7 +664,10 @@ export default function ServiciosPageContent({ lang }: ServiciosPageContentProps
                                                                 transition: 'color 0.3s'
                                                             }}
                                                         >
-                                                            {service.title}
+                                                            <Link href={service.link} className="service-card-detail-link"
+                                                                onClick={() => trackEvent('click_service_detail', { source: 'services_list', service: service.title, lang })}>
+                                                                {service.title}<span className="sr-only"> · {isEs ? 'Ver alcance y detalles' : 'View scope and details'}</span>
+                                                            </Link>
                                                         </h3>
 
                                                         {/* Subtitle */}
@@ -815,6 +839,8 @@ export default function ServiciosPageContent({ lang }: ServiciosPageContentProps
                         </AnimatePresence>
                     </div>
                 </section>
+
+                {children}
 
                 {/* Por qué elegir SolvaTech */}
                 <section style={{ position: "relative", width: "100%", maxWidth: "1200px", margin: "0 auto", padding: "40px 24px 80px" }}>

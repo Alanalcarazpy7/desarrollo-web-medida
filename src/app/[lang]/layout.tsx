@@ -13,6 +13,11 @@ const inter = Inter({
   display: "swap",
 });
 
+// Public locales are known at build time, including their article/project URLs.
+export function generateStaticParams() {
+  return [{ lang: 'es' }, { lang: 'en' }];
+}
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://solvatech.com.py"),
   title: {

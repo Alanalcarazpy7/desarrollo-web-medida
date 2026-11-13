@@ -39,3 +39,13 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Local guidance, audits, authoring helpers and client brief setup
+/.agents/
+/.claude/
+/.codex/
+/docs/
+/integrations/google-forms/
+/TEMP_*.md
+/public/recursos/*brief*.txt
+/scripts/audit-local-seo.cjs

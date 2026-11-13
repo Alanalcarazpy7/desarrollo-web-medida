@@ -7,6 +7,7 @@ const Navbar = dynamic(() => import("@/components/Navbar"));
 const Footer = dynamic(() => import("@/components/Footer"));
 const BackgroundParticles = dynamic(() => import("@/components/BackgroundParticles"));
 import ServiceCard from "@/components/ServiceCard";
+import ServiceDetailContent from "@/components/ServiceDetailContent";
 import CTAButton from "@/components/CTAButton";
 import ServiceJsonLd from "@/components/ServiceJsonLd";
 import RelatedArticles from "@/components/RelatedArticles";
@@ -83,7 +84,7 @@ export default async function DesarrolloWebProPage({ params }: Props) {
         "Diseño 100% único, creado desde cero para tu empresa (nada de bases)",
         "10 a 15 páginas: por servicio, por sucursal o por línea de negocio",
         "Animaciones y efectos al navegar, para una experiencia premium",
-        "Optimizada para abrir al instante, incluso con internet lento",
+        "Optimización de recursos e imágenes para facilitar la navegación móvil",
         "Formularios avanzados y cotizadores a medida",
         "Integraciones: reservas, chat, sistema de clientes o pagos",
         "Opción de tener la web en dos idiomas y blog para publicar vos mismo",
@@ -94,7 +95,7 @@ export default async function DesarrolloWebProPage({ params }: Props) {
         "100% unique design, built from scratch for your company (no base templates)",
         "10 to 15 pages: by service, by branch or by line of business",
         "Animations and effects while browsing, for a premium experience",
-        "Optimized to open instantly, even on slow internet",
+        "Resource and image optimisation for mobile browsing",
         "Advanced forms and custom quote engines",
         "Integrations: bookings, chat, client system or payments",
         "Optional two-language site and a blog you can update yourself",
@@ -172,8 +173,8 @@ export default async function DesarrolloWebProPage({ params }: Props) {
         h1: isEs ? "Web Pro para tu empresa" : "Pro website for your company",
         whyTitle: isEs ? "Presencia Corporativa Premium" : "Premium Corporate Presence",
         whyDesc: isEs
-            ? "Una empresa líder necesita una web a la altura de su operación. La Web Pro es un sitio grande, con diseño único, hecho para abrir al instante en el celular y guiar a cada tipo de cliente a la sección que le sirve. Sumás integraciones (reservas, chat, sistema de clientes o pagos) y atención prioritaria durante todo el proyecto, para que la web trabaje todos los días para tu negocio."
-            : "A leading company needs a website that matches its operation. Web Pro is a large site with a unique design, built to open instantly on mobile and guide each type of client to the section that helps them. You add integrations (bookings, chat, client system or payments) and priority attention throughout the project, so the website works for your business every day.",
+            ? "La Web Pro organiza un sitio amplio con diseño propio y recorridos para distintos tipos de cliente. Planificamos contenido, navegación móvil e integraciones como reservas, chat o pagos según el alcance contratado. Antes de desarrollar, confirmamos dependencias, responsables y pruebas para la entrega."
+            : "Web Pro organises a larger site with a custom design and journeys for different customer groups. We plan content, mobile navigation and integrations such as bookings, chat or payments within the agreed scope. Dependencies, responsibilities and acceptance checks are confirmed before development.",
         featuresTitle: isEs ? "¿Qué incluye este plan?" : "What is included in this plan?",
         ventajasTitle: isEs ? "Ventajas Corporativas" : "Corporate Advantages",
         faqsTitle: isEs ? "Preguntas Frecuentes" : "Frequently Asked Questions",
@@ -382,6 +383,8 @@ export default async function DesarrolloWebProPage({ params }: Props) {
                         </ul>
                     </ServiceCard>
                 </div>
+
+                <ServiceDetailContent lang={lang} slug="desarrollo-web-pro" />
 
                 {/* Por qué elegirnos */}
                 <div style={{ marginTop: "40px" }}>

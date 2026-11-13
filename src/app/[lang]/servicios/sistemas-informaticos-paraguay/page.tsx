@@ -8,9 +8,11 @@ const Navbar = dynamic(() => import("@/components/Navbar"));
 const Footer = dynamic(() => import("@/components/Footer"));
 const BackgroundParticles = dynamic(() => import("@/components/BackgroundParticles"));
 import ServiceCard from "@/components/ServiceCard";
+import ServiceDetailContent from "@/components/ServiceDetailContent";
 import CTAButton from "@/components/CTAButton";
 import ServiceJsonLd from "@/components/ServiceJsonLd";
 import { buildServiceJsonLd } from "@/lib/service-schema";
+import RelatedArticles from "@/components/RelatedArticles";
 
 type Props = {
     params: Promise<{ lang: string }>;
@@ -293,6 +295,8 @@ export default async function SistemasInformaticosParaguayPage({ params }: Props
                     </ServiceCard>
                 </div>
 
+                <ServiceDetailContent lang={lang} slug="sistemas-informaticos-paraguay" />
+
                 <div style={{ marginTop: "96px", backgroundColor: "#0a0a0a", border: `1px solid rgba(0, 217, 255, 0.3)`, padding: "40px", borderRadius: "24px", textAlign: "center" }}>
                     <h2 style={{ fontSize: "clamp(1.875rem, 3vw, 2.25rem)", fontWeight: 700, marginBottom: "24px" }}>{dict.conclusionTitle}</h2>
                     <p style={{ color: theme.textSide, fontSize: "1.125rem", marginBottom: "32px", maxWidth: "800px", margin: "0 auto" }}>
@@ -327,6 +331,11 @@ export default async function SistemasInformaticosParaguayPage({ params }: Props
                 }
             `}} />
 
+            <RelatedArticles lang={lang} slugs={[
+                'catalogo-whatsapp-o-tienda-online-paraguay',
+                'link-de-pago-o-pasarela-paraguay',
+                'presupuesto-diseno-web-paraguay-que-incluir',
+            ]} />
             <Footer />
         </main>
     );

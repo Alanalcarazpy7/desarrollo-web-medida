@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import ServiciosPageContent from "@/components/ServiciosPageContent";
+import ServiceDirectory from "@/components/ServiceDirectory";
 
 type Props = {
     params: Promise<{ lang: string }>;
@@ -48,11 +49,12 @@ export default async function ServiciosGeneralPage({ params }: Props) {
     const base = "https://solvatech.com.py";
 
     const services: [string, string][] = [
-        ["Desarrollo Web en Paraguay", "/servicios/desarrollo-web-paraguay"],
+        [isEs ? "Desarrollo Web en Paraguay" : "Web Development in Paraguay", "/servicios/desarrollo-web-paraguay"],
         [isEs ? "Web Básica" : "Basic Website", "/servicios/desarrollo-web-basica"],
         [isEs ? "Catálogo digital / Menú" : "Digital Catalog / Menu", "/servicios/desarrollo-web-catalogo"],
         [isEs ? "Web Estándar" : "Standard Website", "/servicios/desarrollo-web-estandar"],
         [isEs ? "Web Pro" : "Web Pro", "/servicios/desarrollo-web-pro"],
+        [isEs ? "Tiendas online en Paraguay" : "Online stores in Paraguay", "/servicios/desarrollo-tiendas-online-paraguay"],
         [isEs ? "Sistemas a medida" : "Custom systems", "/servicios/sistemas-informaticos-paraguay"],
         [isEs ? "Posicionamiento en Google" : "Google & Maps SEO", "/servicios/posicionamiento-google"],
         [isEs ? "Hosting web administrado" : "Managed web hosting", "/servicios/hosting-web-administrado"],
@@ -85,7 +87,7 @@ export default async function ServiciosGeneralPage({ params }: Props) {
         <>
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListLd) }} />
             <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
-            <ServiciosPageContent lang={lang} />
+            <ServiciosPageContent lang={lang}><ServiceDirectory lang={lang} /></ServiciosPageContent>
         </>
     );
 }

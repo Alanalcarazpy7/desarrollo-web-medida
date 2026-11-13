@@ -8,6 +8,7 @@ const Navbar = dynamic(() => import("@/components/Navbar"));
 const Footer = dynamic(() => import("@/components/Footer"));
 const BackgroundParticles = dynamic(() => import("@/components/BackgroundParticles"));
 import ServiceCard from "@/components/ServiceCard";
+import ServiceDetailContent from "@/components/ServiceDetailContent";
 import CTAButton from "@/components/CTAButton";
 import ServiceJsonLd from "@/components/ServiceJsonLd";
 import { buildServiceJsonLd } from "@/lib/service-schema";
@@ -79,7 +80,7 @@ export default async function HostingWebAdministradoPage({ params }: Props) {
         "Monitoreo constante del servidor y alertas ante cualquier caída",
         "Actualizaciones de seguridad y mantenimiento del servidor incluidas",
         "Soporte técnico local en Paraguay ante cualquier duda, bloqueo o caída",
-        "Servidor estable con 99.9% de disponibilidad (Uptime) garantizada"
+        "Condiciones de disponibilidad y respuesta documentadas según el proveedor y el plan"
     ] : [
         "High-speed web server optimized with SSD NVMe storage disks",
         "Free and unlimited SSL security certificate (HTTPS) Let's Encrypt",
@@ -88,13 +89,13 @@ export default async function HostingWebAdministradoPage({ params }: Props) {
         "Constant server monitoring and alerts for any downtime",
         "Security updates and server maintenance included",
         "Local technical support in Paraguay for any questions, blocks, or crashes",
-        "Stable server with 99.9% guaranteed availability (Uptime)"
+        "Documented availability and response terms according to provider and plan"
     ];
 
     const chooseReasons = isEs ? [
         {
             title: "Velocidad Optimizada para Paraguay",
-            desc: "Nuestros servidores usan cachés avanzadas y redes CDN configuradas para que tu página web cargue instantáneamente desde conexiones móviles (Tigo, Personal, Claro) en cualquier punto de Paraguay."
+            desc: "Configuramos caché y distribución de recursos donde corresponda para reducir transferencias. La velocidad observada depende también de la web, el dispositivo y la conexión del visitante."
         },
         {
             title: "Administración Proactiva",
@@ -102,12 +103,12 @@ export default async function HostingWebAdministradoPage({ params }: Props) {
         },
         {
             title: "Seguridad Corporativa",
-            desc: "Configuramos firewalls a nivel de servidor que previenen inyecciones de código malicioso, ataques DDoS y malware, manteniendo la información de tus clientes totalmente a salvo."
+            desc: "Aplicamos controles y actualizaciones del entorno contratado para reducir exposición. La seguridad también requiere cuidar la aplicación, los accesos y las copias; ningún servidor elimina todos los riesgos."
         }
     ] : [
         {
             title: "Optimized Speed for Paraguay",
-            desc: "Our servers use advanced caching and CDN networks configured so that your website loads instantly from mobile connections (Tigo, Personal, Claro) anywhere in Paraguay."
+            desc: "We configure caching and resource distribution where appropriate to reduce transfers. Observed speed also depends on the website, visitor device and connection."
         },
         {
             title: "Proactive Management",
@@ -115,7 +116,7 @@ export default async function HostingWebAdministradoPage({ params }: Props) {
         },
         {
             title: "Corporate Security",
-            desc: "We configure server-level firewalls that prevent malicious code injections, DDoS attacks, and malware, keeping your clients' information fully secure."
+            desc: "We apply controls and updates to the contracted environment to reduce exposure. Application maintenance, access management and backups also matter; no server eliminates every risk."
         }
     ];
 
@@ -151,8 +152,8 @@ export default async function HostingWebAdministradoPage({ params }: Props) {
         h1: isEs ? "Hosting Web Administrado" : "Managed Web Hosting",
         whyTitle: isEs ? "Infraestructura Rápida, Segura y Sin Preocupaciones" : "Fast, Secure, Worry-Free Infrastructure",
         whyDesc: isEs
-            ? "Un hosting lento o inestable destruye tus esfuerzos publicitarios y de SEO. Con nuestro Hosting Web Administrado garantizamos que tu página web responda al instante, mientras nosotros nos encargamos del mantenimiento técnico del servidor para que vos no tengas que hacerlo."
-            : "A slow or unstable hosting destroys your advertising and SEO efforts. With our Managed Web Hosting we guarantee that your website responds instantly, while we handle the server's technical maintenance so you don't have to.",
+            ? "Administramos el entorno donde funciona tu web y definimos monitoreo, copias y mantenimiento según sus necesidades. Sabés quién atiende una incidencia, cómo se solicita ayuda y qué responsabilidades quedan en cada proveedor."
+            : "We manage the environment running your website and define monitoring, backups and maintenance around its needs. You know who handles an issue, how to request help and which responsibilities belong to each provider.",
         featuresTitle: isEs ? "¿Qué incluye este plan?" : "What is included in this plan?",
         ventajasTitle: isEs ? "Ventajas Técnicas" : "Technical Advantages",
         faqsTitle: isEs ? "Preguntas Frecuentes" : "Frequently Asked Questions",
@@ -350,6 +351,8 @@ export default async function HostingWebAdministradoPage({ params }: Props) {
                         </ul>
                     </ServiceCard>
                 </div>
+
+                <ServiceDetailContent lang={lang} slug="hosting-web-administrado" />
 
                 {/* Por qué elegirnos */}
                 <div style={{ marginTop: "40px" }}>

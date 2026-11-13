@@ -1,7 +1,7 @@
 "use client";
 
 import { useLanguage } from "@/context/LanguageContext";
-import { blogPosts } from '@/lib/blog-data';
+import { blogSummaries as blogPosts } from '@/lib/blog-index';
 import Link from 'next/link';
 import BlogCard from "@/components/BlogCard";
 import Navbar from "@/components/Navbar";

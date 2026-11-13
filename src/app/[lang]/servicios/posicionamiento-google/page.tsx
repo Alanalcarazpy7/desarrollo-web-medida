@@ -7,6 +7,7 @@ const Navbar = dynamic(() => import("@/components/Navbar"));
 const Footer = dynamic(() => import("@/components/Footer"));
 const BackgroundParticles = dynamic(() => import("@/components/BackgroundParticles"));
 import ServiceCard from "@/components/ServiceCard";
+import ServiceDetailContent from "@/components/ServiceDetailContent";
 import CTAButton from "@/components/CTAButton";
 import ServiceJsonLd from "@/components/ServiceJsonLd";
 import RelatedArticles from "@/components/RelatedArticles";
@@ -28,8 +29,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       ? "Posicionamiento SEO en Google y Maps en Paraguay"
       : "Google SEO & Google Maps Ranking in Paraguay";
     const description = isEs
-      ? "Servicio de posicionamiento orgánico (SEO local) en Google y Google Maps para negocios en Paraguay. Aparecé primero en las búsquedas y atraé clientes."
-      : "Search engine optimization (local SEO) on Google and Google Maps for businesses in Paraguay. Get ranked first in searches and attract clients.";
+      ? "SEO para negocios en Paraguay: revisión técnica, páginas de servicios y visibilidad local. Priorizamos búsquedas relevantes y medimos consultas, sin prometer posiciones."
+      : "SEO for businesses in Paraguay: technical review, service pages and local visibility. We prioritise relevant searches and measure enquiries without ranking guarantees.";
 
     return {
         title,
@@ -94,65 +95,65 @@ export default async function PosicionamientoGooglePage({ params }: Props) {
     const chooseReasons = isEs ? [
         {
             title: "Tráfico Local Directo",
-            desc: "Cuando alguien busca un servicio en Asunción u otra ciudad desde su celular, Google le muestra primero el mapa local. Aparecer ahí te asegura llamadas e indicaciones de cómo llegar instantáneas."
+            desc: "Revisamos la información que encuentra quien busca tu servicio y tu zona real de atención. Los resultados locales dependen de varios factores; aparecer no garantiza una llamada."
         },
         {
             title: "Sin Costo por Clic",
-            desc: "A diferencia de la publicidad pagada (Google Ads), en el SEO orgánico no pagás por cada clic que hace el usuario. Las visitas, llamadas y consultas que recibas son 100% gratuitas."
+            desc: "Google no cobra por cada clic de un resultado orgánico. La revisión, el contenido y el mantenimiento sí necesitan trabajo y presupuesto; los distinguimos de una campaña de anuncios."
         },
         {
             title: "Confianza y Autoridad",
-            desc: "Los usuarios confían mucho más en los negocios que Google recomienda de forma orgánica en los mapas que en los anuncios pagados. Ranquear alto incrementa el estatus de tu marca."
+            desc: "Servicios bien explicados, datos de contacto consistentes y referencias reales ayudan a evaluar tu negocio. El contenido debe resolver dudas, además de ser rastreable."
         }
     ] : [
         {
             title: "Direct Local Traffic",
-            desc: "When someone searches for a service in Asunción or another city from their phone, Google shows the local map pack first. Appearing there secures instant calls and directions."
+            desc: "We review the information people find when searching for your service and actual service area. Local results depend on several factors; appearing does not guarantee a call."
         },
         {
             title: "No Cost-Per-Click",
-            desc: "Unlike paid ads (Google Ads), you do not pay per click in organic SEO. The visits, phone calls, and inquiries you receive are 100% free."
+            desc: "Google does not charge per click on an organic result. Review, content and maintenance still require work and a budget; we distinguish these from an advertising campaign."
         },
         {
             title: "Trust and Authority",
-            desc: "Users trust businesses recommended organically by Google in maps much more than paid ads. Ranking high increases your brand authority."
+            desc: "Clear service explanations, consistent contact details and real references help people assess your business. Content should answer questions as well as be crawlable."
         }
     ];
 
     const faqs = isEs ? [
         {
             q: "¿En cuánto tiempo se empiezan a ver los resultados del SEO local?",
-            a: "El SEO es una estrategia progresiva. Las primeras mejoras en visibilidad local y optimizaciones en Google Maps suelen registrarse en los primeros 30 a 45 días. Los resultados significativos y de estabilidad orgánica suelen consolidarse entre los 3 y 6 meses."
+            a: "Depende del estado del sitio, el rastreo y la competencia. Acordamos entregables y revisiones de períodos equivalentes; no una fecha de posicionamiento. Algunas correcciones se comprueban al publicarse y su efecto en búsquedas puede tardar más."
         },
         {
             q: "¿Necesito tener una página web para usar el servicio de Google Maps?",
-            a: "No es obligatorio tener una web para aparecer en Google Maps, pero tener un sitio web optimizado técnicamente y enlazado con tu ficha multiplica tus posibilidades de destacar por encima de competidores que solo tienen la ficha de Maps básica."
+            a: "Un negocio elegible puede tener un Perfil de Empresa sin web. Un sitio propio permite explicar servicios y condiciones con más detalle. La elegibilidad, verificación y aparición del perfil dependen de las reglas de Google."
         },
         {
             q: "¿Qué pasa si suspendo el servicio mensual de SEO?",
-            a: "El trabajo SEO es duradero y no desaparece de un día para el otro. No obstante, dado que Google actualiza sus algoritmos constantemente y tus competidores siguen trabajando en sus perfiles, dejar de optimizar provocará una pérdida gradual de posiciones a mediano plazo."
+            a: "Las mejoras publicadas permanecen mientras mantengas el sitio. Al pausar se detienen las tareas recurrentes; la posición puede variar con el contenido, la competencia y los cambios del buscador, sin que podamos anticipar una caída concreta."
         }
     ] : [
         {
             q: "How long does it take to start seeing local SEO results?",
-            a: "SEO is a progressive strategy. The first improvements in local visibility and Google Maps optimizations typically show in the first 30 to 45 days. Significant results and organic stability usually consolidate within 3 to 6 months."
+            a: "It depends on site condition, crawling and competition. We agree deliverables and equivalent-period reviews, not a ranking date. Some fixes can be checked at publication while their search effects may take longer."
         },
         {
             q: "Do I need a website to use the Google Maps optimization service?",
-            a: "It is not mandatory to have a website to appear on Google Maps, but having a technically optimized website linked to your profile multiplies your chances of standing out over competitors with only a basic listing."
+            a: "An eligible business can have a Business Profile without a website. Your own site explains services and terms in more depth. Profile eligibility, verification and appearance depend on Google's rules."
         },
         {
             q: "What happens if I pause the monthly SEO service?",
-            a: "SEO efforts are long-lasting and do not disappear overnight. However, since Google frequently updates its algorithms and competitors continue working on their profiles, stopping optimization will lead to a gradual loss of ranking over time."
+            a: "Published improvements remain while the site is maintained. Pausing stops recurring tasks; rankings can change with content, competition and search engine updates, without a predictable decline."
         }
     ];
 
     const dict = {
         h1: isEs ? "Posicionamiento en Google y Maps" : "Google & Google Maps SEO Ranking",
-        whyTitle: isEs ? "Sé la opción número uno en tu zona" : "Be the Number One Option in Your Area",
+        whyTitle: isEs ? "Mejorá la información que encuentra tu próximo cliente" : "Improve what your next customer finds",
         whyDesc: isEs 
-            ? "Si tenés un local comercial, consultorio, oficina, taller o brindás servicios a domicilio en Paraguay, el SEO local es la estrategia de marketing digital más rentable. Nos encargamos de estructurar técnicamente tu sitio web y optimizar tu perfil comercial en Google para captar la intención de búsqueda de clientes listos para comprar, llamarte o visitarte."
-            : "If you have a retail store, medical clinic, office, workshop, or provide home services in Paraguay, local SEO is the most cost-effective digital marketing strategy. We take care of technically structuring your website and optimizing your Google Business Profile to capture search intent from customers ready to buy, call, or visit you.",
+            ? "Revisamos cómo se presentan tu negocio y tus servicios en búsquedas. Organizamos las prioridades técnicas y de contenido para que una persona de tu zona pueda entender qué ofrecés y cómo consultar. Si corresponde, revisamos también el Perfil de Empresa."
+            : "We review how your business and services appear in search. Technical and content priorities help people in your area understand your offer and how to enquire. Where applicable, we also review the Business Profile.",
         featuresTitle: isEs ? "¿Qué incluye este servicio?" : "What is included in this service?",
         ventajasTitle: isEs ? "Ventajas del SEO Local" : "Local SEO Advantages",
         faqsTitle: isEs ? "Preguntas Frecuentes" : "Frequently Asked Questions",
@@ -349,6 +350,8 @@ export default async function PosicionamientoGooglePage({ params }: Props) {
                         </ul>
                     </ServiceCard>
                 </div>
+
+                <ServiceDetailContent lang={lang} slug="posicionamiento-google" />
 
                 {/* Por qué elegirnos */}
                 <div style={{ marginTop: "40px" }}>

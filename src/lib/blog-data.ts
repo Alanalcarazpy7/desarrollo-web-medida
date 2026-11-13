@@ -1,3 +1,6 @@
+import { november2026Posts } from './blog-posts-noviembre-2026';
+import { paymentsGuide } from './blog-payments-guide';
+
 export interface BlogPost {
     slug: string;
     title: string;
@@ -7,6 +10,7 @@ export interface BlogPost {
     content: string;
     contentEn: string;
     date: string;
+    updatedAt?: string;
     author: string;
     category: string;
     categoryEn: string;
@@ -17,6 +21,7 @@ export interface BlogPost {
 }
 
 export const blogPosts: BlogPost[] = [
+    ...november2026Posts,
     {
         slug: "pagina-web-para-peluquerias-barberias-paraguay",
         title: "Página web para peluquerías y barberías en Paraguay: qué necesita de verdad",
@@ -717,130 +722,7 @@ export const blogPosts: BlogPost[] = [
             </ul>
         `
     },
-    {
-        slug: "medios-de-pago-online-paraguay",
-        title: "Cómo cobrar por internet en Paraguay: medios de pago para tu web",
-        titleEn: "How to get paid online in Paraguay: payment methods for your website",
-        excerpt: "Pagopar, Bancard, billeteras y transferencias. Cuál te conviene según tu negocio y qué necesitás para empezar a cobrar online.",
-        excerptEn: "Pagopar, Bancard, wallets and transfers. Which one fits your business and what you need to start charging online.",
-        date: "2026-09-01",
-        author: "Alan Alcaraz",
-        category: "E-commerce",
-        categoryEn: "E-commerce",
-        image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=2425&auto=format&fit=crop",
-        readTime: "8 min",
-        keywords: ["medios de pago online paraguay", "pagopar", "bancard", "cobrar por internet paraguay", "pasarela de pago paraguay", "tienda online paraguay"],
-        keywordsEn: ["online payments paraguay", "pagopar", "bancard", "payment gateway paraguay"],
-        content: `
-            <p>Tenés la web lista, la gente entra, le gusta lo que ve. Y ahí aparece la pregunta: <strong>¿cómo le cobro?</strong> En Paraguay hay varias opciones y no todas le sirven a todos los negocios.</p>
-
-            <p>Esta guía repasa las alternativas reales del mercado local y cuál conviene según lo que vendas.</p>
-
-            <h2>Primero: ¿de verdad necesitás cobrar online?</h2>
-
-            <p>Empecemos por lo incómodo. Si vendés servicios, productos a pedido o trabajás con pocos clientes por mes, <strong>probablemente no necesites una pasarela de pago todavía</strong>.</p>
-
-            <p>Un catálogo con botón de WhatsApp, donde el cliente arma el pedido y vos coordinás el pago por transferencia, funciona muy bien en Paraguay y no te cobra comisión por venta. Muchos negocios facturan años así antes de necesitar algo más.</p>
-
-            <p>Cobrar online conviene cuando: vendés muchos productos chicos, recibís pedidos fuera de horario, vendés cursos o servicios digitales, o querés cobrarle a gente que no está en el país.</p>
-
-            <h2>Las opciones del mercado paraguayo</h2>
-
-            <h3>Transferencia bancaria y SIPAP</h3>
-
-            <p>La más usada y la más simple: mostrás tus datos bancarios, el cliente transfiere y te manda el comprobante por WhatsApp. Cero comisión, cero integración técnica.</p>
-
-            <p><strong>Contra:</strong> es manual. Alguien tiene que verificar cada pago. A partir de cierto volumen se vuelve inmanejable.</p>
-
-            <h3>Billeteras electrónicas</h3>
-
-            <p>Tigo Money, Billetera Personal y similares tienen muchísima penetración en Paraguay, sobre todo fuera de Asunción y en públicos que no usan tarjeta. Para tickets chicos son muy prácticas.</p>
-
-            <p><strong>Contra:</strong> igual que la transferencia, suele resolverse de forma manual salvo que integres una plataforma que las agrupe.</p>
-
-            <h3>Pagopar</h3>
-
-            <p>Es la pasarela local más conocida. Agrupa varios medios en un solo checkout: tarjetas, billeteras, pagos en bocas de cobranza y transferencias. Está pensada para el mercado paraguayo y es la opción más común cuando querés automatizar el cobro en una tienda online.</p>
-
-            <p><strong>A favor:</strong> el cliente elige cómo pagar y vos recibís la confirmación automática. <strong>Contra:</strong> cobra comisión por transacción.</p>
-
-            <h3>Bancard</h3>
-
-            <p>Es la procesadora de tarjetas más grande del país. Se usa cuando querés aceptar tarjetas de crédito y débito directamente. Suele implicar un trámite más formal con tu banco.</p>
-
-            <p><strong>A favor:</strong> pagos con tarjeta, cuotas. <strong>Contra:</strong> el alta es más burocrática y conviene tener cierto volumen para que valga la pena.</p>
-
-            <h3>Plataformas internacionales</h3>
-
-            <p>Si vendés servicios o productos digitales a clientes de afuera, plataformas como PayPal o Stripe pueden entrar en juego. Para vender puertas adentro en Paraguay, casi siempre conviene una solución local.</p>
-
-            <figure>
-                <img src="https://images.unsplash.com/photo-1523474253046-8cd2748b5fd2?q=80&w=1600&auto=format&fit=crop" alt="Comercio local preparando pedidos para vender online" loading="lazy" />
-                <figcaption>Muchos negocios facturan años con catálogo y transferencia antes de necesitar una pasarela de pago.</figcaption>
-            </figure>
-
-            <h2>Cuál te conviene según tu negocio</h2>
-
-            <ul>
-                <li><strong>Servicios y trabajos a pedido:</strong> catálogo o web con WhatsApp y transferencia. Sin comisiones.</li>
-                <li><strong>Tienda con muchos productos:</strong> pasarela local tipo Pagopar, para no verificar pagos a mano.</li>
-                <li><strong>Cursos o productos digitales:</strong> pasarela con confirmación automática, así la entrega es inmediata.</li>
-                <li><strong>Ticket alto y clientes empresa:</strong> transferencia con factura. Es lo que esperan.</li>
-                <li><strong>Clientes en el exterior:</strong> sumá una plataforma internacional a lo que ya tengas.</li>
-            </ul>
-
-            <h2>Qué necesitás para habilitar cobros online</h2>
-
-            <ul>
-                <li>Estar formalizado: RUC activo y cuenta bancaria a nombre del negocio.</li>
-                <li>Una web o tienda donde integrar el checkout.</li>
-                <li>Definir cómo vas a facturar cada venta.</li>
-                <li>Reglas claras de envío, cambios y devoluciones, publicadas en la web.</li>
-            </ul>
-
-            <p>Ese último punto se subestima mucho: la mitad de las consultas que frenan una compra son sobre el envío y la devolución, no sobre el producto.</p>
-
-            <h2>Un consejo antes de complicarte</h2>
-
-            <p>Arrancá simple. Poné el catálogo con pedido por WhatsApp y transferencia, medí cuántos pedidos te entran por mes y recién ahí sumá una pasarela. Integrar pagos cuando todavía no hay volumen es pagar comisiones y complejidad por adelantado.</p>
-
-            <p>Si querés que armemos tu catálogo o tu tienda con el medio de cobro que mejor te sirva, <a href="/es/servicios/desarrollo-web-catalogo">mirá cómo funciona el catálogo digital</a> o escribinos y lo vemos juntos.</p>
-        `,
-        contentEn: `
-            <p>Your website is ready, people visit and like what they see. Then the question appears: <strong>how do I charge them?</strong> In Paraguay there are several options and not all fit every business.</p>
-
-            <h2>First: do you really need online payments?</h2>
-
-            <p>If you sell services, made-to-order products or work with few clients per month, <strong>you probably do not need a payment gateway yet</strong>. A catalog with a WhatsApp button, where the client builds the order and you coordinate a bank transfer, works very well in Paraguay and charges no per-sale commission.</p>
-
-            <h2>The options in the Paraguayan market</h2>
-
-            <h3>Bank transfer and SIPAP</h3>
-            <p>The most used and simplest: you show your bank details, the client transfers and sends the receipt via WhatsApp. Zero commission, zero technical integration. Downside: it is manual.</p>
-
-            <h3>Electronic wallets</h3>
-            <p>Tigo Money, Billetera Personal and similar have huge penetration in Paraguay, especially outside Asunción. Very practical for small tickets.</p>
-
-            <h3>Pagopar</h3>
-            <p>The best-known local gateway. It groups cards, wallets, payment points and transfers into one checkout, designed for the Paraguayan market. Automatic confirmation, but it charges a per-transaction commission.</p>
-
-            <h3>Bancard</h3>
-            <p>The largest card processor in the country. Used when you want to accept credit and debit cards directly. The setup is more formal and works better with some volume.</p>
-
-            <h2>Which one fits your business</h2>
-
-            <ul>
-                <li><strong>Services and made-to-order work:</strong> catalog or website with WhatsApp and transfer. No commissions.</li>
-                <li><strong>Store with many products:</strong> a local gateway, so you do not verify payments by hand.</li>
-                <li><strong>Courses or digital products:</strong> a gateway with automatic confirmation for instant delivery.</li>
-                <li><strong>High ticket, business clients:</strong> transfer with an invoice. That is what they expect.</li>
-            </ul>
-
-            <h2>One piece of advice before overcomplicating</h2>
-
-            <p>Start simple. Put up the catalog with WhatsApp orders and transfers, measure how many orders come in per month, and only then add a gateway. Integrating payments before you have volume means paying commissions and complexity up front.</p>
-        `
-    },
+    paymentsGuide,
     {
         slug: "importancia-web-profesional-2026",
         title: "¿Por qué tu negocio necesita una Página Web Profesional en 2026?",

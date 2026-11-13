@@ -8,6 +8,7 @@ const Navbar = dynamic(() => import("@/components/Navbar"));
 const Footer = dynamic(() => import("@/components/Footer"));
 const BackgroundParticles = dynamic(() => import("@/components/BackgroundParticles"));
 import ServiceCard from "@/components/ServiceCard";
+import ServiceDetailContent from "@/components/ServiceDetailContent";
 import CTAButton from "@/components/CTAButton";
 import ServiceJsonLd from "@/components/ServiceJsonLd";
 import { buildServiceJsonLd } from "@/lib/service-schema";
@@ -350,6 +351,8 @@ export default async function SoporteWebBasicoPage({ params }: Props) {
                         </ul>
                     </ServiceCard>
                 </div>
+
+                <ServiceDetailContent lang={lang} slug="soporte-web-basico" />
 
                 {/* Por qué elegirnos */}
                 <div style={{ marginTop: "40px" }}>

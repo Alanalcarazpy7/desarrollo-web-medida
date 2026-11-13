@@ -4,7 +4,7 @@ import { motion, useMotionValue, useAnimationFrame, animate } from "framer-motio
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
-import { blogPosts } from "@/lib/blog-data";
+import { blogSummaries as blogPosts } from "@/lib/blog-index";
 import { useLanguage } from "@/context/LanguageContext";
 
 export default function BlogCarousel() {

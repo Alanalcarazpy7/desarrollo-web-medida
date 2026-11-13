@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { blogPosts } from "@/lib/blog-data";
+import { blogSummaries as blogPosts } from "@/lib/blog-index";
 import { useLanguage } from "@/context/LanguageContext";
 
 export default function BlogPreview() {

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Payment link and integrated checkout</title><desc id="desc">Two payment paths connecting an order to a verified confirmation.</desc>
+  <rect width="1200" height="630" fill="#091522"/>
+  <g fill="none" stroke="#15334a" stroke-width="1"><path d="M0 126h1200M0 252h1200M0 378h1200M0 504h1200M150 0v630M300 0v630M450 0v630M600 0v630M750 0v630M900 0v630M1050 0v630"/></g>
+  <text x="70" y="74" fill="#86abc0" font-family="Arial,sans-serif" font-size="21" letter-spacing="5">SOLVATECH / E-COMMERCE</text>
+  <rect x="90" y="168" width="300" height="300" rx="24" fill="#12283b" stroke="#31556b"/>
+  <rect x="130" y="210" width="220" height="136" rx="14" fill="#1a3d54"/>
+  <rect x="151" y="240" width="52" height="34" rx="6" fill="#79e3f0"/>
+  <path d="M151 307h72m22 0h48" stroke="#8cb1c5" stroke-width="10" stroke-linecap="round"/>
+  <path d="M154 404h166" stroke="#79e3f0" stroke-width="12" stroke-linecap="round"/>
+  <path d="M405 274h155m-25-22 25 22-25 22M405 388h155m-25-22 25 22-25 22" stroke="#79e3f0" stroke-width="5" fill="none"/>
+  <rect x="603" y="168" width="486" height="300" rx="24" fill="#12283b" stroke="#31556b"/>
+  <circle cx="655" cy="211" r="8" fill="#79e3f0"/><path d="M684 211h130" stroke="#8cb1c5" stroke-width="8" stroke-linecap="round"/>
+  <path d="M649 270h236m-236 44h180m-180 44h215" stroke="#31556b" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="982" cy="343" r="55" fill="#79e3f0"/><path d="m956 343 18 19 35-39" fill="none" stroke="#091522" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="70" y="568" fill="#e7f5fb" font-family="Arial,sans-serif" font-size="34">LINK / CHECKOUT</text>
+</svg>

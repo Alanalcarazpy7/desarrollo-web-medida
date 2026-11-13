@@ -7,6 +7,7 @@ const Navbar = dynamic(() => import("@/components/Navbar"));
 const Footer = dynamic(() => import("@/components/Footer"));
 const BackgroundParticles = dynamic(() => import("@/components/BackgroundParticles"));
 import ServiceCard from "@/components/ServiceCard";
+import ServiceDetailContent from "@/components/ServiceDetailContent";
 import CTAButton from "@/components/CTAButton";
 import ServiceJsonLd from "@/components/ServiceJsonLd";
 import RelatedArticles from "@/components/RelatedArticles";
@@ -84,7 +85,7 @@ export default async function DesarrolloWebEstandarPage({ params }: Props) {
         "Sección de novedades o blog para publicar vos mismo y sumar contenido",
         "Galería de fotos ampliada y sección 'Nosotros' / 'Quiénes somos'",
         "Cada página con su título y textos claros para que Google la entienda",
-        "Carga rápida: la web abre al toque en el celular",
+        "Imágenes y recursos optimizados para la navegación en celular",
         "Formulario de contacto profesional y mapa de Google Maps",
         "3 rondas de cambios antes de publicar",
         "6 meses de hosting incluidos (el alojamiento de tu web)"
@@ -94,7 +95,7 @@ export default async function DesarrolloWebEstandarPage({ params }: Props) {
         "News or blog section you can update yourself to keep adding content",
         "Expanded photo gallery and an 'About Us' section",
         "Each page with a clear title and copy so Google understands it",
-        "Fast loading: the site opens instantly on mobile",
+        "Images and resources optimised for mobile browsing",
         "Professional contact form and Google Maps location",
         "3 rounds of changes before launch",
         "6 months of hosting included (your website's server space)"
@@ -378,6 +379,8 @@ export default async function DesarrolloWebEstandarPage({ params }: Props) {
                         </ul>
                     </ServiceCard>
                 </div>
+
+                <ServiceDetailContent lang={lang} slug="desarrollo-web-estandar" />
 
                 {/* Por qué elegirnos */}
                 <div style={{ marginTop: "40px" }}>

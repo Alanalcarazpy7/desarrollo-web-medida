@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Domain, hosting and business email</title><desc id="desc">A domain address connects to website hosting and a mailbox as separate services.</desc>
+  <rect width="1200" height="630" fill="#091522"/>
+  <text x="70" y="74" fill="#86abc0" font-family="Arial,sans-serif" font-size="21" letter-spacing="5">SOLVATECH / WEB INFRASTRUCTURE</text>
+  <rect x="110" y="240" width="363" height="110" rx="18" fill="#12283b" stroke="#79e3f0" stroke-width="3"/>
+  <circle cx="163" cy="295" r="23" fill="none" stroke="#79e3f0" stroke-width="3"/><path d="M140 295h46m-23-23c-15 19-15 29 0 46 15-17 15-27 0-46" fill="none" stroke="#79e3f0" stroke-width="2"/>
+  <text x="206" y="307" fill="#e7f5fb" font-family="Arial,sans-serif" font-size="34">.com.py</text>
+  <path d="M474 295h125m0 0V182h138m-138 113v128h138" stroke="#31556b" stroke-width="5" fill="none"/>
+  <g fill="#12283b" stroke="#31556b"><rect x="768" y="109" width="302" height="153" rx="16"/><rect x="768" y="342" width="302" height="153" rx="16"/></g>
+  <rect x="801" y="140" width="236" height="36" rx="5" fill="#1a3d54"/><rect x="801" y="192" width="236" height="36" rx="5" fill="#1a3d54"/>
+  <circle cx="824" cy="158" r="6" fill="#79e3f0"/><circle cx="824" cy="210" r="6" fill="#79e3f0"/>
+  <rect x="847" y="377" width="143" height="80" rx="7" fill="none" stroke="#79e3f0" stroke-width="4"/><path d="m847 382 71 47 72-47" fill="none" stroke="#79e3f0" stroke-width="4"/>
+  <text x="70" y="568" fill="#e7f5fb" font-family="Arial,sans-serif" font-size="34">DOMAIN / HOSTING / EMAIL</text>
+</svg>

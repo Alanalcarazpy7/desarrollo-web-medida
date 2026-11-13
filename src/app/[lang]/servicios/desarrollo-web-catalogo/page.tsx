@@ -7,6 +7,7 @@ const Navbar = dynamic(() => import("@/components/Navbar"));
 const Footer = dynamic(() => import("@/components/Footer"));
 const BackgroundParticles = dynamic(() => import("@/components/BackgroundParticles"));
 import ServiceCard from "@/components/ServiceCard";
+import ServiceDetailContent from "@/components/ServiceDetailContent";
 import CTAButton from "@/components/CTAButton";
 import ServiceJsonLd from "@/components/ServiceJsonLd";
 import RelatedArticles from "@/components/RelatedArticles";
@@ -357,6 +358,8 @@ export default async function DesarrolloWebCatalogoPage({ params }: Props) {
                     </ServiceCard>
                 </div>
 
+                <ServiceDetailContent lang={lang} slug="desarrollo-web-catalogo" />
+
                 {/* Por qué elegirnos */}
                 <div style={{ marginTop: "40px" }}>
                     <h2 style={{ fontSize: "1.75rem", fontWeight: 800, textAlign: "center", marginBottom: "32px" }}>{dict.ventajasTitle}</h2>
@@ -412,6 +415,8 @@ export default async function DesarrolloWebCatalogoPage({ params }: Props) {
             <RelatedArticles
                 lang={lang}
                 slugs={[
+                    "catalogo-whatsapp-o-tienda-online-paraguay",
+                    "link-de-pago-o-pasarela-paraguay",
                     "menu-digital-qr-restaurantes-paraguay",
                     "medios-de-pago-online-paraguay",
                     "tendencias-ecommerce-2026",

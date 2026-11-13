@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 import { trackEvent } from "@/lib/analytics";
 import { getWhatsAppLink } from "@/lib/whatsapp";
+import { openWhatsAppDraft } from "@/lib/whatsapp-window";
 
 export default function Contacto() {
     const { t, language } = useLanguage();
@@ -19,6 +20,7 @@ export default function Contacto() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitSuccess, setSubmitSuccess] = useState(false);
     const [validationError, setValidationError] = useState<string | null>(null);
+    const [preparedLink, setPreparedLink] = useState<string | null>(null);
 
     const theme = {
         bg: "#000000",
@@ -31,6 +33,7 @@ export default function Contacto() {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+        if (isSubmitting) return;
         setValidationError(null);
 
         // Required field validation
@@ -39,17 +42,22 @@ export default function Contacto() {
             return;
         }
 
+        const digits = formData.telefono.replace(/\D/g, '');
+        if (digits.length < 8 || digits.length > 15) {
+            setValidationError(language === 'es' ? 'Revisá tu número de WhatsApp, incluido el código de país.' : 'Check your WhatsApp number, including the country code.');
+            return;
+        }
+
         setIsSubmitting(true);
 
-        setTimeout(() => {
-            trackEvent("submit_contact_form", {
-                project_type: formData.tipoProyecto,
-                budget: formData.presupuesto,
-                lang: language
-            });
+        trackEvent("submit_contact_form", {
+            project_type: formData.tipoProyecto,
+            budget: formData.presupuesto,
+            lang: language
+        });
 
-            const whatsappMessage = language === 'en'
-                ? `Hello, I want to inquire about a project for SolvaTech.
+        const whatsappMessage = language === 'en'
+            ? `Hello, I want to inquire about a project for SolvaTech.
 
 Name: ${formData.nombre.trim()}
 Email: ${formData.email.trim() || 'Not specified'}
@@ -57,7 +65,7 @@ WhatsApp: ${formData.telefono.trim()}
 Project Type: ${formData.tipoProyecto}
 Budget: ${formData.presupuesto}
 Details: ${formData.mensaje.trim()}`
-                : `Hola, quiero consultar por un proyecto para SolvaTech.
+            : `Hola, quiero consultar por un proyecto para SolvaTech.
 
 Nombre: ${formData.nombre.trim()}
 Email: ${formData.email.trim() || 'No especificado'}
@@ -66,22 +74,19 @@ Tipo de proyecto: ${formData.tipoProyecto}
 Presupuesto: ${formData.presupuesto}
 Detalles: ${formData.mensaje.trim()}`;
 
-            const whatsappUrl = getWhatsAppLink(whatsappMessage);
-            window.open(whatsappUrl, "_blank");
+        const whatsappUrl = getWhatsAppLink(whatsappMessage);
+        setPreparedLink(whatsappUrl);
+        const opened = openWhatsAppDraft(whatsappUrl);
+        if (opened) {
+            trackEvent('contact_whatsapp_open', { source: 'home_form', lang: language });
+        } else {
+            setValidationError(language === 'es'
+                ? 'Tu navegador bloqueó la nueva ventana. Usá el enlace de abajo para abrir WhatsApp; tus datos siguen acá.'
+                : 'Your browser blocked the new window. Use the link below to open WhatsApp; your details are still here.');
+        }
 
-            setIsSubmitting(false);
-            setSubmitSuccess(true);
-            setFormData({
-                nombre: "",
-                email: "",
-                telefono: "",
-                tipoProyecto: "",
-                presupuesto: "",
-                mensaje: "",
-            });
-
-            setTimeout(() => setSubmitSuccess(false), 5000);
-        }, 1000);
+        setIsSubmitting(false);
+        setSubmitSuccess(opened);
     };
 
     const contactMethods = [
@@ -279,7 +284,10 @@ Detalles: ${formData.mensaje.trim()}`;
                         transition={{ duration: 0.8, delay: 0.4 }}
                         className="lg:col-span-2"
                     >
-                        <form onSubmit={handleSubmit} style={{
+                        <form onSubmit={handleSubmit} onChange={() => {
+                            setSubmitSuccess(false);
+                            setPreparedLink(null);
+                        }} style={{
                             padding: '24px',
                             borderRadius: '24px',
                             backgroundColor: 'rgba(10, 10, 10, 0.8)',
@@ -300,6 +308,7 @@ Detalles: ${formData.mensaje.trim()}`;
 
                             {submitSuccess && (
                                 <motion.div
+                                    role="status"
                                     initial={{ opacity: 0, y: -10 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     style={{
@@ -312,12 +321,14 @@ Detalles: ${formData.mensaje.trim()}`;
                                         fontWeight: 600,
                                         fontSize: '13px'
                                     }}>
-                                    {t('contact.form.success')}
+                                    {language === 'es'
+                                        ? 'Tu mensaje está preparado en WhatsApp. Revisalo y tocá Enviar para que lo recibamos.'
+                                        : 'Your message is ready in WhatsApp. Review it and tap Send so we receive it.'}
                                 </motion.div>
                             )}
 
                             {validationError && (
-                                <div style={{
+                                <div role="alert" style={{
                                     padding: '10px',
                                     borderRadius: '8px',
                                     backgroundColor: 'rgba(255, 50, 100, 0.1)',
@@ -329,6 +340,14 @@ Detalles: ${formData.mensaje.trim()}`;
                                 }}>
                                     {validationError}
                                 </div>
+                            )}
+
+                            {preparedLink && (
+                                <a href={preparedLink} target="_blank" rel="noopener noreferrer"
+                                    className="contact-whatsapp-retry"
+                                    onClick={() => trackEvent('contact_whatsapp_retry', { source: 'home_form', lang: language })}>
+                                    {language === 'es' ? 'Abrir el mensaje preparado en WhatsApp ↗' : 'Open the prepared message in WhatsApp ↗'}
+                                </a>
                             )}
 
                             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '12px' }}>

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { redirect } from "next/navigation";
+import { permanentRedirect } from "next/navigation";
 
 type Props = { params: Promise<{ lang: string }> };
 
@@ -22,5 +22,5 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function PromoLanzamientoRedirect({ params }: Props) {
   const { lang } = await params;
   const loc = lang === "en" ? "en" : "es";
-  redirect(`/${loc}/servicios/desarrollo-web-basica`);
+  permanentRedirect(`/${loc}/servicios/desarrollo-web-basica`);
 }

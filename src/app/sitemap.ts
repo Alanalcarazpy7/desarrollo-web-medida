@@ -16,19 +16,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
   })
 
   const coreRoutes = [
-    { path: '', date: '2026-03-17' },
-    { path: '/blog', date: '2026-03-17' },
-    { path: '/servicios', date: '2026-06-21' },
-    { path: '/servicios/desarrollo-web-paraguay', date: '2026-09-01' },
-    { path: '/servicios/sistemas-informaticos-paraguay', date: '2026-06-21' },
-    { path: '/servicios/desarrollo-web-basica', date: '2026-06-21' },
-    { path: '/servicios/desarrollo-web-estandar', date: '2026-06-21' },
-    { path: '/servicios/desarrollo-web-pro', date: '2026-06-21' },
-    { path: '/servicios/desarrollo-web-catalogo', date: '2026-06-21' },
-    { path: '/servicios/posicionamiento-google', date: '2026-06-21' },
-    { path: '/servicios/hosting-web-administrado', date: '2026-07-19' },
-    { path: '/servicios/dominio-configuracion-web', date: '2026-07-19' },
-    { path: '/servicios/soporte-web-basico', date: '2026-06-21' },
+    { path: '', date: '2026-11-12' },
+    { path: '/blog', date: '2026-11-12' },
+    { path: '/servicios', date: '2026-11-12' },
+    { path: '/servicios/desarrollo-web-paraguay', date: '2026-11-12' },
+    { path: '/servicios/sistemas-informaticos-paraguay', date: '2026-11-12' },
+    { path: '/servicios/desarrollo-web-basica', date: '2026-11-12' },
+    { path: '/servicios/desarrollo-web-estandar', date: '2026-11-12' },
+    { path: '/servicios/desarrollo-web-pro', date: '2026-11-12' },
+    { path: '/servicios/desarrollo-web-catalogo', date: '2026-11-12' },
+    { path: '/servicios/desarrollo-tiendas-online-paraguay', date: '2026-11-12' },
+    { path: '/servicios/posicionamiento-google', date: '2026-11-12' },
+    { path: '/servicios/hosting-web-administrado', date: '2026-11-12' },
+    { path: '/servicios/dominio-configuracion-web', date: '2026-11-12' },
+    { path: '/servicios/soporte-web-basico', date: '2026-11-12' },
     { path: '/terminos-de-servicio', date: '2026-07-19' },
     { path: '/politica-de-privacidad', date: '2026-07-19' },
   ] as const
@@ -52,7 +53,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     return availableLocales.map((locale) => ({
       url: `${baseUrl}/${locale}${path}`,
-      lastModified: new Date(post.date),
+      lastModified: new Date(post.updatedAt || post.date),
       changeFrequency: 'monthly' as const,
       priority: 0.8,
       alternates: {
